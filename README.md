@@ -1,5 +1,5 @@
 # lab-web-2022
-Repository untuk mengumpulkan tugas praktikum Lab Web 2022 Group A
+Repository untuk mengumpulkan tugas praktikum Lab Web 2022 Group 1
 
 ## List Praktikan :
 - MUHAMMAD KAHFI MS
