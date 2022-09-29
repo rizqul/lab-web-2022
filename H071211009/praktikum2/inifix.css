@@ -1,0 +1,162 @@
+*{
+    font-family: 'Times New Roman';
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-image: url(roof.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    /* background-color: #5a3e28; */
+    width: 100%;
+    height: 100px;
+    display: flex;
+    position: fixed;
+}
+
+/* logo */
+.navbar img {
+    width: 50px;
+    height: 50px;
+    padding-top: 45px;
+    padding-left: 15px;
+    margin: 5px;
+}
+
+.navbar h3 {
+    align-items: left;
+    padding: 15px;
+    padding-top: 60px;
+    margin: 5px;
+    margin-right: 800px;
+    font-size: 20px;
+    color: white;
+}
+
+.ul-navbar {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+/* untuk ilangkan titik list */
+.li-navbar {
+    list-style-type: none;
+    padding: 15px;
+    margin: 5px;
+    padding-top: 60px;
+}
+
+.li-navbar a {
+    color: white;
+    padding: 7px;
+}
+
+.li-navbar a:hover {
+    background-color: white;
+    color: #5a3e28;
+    transition: all .2s ease-in-out;
+    transition-delay: .1s;
+    border-radius: 40px;
+}
+
+.head-center {
+    background: url(pet.png) fixed;
+    background-position: 30px 0px ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 515px;
+}
+
+.this1 {
+    background-color: #b7e3fd;
+}
+
+.this2 {
+    background-color: #b7e3fd;
+}
+
+.about {
+    max-width: 980px;
+    width: 100%;
+    margin: auto;
+    padding-top: 5%;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.container {
+    justify-content: center;
+    margin: auto;
+    width: 100%;
+    height: fit-content;
+    padding-bottom: 130px;
+}
+
+.container h1 {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 90px;
+}
+
+.about-desc {
+    column-count: 2;
+    column-gap: 50px;
+    column-rule-style: none;
+    text-align: justify;
+    color: #bd524e;
+    font-size: 18px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.card {
+    width: 170px;
+    text-align: center;
+    margin: 7px;
+}
+
+.card img {
+    width: 170px;
+    height: 170px;
+    border-radius: 20px;
+}
+
+.card h2 {
+    font-size: 21px;
+    margin: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.cards {
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+}
+
+.forpaw {
+    background-color: white;
+}
+
+.forpaw img {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    width: 50px;
+    height: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;   
+}
+
+.forpaw h1{
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.forimage {
+    padding: 100px;
+}
+
