@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Lato&display=swap");
+.btn-outline-primary:hover,
+.btn-outline-primary:active,
+.btn-outline-primary:visited {
+  background-color: #ffa62b !important;
+}
+
+.orange {
+  color: #ffa62b !important;
+}
+
+.logo,
+.title {
+  font-family: "Arvo", sans-serif !important;
+  font-weight: 800;
+}
+
+.carousel .carousel-item {
+  height: 90vh;
+}
+
+.title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99;
+}
