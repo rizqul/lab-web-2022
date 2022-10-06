@@ -1,0 +1,147 @@
+*, html, body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    
+}
+
+.fContainer {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-color:black;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    width: 100%;
+    height: 70px;
+    background-color: black;
+}
+
+.brand {
+    display: flex;
+    flex-direction: row;
+    font-size: 35px;
+    padding: 15px ;
+}
+
+.firstname {
+    color:white;
+    font-weight: 700;    
+    font-family: "Chiller", sans-serif;
+}
+
+.lastname {
+    color: white;
+    font-weight: 400;
+    padding-left: 4px;
+    font-family: "Chiller", sans-serif;
+}
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.navigation>li{
+    list-style-type: none;
+    color: red;
+}
+
+.navigation a {
+    padding: 15px;
+}
+
+.navigation a:hover {
+    background-color: aliceblue;
+}
+
+.container-fluid{
+    width: 100%;
+}
+.bg-jumbotron{
+    color:white;
+    font-size: 4em;
+    text-align: center;
+    margin: auto;
+    height: 30px;
+    padding: 200px;
+    background-image: url(bg.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    font-family: "Tentang Nanti Demo", sans-serif;
+    font-style: normal;
+}
+
+.judulparagraf{
+    text-align: center;
+    font-family: "Chiller", sans-serif;
+    color: rgb(222, 91, 91);
+    padding-top: 50px;
+    padding-bottom: 40px;
+    font-size: 30px;
+}
+
+.paragraf{
+   width: 70%;
+   height: 250px;
+   margin: auto;
+   margin-top: 10px;
+   color: white;
+}
+
+.paragraf1 {
+    column-count: 2;
+    column-gap: 30px;
+    text-align: justify;
+    justify-content: center;
+}
+
+.cards img {
+    width: 220px;
+    border-radius: 7px;
+    transition: 0.5, ease-in;
+    transform: scale(1);
+}
+.cards:hover{
+    transform: scale(1.1);
+}
+
+.cards {
+    width: 220px;
+    text-align: center;
+    border-radius: 7px;
+    margin: 10px;
+    color: white;
+    font-family: 'Times New Roman', sans-serif;
+}
+.cards h3 {
+    margin: 5px 0px;
+}
+
+.container-cards {
+    display: flex;
+    justify-content: center;
+    border-radius: 7px;
+}
+.cards-tittle {
+    text-align: center;
+    color: azure;
+    padding-bottom: 60px;
+    font-family: "Chiller", sans-serif;
+}
+
+
+
+
+
+
+
