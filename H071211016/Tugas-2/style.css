@@ -1,0 +1,70 @@
+body{
+    margin: 0;
+    background-color: black;
+}
+
+h1, h2, p, a, h3 {
+    color: white;
+}
+
+nav{
+    background-color: rgb(20, 20, 20);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav h2{
+    padding: 14px 16px;
+    margin: 0;
+}
+
+nav a{
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.jumbotron{
+    background-image: url(picture/lamp.jpg);
+    background-size: cover;
+    height: 630px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.jumbotron h1{
+    margin: 0;
+    font-size: 50px;
+}
+
+.description{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.description-text{
+    width: 500px; 
+    margin:10px;
+}
+.title{
+    text-align: center;
+}
+
+img{
+    width:100%;
+    height: auto;
+}
+
+.galeri{
+    display: flex;
+    width: auto;
+    align-items: baseline;
+}
+
+.container{
+    text-align: center;
+}
