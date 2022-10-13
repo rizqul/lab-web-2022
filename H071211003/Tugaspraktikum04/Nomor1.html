@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nomor1</title>
+</head>
+<body>
+    <script>
+    var nama = prompt("Masukkan nama anda");
+if (nama==="") {
+    console.log ("Silahkan masukkan nama terlebih dahulu");
+}
+else {
+    let sudah = prompt ("Sudah mengumpulkan tugas praktikum? YES atau NO")
+    if (sudah==="YES") {
+        let ikut = prompt ("Ikut Asistensi? YES atau NO")
+        if (ikut === "YES") {
+            let assistensi= prompt ("Sudah berapa kali assistensi? 1 atau 2")
+            if (assistensi == 1) {
+                console.log ("Assistensi sekali lagi ya " + nama)
+            }else if (assistensi == 2) {
+                console.log ("Hebat kamu " + nama)
+            }else {
+                console.log("masukkan sesuai input")
+            }
+        }else if(ikut === "NO") {
+            console.log("Assistensi dulu ya " + nama)
+        }else {
+            console.log ("masukkan sesuai input")
+        }  
+    }else if (sudah==="NO") {
+        console.log("Assistensi dulu ya " + nama)
+    }
+    else {
+        console.log ("Masukkan input yang benar")
+    }
+}
+    </script>
+</body>
+</html>
