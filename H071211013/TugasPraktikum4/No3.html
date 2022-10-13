@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>JS 3</title>
+    <script>
+        var str = prompt("Input text");
+            var counts = {};
+            for (let i = 0; i < str.length; i++) {
+                var ch = str.charAt(i); 
+                if( ch == " " ) {
+                    ch = "spasi";
+                }
+                var count = counts[ch];
+                counts[ch] = count ? count + 1 : 1;
+            }
+            for (ch in counts) {
+                console.log(ch + " = " + counts[ch]);
+            }
+            console.log(counts["j"]);
+
+        // const str = prompt('Masukkan Kalimat');
+        // const freq = {};
+        // for (let i = 0; i < str.length; i++) {
+        //     const character = str.charAt(i)
+        //     if (freq[character]) freq[character]++
+        //     else freq[character] = 1
+        // }
+        // const key = Object.entries(freq)
+        // for (let i = 0; i < Object.keys(freq).length; i++) {
+        //     console.log(`${key[i][0] === ' ' ? 'Spasi' : key[i][0]} = ${key[i][1]}`)
+        // }
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
