@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Red Velvet</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+  <style>
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .about {
+      text-align: justify !important;
+    }
+
+    .no-underline {
+      text-decoration: none;
+    }
+
+    .card>.card-header>img {
+      -webkit-filter: grayscale(100%);
+      filter: grayscale(100%);
+    }
+
+    .card>.card-header>img:hover {
+      -webkit-filter: grayscale(0%);
+      filter: grayscale(0%);
+      transition-duration: .8s;
+    }
+
+    a>img {
+      text-decoration: none;
+    }
+
+    .zoommm:hover {
+      filter: drop-shadow(0 0.2rem 0.25rem rgba(0, 0, 0, 0.5));
+      transition-duration: .2s;
+    }
+
+    #discography {
+      background-color: rgb(245, 202, 207);
+    }
+
+    #list-bullet {
+      list-style: square;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-light fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="logo.png" width="60px" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#discography">Discography</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact Us</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+            style="border-radius: 50px;">
+          <button class="btn btn-outline-danger" type="submit" style="border-radius: 50px;">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="1.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="2.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="3.jpg" class="d-block w-100" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="container text-center mt-4 mb-4 mx-auto" id="about">
+      <h2>Red Velvet</h2>
+      <div class="row row-cols-2">
+        <div class="col about">
+          <p>
+            Red Velvet is a South Korean girl group formed by SM Entertainment. The group debuted on August 1, 2014,
+            with
+            the digital single "Happiness" and four group members: Irene, Seulgi, Wendy, and Joy. In March 2015, Yeri
+            was
+            added into the group.
+            Since their debut, Red Velvet has released two studio albums, one reissue album, and eight extended plays in
+            Korean, with nine of them topping South Korea's Gaon Album Chart. Their singles "Happiness", "Ice Cream
+            Cake",
+            "Dumb Dumb", "Russian Roulette",
+            "Rookie", "Peek-a-Boo", and "Bad Boy" have all charted in the top five on Gaon Digital Chart, while their
+            singles "Red Flavor" and "Power Up" topped the chart upon their releases.
+            Additionally, they made their Japanese debut in July 2018 with the extended play #Cookie Jar.
+          </p>
+        </div>
+        <div class="col about">
+          <p>
+            Red Velvet is regarded as one of the most popular K-pop groups worldwide by Time and Billboard and have
+            received several awards for music, choreography, and popularity, including the Golden Disc New Artist Award
+            in
+            2015 and the Mnet Asian Music Award for Best Female Group in 2017. The director of the Korea Foundation for
+            International Cultural Exchange cited Red Velvet as a major contributor and one of the country's most
+            talented
+            idol groups who have "largely promoted K-pop" while discussing the Korean Wave in 2018. Debuting under one of
+            South
+            Korea biggest agencies, Red Velvet has gained many recognition and success not only from Korea fans but also
+            overseas fans.
+            Their very first single, Ice Cream gained many attentions and reached first on Gaon Album Chart.</p>
+        </div>
+        <div class="col about">
+          <p>
+            Red Velvet is known for their 'dual concept' dubbed as their "red" and "velvet" sides which influences their
+            styling and the music they release. The group's "red" half produces singles predominantly of the pop genre
+            due
+            to its bright and more youthful nature. Their singles "Ice Cream Cake", "Dumb Dumb" and "Red Flavor" are
+            such
+            examples. Their more mature "velvet" concept has spawned tracks primarily in the R&B genre. Their singles
+            "Automatic" and "Bad Boy" are considered to be part of the "velvet" concept. They often incorporate other
+            genres for the two sides, mixing them with genres such as electronic pop, hip-hop and disco. This dual
+            concept
+            has earned the group international praise for their versatility and diverse music.
+          </p>
+        </div>
+        <div class="col about">
+          <p>
+            Seulgi was the first member to be cast as an SM Entertainment trainee through an audition in 2007, while
+            Irene
+            was cast in 2009, and Yeri in 2011. In 2012, Wendy and Joy were cast through the SM Global Auditions in
+            Canada
+            and Seoul respectively. Preparations for Red Velvet began in late 2013, through SM Entertainment's trainee
+            group SM Rookies. Irene and Seulgi were introduced initially to the public through the said project team in
+            2013, followed by Wendy in 2014. With the addition of member Joy, the four-member group would debut as Red
+            Velvet, SM Entertainment's first girl group in five years since f(x). On March 11, 2015, SM Rookies member
+            Yeri was officially announced as part of the group.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="container text-center mt-4 mb-4 pb-4 rounded-2" id="discography">
+      <h2 class="pt-4 pb-4">Discography</h2>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+        
+        <div class="col">
+          <button type="button" class="btn btn-outline-danger mb-4">
+            Latest Release
+          </button>
+          <div class="card-body">
+            <img src="a1.png" alt="album cover" width="100%" class="rounded-3 zoommm">
+            <br> Feel My Rhythm
+          </div>
+        </div>
+        
+        <div class="col">
+          <button type="button" class="btn btn-outline-danger mb-4">
+            Albums
+          </button>
+          <div class="card-body mb-3">
+            <img src="bloom.png" alt="album cover" width="45%" class="rounded-3 zoommm">
+            <br> BLOOM
+          </div>
+          <div class="card-body mb-3">
+            <img src="finale.png" alt="album cover" width="45%" class="rounded-3 zoommm">
+            <br> 'The ReVe Festival' Finale
+          </div>
+          <div class="card-body mb-3">
+            <img src="summer.png" alt="album cover" width="45%" class="rounded-3 zoommm">
+            <br> Summer Magic - Summer Mini Album
+          </div>
+          <div class="card-body mb-3">
+            <img src="pervel.png" alt="album cover" width="45%" class="rounded-3 zoommm">
+            <br> Perfect Velvet - The 2nd Album
+          </div>
+        </div>
+
+        <div class="col">
+          <button type="button" class="btn btn-outline-danger mb-4">
+            Solo Debuts and Sub-Unit
+          </button>
+          <div class="card-body mb-3">
+            <img src="28.png" alt="album cover" width="45%" class="rounded-3 zoommm">
+            <br> 28 Reasons - The 1st Mini Album
+          </div>
+          <div class="card-body mb-3">
+            <img src="like.png" alt="album cover" width="45%" class="rounded-3 zoommm">
+            <br> Like Water - The 1st Mini Album
+          </div>
+          <div class="card-body mb-3">
+            <img src="hello.png" alt="album cover" width="45%" class="rounded-3 zoommm">
+            <br> Hello - Special Album
+          </div>
+          <div class="card-body mb-3">
+            <img src="monster.png" alt="album cover" width="45%" class="rounded-3 zoommm">
+            <br> Monster - The 1st Mini Album (by Irene and Seulgi)
+          </div>
+        </div>
+        <div class="col">
+          <button type="button" class="btn btn-outline-danger mb-4">
+            Achievements
+          </button>
+          <ul class="text-start" id="list-bullet">
+            <li> First Win: March 25, 2015 on Music Bank for “Ice Cream Cake” </li>
+            <li> 50th Win: August 23, 2018 on M! Countdown for “Power Up”</li>
+            <li> Total Wins: 80 (as of April 1, 2022) </li>
+            <li> Most Awarded Song: “Power Up” with 10 wins (as of April 2022)</li>
+            <li> First Triple Crown: January 18th, 2020 on Music Core for “Psycho”</li>
+            <li> Total Triple Crowns: 3 (as of April 2022) </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <h2 class="container text-center mt-2 mb-2" id="gallery">Gallery</h2>
+    <div class="row">
+      <div class="col d-flex align-items-stretch">
+        <div class="card shadow-sm">
+          <div class="card-header">
+            <img src="irene.jpeg" class="card-img-top w-100" alt="...">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title text-center"><b>IRENE</b></h5>
+            <p class="card-text">Bae Joo-hyun (Hangul: 배주현, born on March 29, 1991), also known as Irene, is a
+              South-Korean singer, dancer, rapper, model, actress and television personality and hostess. She is the
+              leader, vocalist, lead dancer, main rapper, visual and center of South-Korean girl group Red Velvet.</p>
+          </div>
+          <div class="card-footer">
+            <a href="https://en.wikipedia.org/wiki/Irene_(singer)" class="btn btn-outline-danger">More</a>
+            </di>
+          </div>
+        </div>
+      </div>
+      <div class="col d-flex align-items-stretch">
+        <div class="card shadow-sm">
+          <div class="card-header">
+            <img src="seulgi.jpeg" class="card-img-top w-100" alt="...">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title text-center"><b>SEULGI</b></h5>
+            <p class="card-text">Seulgi (Korean name: Kang Seul-gi; Hangul: 강슬기, born on February 10, 1994) is a
+              South-Korean singer and dancer. She is the lead vocalist, and main dancer of South-Korean girl group Red
+              Velvet.</p>
+          </div>
+          <div class="card-footer">
+            <a href="https://en.wikipedia.org/wiki/Seulgi_(singer)" class="btn btn-outline-danger">More</a>
+            </di>
+          </div>
+        </div>
+      </div>
+      <div class="col d-flex align-items-stretch">
+        <div class="card shadow-sm">
+          <div class="card-header">
+            <img src="wendy.jpeg" class="card-img-top w-100" alt="...">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title text-center"><b>WENDY</b></h5>
+            <p class="card-text">Son Seung-wan (born February 21, 1994 in Seongbuk-dong, Seoul. South Korea), better
+              known as Wendy, is a Korean singer and voice actress. She is the main vocalist of the South-Korean
+              girl group Red Velvet.</p>
+          </div>
+          <div class="card-footer">
+            <a href="https://en.wikipedia.org/wiki/Wendy_(singer)" class="btn btn-outline-danger">More</a>
+            </di>
+          </div>
+        </div>
+      </div>
+      <div class="col d-flex align-items-stretch">
+        <div class="card shadow-sm">
+          <div class="card-header">
+            <img src="joy.jpeg" class="card-img-top w-100" alt="...">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title text-center"><b>JOY</b></h5>
+            <p class="card-text">Park Soo-young (Hangul: 박수영; born September 3, 1996), also known as Joy, is a
+              South-Korean singer and actress. She is the lead rapper and vocalist of South-Korean girl group, Red
+              Velvet</p>
+          </div>
+          <div class="card-footer">
+            <a href="https://en.wikipedia.org/wiki/Joy_(singer)" class="btn btn-outline-danger">More</a>
+            </di>
+          </div>
+        </div>
+      </div>
+      <div class="col d-flex align-items-stretch">
+        <div class="card shadow-sm">
+          <div class="card-header">
+            <img src="yeri.jpeg" class="card-img-top w-100" alt="...">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title text-center"><b>YERI</b></h5>
+            <p class="card-text">Kim Ye-rim (Hangul: 김예림, born March 5, 1999), better known by her stage name,
+              Yeri, is a South-Korean singer-songwriter, rapper and television personality. She is the vocalist,
+              rapper and maknae of the South-Korean girl group Red Velvet and was introduced to the group as a
+              new addition on March 11, 2015.</p>
+          </div>
+          <div class="card-footer">
+            <a href="https://en.wikipedia.org/wiki/Yeri_(singer)" class="btn btn-outline-danger">More</a>
+            </di>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-danger mt-4 mb-4" role="alert">
+      <section class="d-flex justify-content-center justify-content-lg-between p-4">
+        <div class="me-5 d-none d-lg-block">
+          <span>Check out our latest song now!</span>
+        </div>
+        <div id="logosss">
+          <a href="https://open.spotify.com/track/2oBMZYteeO8DyXV9gDx6Za?si=c597de8c2a2843ad" class="me-4 no-underline">
+            <img src="spo.png" alt="logo spo" width="32px">
+          </a>
+          <a href="https://www.youtube.com/watch?v=R9At2ICm4LQ" class="me-4 no-underline">
+            <img src="yt.png" alt="logo yt" width="32px">
+          </a>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <footer class="text-center text-lg-start bg-white text-muted">
+    <section>
+      <div class="container text-center text-md-start mt-5">
+        <div class="row mt-3">
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Membership
+            </h6>
+            <form>
+              <div class="mb-3">
+                <label for="exampleInputUsername1" class="form-label">Usename</label>
+                <input type="username" class="form-control" id="exampleInputUsername1">
+                <div id="usernamehelp" class="form-text"></div>
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1">
+              </div>
+              <button type="submit" class="btn btn-primary">Sign In</button>
+            </form>
+          </div>
+
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Follow Us!</h6>
+            <p><a href="https://www.youtube.com/channel/UCk9GmdlDTBfgGRb7vXeRMoQ"
+                class="text-reset no-underline">YOUTUBE</a></p>
+            <p><a href="https://www.instagram.com/redvelvet.smtown/?hl=id" class="text-reset no-underline">INSTAGRAM</a>
+            </p>
+            <p><a href="https://twitter.com/RVsmtown" class="text-reset no-underline">TWITTER</a></p>
+            <p><a href="https://www.facebook.com/RedVelvet/" class="text-reset no-underline">FACEBOOK</a></p>
+            <p><a href="https://open.spotify.com/artist/1z4g3DjTBBZKhvAroFlhOM"
+                class="text-reset no-underline">SPOTIFY</a></p>
+          </div>
+
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <h6 class="text-uppercase fw-bold mb-4" id="contact">Contact</h6>
+            <p>SM Entertainment 83-21, Wangsimni-ro, Seongdong-gu, Seoul, Republic of Korea</p>
+            <p>smcnc@smtown.com</p>
+            <p>+ 82-2-6240-9400</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+      © 2022 SM Entertainment. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
