@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<script>
+    var nama = prompt("Masukkan nama anda: ");
+    var tugas = prompt("Sudah mengumpulkan tugas praktikum? Yes or No?");
+    var tugasLowerCase = tugas.toLowerCase();
+
+    if(tugasLowerCase == "yes"){
+        var asistensi = prompt("Ikut asistensi? Yes or No?");
+        var asistensiLowerCase = asistensi.toLowerCase();
+
+        if (asistensiLowerCase == "yes"){
+            var jumlahAsistensi = prompt("Sudah berapa kali asistensi? 1 atau 2?");
+
+            if (jumlahAsistensi == 2){
+                console.log("Hebat Kamu " + nama);
+            } else if (jumlahAsistensi == 1){
+                console.log("Asistensi sekali lagi " + nama);
+            } else {
+                console.log("Masukkan input yang benar yaitu 1 atau 2");
+            }
+
+        } else if (asistensiLowerCase == "no"){
+            console.log("Asistensi dulu ya " + name);
+        } else {
+            console.log("Masukkan input yang benar yaitu YES atau NO");
+        }
+
+    } else if (tugasLowerCase == "no"){
+        console.log("Jangan lupa di kerja tugas praktikumnya " + nama);
+    } else {
+        console.log("Masukkan input yang benar yaitu YES atau NO");
+    }
+</script>
+
+</body>
+</html>
