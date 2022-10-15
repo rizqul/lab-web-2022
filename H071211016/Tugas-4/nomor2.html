@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nomor 2</title>
+</head>
+<body>
+    <script>
+        var input = prompt("Perkalian berapa: ");
+        var totalSemua = 0;
+        if(!isNaN(input)){
+            var batas = prompt("Ingin dikalikan sampai berapa: ");
+            if (!isNaN(batas)) {
+                for (let i = 1; i <= batas; i++){
+                    let total = i * input;
+                    console.log(i + " x " + input +" = " + total);
+                    totalSemua += total;
+                }
+                console.log("Hasil seluruh perkalian: " + totalSemua);
+            } else {
+                console.log("inputan kamu bukan angka!");
+            }
+        } else {
+        console.log("inputan kamu bukan angka!");
+        }
+    </script>
+</body>
+</html>
