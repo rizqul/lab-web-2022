@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Lato&display=swap");
+
+$orange: #ffa62b;
+$primary-font: "Arvo", sans-serif;
+
+.btn-outline-primary {
+  &:hover {
+    background-color: $orange !important;
+  }
+
+  &:active {
+    background-color: $orange !important;
+  }
+
+  &:visited {
+    background-color: $orange !important;
+  }
+}
+
+.orange {
+  color: $orange !important;
+}
+
+.bg-orange {
+  background-color: $orange;
+}
+
+.logo,
+.title {
+  font-family: $primary-font;
+  font-weight: 800;
+}
+
+.carousel {
+  .carousel-item {
+    height: 90vh;
+  }
+}
+
+.title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99;
+}
+
+.card-img-top {
+  max-height: 20rem;
+  object-fit: cover;
+
+  &:hover {
+    max-height: 100%;
+    transform: scale(1.2);
+    transition: 0.3s;
+  }
+}
+
+.card-title {
+  min-height: 4rem;
+}
+
+.card-text {
+  height: 10rem;
+}

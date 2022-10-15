@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Lato&display=swap");
-.btn-outline-primary:hover,
-.btn-outline-primary:active,
+.btn-outline-primary:hover {
+  background-color: #ffa62b !important;
+}
+.btn-outline-primary:active {
+  background-color: #ffa62b !important;
+}
 .btn-outline-primary:visited {
   background-color: #ffa62b !important;
 }
@@ -15,7 +19,7 @@
 
 .logo,
 .title {
-  font-family: "Arvo", sans-serif !important;
+  font-family: "Arvo", sans-serif;
   font-weight: 800;
 }
 
@@ -33,9 +37,9 @@
 
 .card-img-top {
   max-height: 20rem;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
-
 .card-img-top:hover {
   max-height: 100%;
   transform: scale(1.2);
@@ -48,4 +52,4 @@
 
 .card-text {
   height: 10rem;
-}
+}/*# sourceMappingURL=style.css.map */
