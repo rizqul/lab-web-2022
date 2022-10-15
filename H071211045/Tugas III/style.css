@@ -1,0 +1,59 @@
+body {
+    background-image: url("assets/background.jpg");
+    background-size: contain;
+}
+
+.about-us, .display-4, .display-6 {
+    color: rgba(255, 255, 255, 0.797);
+}
+
+.lets-colonize {
+    filter: opacity(70%);
+}
+
+.descriptions, .achievements, .footer {
+    overflow-x: hidden;
+}
+
+.item-card {
+    width: 19rem;
+    opacity: 0.75;
+    height: 30rem;
+}
+
+.item-card:hover {
+    scale: 1.05;
+    opacity: 1;
+    transition: 0.3s;
+    box-shadow: 0 0.5rem 0.8rem rgba(255, 167, 66, 0.324);
+}
+
+.item-card:not(:hover) {
+    transition: 0.3s;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    height: 3rem;
+}
+
+.card-text {
+    height: 10.5rem;
+}
+
+.btn-orange, .btn-orange:hover {
+    background-color: rgb(193, 82, 2);
+    color: aliceblue;
+    border: 1px solid rgb(255, 255, 255);
+}
+
+.alert {
+    border-radius: 0;
+    opacity: 0.4;
+}
+
+.footer {
+    background-image: url("assets/footer.jpg");
+    background-size: cover;
+    background-position: center;
+}

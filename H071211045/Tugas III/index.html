@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sofyan Pujas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-nav bg- fixed-top px-5">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="assets/logo.png" width="290vw" height="64vmin" class="d-inline-block align-top lets-colonize"
+            alt="Lets Colonize" loading="lazy">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#projects">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#achievements">Badges</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Community
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="https://forums.space.com/">Forum</a></li>
+                <li><a class="dropdown-item" href="https://github.com/sofyanox12">Author</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Market Cap : 59.3% World GDP</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">|&nbsp;&nbsp;&nbsp;&nbsp;Upcoming
+                - (Project) Tethra Shield</a>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <button class="btn btn-outline-light" type="submit">Join Us</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Carousel -->
+    <div id="carousel-spot" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carousel-spot" data-bs-slide-to="0" class=""
+          aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carousel-spot" data-bs-slide-to="1" aria-label="Slide 2"
+          class=""></button>
+        <button type="button" data-bs-target="#carousel-spot" data-bs-slide-to="2" aria-label="Slide 3" class="active"
+          aria-current="true"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item">
+          <img src="assets/carousel_1.jpg" class="img-fluid">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>The Mars Terraforming</h5>
+            <p>A biggest project humanity have ever worked on.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="assets/carousel_2.jpg" class="img-fluid">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Discovery of Resources</h5>
+            <p>Representative space on Mars are detected with rare minerals.</p>
+          </div>
+        </div>
+        <div class="carousel-item active">
+          <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Third slide" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#555"></rect><text x="50%" y="50%" fill="#333" dy=".3em">Third slide</text></svg> -->
+          <img src="assets/carousel_3.jpg" class="img-fluid">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Martian Outposts</h5>
+            <p>These are the extended version of Martian City to explore wide areas.</p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carousel-spot" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carousel-spot" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- About Section (Grid System) -->
+  <div class="container m-auto d-flex flex-column mt-4 description" id="about">
+    <p class="display-4 mx-auto mt-4">About Us</p>
+    <div class="row mt-3">
+      <div class="col-md text-justify about-us">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illum aut labore eaque
+        velit
+        voluptatem quisquam a repudiandae suscipit vero. Aliquam quisquam illum quas aspernatur ad cupiditate explicabo
+        mollitia nisi ab minima reprehenderit consequuntur eligendi sapiente fuga ducimus repudiandae tempore id,
+        obcaecati laudantium ea, corporis et, at ut aut. Ipsum, aspernatur!</div>
+      <div class="col-md text-justify about-us">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates, odio ab.
+        Obcaecati iure
+        commodi, repudiandae fuga maiores provident fugit, eos quisquam iste neque dignissimos totam deserunt enim culpa
+        velit adipisci. Ratione, fugiat deserunt! Quos perferendis possimus vero quasi, sit sunt cumque eaque, ullam
+        veritatis consectetur adipisci, vel est dolore suscipit.</div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md text-justify about-us">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae nulla voluptates
+        corrupti
+        quisquam velit quaerat hic soluta quidem ratione magnam. Asperiores at, exercitationem cum eius voluptates
+        quidem fuga omnis! Placeat velit aliquam excepturi at ipsa sunt magni molestias! Dignissimos officia doloribus
+        tempore nostrum cum obcaecati nobis doloremque similique ipsa quia?
+      </div>
+      <div class="col-md text-justify about-us">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque id amet consequatur
+        aperiam
+        neque doloremque officiis odit sint quidem. Molestias, animi. Quis molestiae, cupiditate, necessitatibus nisi
+        ipsum iste, minima a quae optio id minus. Eum, rerum autem sunt nisi ipsam accusamus qui molestias doloremque
+        tenetur minima temporibus obcaecati maiores quia.</div>
+    </div>
+  </div>
+
+  <div class="d-flex flex-column mt-5 badge" id="badge">
+  <p class="display-4 mx-auto mt-4" id="achievements">The Most Known For</p>
+  <div class="container row m-auto d-flex text-center justify-content-center achievements" >
+    <div class="col-lg item-achieved">
+      <img class="img-fluid mx-auto" src="assets/achievements/item_1.png" width="60%">
+      <p class="display-6 mx-auto">Largest Tech Manufacture</p>
+    </div>
+    <div class="col-lg item-achieved">
+      <img class="img-fluid mx-auto" src="assets/achievements/item_2.png" width="70%">
+      <p class="display-6 mx-auto">Healthiest Community</p>
+    </div>
+    <div class="col-lg item-achieved">
+      <img class="img-fluid mx-auto" src="assets/achievements/item_3.png" width="30%">
+      <p class="display-6 mx-auto">The Guardian of Humanity</p>
+    </div>
+  </div>
+  </div>
+
+  <div class="d-flex flex-column mt-5 gallery" id="projects">
+    <p class="display-4 mx-auto mt-5">Our Latest Projects</p>
+    <div class="container row d-flex justify-content-center m-auto">
+      <div class="card col-xl m-2 item-card">
+        <img class="card-img-top mt-2" src="assets/picture_1.jpg">
+        <div class="card-body">
+          <h5 class="card-title">Autonomous Rover Drone <span class="badge text-white bg-success">Deployed</span></h5>
+          <hr>
+          <p class="card-text">This project is a continuation from earlier mars landing research. XB2 Rover drones will
+            circle every area that has never been entered before.</p>
+          <a href="#projects" class="btn btn-orange">Read More</a>
+        </div>
+      </div>
+      <div class="card col-xl m-2 item-card">
+        <img class="card-img-top mt-2" src="assets/picture_2.jpg">
+        <div class="card-body">
+          <h5 class="card-title">Eveniet Space Lift <span class="badge text-white bg-success">Deployed</span></h5>
+          <hr>
+          <p class="card-text">A Space lift that can carry 10000 tons of cargo to the space. The lift can withstand the
+            pressure of the space and the velocity of Earth's rotation.</p>
+          <a href="#projects" class="btn btn-orange">Read More</a>
+        </div>
+      </div>
+      <div class="card col-xl m-2 item-card">
+        <img class="card-img-top mt-2" src="assets/picture_3.jpg">
+        <div class="card-body">
+          <h5 class="card-title">New Guinea Floating Island <span class="badge text-white bg-success">Deployed</span>
+          </h5>
+          <hr>
+          <p class="card-text">Guinea hyper drive is a new technology that can create a floating island in the middle of
+            the Pacific Ocean. The island can be used as a base for the colonization of Mars.</p>
+          <a href="#projects" class="btn btn-orange">Read More</a>
+        </div>
+      </div>
+      <div class="card col-xl m-2 item-card">
+        <img class="card-img-top mt-2" src="assets/picture_4.jpg">
+        <div class="card-body">
+          <h5 class="card-title">The First Martian City <span class="badge text-white bg-warning">In-Progress</span>
+          </h5>
+          <hr>
+          <p class="card-text">Martian City of Mars is a city that is built on the surface of Mars. The city is built
+            with the latest technology and is equipped with everything needed for human life.</p>
+          <a href="#projects" class="btn btn-orange">Read More</a>
+        </div>
+      </div>
+      <div class="card col-xl m-2 item-card">
+        <img class="card-img-top mt-2" src="assets/picture_5.jpg">
+        <div class="card-body">
+          <h5 class="card-title">Mars Terraforming <span class="badge text-white bg-warning">In-Progress</span>
+          </h5>
+          <hr>
+          <p class="card-text">The Mars Terraforming Project is a project to make Mars suitable for human life. The
+            project is still in the research phase and is expected to be completed in 2230.</p>
+          <a href="#projects" class="btn btn-orange">Read More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mx-auto mt-5 py-5 footer text-light">
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+      <strong>Hello There!</strong> We are currently looking for new members. If you are interested, please contact us.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <footer class="row d-flex py-5 border-top mx-5">
+      <div class="col">
+        <form>
+          <h5>Any Corporate ID?</h5>
+          <p>Let's checkout your lucky day now and colonize with us.</p>
+          <div class="d-flex w-100 gap-2">
+            <label for="newsletter1" class="visually-hidden">Corporate ID</label>
+            <input id="newsletter1" type="text" class="form-control" placeholder="ID">
+            <button class="btn btn-orange" type="button">Checkout</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="col"></div>
+      <div class="col"></div>
+
+      <div class="col">
+        <h5>Corporation</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+          <li class="nav-item mb-2"><a href="#about" class="nav-link p-0 text-muted">About</a></li>
+          <li class="nav-item mb-2"><a href="#projects" class="nav-link p-0 text-muted">Projects</a></li>
+          <li class="nav-item mb-2"><a href="" class="nav-link p-0 text-muted">Community</a></li>
+        </ul>
+      </div>
+
+      <div class="col">
+        <h5>Advancement</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="#achievements" class="nav-link p-0 text-muted">Achievements</a></li>
+          <li class="nav-item mb-2"><a href="https://forums.space.com/" class="nav-link p-0 text-muted">Forums</a></li>
+          <li class="nav-item mb-2"><a href="" class="nav-link p-0 text-muted">Spaceships</a></li>
+          <li class="nav-item mb-2"><a href="" class="nav-link p-0 text-muted">Manufacturing</a></li>
+          <li class="nav-item mb-2"><a href="https://github.com/sofyanox12" class="nav-link p-0 text-muted">Founders</a></li>
+        </ul>
+      </div>
+
+    </footer>
+    <div class="d-flex justify-content-between py-4 my-4 border-top mx-5 text-dark">
+      <strong>© 2020-2220 Lets-Go, Inc. All rights reserved.</strong>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
