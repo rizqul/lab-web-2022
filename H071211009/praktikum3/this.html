@@ -1,0 +1,432 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GENSHIN IMPACT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css"/>
+    <style>
+    .LS img {
+      width: 100%;
+    }
+    .GILogo img {
+      align-items: center;
+    }
+    #about{
+      padding: 30px 40px 60px;
+    }
+    #about p{
+      text-align: justify ;
+      padding: 20px;
+    }
+    .bghalf{
+      background-image:url(image/ganyu2.png);
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    }
+    .container{
+      /* padding: 0 20px; */
+    }
+    .row{
+      table-layout: fixed;
+      justify-content: space-around;
+    }
+    .card{
+      margin-bottom: 30px;
+      width: 260px;
+      transition: all 0.3s;
+    }
+    .card img {
+      height: 210px;
+    }
+    .card:hover{
+      transform: scale(1.1);
+    }
+    .badge {
+      height: 45px;
+      font-size:150%;
+      margin-bottom: 20px;
+    }
+    @media(max-width:1700px ){
+      .bghalf{
+        background-position: bottom;
+        background-size: 100%;
+      }
+    }
+
+    </style>
+  </head>
+  
+  <body>
+        
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">GENSHIN IMPACT</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Element
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Carousel -->
+    <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="true">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="image/GI.png" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="image/Zhongli.png" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="image/Eula.png" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="image/Yae.png" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="image/tighnari.png" class="d-block w-100" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+    <!-- Grid -->
+    <div id = "about">
+    <div class="container text-center">
+      <br><br>
+      <h1 style="font-family:Times new roman;"><b>GENSHIN IMPACT</b></h1>
+      <br>  
+      <div class="row" style="font-family:Times new roman;">
+        <div class="col-md-6">
+          <p>
+            Genshin Impact is an action role-playing game developed and published by miHoYo. It was released for Microsoft Windows, PlayStation 4, iOS, and Android in 2020, and on PlayStation 5 in 2021, and is set for release on Nintendo Switch. The game features an anime-style open-world environment and an action-based battle system using elemental magic and character-switching. The game is free-to-play and is monetized through gacha game mechanics through which players can obtain new characters and weapons. The base game is expanded on a regular basis through patches using the games as a service model.
+          </p>
+        </div>
+        <div class="col-md-6">
+          <p>
+            Genshin Impact is an open-world action role-playing game that allows the player to control one of four interchangeable characters in a party. Switching between characters can be done quickly during combat. Characters may have their strengths enhanced in various ways, such as increasing a character's level and improving artifacts and the weapons that the character equips. In addition to exploration, the player can attempt various challenges for rewards. Completing these challenges grants the player progress towards increasing their Adventure Rank, which in turn unlocks new quests, challenges, and raises the World Level.
+          </p>
+        </div>
+        <div class="col-md-6">
+          <p>
+            Development of Genshin Impact began in 2017. The game received generally positive reviews, with critics praising the game's combat mechanics and immersive open world, but criticizing its simplistic endgame and monetization model. It had a first-year launch revenue of more than $3 billion in its first year of release, the highest for any video game, and a revenue of more than $4 billion as of March 2022. Prior to its release the game had over 10 million registrations. According to some, the game was the biggest international release of any Chinese video game.
+          </p>
+        </div>
+        <div class="col-md-6">
+          <p>
+            Genshin Impact takes place in the world of Teyvat, and is composed of the seven major. Each nation is ruled by a different god. The mysterious floating island of Celestia is allegedly home to gods and mortals who have ascended to godhood through great, heroic feats. Underground lie the ruins of the nation of Khaenri'ah which was destroyed by gods. Unlike the seven nations, Khaenri'ah was not ruled over by a god. The Traveler is separated from their twin and becomes trapped in Teyvat. They are joined by a companion, Paimon, as they journey through Teyvat in search of their lost sibling.
+          </p>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- Grid n Badge -->
+    <div class = "LS">
+      <img src="image/LS.png" alt="">
+    </div>
+    
+    <div class="bghalf">
+      <br><br><br>
+      <h2 align = center style="font-family:Times new roman; font-size:40px;"><b>CHARACTERS BY ELEMENT</b></h2>
+      <br><br>
+      <div class="container">
+        <div class="row rows-cols-auto">
+          <div class="col-lg-3 col-md-4 col-sm-6">
+            <!-- <h1><span class="badge bg-primary">ANEMO<span class="badge bg-secondary">1</span></span></h1> -->
+              <span class="badge bg-primary d-inline-flex">ANEMO &nbsp; <img src="image/anemo.png" alt="" height="30px" weight = "40px"></span>
+              <div>
+                <ul>
+                  <li>Traveler</li>
+                  <li>Venti</li>
+                  <li>Jean</li>
+                  <li>Sucrose</li>
+                  <li>Xiao</li>
+                  <li>Sayu</li>
+                  <li>Kaedehara Kazuha</li>
+                  <li>Shikanoin Heizo</li>
+                </ul>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6">
+              <span class="badge bg-primary d-inline-flex">GEO &nbsp;<img src="image/Geo.png" alt="" height="30px" weight = "40px"></span>
+              <div>
+                <ul>
+                  <li>Traveler</li>
+                  <li>Albedo</li>
+                  <li>Arataki Itto</li>
+                  <li>Gorou</li>
+                  <li>Zhongli</li>
+                  <li>Noelle</li>
+                  <li>Ningguang</li>
+                  <li>Yun Jin</li>
+                </ul>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6">
+              <span class="badge bg-primary d-inline-flex">ELECTRO &nbsp;<img src="image/electro.png" alt="" height="30px" weight = "40px"></span>
+              <div>
+                <ul>
+                  <li>Traveler</li>
+                  <li>Beido</li>
+                  <li>Fischl</li>
+                  <li>Cyno</li>
+                  <li>Keqing</li>
+                  <li>Kujou Sara</li>
+                  <li>Kuki Shinobu</li>
+                  <li>Lisa</li>
+                  <li>Raiden Shogun</li>
+                  <li>Yae Miko</li>
+                </ul>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6">
+              <span class="badge bg-primary d-inline-flex">DENDRO &nbsp;<img src="image/dendro.png" alt="" height="30px" weight = "40px"></span>
+              <div>
+                <ul>
+                  <li>Traveler</li>
+                  <li>Collei</li>
+                  <li>Tighnari</li>
+                </ul>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6">
+              <span class="badge bg-primary d-inline-flex">HYDRO &nbsp;<img src="image/hydro.png" alt="" height="30px" weight = "40px"></span>
+              <div>
+                <ul>
+                  <li>Barbara</li>
+                  <li>Mona</li>
+                  <li>Tartaglia</li>
+                  <li>Xingqui</li>
+                  <li>Kamisato Ayato</li>
+                  <li>Sangonomiya Kokomi</li>
+                  <li>Yelan</li>
+                  <li>Nilou</li>
+                  <li>Candace</li>
+                </ul>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6">
+              <span class="badge bg-primary d-inline-flex">PYRO &nbsp;<img src="image/pyro.png" alt="" height="30px" weight = "40px"></span>
+              <div>
+                <ul>
+                  <li>Amber</li>
+                  <li>Bennet</li>
+                  <li>Diluc</li>
+                  <li>Hu Tao</li>
+                  <li>Klee</li>
+                  <li>Thoma</li>
+                  <li>Xiangling</li>
+                  <li>Xinyan</li>
+                  <li>Yanfei</li>
+                  <li>Yoimiya</li>
+                </ul>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6">
+              <span class="badge bg-primary d-inline-flex">CRYO &nbsp;<img src="image/cryo.png" alt="" height="30px" weight = "40px"></span>
+              <div>
+                <ul>
+                  <li>Kaeya</li>
+                  <li>Eula</li>
+                  <li>Ganyu</li>
+                  <li>Kamisato Ayaka</li>
+                  <li>Shenhe</li>
+                  <li>Aloy</li>
+                  <li>Chongyun</li>
+                  <li>Diona</li>
+                  <li>Qiqi</li>
+                  <li>Rosaria</li>
+                </ul>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card -->
+    <br><hr><br><br>
+    
+    <div class="container text-center">
+      <h3 style="font-family:Times new roman; font-size: 40px;"><b>ARCHON DISCOVERED</b></h3>
+      <br><br><br>
+      <div class="row row-cols-auto">
+        <div class="col">
+          <div class="card">
+          <img src="image/barbatos.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                  <h5 class="card-title" align = center>LORD BARBATOS</h5>
+                  <br>
+                  <p class="card-text">Barbatos, also known as Lord Barbatos or the God of Freedom, is the current Anemo Archon of The Seven who presides over Mondstadt.
+                    Barbatos is depicted as a male figure wearing a cape and ropes, with two wings on his back.
+                  </p>
+                  
+                  <a href="https://genshin-impact.fandom.com/wiki/Barbatos" class="btn btn-primary">More Information</a>
+              </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+          <img src="image/Morax.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                  <h5 class="card-title" align = center>MORAX</h5>
+                  <br>
+                  <p class="card-text">Morax, also known as the God of Contracts and Rex Lapis, is the current Geo Archon and a member of The Seven. He’s the God of Contracts, Commerce, and the Warrior God. He had been presiding over Liyue prior to revoking his providence in the last Rite of Descension.</p>               
+                  <a href="https://genshin-impact.fandom.com/wiki/Morax" class="btn btn-primary">More Information</a>
+              </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+          <img src="image/Raiden.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                  <h5 class="card-title" align = center>RAIDEN SHOGUN</h5>
+                  <br>
+                  <p class="card-text">The Electro Archon, also referred to as the Great Narukami, is the Archon who presides over Inazuma, the land of Electro.
+                    The Shogun was created in the Raiden twins image and now serves as the public image for the Electro Archon.
+                  </p>
+                  <a href="https://genshin-impact.fandom.com/wiki/Raiden_Shogun" class="btn btn-primary">More Information</a>
+                </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+          <img src="image/Kusanali.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                  <h5 class="card-title" align = center>LESSER LORD KUSANALI</h5>
+                  <br>
+                  <p class="card-text">Lesser Lord Kusanali is the current Dendro Archon among The Seven and presides over Sumeru. She is the youngest and likely the newest among The Seven, having risen to this position following the death of the God of the Woods, Greater Lord Rukkhadevata.
+                  </p>
+                  <a href="https://genshin-impact.fandom.com/wiki/Lesser_Lord_Kusanali" class="btn btn-primary">More Information</a>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>   
+    <br><br><br><br>
+
+    <!-- Alert n Footer -->
+    <div class="bg-dark">
+
+      <div class="alert alert-info" role="alert" align = left>
+        GET TO KNOW MORE ABOUT GENSHIN!
+      </div>
+
+      <div class="container">
+        <footer class="py-5">
+          <div class="row">
+            <div class="col-6 col-md-2 mb-3">
+              <h5 style="color: white">Sosial Media</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="https://www.facebook.com/Genshinimpact/" class="nav-link p-0 text-muted">Facebook</a></li>
+                <li class="nav-item mb-2"><a href="https://www.instagram.com/genshinimpact/" class="nav-link p-0 text-muted">Instagram</a></li>
+                <li class="nav-item mb-2"><a href="https://twitter.com/GenshinImpact" class="nav-link p-0 text-muted">Twitter</a></li>
+                <li class="nav-item mb-2"><a href="https://www.reddit.com/r/Genshin_Impact/" class="nav-link p-0 text-muted">Reddit</a></li>
+              </ul>
+            </div>
+            <div class="col-6 col-md-2 mb-3">
+              <h5 style="color: white">Useful Links</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="https://discord.com/invite/genshinimpact" class="nav-link p-0 text-muted">Discord</a></li>
+                <li class="nav-item mb-2"><a href="https://www.youtube.com/c/GenshinImpact" class="nav-link p-0 text-muted">Youtube</a></li>
+                <li class="nav-item mb-2"><a href="https://www.tiktok.com/@genshinimpact_en" class="nav-link p-0 text-muted">Tiktok</a></li>
+                <li class="nav-item mb-2"><a href="https://www.hoyolab.com/" class="nav-link p-0 text-muted">Community</a></li>
+              </ul>
+            </div>
+            <div class="col-6 col-md-2 mb-3">
+              <h5 style="color: white">Section</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+              </ul>
+            </div>
+      
+            <div class="col-md-5 offset-md-1 mb-3">
+              <form class="forum-pertanyaan">
+                <h5 style="color: white">Give us your opinion</h5>
+                <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+                  <label for="newsletter1" class="visually-hidden">Email address</label>
+                  <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+                </div>
+                <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Comment..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary mb-4">
+                    Submit
+                </button>
+              </form>
+            </div>
+          </div>
+      
+          <div class="border-top">
+            
+            <div class = "GILogo" align = center>
+              <img src="image/GenshinName-removebg-preview.png">
+            </div>
+          <br>
+          <p style="color:white;text-align: center!important;">Web made by <a style="color: white; text-decoration:none" href="https://www.instagram.com/_milchan27/">Emilia Damayanti</a> </p>
+            
+          </div>
+        </footer>
+      </div>
+
+    </div>        
+    
+    <audio autoplay loop hidden>
+      <source src="BGM/01 - Genshin Impact Main Theme.mp3" type="audio/mp3">
+    </audio>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+        
+  </body>
+
+</html>
