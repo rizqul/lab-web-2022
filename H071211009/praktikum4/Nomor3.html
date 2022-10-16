@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ketiga</title>
+    </head>
+
+    <body>
+        <script>
+            var sentence = prompt("Masukkan Kalimat");
+            var array = sentence.split('');
+            array.sort(); //untuk mengurutkan dari yang kuantitasnya terbanyak
+            var count = 1;
+            for (let i = 0; i < array.length; i++) { //count = 0 javascript using looping
+                if (array[i] == array[i + 1]) {
+                    count += 1;  //menghitung jumlah karakter
+                } else {
+                    if (array[i] == " ") {
+                        console.log("Spasi = " + count);
+                        count = 1;
+                    } else {
+                        console.log(array[i] + " " + count);
+                        count = 1; //supaya terhitung tepat sama yang diinput
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>

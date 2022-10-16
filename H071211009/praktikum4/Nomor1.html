@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pertama</title>
+</head>
+
+<!-- const untuk variabel yg nilainya statis atau tidak berubah -->
+
+<body>
+    <script>
+        let yes = "YES";
+        let no = "NO";
+        const nama = prompt("Masukkan nama anda");
+        if (nama.trim().length) {
+            const kumpul = prompt("Apakah sudah mengumpulkan Tugas Praktikum? YES atau NO");
+            const kumpul_input = kumpul.toUpperCase();
+            if (kumpul_input == yes) {
+                const asistensi = prompt("Ikut asistensi? YES atau NO");
+                const asistensi_input = asistensi.toUpperCase(); 
+                if (asistensi_input == yes) {
+                    const berapa = prompt("Sudah berapa kali asistensi? 1 atau 2");
+                    if (berapa == "1") {
+                        console.log("Satu kali lagi ya " + nama);
+                    } else if (berapa == "2") {
+                        console.log("Kamu hebat " + nama);
+                    } else {
+                        console.log("Masukan input yang benar");
+                    }
+                } else if (asistensi_input == no) {
+                    console.log("Asistensi dulu ya " + nama);
+                } else {
+                    console.log("Masukan input yang benar");
+                }
+            } else if (kumpul_input == no) {
+                console.log("Jangan lupa dikerja tugas praktikumnya " + nama);
+            } else {
+                console.log("masukan YES/yes atau NO/no");
+            }
+        } else {
+            console.log("Mohon input nama anda");
+        }
+    </script>
+</body>
+
+</html>

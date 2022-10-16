@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Kedua</title>
+    </head>
+
+    <body>
+        <script>
+            var a = (prompt("Perkalian berapa?"));
+
+            var sum = 0;
+
+            if (a) { // untuk mengecek apakah bukan NaN, Unidentified, Null
+                
+                var b = (prompt("Ingin dikalikan sampai berapa?"));
+
+                if (b) {
+                    for (let i = 1; i <= b; i++) {  //i mulai dari perkalian 1
+                        sum += i * a; //menjumlahkan hasil akhir smua perkalian
+                        console.log(i + " x " + a + " = " + (i * a));
+                    }
+                    console.log("Jumlah hasil perkalian:" + sum);
+                } else {
+                    console.log("Input bukan angka");
+                }
+
+            } else {
+                console.log("Input bukan angka");
+            }
+
+        </script>
+    </body>
+</html>
+
+    
