@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Another Case</title>
+</head>
+
+<body>
+    <script>
+        let yes = "YES";
+        let no = "NO";
+        const nama = prompt("Input your name");
+        if (nama.trim().length) {
+            const anime = prompt("Have you wathced anime before? YES or NO");
+            const anime_input = anime.toUpperCase();
+            if (anime_input == yes) {
+                const crush = prompt("Do you have crush on 2D characters? YES or NO");
+                const crush_input = crush.toUpperCase();
+                if (crush_input == yes) {
+                    const jumlah = prompt("How many hours of anime you watch in a day?");
+                    if (jumlah >= 20) {
+                        console.log("How in the world do you have a social life?");
+                    } else if (jumlah >= 10){
+                        console.log("Ok " + nama + ", you're a person of culture");
+                    } else {
+                        console.log("Wise choice " + nama)
+                    }
+                } else if (crush_input == no) {
+                    console.log(nama + ", you're NOOB");
+                }
+            } else if (anime_input == no) {
+                console.log("Hmm normies");
+            }
+        } else {
+            console.log("Come on, input your name");
+        }
+    </script>
+</body>
+
+</html>
