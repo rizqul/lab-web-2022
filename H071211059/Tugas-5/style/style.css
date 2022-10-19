@@ -1,0 +1,256 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap");
+:root {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url("../assets/bg.png");
+  font-family: "Comfortaa", cursive;
+}
+
+.container {
+  background-color: #fff;
+  height: 550px;
+  width: 1200px;
+  border-radius: 10px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.container h1 {
+  color: #c7b1c9;
+  font-size: 1.235rem;
+  font-weight: 1000;
+  text-align: center;
+  margin: 2rem 0;
+}
+.container p {
+  color: #aca7a7;
+}
+.container button {
+  background-color: #fff;
+  border: #aca7a7 solid 1px;
+  border-radius: 20px;
+  padding: 0.5rem;
+  width: 100px;
+  max-height: 30px;
+  color: #aca7a7;
+  font-family: "Comfortaa", cursive;
+}
+.container button:hover {
+  cursor: pointer;
+}
+
+.playing-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.table {
+  background-color: #fff;
+  height: 150px;
+  width: 600px;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.panel .left {
+  width: 180px;
+}
+.panel .right {
+  width: 180px;
+}
+.panel.user {
+  display: flex;
+  align-items: center;
+}
+.panel.user button {
+  display: block;
+  margin: auto;
+  margin-top: 10px;
+}
+.panel.user button:hover {
+  background-color: #f29693;
+  color: #fff;
+  transition: ease 0.5s;
+}
+.panel.dealer {
+  display: flex;
+  align-items: center;
+}
+.panel.dealer button {
+  display: block;
+  margin: auto;
+}
+.panel.dealer button:hover {
+  background-color: #f29693;
+  color: #fff;
+  transition: ease 0.5s;
+}
+.panel.dealer img {
+  width: 180px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.side-panel {
+  text-align: center;
+}
+.side-panel p {
+  margin: 0.5rem 0;
+}
+
+.bet-options {
+  width: 640px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.pokerchip {
+  flex-basis: 30%;
+  margin: 0.5em;
+  font-size: 1.2em;
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 3em;
+  height: 3em;
+  background: #555;
+  border-radius: 50%;
+  position: relative;
+  border: 0.4em dashed white;
+  transition: all 0.5s ease;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+.pokerchip p {
+  color: white;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+}
+.pokerchip.flat {
+  box-shadow: 0 0 0 0.2em #fff;
+}
+.pokerchip.brown {
+  background-color: #665a48;
+}
+.pokerchip.pink {
+  background-color: #ff9494;
+}
+.pokerchip.blue {
+  background-color: #7895b2;
+}
+.pokerchip.yellow {
+  background-color: #eebb4d;
+}
+.pokerchip.violet {
+  background-color: #874c62;
+}
+.pokerchip.orange {
+  background-color: #ffc898;
+}
+.pokerchip:hover {
+  cursor: pointer;
+  transform: rotate(360deg);
+}
+
+.card {
+  width: 100px;
+  height: 130px;
+  border-radius: 10px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: white;
+  margin: 10px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card p {
+  margin: 10px;
+  color: white;
+}
+.card p.bottom {
+  margin-left: auto;
+}
+.card i {
+  margin: auto;
+}
+.card.black {
+  background-color: #404041;
+}
+.card.red {
+  background-color: #f29693;
+}
+.card.flipped {
+  background-color: #ffd754;
+  color: #ffd754;
+}
+.card.flipped p {
+  color: #ffd754;
+}
+
+.start-panel {
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #aca7a7;
+  height: 300px;
+  border-radius: 10px;
+}
+.start-panel .bet-options > * {
+  margin-top: 20px;
+}
+.start-panel p {
+  margin: 0;
+}
+.start-panel button {
+  background-color: #fff;
+  border: #aca7a7 solid 1px;
+  border-radius: 20px;
+  padding: 0.5rem;
+  width: 100px;
+  max-height: 30px;
+  color: #aca7a7;
+  font-family: "Comfortaa", cursive;
+  margin: auto;
+}
+
+.return-panel {
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #aca7a7;
+  height: 300px;
+  border-radius: 10px;
+  width: 640px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.return-panel .return {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.return-panel .continue {
+  font-size: 0.8rem;
+  opacity: 80%;
+}
+
+.hidden {
+  display: none;
+}/*# sourceMappingURL=style.css.map */
