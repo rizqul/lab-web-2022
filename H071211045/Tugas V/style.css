@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+
+:root {
+    /* Colors */
+    --primary: rgb(18, 18, 18);
+    --secondary: brown;
+    --third: wheat;
+
+    /* Fonts */
+    --font:  'Silkscreen', cursive;
+}
+
+body {
+    background-color: var(--secondary);
+    text-align: center;
+    align-items: center;
+    overflow-x: hidden;
+    font-family: var(--font);
+}
+
+p {
+    color: var(--third);
+    font-size: 20px;
+}
+
+.display-7 {
+    font-size: 1.4rem;
+}
+
+.display-5, .display-7 {
+    margin-top: 5px;
+    color: var(--third);
+}
+
+.mt-5 {
+    margin-top: 15rem;
+}
+
+.board {
+    width: 80%;
+    height: 38rem;
+    background-color: var(--primary);
+    border-radius: 100px;
+    padding-block: 0.5rem;
+    border: 2px solid var(--third);
+}
+
+.cards {
+    width: 5.75rem;
+    margin: 0 0.25rem;
+
+    image-resolution: pixelated;
+    image-rendering: -moz-crisp-edges;
+}
+
+
+
+.cards:hover {
+    /* cursor: pointer; */
+    transform: translate(0, -1rem);
+    transition: 0.2s;
+}
+
+.cards:not(:hover) {
+    transition: 0.2s;
+}
+
+.dealer-char {
+    width: 15rem;
+    border: 2px solid var(--third);
+}
+
+.player {
+    margin-top: 5rem;
+}
+
+.player-char {
+    width: 10rem;   
+}
+
+.chip {
+    width: 3.5rem;
+    margin-right: 2rem;
+    filter: hue-rotate(170deg) brightness(70%);
+}
+
+.money {
+    background-color: wheat;
+    margin: auto;
+    border-radius: 10px;
+    width: 80%;
+    padding: 0 1rem;
+}
+
+.menu {
+    border-radius: 5px;
+    justify-content: center;
+}
+
+
+
+.game {
+    display: none;
+}
+
+.back-cards {
+    position: absolute;
+}
+
+.back-cards:nth-child(1) {
+    transform: translate(-2px, -2px);
+}
+
+.back-cards:nth-child(2) {
+    transform: translate(-4px, -4px);
+}
+
+.back-cards:nth-child(3) {
+    transform: translate(-6px, -6px);
+}
+
+.back-cards:nth-child(4) {
+    transform: translate(-8px, -8px);
+}
+
+.back-cards:nth-child(5) {
+    transform: translate(-10px, -10px);
+}
+
+
+

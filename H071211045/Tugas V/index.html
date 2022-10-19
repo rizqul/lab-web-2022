@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/icon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Blackjack</title>
+</head>
+
+<body>
+
+    <div class="display-3">Blackjack</div>
+    <div class="container board game">
+        <div class="row">
+            <div class="col">
+                <div class="container backup-cards mt-5">
+                    <img src="assets/back_red.png" alt="back" class="cards back-cards">
+                    <img src="assets/back_red.png" alt="back" class="cards back-cards">
+                    <img src="assets/back_red.png" alt="back" class="cards back-cards">
+                    <img src="assets/back_red.png" alt="back" class="cards back-cards">
+                    <img src="assets/back_red.png" alt="back" class="cards back-cards">
+                </div>
+            </div>
+            <div class="col">
+                <div class="display-7 player-title">Dealer</div>
+                <img src="assets/dealer1.png" class="img-fluid dealer-char mt-2">
+                <div class="chat-box" id="dealer-chat"></div>
+            </div>
+
+            <div class="col">
+                <div class="container d-flex justify-content-center dealer-deck mt-5" id="dealer-deck">
+                    <!-- There will be card images here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <p>POT: $<span id="total-pot">0</span></p>
+        </div>
+
+        <div class="container row player">
+            <div class="col">
+                <div class="display-7 player-title"><span id="player-name">Player</div>
+                <img src="assets/player.png" class="img-fluid player-char">
+            </div>
+            <div class="col">
+                <div class="container d-flex justify-content-center player-deck mt-5" id="player-deck">
+                    <!-- There will be card images here -->
+                </div>
+            </div>
+            <div class="col">
+                <div class="row m-0 h-30">
+                    <div class="container activity-button mt-5">
+                        <button class="btn btn-light btn-lg" onclick="takeCard()">Take</button>
+                        <button class="btn btn-light btn-lg" onclick="stand()">Stay</button>
+                        <button class="btn btn-light btn-lg" onclick="reset()">Quit</button>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="container d-flex money">
+                        <img src="assets/chip.png" alt="" class="img-fluid chip">
+                        <div class="display-6"><span id="money">5000</span></div>
+
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <p>Your Cards : <span id="player-sum">0</span></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container board menu main">
+        <div class="display-5">Want to Play A Round?</div>
+        <div class="container buttons d-flex flex-column">
+            <button class="btn btn-light btn-lg m-3" onclick="startGame()">Start Game</button>
+            <button class="btn btn-light btn-lg m-3">Github</button>
+        </div>
+        <div class="container menu-logo">
+            <img src="assets/menu.png" alt="logo" class="img-fluid h-25 w-25 blackjack-logo"
+                style="filter: invert(100%) hue-rotate(200deg);">
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
