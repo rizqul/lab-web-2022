@@ -8,7 +8,6 @@ var name = "Player";
 
 const values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 const types = ["H", "K", "S", "W"]; // H = Hati, K = Klober, S = Sekop, W = Wajik
-const dealerMoney = [100, 250, 500, 1000, 1500, 2500, 3000, 5000];
 const startingMoney = 5000;
 const startingCard = 2;
 
@@ -19,11 +18,14 @@ backCard.src = "assets/back_red.png";
 var pot = document.getElementById("total-pot").innerHTML;
 var player = document.getElementById("money").innerHTML;
 
-var hiddenCard, character;
-var haveAceP1, haveAceP2, hit, deck;
-var money = startingMoney;
+var hiddenCard;
+var haveAceP1, haveAceP2;
+var hit, deck;
+var money;
 
 function prepareGame() {
+    money = startingMoney
+    dealer = 0;
     dealer = player = bet = pot = 0;
     haveAceP1 = haveAceP2 = false;
     hit = true;
@@ -38,7 +40,7 @@ function startGame() {
 }
 
 makeDeck = () => { // Mengatur Kartu
-    
+
     // Menyetel Pot ke jadi kosong
     pot = 0;
 
@@ -58,8 +60,6 @@ makeDeck = () => { // Mengatur Kartu
         deck[i] = deck[indexOfDeck];
         deck[indexOfDeck] = temp;
     }
-
-    pot += dealerMoney[Math.floor(Math.random() * dealerMoney.length)]
 
     // Menambah kartu ke dealer
     hiddenCard = deck.pop();
@@ -112,8 +112,7 @@ getValue = (card) => { // Menghitung nilai kartu
 
 askBet = () => { // Meminta bet
     let bet = 0;
-    document.getElementsByClassName("betting")[0].style.zIndex = "50";
-    document.getElementsByClassName("overlay")[0].style.display = "block";
+    popUp("betting", 1);
 
     $("#submit").click(function () {
         bet = parseInt(document.getElementById("bet").value);
@@ -128,10 +127,10 @@ askBet = () => { // Meminta bet
             pot += bet;
             money -= bet;
 
+            pot += (Math.floor(Math.random() < 0.5) && bet > 500 ? (bet - 500) : (bet + 500)); // Uang dari dealer
             updateStatus();
+            popUp("betting", 0);
 
-            document.getElementsByClassName("overlay")[0].style.display = "none";
-            document.getElementsByClassName("betting")[0].style.zIndex = "-50";
 
         } else {
             alert("Please input a valid number!");
@@ -145,7 +144,7 @@ updateStatus = () => { // Update status
     document.getElementById("player-sum").innerHTML = player;
     document.getElementById("total-pot").innerHTML = pot;
     document.getElementById("money").innerHTML = money;
-    
+
     console.log("Status \nPlayer: " + player + "\nDealer: " + dealer + "\nPot: " + pot + "\nMoney: " + money);
 }
 
@@ -163,23 +162,23 @@ checkAce = (playerScore, targetParent, haveAce) => { // Mengecek apakah ada kart
     return playerScore;
 }
 
-stand = () => { // Menyimpan nilai kartu
+stand = () => { // Menyimpan nilai kartu (Seperti Submit)
     hit = (hit == true) ? false : true;
 
     document.getElementById("dealer-deck").removeChild(backCard);
     addCard(hiddenCard, "dealer-deck");
 
-    while (dealer < 17) {
+    while (dealer < 18) {
         let card = deck.pop();
         dealer += getValue(card);
         addCard(card, "dealer-deck");
     }
 
-    if ((player < 21 && dealer < 21) && (player > dealer) || dealer > 21) {
+    if ((player < 21 && dealer < 21) && (player > dealer) || (dealer > 21 && player < 21)) {
         document.getElementById("game-result").innerHTML = "You Win!";
         money += pot;
 
-    } else if ((player < 21 && dealer && 21) && (dealer > player) || player > 21) {
+    } else if ((player < 21 && dealer < 21) && (dealer > player) || (player > 21 && dealer < 21)) {
         document.getElementById("game-result").innerHTML = "You Lose!";
 
     } else {
@@ -188,27 +187,31 @@ stand = () => { // Menyimpan nilai kartu
     }
 
     updateStatus();
-
-    document.getElementsByClassName("overlay")[0].style.display = "block";
-    document.getElementsByClassName("game-over")[0].style.zIndex = "50";
+    popUp("game-over", 1);
 
     $("#play-again").click(function () {
-        document.getElementsByClassName("overlay")[0].style.display = "none";
-        document.getElementsByClassName("game-over")[0].style.zIndex = "-50";
+        popUp("game-over", 0);
         document.getElementById("player-deck").innerHTML = "";
         document.getElementById("dealer-deck").innerHTML = "";
-
         dealer = player = 0;
         startGame();
     });
 }
 
+popUp = (window, index) => {
+    if (index == 1) {
+        document.getElementsByClassName("overlay")[0].style.display = "block";
+        document.getElementsByClassName(window)[0].style.zIndex = "50";
+    } else if (index == 0) {
+        document.getElementsByClassName("overlay")[0].style.display = "none";
+        document.getElementsByClassName(window)[0].style.zIndex = "-50";
+    }
+}
 
 $("#exit").click(function () {
     money = startingMoney;
     player = dealer = pot = 0;
-    document.getElementsByClassName("overlay")[0].style.display = "none";
-    document.getElementsByClassName("game-over")[0].style.zIndex = "-50";
+    popUp("game-over", 0);
     document.getElementById("player-deck").innerHTML = "";
     document.getElementById("dealer-deck").innerHTML = "";
     switchWindow("game", "menu");
