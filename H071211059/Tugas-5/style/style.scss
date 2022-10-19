@@ -1,0 +1,292 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap");
+
+$primary-font: "Comfortaa", cursive;
+$primary-white: #fff;
+$grey: #aca7a7;
+
+@mixin panels {
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $grey;
+  height: 300px;
+  border-radius: 10px;
+}
+:root {
+  box-sizing: border-box;
+}
+body {
+  background-image: url("../assets/bg.png");
+  font-family: $primary-font;
+}
+
+.container {
+  background-color: $primary-white;
+  height: 550px;
+  width: 1200px;
+  border-radius: 10px;
+  // border: 1px black solid;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  h1 {
+    color: #c7b1c9;
+    font-size: 1.235rem;
+    font-weight: 1000;
+    text-align: center;
+    margin: 2rem 0;
+  }
+
+  p {
+    color: $grey;
+  }
+
+  button {
+    background-color: $primary-white;
+    border: $grey solid 1px;
+    border-radius: 20px;
+    padding: 0.5rem;
+    width: 100px;
+    max-height: 30px;
+    color: $grey;
+    font-family: $primary-font;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.playing-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.table {
+  background-color: #fff;
+  height: 150px;
+  width: 600px;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.panel {
+  .left {
+    width: 180px;
+  }
+
+  .right {
+    width: 180px;
+  }
+  &.user {
+    display: flex;
+    align-items: center;
+
+    button {
+      display: block;
+      margin: auto;
+      margin-top: 10px;
+
+      &:hover {
+        background-color: #f29693;
+        color: $primary-white;
+        transition: ease 0.5s;
+      }
+    }
+  }
+
+  &.dealer {
+    display: flex;
+    align-items: center;
+
+    button {
+      display: block;
+      margin: auto;
+
+      &:hover {
+        background-color: #f29693;
+        color: $primary-white;
+        transition: ease 0.5s;
+      }
+    }
+
+    img {
+      width: 180px;
+      object-fit: cover;
+    }
+  }
+}
+
+.side-panel {
+  text-align: center;
+
+  p {
+    margin: 0.5rem 0;
+  }
+}
+
+.bet-options {
+  width: 640px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.pokerchip {
+  flex-basis: 30%;
+  margin: 0.5em;
+  font-size: 1.2em;
+  position: relative;
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 3em;
+  height: 3em;
+  background: #555;
+  border-radius: 50%;
+  position: relative;
+  border: 0.4em dashed white;
+  transition: all 0.5s ease;
+  backface-visibility: hidden;
+
+  p {
+    color: white;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1rem;
+  }
+
+  &.flat {
+    box-shadow: 0 0 0 0.2em #fff;
+  }
+
+  &.brown {
+    background-color: #665a48;
+  }
+
+  &.pink {
+    background-color: #ff9494;
+  }
+
+  &.blue {
+    background-color: #7895b2;
+  }
+
+  &.yellow {
+    background-color: #eebb4d;
+  }
+
+  &.violet {
+    background-color: #874c62;
+  }
+
+  &.orange {
+    background-color: #ffc898;
+  }
+
+  &:hover {
+    cursor: pointer;
+    transform: rotate(360deg);
+  }
+}
+
+.card {
+  width: 100px;
+  height: 130px;
+  border-radius: 10px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: white;
+  margin: 10px 5px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  p {
+    margin: 10px;
+    color: white;
+
+    &.bottom {
+      margin-left: auto;
+    }
+  }
+
+  i {
+    margin: auto;
+  }
+
+  &.black {
+    background-color: #404041;
+  }
+
+  &.red {
+    background-color: #f29693;
+  }
+
+  &.flipped {
+    background-color: #ffd754;
+    color: #ffd754;
+
+    p {
+      color: #ffd754;
+    }
+  }
+}
+
+.start-panel {
+  @include panels;
+  .bet-options > * {
+    margin-top: 20px;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  button {
+    background-color: $primary-white;
+    border: $grey solid 1px;
+    border-radius: 20px;
+    padding: 0.5rem;
+    width: 100px;
+    max-height: 30px;
+    color: $grey;
+    font-family: $primary-font;
+    margin: auto;
+  }
+}
+
+.return-panel {
+  @include panels;
+  width: 640px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .return {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  .continue {
+    font-size: 0.8rem;
+    opacity: 80%;
+  }
+}
+
+.hidden {
+  display: none;
+}
