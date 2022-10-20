@@ -19,9 +19,9 @@
         <div class="row">
             <div class="col">
                 <div class="container backup-cards mt-5">
-                    <img src="assets/back_red.png" alt="back" class="cards back-cards" onclick="takeCard()">
                     <img src="assets/back_red.png" alt="back" class="cards back-cards">
                     <img src="assets/back_red.png" alt="back" class="cards back-cards">
+                    <img src="assets/back_red.png" alt="back" class="cards back-cards" id="back-card">
                     <img src="assets/back_red.png" alt="back" class="cards back-cards">
                     <img src="assets/back_red.png" alt="back" class="cards back-cards">
                 </div>
@@ -35,10 +35,6 @@
             <div class="col">
                 <div class="container d-flex justify-content-center dealer-deck mt-5" id="dealer-deck">
                     <!-- There will be card images here -->
-                    <img src="assets/back_red.png" alt="back" class="cards">
-                    <img src="assets/back_red.png" alt="back" class="cards">
-                    <img src="assets/back_red.png" alt="back" class="cards">
-                    <img src="assets/back_red.png" alt="back" class="cards">
                 </div>
             </div>
         </div>
@@ -60,8 +56,8 @@
             <div class="col">
                 <div class="row m-0 h-30">
                     <div class="container activity-button mt-5">
-                        <button class="btn btn-light btn-lg" onclick="takeCard()">Take</button>
-                        <button class="btn btn-light btn-lg" onclick="stand()">Stay</button>
+                        <button class="btn btn-light btn-lg" id="take-button" onclick="takeCard()">Take</button>
+                        <button class="btn btn-light btn-lg" id="stay-button" onclick="stand()">Stay</button>
                         <button class="btn btn-light btn-lg exit">Quit</button>
                     </div>
                 </div>
@@ -98,7 +94,7 @@
         <div class="container buttons d-flex flex-column">
             <div class="row m-4">
                 <div class="col">
-                    <div class="display-6">Player Name</div>
+                    <div class="display-6 options">Player Name</div>
                 </div>
                 <div class="col">
                     <input type="text" class="form-control" id="player-name-input" placeholder="Player">
@@ -109,7 +105,7 @@
             </div>
             <div class="row m-4">
                 <div class="col">
-                    <div class="display-6">Mode</div>
+                    <div class="display-6 options">Mode</div>
                 </div>
                 <div class="col bg-lg mt-3">
                     <p><span id="money-mode">Classic</span></p>

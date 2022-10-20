@@ -14,7 +14,7 @@ body, .background {
     background-color: var(--secondary);
     text-align: center;
     align-items: center;
-    overflow: hidden;
+    overflow-x: hidden;
     font-family: var(--font);
     margin: 0;
 }
@@ -138,38 +138,37 @@ p {
 
 .back-cards:nth-child(1) {
     transform: translate(-2px, -2px);
+    z-index: 1;
 }
 
 .back-cards:nth-child(2) {
     transform: translate(-4px, -4px);
+    z-index: 2;
 }
 
 .back-cards:nth-child(3) {
     transform: translate(-6px, -6px);
+    z-index: 3;
 }
 
 .back-cards:nth-child(4) {
     transform: translate(-8px, -8px);
+    z-index: 4;
 }
 
 .back-cards:nth-child(5) {
     transform: translate(-10px, -10px);
+    z-index: 5;
 }
 
-/* on-table adalah kelas kartu yang telah terbagi */
 .drawn { 
-    /* Buat animasi posisi on-table dimulai dari posisi back-cards hingga ke tempat asalnya sendiri */
-    animation-name: card-give;
-    animation-iteration-count: infinite;
-    animation-duration: 5s;
+    cursor: pointer;
+    transition: ease-in-out 2s;
+    z-index: 2;
 }
 
-/* 
-@keyframes card-give {
-    from {
-        transform: translate(-100px, -100px);
-    }
-    to {
-        transform: translate(0, 0);
-    }
-} */
+.chat-box {
+    color: var(--third);
+    font-size: small;
+}
+
