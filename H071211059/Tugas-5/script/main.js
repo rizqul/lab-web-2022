@@ -9,15 +9,18 @@ let bet500 = document.getElementsByClassName("pokerchip")[4];
 let bet1k = document.getElementsByClassName("pokerchip")[5];
 let undo = document.getElementById("undo-bet");
 let startBtn = document.getElementsByClassName("start-btn")[0];
-let bettingHistory = [];
 let dealerCard = document.getElementsByClassName("dealer")[1].children;
+let bettingHistory = [];
 
 let startingTotal = document.getElementsByClassName("total")[1];
 let total = document.getElementsByClassName("total")[0];
-
 let reset = document.getElementsByClassName("reset-btn")[0];
 
+// Memulai game
 startBtn.onclick = () => {
+  document.getElementsByClassName("user")[1].innerHTML = "";
+  document.getElementsByClassName("dealer")[1].innerHTML = "";
+
   if (bettingHistory.length == 0) {
     alert("You have to bet first");
     return;
@@ -38,45 +41,35 @@ startBtn.onclick = () => {
   }
 };
 
+// Funtsi yang dijalankan ketika chip diklik
 bet10.onclick = () => {
-  betting(10);
-  updateTotal(-10);
-  bettingHistory.push(10);
+  chipClicked(10);
 };
 
 bet50.onclick = () => {
-  betting(50);
-  updateTotal(-50);
-  bettingHistory.push(50);
+  chipClicked(50);
 };
 
 bet100.onclick = () => {
-  betting(100);
-  updateTotal(-100);
-  bettingHistory.push(100);
+  chipClicked(100);
 };
 
 bet200.onclick = () => {
-  betting(200);
-  updateTotal(-200);
-  bettingHistory.push(200);
+  chipClicked(200);
 };
 
 bet500.onclick = () => {
-  betting(500);
-  updateTotal(-500);
-  bettingHistory.push(500);
+  chipClicked(500);
 };
 
 bet1k.onclick = () => {
-  betting(1000);
-  updateTotal(-1000);
-  bettingHistory.push(1000);
+  chipClicked(1000);
 };
 
+// Fungsional tombol undo
 undo.onclick = () => {
   if (bettingHistory.length == 0) {
-    alert("You can't undo anymore dumbass");
+    alert("You can't undo anymore");
     return;
   }
 
@@ -85,6 +78,7 @@ undo.onclick = () => {
   updateTotal(value);
 };
 
+// Fungsional tombol reset
 reset.onclick = () => {
   userPoint.innerText = "0";
   userCards = [];
@@ -96,6 +90,12 @@ reset.onclick = () => {
   document.getElementsByClassName("user")[1].innerHTML = "";
 };
 
+function chipClicked(chip) {
+  betting(chip);
+  updateTotal(-chip);
+  bettingHistory.push(chip);
+}
+
 function betting(betValue) {
   startingBet.value =
     parseInt(startingBet.innerText.replace("BET = $", "")) + betValue;
@@ -106,6 +106,7 @@ function updateTotal(value) {
   startingTotal.value =
     parseInt(startingTotal.innerText.replace("$", "")) + value;
   startingTotal.innerText = "$" + startingTotal.value;
+  total.innerHTML = startingTotal.innerHTML;
 }
 
 // card management
@@ -120,9 +121,46 @@ let meme = document.getElementById("video");
 let dealerPoint = 0;
 let userCards = [];
 let dealerCards = [];
-
+let totalPoints = 0;
 let deck = createDeck();
 
+hitBtn.onclick = () => {
+  hit("user");
+  if (userPoint.innerText > 21) {
+    bet.innerText = `YOUR POINT > 21. YOU LOSE`;
+  }
+
+  let point = parseInt(userPoint.innerText);
+
+  if (point > 21 || point == 21) {
+    checkWinner();
+  }
+
+  if (point < 21 && userCards.length == 5) {
+    checkWinner();
+  }
+};
+
+standBtn.onclick = () => {
+  dealerCard[1].classList.remove("flipped");
+
+  while (dealerPoint <= parseInt(userPoint.innerText)) {
+    hit("dealer");
+  }
+  setTimeout(() => {
+    checkWinner();
+  }, 1500);
+};
+
+returnPanel.onclick = () => {
+  startingBet.innerHTML = "BET = $0";
+  userCards = [];
+  dealerCards = [];
+  returnPanel.classList.add("hidden");
+  startPanel.classList.remove("hidden");
+};
+
+// Membuat satu deck kartu
 function createDeck() {
   const n = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"];
   const k = ["club", "diamond", "heart", "spade"];
@@ -143,24 +181,6 @@ function randomCard() {
   deck.splice(randomIndex, 1);
   return item;
 }
-
-hitBtn.onclick = () => {
-  hit("user");
-  if (userPoint.innerText > 21) {
-    bet.innerText = `YOUR POINT > 21. YOU LOSE`;
-  }
-};
-
-standBtn.onclick = () => {
-  dealerCard[1].classList.remove("flipped");
-
-  while (dealerPoint <= parseInt(userPoint.innerText)) {
-    hit("dealer");
-  }
-  setTimeout(() => {
-    checkWinner();
-  }, 1500);
-};
 
 function hit(player) {
   let cardDrawn = randomCard();
@@ -196,11 +216,7 @@ function hit(player) {
   parent.appendChild(card);
 }
 
-let checked = false;
-let totalPoints = 0;
-
 function updatePoint(playerCard) {
-  // console.log(playerCard);
   for (let i = 0; i < playerCard.length; i++) {
     if (playerCard[i] == "J" || playerCard[i] == "Q" || playerCard[i] == "K") {
       playerCard[i] = 10;
@@ -208,19 +224,65 @@ function updatePoint(playerCard) {
     if (playerCard[i] === "A") {
       playerCard[i] = 1;
     }
-    console.log(playerCard);
   }
+
   totalPoints = sum(playerCard);
 
-  if (totalPoints < 21 && playerCard.includes(1)) {
+  if (totalPoints + 10 <= 21 && playerCard.includes(1)) {
     totalPoints += 10;
-    console.log(totalPoints);
   }
 
   if (playerCard == userCards) {
     userPoint.innerText = totalPoints;
   } else {
     dealerPoint = totalPoints;
+  }
+}
+
+function checkWinner() {
+  let gameState = false;
+  let win = false;
+  if (userPoint.innerText > 21) {
+    gameStatus.innerText = `YOUR POINT > 21. YOU LOSE`;
+    gameState = true;
+  } else if (userPoint.innerText == 21) {
+    gameStatus.innerText = `BLACKJACK! YOU WIN`;
+    gameState = true;
+    win = true;
+  } else if (dealerPoint > 21) {
+    gameStatus.innerText = `DEALER = ${dealerPoint}. YOU WIN`;
+    gameState = true;
+    win = true;
+  } else if (userPoint.innerText > dealerPoint) {
+    gameStatus.innerText = `DEALER = ${dealerPoint}. YOU WIN`;
+    gameState = true;
+    win = true;
+  } else if (userPoint.innerText < dealerPoint) {
+    gameStatus.innerText = `DEALER = ${dealerPoint}. YOU LOSE`;
+    gameState = true;
+  } else if (userPoint.innerText < 21 && userCards.length == 5) {
+    gameStatus.innerText = `YOU WIN!`;
+    gameState = true;
+    win = true;
+  } else {
+    gameStatus.innerText = `DEALER = ${dealerPoint}. DRAW`;
+    gameState = true;
+  }
+
+  if (gameState) {
+    returnPanel.classList.remove("hidden");
+    if (win) {
+      returnValue.innerText =
+        "Your Return : $" +
+        parseInt(startingBet.innerText.replace("BET = $", "")) * 5;
+      console.log(returnValue.innerText);
+      updateTotal(
+        parseInt(returnValue.innerText.replace("Your Return : $", ""))
+      );
+    } else {
+      returnValue.innerText = "Your Return : $0";
+    }
+    totalBet.innerText = startingBet.innerText;
   }
 }
 
@@ -231,52 +293,6 @@ function sum(arr) {
   }
   return sum;
 }
-
-function checkWinner() {
-  let gameState = 0;
-  let win = false;
-  if (userPoint.innerText > 21) {
-    gameStatus.innerText = `YOUR POINT > 21. YOU LOSE`;
-    gameState = 1;
-  } else if (userPoint.innerText == 21) {
-    gameStatus.innerText = `BLACKJACK! YOU WIN`;
-    win = true;
-    gameState = 1;
-  } else if (dealerPoint > 21) {
-    gameStatus.innerText = `DEALER = ${dealerPoint}. YOU WIN`;
-    win = true;
-    gameState = 1;
-  } else if (userPoint.innerText > dealerPoint) {
-    gameStatus.innerText = `DEALER = ${dealerPoint}. YOU WIN`;
-    win = true;
-
-    gameState = 1;
-  } else if (userPoint.innerText < dealerPoint) {
-    gameStatus.innerText = `DEALER = ${dealerPoint}. YOU LOSE`;
-    win = true;
-    gameState = 1;
-  } else {
-    gameStatus.innerText = `DEALER = ${dealerPoint}. DRAW`;
-    gameState = 1;
-  }
-
-  if ((gameState = 1)) {
-    returnPanel.classList.remove("hidden");
-    console.log(startingBet.innerText.replace("BET = $", ""));
-    if (win) {
-      returnValue.innerText =
-        returnValue.innerText +
-        parseInt(startingBet.innerText.replace("BET = $", "")) * 1.5;
-    } else {
-      returnValue.innerText = 0;
-    }
-    totalBet.innerText = startingBet.innerText;
-  }
-}
-
-returnPanel.onclick = () => {
-  returnPanel.classList.add("hidden");
-};
 
 function returnBet() {
   returnValue.innerText = parseInt(startingBet.innerText) * 2;
