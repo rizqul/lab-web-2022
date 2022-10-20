@@ -10,16 +10,18 @@
     --font:  'Silkscreen', cursive;
 }
 
-body {
+body, .background {
     background-color: var(--secondary);
     text-align: center;
     align-items: center;
-    overflow-x: hidden;
+    overflow: hidden;
     font-family: var(--font);
     margin: 0;
 }
 
-
+.background {
+    z-index: -1;
+}
 
 p {
     color: var(--third);
@@ -57,12 +59,10 @@ p {
     image-rendering: -moz-crisp-edges;
 }
 
-
-
 .cards:hover {
     /* cursor: pointer; */
     transform: translate(0, -1rem);
-    transition: 0.2s;
+    transition: 0.5s;
 }
 
 .cards:not(:hover) {
@@ -96,18 +96,24 @@ p {
     padding: 0 1rem;
 }
 
-.menu, .betting {
+.menu, .betting, .preferences {
     border-radius: 5px;
     justify-content: center;
 }
 
 .betting, .game-over, .reset-money {
+    display: none;
     z-index: -50;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color:  rgba(18, 18, 18, 0.722);
+}
+
+.preferences {
+    background-color: var(--primary);
+    display: none;
 }
 
 .overlay{
@@ -126,6 +132,8 @@ p {
 
 .back-cards {
     position: absolute;
+    left: 50;
+    top: 50;
 }
 
 .back-cards:nth-child(1) {
@@ -148,5 +156,20 @@ p {
     transform: translate(-10px, -10px);
 }
 
+/* on-table adalah kelas kartu yang telah terbagi */
+.drawn { 
+    /* Buat animasi posisi on-table dimulai dari posisi back-cards hingga ke tempat asalnya sendiri */
+    animation-name: card-give;
+    animation-iteration-count: infinite;
+    animation-duration: 5s;
+}
 
-
+/* 
+@keyframes card-give {
+    from {
+        transform: translate(-100px, -100px);
+    }
+    to {
+        transform: translate(0, 0);
+    }
+} */

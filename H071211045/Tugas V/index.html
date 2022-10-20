@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col">
                 <div class="container backup-cards mt-5">
-                    <img src="assets/back_red.png" alt="back" class="cards back-cards">
+                    <img src="assets/back_red.png" alt="back" class="cards back-cards" onclick="takeCard()">
                     <img src="assets/back_red.png" alt="back" class="cards back-cards">
                     <img src="assets/back_red.png" alt="back" class="cards back-cards">
                     <img src="assets/back_red.png" alt="back" class="cards back-cards">
@@ -35,6 +35,10 @@
             <div class="col">
                 <div class="container d-flex justify-content-center dealer-deck mt-5" id="dealer-deck">
                     <!-- There will be card images here -->
+                    <img src="assets/back_red.png" alt="back" class="cards">
+                    <img src="assets/back_red.png" alt="back" class="cards">
+                    <img src="assets/back_red.png" alt="back" class="cards">
+                    <img src="assets/back_red.png" alt="back" class="cards">
                 </div>
             </div>
         </div>
@@ -76,11 +80,12 @@
 
     </div>
 
+    <!-- Container Menu -->
     <div class="container board menu main">
         <div class="display-5">Want to Play A Round?</div>
         <div class="container buttons d-flex flex-column">
             <button class="btn btn-light btn-lg m-3" onclick="startGame()">Start Game</button>
-            <button class="btn btn-light btn-lg m-3">Github</button>
+            <button class="btn btn-light btn-lg m-3" id="goto-options">Options</button>
         </div>
         <div class="container menu-logo">
             <img src="assets/menu.png" alt="logo" class="img-fluid h-25 w-25 blackjack-logo"
@@ -88,6 +93,38 @@
         </div>
     </div>
 
+    <div class="container board menu preferences">
+        <div class="display-5">Options</div>
+        <div class="container buttons d-flex flex-column">
+            <div class="row m-4">
+                <div class="col">
+                    <div class="display-6">Player Name</div>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" id="player-name-input" placeholder="Player">
+                </div>
+                <div class="col">
+                    <button class="btn btn-light btn-lg" id="submit-name">Rename</button>
+                </div>
+            </div>
+            <div class="row m-4">
+                <div class="col">
+                    <div class="display-6">Mode</div>
+                </div>
+                <div class="col bg-lg mt-3">
+                    <p><span id="money-mode">Classic</span></p>
+                </div>
+                <div class="col">
+                    <button class="btn btn-light btn-lg m-3" id="switch-mode">Switch</button>
+                </div>
+            </div>
+            <div class="row m-4">
+                <button class="btn btn-light btn-lg m-3" id="go-back">Back</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pop Ups -->
     <div class="container board w-50 d-flex justify-content-center flex-column betting">
         <div class="row">
             <div class="display-5 m-2">Place Your Bet</div>
@@ -119,6 +156,7 @@
     </div>
 
     <div class="overlay position-absolute"></div>
+    <div class="background position-absolute w-100 h-100"></div>
 
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="script.js"></script>

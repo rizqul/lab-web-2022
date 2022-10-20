@@ -8,7 +8,6 @@ var playerName = "Player";
 
 const values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 const types = ["H", "K", "S", "W"]; // H = Hati, K = Klober, S = Sekop, W = Wajik
-const startingMoney = 5000;
 const startingCard = 2;
 
 var backCard = document.createElement("img");
@@ -18,12 +17,17 @@ backCard.src = "assets/back_red.png";
 var pot = document.getElementById("total-pot").innerHTML;
 var player = document.getElementById("money").innerHTML;
 
+var mode = ["Poor", "Classic", "Professional", "Mafia", "Bilionaire"];
+
 var hiddenCard;
 var haveAceP1, haveAceP2;
-var hit, deck;
-var money = startingMoney;
+var hit, deck, money;
+var startingMoney = 5000;
 
 function prepareGame() { // Mengatur game
+    document.getElementById("bet").value = "";
+    document.getElementById("player-deck").innerHTML = "";
+    document.getElementById("dealer-deck").innerHTML = "";
     deck = [];
     dealer = player = bet = 0;
     haveAceP1 = haveAceP2 = false;
@@ -31,10 +35,9 @@ function prepareGame() { // Mengatur game
 }
 
 function startGame() {
+    money = startingMoney;
     switchWindow("menu", "game");
-    prepareGame();
     askBet();
-    makeDeck();
     updateStatus();
 }
 
@@ -73,6 +76,7 @@ makeDeck = () => { // Mengatur Kartu
         addCard(card, "player-deck");
         player += getValue(card);
     }
+
 }
 
 takeCard = () => { // Mengambil kartu tambahan
@@ -83,7 +87,6 @@ takeCard = () => { // Mengambil kartu tambahan
     addCard(card, "player-deck");
     player += getValue(card);
     document.getElementById("player-sum").innerHTML = player;
-
     updateStatus();
 }
 
@@ -94,7 +97,7 @@ switchWindow = (origin, target) => { // Mengganti tampilan
 
 addCard = (card, targetParent) => { // Menambahkan kartu ke dalam deck 
     let card_image = document.createElement("img");
-    card_image.className = "cards";
+    card_image.className = "cards drawn";
     card_image.src = "assets/cards/" + card + ".png";
     document.getElementById(targetParent).append(card_image);
 }
@@ -107,11 +110,11 @@ getValue = (card) => { // Menghitung nilai kartu
 }
 
 askBet = () => { // Meminta bet
-    let bet = 0;
-
-    if (money < 1) 
-        popUp("reset-money", 1); 
-    else 
+    prepareGame();
+    blackjack = money * 5;
+    if (money < 1)
+        popUp("reset-money", 1);
+    else
         popUp("betting", 1);
 }
 
@@ -123,14 +126,13 @@ updateStatus = () => { // Update status
     document.getElementById("money").innerHTML = money;
 
     if (bet > 0) bet = "";
-    console.log("Status \nPlayer: " + player + "\nDealer: " + dealer + "\nPot: " + pot + "\nMoney: " + money);
 }
 
 checkAce = (playerScore, targetParent, haveAce) => { // Mengecek apakah ada kartu Aceco
     if (playerScore > 21 && !haveAce) {
         for (let i = 0; i < document.getElementById(targetParent).children.length; i++) {
             if (document.getElementById(targetParent).children[i].src.includes("A")) {
-                console.log("an Ace have been detected on" + targetParent);
+                console.log("an Ace have been detected on " + targetParent);
                 haveAce = true;
                 playerScore -= 10;
                 break;
@@ -143,13 +145,13 @@ checkAce = (playerScore, targetParent, haveAce) => { // Mengecek apakah ada kart
 stand = () => { // Menyimpan nilai kartu (Seperti Submit)
     updateStatus();
     let belowLimit = (player <= 21 && dealer <= 21);
-
+    let botAI = Math.floor(Math.random() * 16) + 4;
     hit = (hit == true) ? false : true;
 
     document.getElementById("dealer-deck").removeChild(backCard);
     addCard(hiddenCard, "dealer-deck");
 
-    while (dealer < 15) {
+    while (dealer < botAI) { // 15-20
         let card = deck.pop();
         dealer += getValue(card);
         addCard(card, "dealer-deck");
@@ -157,15 +159,17 @@ stand = () => { // Menyimpan nilai kartu (Seperti Submit)
 
     if ((belowLimit && (player > dealer)) || (dealer > 21 && player <= 21)) {
         document.getElementById("game-result").innerHTML = "You Win!";
-        console.log(playerName + "Wins")
-        console.log("Money Updated:", money, "(+" + pot + ")");
         money += pot;
 
     } else if ((belowLimit && (dealer > player)) || (player > 21 && dealer <= 21)) {
         document.getElementById("game-result").innerHTML = "You Lose!";
-        console.log(playerName + "Lose")
-
+    
+    } else if ((player == 21)) {
+        document.getElementById("game-result").innerHTML = "Blackjack!";
+        money += blackjack;
+    
     } else {
+        money += Math.round(pot / 2);
         document.getElementById("game-result").innerHTML = "Draw!";
     }
 
@@ -185,26 +189,18 @@ popUp = (window, index) => {
 
 button = {
     playAgain: $("#play-again").click(function () {
-        document.getElementById("player-deck").innerHTML = "";
-        document.getElementById("dealer-deck").innerHTML = "";
         popUp("game-over", 0);
-        prepareGame();
-        makeDeck();
         askBet();
         updateStatus();
     }),
 
     exit: $(".exit").click(function () {
-        money = startingMoney;
-        document.getElementById("player-deck").innerHTML = "";
-        document.getElementById("dealer-deck").innerHTML = "";
         switchWindow("game", "menu");
-        popUp("betting", 0); 
+        popUp("betting", 0);
         popUp("reset-money", 0);
         popUp("game-over", 0);
         prepareGame();
         makeDeck();
-        askBet();
         updateStatus();
     }),
 
@@ -215,11 +211,14 @@ button = {
                 alert("You don't have enough money!");
                 return;
             }
+
+            makeDeck();
             pot += bet;
             money -= bet;
-            pot += (Math.floor(Math.random() < 0.5) && bet > 500 ? (bet + 250) : (bet - 250)); // Uang dari dealer
-            console.log("Bet:" + bet);
+            pot += (Math.floor(Math.random() < 0.5) && bet > 500 ? (bet + 250) : (bet)); // Uang dari dealer
+            
             updateStatus();
+            
             popUp("betting", 0);
 
         } else {
@@ -232,5 +231,47 @@ button = {
         updateStatus();
         popUp("reset-money", 0);
         askBet();
+    }),
+
+    gotoOptions: $("#goto-options").click(function () {
+        // document.getElementById("options").style = "background-color: rgb(18, 18, 18);";
+        switchWindow("menu", "preferences");
+    }),
+
+    rename: $("#submit-name").click(function () {
+        playerName = document.getElementById("player-name-input").value;
+        document.getElementById("player-name-input").value = "";
+        document.getElementById("player-name-input").placeholder = playerName;
+        switchWindow("preferences", "menu");
+    }),
+
+    switchMode: $("#switch-mode").click(function () {
+        let x = mode.indexOf(document.getElementById("money-mode").innerHTML) + 1;
+        if(x > mode.length - 1) x = 0;
+        document.getElementById("money-mode").innerHTML = mode[x];
+        // Use case
+        switch (x) {
+            case 0:
+                startingMoney = 100;
+                break;
+            case 1:
+                startingMoney = 5000;
+                break;
+            case 2:
+                startingMoney = 25000;
+                break;
+            case 3:
+                startingMoney = 75000;
+                break;
+            case 4:
+                startingMoney = 1000000;
+                break;
+        }
+        money = startingMoney;
+    }),
+
+    goBack : $("#go-back").click(function () {
+        switchWindow("preferences", "menu");
     })
 }
+
