@@ -19,7 +19,7 @@ var player = document.getElementById("money").innerHTML;
 
 var mode = ["Poor", "Classic", "Professional", "Mafia", "Billionaire"];
 
-var hiddenCard, deal;
+var hiddenCard;
 var haveAceP1, haveAceP2;
 var hit, deck, money;
 var startingMoney = 5000;
@@ -31,7 +31,7 @@ function prepareGame() { // Mengatur game
     document.getElementById("dealer-deck").innerHTML = "";
     deck = [];
     dealer = player = bet = 0;
-    haveAceP1 = haveAceP2 = deal = false;
+    haveAceP1 = haveAceP2 = false;
     hit = true;
 }
 
@@ -43,7 +43,6 @@ function startGame() {
 }
 
 makeDeck = () => { // Mengatur Kartu
-    // Menyetel Pot ke jadi kosong
     pot = 0;
 
     // Memuat deck -> [..., 2S, 3S, 4S, ..]
@@ -349,7 +348,6 @@ animateCard = async (deckName) => { // Animasi kartu dibagi
             top: 0,
             left: 0
         });
-        deal = false;
     });
 }
 
