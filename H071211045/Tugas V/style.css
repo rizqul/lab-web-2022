@@ -51,7 +51,8 @@ p {
 .cards {
     width: 5.75rem;
     margin: 0 0.25rem;
-
+    /* Add shadow effect */
+    box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.545);
     image-resolution: pixelated;
     image-rendering: -moz-crisp-edges;
 }
@@ -100,7 +101,7 @@ p {
     justify-content: center;
 }
 
-.betting, .game-over {
+.betting, .game-over, .reset-money {
     z-index: -50;
     position: absolute;
     top: 50%;

@@ -58,7 +58,7 @@
                     <div class="container activity-button mt-5">
                         <button class="btn btn-light btn-lg" onclick="takeCard()">Take</button>
                         <button class="btn btn-light btn-lg" onclick="stand()">Stay</button>
-                        <button class="btn btn-light btn-lg" id="exit">Quit</button>
+                        <button class="btn btn-light btn-lg exit">Quit</button>
                     </div>
                 </div>
                 <div class="row mt-3">
@@ -104,7 +104,17 @@
         </div>
         <div class="row m-3 d-flex justify-content-center">
             <button class="btn btn-light btn-lg m-4 w-25 p-3" id="play-again">Another Round!</button>
-            <button class="btn btn-light btn-lg m-4 w-25 p-3" id="exit">Stand Out!</button>
+            <button class="btn btn-light btn-lg m-4 w-25 p-3 exit">Stand Out.</button>
+        </div>
+    </div>
+
+    <div class="container board w-50 d-flex justify-content-center flex-column reset-money">
+        <div class="row">
+            <div class="display-5 m-2">Bring More Chips?</div>
+        </div>
+        <div class="row m-3 d-flex justify-content-center">
+            <button class="btn btn-light btn-lg m-4 w-25 p-3" id="withdraw">Withdraw from Bank</button>
+            <button class="btn btn-light btn-lg m-4 w-25 p-3 exit">GG, I'm good.</button>
         </div>
     </div>
 
