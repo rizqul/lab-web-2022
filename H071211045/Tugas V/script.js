@@ -31,7 +31,6 @@ prepareGame = () => { // Mengatur game
     document.getElementById("player-deck").innerHTML = "";
     document.getElementById("dealer-deck").innerHTML = "";
     dealer = player = bet = 0;
-    hit = true;
     deck = [];
 }
 
@@ -73,7 +72,7 @@ makeDeck = () => { // Mengatur Kartu
 }
 
 takeCard = () => { // Mengambil kartu tambahan
-    hit = (player > 21 && hit == true) ? false : true;
+    hit = (player > 21) ? false : true;
     if (!hit) return;
     let card = deck.pop();
     // let card = "AK"; // -- debug ace
@@ -104,7 +103,6 @@ getValue = (card) => { // Menghitung nilai kartu
 
 askBet = () => { // Meminta bet
     prepareGame();
-    blackjack = money * 5;
     if (money < 1)
         popUp("reset-money", 1);
     else
@@ -140,14 +138,12 @@ checkAce = (playerScore, targetParent, haveAce) => { // Mengecek apakah ada kart
 stand = () => { // Menyimpan nilai kartu, ini fitur game (Seperti Submit)
     updateStatus();
     let belowLimit = (player <= 21 && dealer <= 21);
-    let botAI = Math.floor(Math.random() * 16) + 3;
-
-    hit = (hit == true) ? false : true;
-
+    let botAI = Math.floor(Math.random() * 18) + 1;
+    let blackjack = 6; // Disesuaikan dengan soal (Normalnya adalah 1.5x)
     document.getElementById("dealer-deck").removeChild(backCard);
     addCard(hiddenCard, "dealer-deck");
 
-    while (dealer < botAI) {
+    while (dealer <= botAI) {
         let card = deck.pop();
         dealer += getValue(card);
         addCard(card, "dealer-deck");
@@ -161,16 +157,16 @@ stand = () => { // Menyimpan nilai kartu, ini fitur game (Seperti Submit)
     let playerCount = document.getElementById("player-deck").children.length;
     let dealerCount = document.getElementById("dealer-deck").children.length;
 
-    if ((belowLimit && ((player > dealer) || (playerCount >= 5))) || (dealer > 21 && player <= 21)) {
+    if ((player == 21 && dealer != 21)) {
+        document.getElementById("game-result").innerHTML = "Blackjack!";
+        money += Math.floor(pot * blackjack);
+
+    } else if ((belowLimit && ((player > dealer) || (playerCount >= 5))) || (dealer > 21 && player <= 21)) {
         document.getElementById("game-result").innerHTML = "You Win!";
         money += pot;
 
     } else if ((belowLimit && ((dealer > player) || (dealerCount >= 5))) || (player > 21 && dealer <= 21)) {
         document.getElementById("game-result").innerHTML = "You Lose!";
-
-    } else if ((player == 21 && dealer != 21)) {
-        document.getElementById("game-result").innerHTML = "Blackjack!";
-        money += blackjack;
 
     } else {
         money += Math.round(pot / 2);
@@ -181,11 +177,11 @@ stand = () => { // Menyimpan nilai kartu, ini fitur game (Seperti Submit)
     setTimeout(() => {
         updateStatus();
         popUp("game-over", 1);
-    }, 3000);
+    }, 2500);
 
 }
 
-popUp = (window, index) => {
+popUp = (window, index) => { // Menampilkan/menyembunyikan pop up sesuai target parameter
     if (index == 1) {
         document.getElementsByClassName("overlay")[0].style.display = "block";
         document.getElementsByClassName(window)[0].style.zIndex = "50";
@@ -206,15 +202,15 @@ chat = () => { // Chat bot dari dealer
     draw = ["Draw? Really?", "Only on this time boy.", "LMAO, Draw.", "Why do this outcome is possible?"];
     random = ["Are you sure, mortal?", "Gambit is not good for health", "You better luck this time."];
 
-    if (condition == "You Win!" || condition == "Blackjack!") {
+    if (condition == "You Win!" || condition == "Blackjack!")
         chat.innerHTML = win[Math.floor(Math.random() * win.length)];
-    } else if (condition == "You Lose!") {
+    else if (condition == "You Lose!")
         chat.innerHTML = lose[Math.floor(Math.random() * lose.length)];
-    } else if (condition == "Draw!") {
+    else if (condition == "Draw!")
         chat.innerHTML = draw[Math.floor(Math.random() * draw.length)];
-    } else {
+    else
         chat.innerHTML = random[Math.floor(Math.random() * random.length)];
-    }
+
 }
 
 animateCard = (deckName) => { // Animasi kartu dibagi
@@ -238,7 +234,7 @@ animateCard = (deckName) => { // Animasi kartu dibagi
     $(deckName + " .drawn:last-child").animate({
         top: yCard - (yFirst - 30),
         left: xCard - (xFirst - 30)
-    }, 600, function () {
+    }, 200, function () {
         // Penyetelan ke posisi awal agar kartu menyesuai lagi
         $(deckName + " .drawn").css({
             position: "relative",
