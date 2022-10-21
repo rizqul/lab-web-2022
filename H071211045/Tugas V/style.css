@@ -42,8 +42,6 @@ p {
 }
 
 .board {
-    /* width: 80%; */
-    /* height: 38rem; */
     background-color: var(--primary);
     border-radius: 100px;
     padding-block: 0.5rem;
@@ -53,14 +51,12 @@ p {
 .cards {
     width: 5.75rem;
     margin: 0 0.25rem;
-    /* Add shadow effect */
     box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.545);
     image-resolution: pixelated;
     image-rendering: -moz-crisp-edges;
 }
 
 .cards:hover {
-    /* cursor: pointer; */
     transform: translate(0, -1rem);
     transition: 0.5s;
 }

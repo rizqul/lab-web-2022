@@ -1,9 +1,3 @@
-/*
-*   Blackjack's Script
-*   Name : Muhammad Sofyan Daud Pujas
-*   NIM  : H071211045
-*/
-
 var playerName = "Player";
 
 const values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
@@ -24,35 +18,35 @@ var haveAceP1, haveAceP2;
 var hit, deck, money;
 var startingMoney = 5000;
 
-function prepareGame() { // Mengatur game
-    document.getElementById("bet").value = "";
-    document.getElementById("game-result").innerHTML = "";
-    document.getElementById("player-deck").innerHTML = "";
-    document.getElementById("dealer-deck").innerHTML = "";
-    deck = [];
-    dealer = player = bet = 0;
-    haveAceP1 = haveAceP2 = false;
-    hit = true;
-}
-
-function startGame() {
+function startGame() { // Memulai game
     money = startingMoney;
     switchWindow("menu", "game");
     askBet();
     updateStatus();
 }
 
+prepareGame = () => { // Mengatur game
+    document.getElementById("bet").value = "";
+    document.getElementById("game-result").innerHTML = "";
+    document.getElementById("player-deck").innerHTML = "";
+    document.getElementById("dealer-deck").innerHTML = "";
+    dealer = player = bet = 0;
+    hit = true;
+    deck = [];
+}
+
 makeDeck = () => { // Mengatur Kartu
+    haveAceP1 = haveAceP2 = false;
     pot = 0;
 
-    // Memuat deck -> [..., 2S, 3S, 4S, ..]
+    // Memuat deck -> [..., 2S, 3S, 4S, 5S ..]
     for (let i = 0; i < types.length; i++) {
         for (let j = 0; j < values.length; j++) {
             deck.push(values[j] + types[i]);
         }
     }
 
-    // Mengacak deck -> [.., JH, 3S, AK, ..]
+    // Mengacak deck -> [.., JH, 3S, AK, JS..]
     for (let i = 0; i < deck.length; i++) {
         let indexOfDeck = Math.floor(Math.random() * deck.length); // diantara 0-1 kali dengan 52 kartu
         let temp = deck[i];
@@ -66,18 +60,16 @@ makeDeck = () => { // Mengatur Kartu
     document.getElementById("dealer-deck").append(backCard);
 
     // Menambah kartu kedua ke dealer
-    let card = deck.pop()
+    let card = deck.pop();
     addCard(card, "dealer-deck");
     dealer += getValue(card);
 
     // Menambah kartu ke player
     for (let i = 0; i < startingCard; i++) {
-        let card = deck.pop()
+        let card = deck.pop();
         addCard(card, "player-deck");
         player += getValue(card);
     }
-
-
 }
 
 takeCard = () => { // Mengambil kartu tambahan
@@ -87,7 +79,6 @@ takeCard = () => { // Mengambil kartu tambahan
     // let card = "AK"; // -- debug ace
     addCard(card, "player-deck");
     player += getValue(card);
-    document.getElementById("player-sum").innerHTML = player;
     updateStatus();
 }
 
@@ -126,19 +117,18 @@ updateStatus = () => { // Update status
     document.getElementById("player-sum").innerHTML = player;
     document.getElementById("total-pot").innerHTML = pot;
     document.getElementById("money").innerHTML = money;
-
     document.getElementsByClassName("exit")[0].disabled = false;
     document.getElementById("stay-button").disabled = false;
     document.getElementById("take-button").disabled = false;
     if (bet > 0) bet = "";
 }
 
-checkAce = (playerScore, targetParent, haveAce) => { // Mengecek apakah ada kartu Aceco
+checkAce = (playerScore, targetParent, haveAce) => { // Mengecek apakah ada kartu ada Ace
     if (playerScore > 21 && !haveAce) {
         for (let i = 0; i < document.getElementById(targetParent).children.length; i++) {
             if (document.getElementById(targetParent).children[i].src.includes("A")) {
-                console.log("an Ace have been detected on " + targetParent);
-                haveAce = true;
+                haveAceP1 = (targetParent == "player-deck") ? true : haveAce;
+                haveAceP2 = (targetParent == "dealer-deck") ? true : haveAce;
                 playerScore -= 10;
                 break;
             }
@@ -147,7 +137,7 @@ checkAce = (playerScore, targetParent, haveAce) => { // Mengecek apakah ada kart
     return playerScore;
 }
 
-stand = () => { // Menyimpan nilai kartu (Seperti Submit)
+stand = () => { // Menyimpan nilai kartu, ini fitur game (Seperti Submit)
     updateStatus();
     let belowLimit = (player <= 21 && dealer <= 21);
     let botAI = Math.floor(Math.random() * 16) + 3;
@@ -203,6 +193,59 @@ popUp = (window, index) => {
         document.getElementsByClassName("overlay")[0].style.display = "none";
         document.getElementsByClassName(window)[0].style.zIndex = "-50";
     }
+}
+
+chat = () => { // Chat bot dari dealer
+    let chat = document.getElementById("dealer-chat");
+    let condition = document.getElementById("game-result").innerHTML;
+
+    win = ["Damn you boy! I got " + dealer, "Just a card of " + dealer + ". You lucky bastard.",
+        "Spend that money on next round.", "I thought mine was bigger."];
+    lose = ["No luck for you today. This " + dealer + " is big.", "Poor man will always get poor.",
+    "You're so unlucky. Mine is only " + dealer];
+    draw = ["Draw? Really?", "Only on this time boy.", "LMAO, Draw.", "Why do this outcome is possible?"];
+    random = ["Are you sure, mortal?", "Gambit is not good for health", "You better luck this time."];
+
+    if (condition == "You Win!" || condition == "Blackjack!") {
+        chat.innerHTML = win[Math.floor(Math.random() * win.length)];
+    } else if (condition == "You Lose!") {
+        chat.innerHTML = lose[Math.floor(Math.random() * lose.length)];
+    } else if (condition == "Draw!") {
+        chat.innerHTML = draw[Math.floor(Math.random() * draw.length)];
+    } else {
+        chat.innerHTML = random[Math.floor(Math.random() * random.length)];
+    }
+}
+
+animateCard = (deckName) => { // Animasi kartu dibagi
+    deckName = "." + deckName;
+
+    // Mengambil posisi x dari firstPlace
+    let xFirst = $("#back-card").offset().left;
+    let yFirst = $("#back-card").offset().top;
+
+    // Mengambil posisi x dari kartu terbaru
+    let xCard = $(deckName + " .drawn:last-child").offset().left;
+    let yCard = $(deckName + " .drawn:last-child").offset().top;
+
+    // Menyesuaikan posisi kartu terbaru dengan posisi firstPlace
+    $(deckName + " .drawn:last-child").offset({
+        top: yFirst,
+        left: xFirst
+    });
+
+    // Animasi dari firstPlace ke kartu terbaru
+    $(deckName + " .drawn:last-child").animate({
+        top: yCard - (yFirst - 30),
+        left: xCard - (xFirst - 30)
+    }, 600, function () {
+        // Penyetelan ke posisi awal agar kartu menyesuai lagi
+        $(deckName + " .drawn").css({
+            position: "relative",
+            top: 0,
+            left: 0
+        });
+    });
 }
 
 button = { // Kumpulan Tombol
@@ -262,7 +305,7 @@ button = { // Kumpulan Tombol
         playerName = document.getElementById("player-name-input").value;
         document.getElementById("player-name-input").value = "";
         document.getElementById("player-name-input").placeholder = playerName;
-        switchWindow("preferences", "menu");
+        document.getElementById("player-name").innerHTML = playerName;
     }),
 
     switchMode: $("#switch-mode").click(function () {
@@ -293,62 +336,3 @@ button = { // Kumpulan Tombol
         switchWindow("preferences", "menu");
     })
 }
-
-/*
-* Fitur Opsional
-*/
-
-chat = () => { // Chat bot dari dealer
-    let chat = document.getElementById("dealer-chat");
-    let condition = document.getElementById("game-result").innerHTML;
-
-    win = ["Damn you boy! I got " + dealer, "Just a card of " + dealer + ". You lucky bastard.",
-        "Spend that money on next round.", "I thought mine was bigger."];
-    lose = ["No luck for you today. This " + dealer + " is big.", "Poor man will always get poor.",
-    "You're so unlucky. Mine is only " + dealer];
-    draw = ["Draw? Really?", "Only on this time boy.", "LMAO, Draw.", "Why do this outcome is possible?"];
-    random = ["Are you sure, mortal?", "Gambit is not good for health", "You better luck this time."];
-
-    if (condition == "You Win!" || condition == "Blackjack!") {
-        chat.innerHTML = win[Math.floor(Math.random() * win.length)];
-    } else if (condition == "You Lose!") {
-        chat.innerHTML = lose[Math.floor(Math.random() * lose.length)];
-    } else if (condition == "Draw!") {
-        chat.innerHTML = draw[Math.floor(Math.random() * draw.length)];
-    } else {
-        chat.innerHTML = random[Math.floor(Math.random() * random.length)];
-    }
-}
-
-animateCard = async (deckName) => { // Animasi kartu dibagi
-    deckName = "." + deckName;
-
-    // Mengambil posisi x dari firstPlace
-    let xFirst = $("#back-card").offset().left;
-    let yFirst = $("#back-card").offset().top;
-
-    // Mengambil posisi x dari kartu terbaru
-    let xCard = $(deckName + " .drawn:last-child").offset().left;
-    let yCard = $(deckName + " .drawn:last-child").offset().top;
-
-    // Menyesuaikan posisi kartu terbaru dengan posisi firstPlace
-    $(deckName + " .drawn:last-child").offset({
-        top: yFirst,
-        left: xFirst
-    });
-
-    // Animasi dari firstPlace ke kartu terbaru
-    $(deckName + " .drawn:last-child").animate({
-        top: yCard - (yFirst - 30),
-        left: xCard - (xFirst - 30)
-    }, 600, function () {
-        // Penyetelan ke posisi awal agar kartu menyesuai lagi
-        $(deckName + " .drawn").css({
-            position: "relative",
-            top: 0,
-            left: 0
-        });
-    });
-}
-
-

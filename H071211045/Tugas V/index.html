@@ -8,12 +8,12 @@
     <link rel="icon" href="assets/icon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <title>Blackjack</title>
 </head>
 
 <body>
-
     <div class="display-3">Blackjack</div>
     <div class="container board game">
         <div class="row">
@@ -97,7 +97,7 @@
                     <div class="display-6 options">Player Name</div>
                 </div>
                 <div class="col">
-                    <input type="text" class="form-control" id="player-name-input" placeholder="Player">
+                    <input type="text" class="form-control" id="player-name-input" placeholder="Player" maxlength="10">
                 </div>
                 <div class="col">
                     <button class="btn btn-light btn-lg" id="submit-name">Rename</button>
@@ -154,7 +154,6 @@
     <div class="overlay position-absolute"></div>
     <div class="background position-absolute w-100 h-100"></div>
 
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="script.js"></script>
 </body>
 
