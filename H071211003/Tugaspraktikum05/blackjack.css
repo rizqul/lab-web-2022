@@ -1,0 +1,70 @@
+body{
+    background-image: url(bg.jpg);
+    background-size: cover;
+    border: 100%;
+    
+}
+#container {
+    background-color: rgb(218, 218, 218);
+    margin-top: 30px;
+    margin-bottom: 20px;
+    margin-left: 260px;
+    margin-right: 260px;
+    padding-bottom: 50px;
+    border-radius: 10px;
+
+}
+#tittle {
+    text-align: center;
+    font-family: "Chiller";
+    color: rgb(0, 0, 0);
+    font-size: xx-large;
+    padding-top: 10px;
+}
+
+#desc {
+    text-align: center;
+    color: rgb(62, 57, 57);
+}
+
+#play {
+    font-style: italic;
+    color: rgb(212, 87, 87);
+    font-size: x-large;
+}
+
+#start {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 15px;
+}
+
+#take {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 15px;
+}
+
+#button {
+    color: rgb(3, 3, 3);
+    text-align: center;
+}
+
+#reset {
+   padding-left: 20px;
+   padding-top: 10px; 
+   padding-bottom: 10px;
+   padding-right: 20px;
+}
+
+#bet {
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-radius: 5px;
+}
