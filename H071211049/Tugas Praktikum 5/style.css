@@ -1,0 +1,82 @@
+body {
+    background: url(bg.png);
+    text-align: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1 {
+    letter-spacing: 2px;
+    font-style: italic;
+    font-family: garamond;
+    color: rgb(199, 40, 114);
+    font-size: 120px;
+    margin-bottom: 4px;
+}
+
+p {
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    font-family: serif;
+    font-variant: small-caps;
+}
+
+#message {
+    color: rgb(255, 255, 255);
+}
+
+button {
+    font-family: garamond;
+}
+
+#start-btn {
+    background-color: rgb(246, 194, 218);
+    color: #8995D6;
+    /* border-style: none; */
+    padding: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    border-radius: 50px;
+    font-size: 25px;
+    border-style: 1px;
+    border-color: #f3f2f5;
+}
+
+#takeCard {
+    background-color: #8075A2;
+    color: #ffff;
+    padding: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    border-radius: 50px;
+    font-size: 25px;
+    border-style: 1px;
+    border-color: #f3f2f5;
+}
+
+#betField {
+    margin-bottom: 20px;
+    border-style: none;
+    padding: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    border-radius: 50px;
+    font-size: 25px;
+    font-family: garamond;
+    text-align: center;
+}
+
+#reset {
+    background-color: #AB62B2;
+    color: #ffffff;
+    /* border-style: none; */
+    padding: 17px;
+    padding-right: 40px;
+    padding-left: 40px;
+    border-radius: 50px;
+    font-size: 25px;
+    font-family: serif;
+    border-style: 1px;
+    border-color: #f3f2f5;
+}

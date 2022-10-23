@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script>
+        var name = prompt("Halo! Silakan masukkan nama Anda!");
+        if (name != null) {
+            var tugas = prompt("Apakah sudah mengumpulkan tugas praktikum? Jika ya, ketik YES dan jika tidak, ketik NO.")
+            if (tugas == "YES") {
+                var asistensi =  prompt("Apakah telah melakukan asistensi? Jika ya, ketik YES dan jika tidak, ketik NO.");
+                if (asistensi == "YES") {
+                    var totalAsistensi = prompt("Sudah berapa kali asistensi? 1 atau 2 kali?");
+                    if (totalAsistensi == 1) {
+                        console.log("Silakan melakukan asistensi sekali lagi, " + name)
+                    } else if (totalAsistensi == 2) {
+                        console.log("Baik.");                        
+                    } else {
+                        console.log("Masukkan input yang benar, yaitu 1 atau 2.")
+                    }                    
+                } else if (asistensi == "NO") {
+                    console.log("Silakan lakukan asistensi terlebih dahulu!");                    
+                } else {
+                    console.log("Masukkan input yang benar, yaitu YES atau NO."); 
+                }                
+            } else if (tugas == "NO") {
+                console.log("Jangan lupa selesaikan tugas praktikumnya, " + name);
+            } else {
+                console.log("Masukkan input yang benar, yaitu YES atau NO.");
+            } 
+        } else {
+            console.log("Nama tidak boleh kosong! Masukkan nama terlebih dahulu.")
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
