@@ -10,16 +10,18 @@
     --font:  'Silkscreen', cursive;
 }
 
-body {
+body, .background {
     background-color: var(--secondary);
     text-align: center;
     align-items: center;
-    overflow-x: hidden;
+    overflow: hidden;
     font-family: var(--font);
     margin: 0;
 }
 
-
+.background {
+    z-index: -1;
+}
 
 p {
     color: var(--third);
@@ -40,8 +42,6 @@ p {
 }
 
 .board {
-    /* width: 80%; */
-    /* height: 38rem; */
     background-color: var(--primary);
     border-radius: 100px;
     padding-block: 0.5rem;
@@ -51,17 +51,14 @@ p {
 .cards {
     width: 5.75rem;
     margin: 0 0.25rem;
-
+    box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.545);
     image-resolution: pixelated;
     image-rendering: -moz-crisp-edges;
 }
 
-
-
 .cards:hover {
-    /* cursor: pointer; */
     transform: translate(0, -1rem);
-    transition: 0.2s;
+    transition: 0.5s;
 }
 
 .cards:not(:hover) {
@@ -95,18 +92,24 @@ p {
     padding: 0 1rem;
 }
 
-.menu, .betting {
+.menu, .betting, .preferences {
     border-radius: 5px;
     justify-content: center;
 }
 
-.betting, .game-over {
+.betting, .game-over, .reset-money {
+    display: none;
     z-index: -50;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color:  rgba(18, 18, 18, 0.722);
+}
+
+.preferences {
+    background-color: var(--primary);
+    display: none;
 }
 
 .overlay{
@@ -125,27 +128,42 @@ p {
 
 .back-cards {
     position: absolute;
+    left: 50;
+    top: 50;
 }
 
 .back-cards:nth-child(1) {
     transform: translate(-2px, -2px);
+    z-index: 1;
 }
 
 .back-cards:nth-child(2) {
     transform: translate(-4px, -4px);
+    z-index: 2;
 }
 
 .back-cards:nth-child(3) {
     transform: translate(-6px, -6px);
+    z-index: 3;
 }
 
 .back-cards:nth-child(4) {
     transform: translate(-8px, -8px);
+    z-index: 4;
 }
 
 .back-cards:nth-child(5) {
     transform: translate(-10px, -10px);
+    z-index: 5;
 }
 
+.drawn { 
+    cursor: pointer;
+    transition: ease-in-out 2s;
+    z-index: 2;
+}
 
-
+.chat-box {
+    color: var(--third);
+    font-size: small;
+}
