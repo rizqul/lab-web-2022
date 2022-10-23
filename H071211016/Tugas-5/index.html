@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>BlackJack</title>
+</head>
+<body>
+    <div class="container">
+        <div class="containerInside">
+            <h1>BlackJack</h1>
+            <h5 class="mb-5">Play a Round?</h5>
+            <h5>Your Cards:</h5>
+            <div class="yourCard mb-3" id="yourCard">
+
+            </div>
+            <h5>Sum:</h5>
+            <h5 id="yourSum"></h5>
+            <div class="d-grid gap-2 d-md-block mb-5">
+                <button class="btn btn-warning" onclick="startGame()" id="startGameButton" type="button">Start Game</button>
+                <button class="btn btn-secondary" onclick="takeCard()" type="button">Take Card</button>
+                <h4 id="warning" style="color: orange;"></h4>
+            </div>
+            <h5>Your Money:</h5>
+            <div class="money">
+                <h5>Rp. <h5 id="yourMoney">5000</h5> </h5> 
+            </div>
+        </div>
+        <form>
+            <input class="form-control form-control-sm mb-3" id="bet" type="number" placeholder="Set Your Bet" aria-label=".form-control-sm example">
+            <button class="btn btn-warning" onclick="window.location.reload();" type="button">Reset</button>
+        </form>
+    </div>
+    <script src="backend.js" ></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+body{
+    background-color: rgb(59, 84, 59);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.container{
+    border: 3px solid white;
+    width: 65vh;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    padding: 15px;
+    justify-content: center;
+}
+
+.randomCard{
+    margin-left: 10px;
+}
+
+.money{
+    display: flex;
+    flex-direction: row;
+}
+
+.yourCard, .randomCard{
+    display: flex;
+    flex-direction: row;
+}
+
+.containerInside{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
