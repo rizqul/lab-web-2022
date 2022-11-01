@@ -139,7 +139,7 @@ function editFormValue()
 
     <div id="add">
         <?php echo theForm() ?>
-        <!-- <?php editFormValue() ?> -->
+
     </div>
 
     <table class="table w-75 mx-auto">
