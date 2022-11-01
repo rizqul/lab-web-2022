@@ -80,6 +80,40 @@ if (isset($_POST['submit'])) {
 $selectAll = 'SELECT * FROM products';
 $result = mysqli_query($conn, $selectAll);
 $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+function theForm()
+{
+    return '<form method="POST" action="index.php" class="center mt-2 w-50 mx-auto" id="form">
+            <div class="mb-2">
+                <label for="title" class="form-label">Product Title</label>
+                <input type="text" class="form-control add-form" id="title" name="title" placeholder="Enter product title" value="">
+            </div>
+            <div class="mb-2">
+                <label for="price" class="form-label">Product Price</label>
+                <input type="text" class="form-control add-form" id="price" name="price" placeholder="Enter product\'s price" value="">
+            </div>
+            <div class="mb-2">
+                <label for="desc" class="form-label">Description</label>
+                <textarea class="form-control add-form" id="desc" name="desc" placeholder="Enter product\'s description"></textarea>
+            </div>
+            <div class="mb-2">
+                <label for="qty" class="form-label">Quantity</label>
+                <input type="text" class="form-control add-form" id="qty" name="qty" placeholder="Enter product\'s quantity" value="">
+            </div>
+            <div class="mb-2">
+                <label for="series" class="form-label">Series</label>
+                <input type="text" class="form-control add-form" id="series" name="series" placeholder="Enter product\'s series" value="">
+            </div>
+            <div class="mb-2">
+                <label for="img-source" class="form-label">Image Source</label>
+                <input type="text" class="form-control add-form" id="img-source" name="img-source" placeholder="Enter product\'s image source" value="">
+            </div>
+            <div class="mt-3">
+                <input type="submit" name="submit" value="Submit" class="btn btn-dark " id="submit">
+                <input type="button" name="cancel" value="Cancel" class="btn btn-dark" id="cancel">
+            </div>
+        </form>';
+}
 ?>
 
 <div class="container">
@@ -91,36 +125,7 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
     </div>
 
     <div id="add">
-        <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" class="center mt-2 w-50 mx-auto" id="form">
-            <div class="mb-2">
-                <label for="title" class="form-label">Product Title</label>
-                <input type="text" class="form-control add-form" id="title" name="title" placeholder="Enter product title" value="">
-            </div>
-            <div class="mb-2">
-                <label for="price" class="form-label">Product Price</label>
-                <input type="text" class="form-control add-form" id="price" name="price" placeholder="Enter product's price" value="">
-            </div>
-            <div class="mb-2">
-                <label for="desc" class="form-label">Description</label>
-                <textarea class="form-control add-form" id="desc" name="desc" placeholder="Enter product's description"></textarea>
-            </div>
-            <div class="mb-2">
-                <label for="qty" class="form-label">Quantity</label>
-                <input type="text" class="form-control add-form" id="qty" name="qty" placeholder="Enter product's quantity" value="">
-            </div>
-            <div class="mb-2">
-                <label for="series" class="form-label">Series</label>
-                <input type="text" class="form-control add-form" id="series" name="series" placeholder="Enter product's series" value="">
-            </div>
-            <div class="mb-2">
-                <label for="img-source" class="form-label">Image Source</label>
-                <input type="text" class="form-control add-form" id="img-source" name="img-source" placeholder="Enter product's image source" value="">
-            </div>
-            <div class="mt-3">
-                <input type="submit" name="submit" value="Submit" class="btn btn-dark " id="submit">
-                <input type="button" name="cancel" value="Cancel" class="btn btn-dark" id="cancel">
-            </div>
-        </form>
+        <?php echo theForm() ?>
     </div>
 
     <table class="table w-75 mx-auto">
