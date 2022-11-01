@@ -10,7 +10,3 @@ cancelBtn.onclick = () => {
   document.getElementById("form").reset();
   formPanel.style.display = "none";
 };
-
-function formValue(title) {
-  document.getElementById("title").value = title;
-}

@@ -114,6 +114,19 @@ function theForm()
             </div>
         </form>';
 }
+
+function editFormValue()
+{
+    echo '<script>
+            document.getElementById("title").value = "";
+            document.getElementById("price").value = "";
+            document.getElementById("desc").value = "";
+            document.getElementById("qty").value = "";
+            document.getElementById("series").value = "";
+            document.getElementById("img-source").value = "";
+            document.getElementById("submit").value = "Update";
+        </script>';
+}
 ?>
 
 <div class="container">
@@ -126,6 +139,7 @@ function theForm()
 
     <div id="add">
         <?php echo theForm() ?>
+        <!-- <?php editFormValue() ?> -->
     </div>
 
     <table class="table w-75 mx-auto">
