@@ -62,13 +62,19 @@ if (isset($_POST['submit'])) {
             'img-source',
             FILTER_SANITIZE_FULL_SPECIAL_CHARS
         );
+        $img_sources = explode(",", $img_sources);
     }
 
     if (empty($titleErr) && empty($priceErr) && empty($descErr) && empty($qtyErr) && empty($seriesErr) && empty($img_sourcesErr)) {
-        $sql = "INSERT INTO products (title, price, `desc`, qty, series, imgsource) 
-                VALUES ('$title', '$price', '$desc', '$qty', '$series', '$img_sources');";
+        $sql = "INSERT INTO products (title, price, `desc`, qty, series) 
+                VALUES ('$title', '$price', '$desc', '$qty', '$series');";
         if (mysqli_query($conn, $sql)) {
             // success
+            $last_id = mysqli_insert_id($conn);
+            foreach ($img_sources as $item) {
+                $sql = "INSERT INTO image_source (`source`, product_id) values ('$item', '$last_id')";
+                mysqli_query($conn, $sql);
+            }
             header('Location: index.php');
         } else {
             // error
