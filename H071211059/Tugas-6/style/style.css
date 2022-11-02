@@ -32,4 +32,24 @@
   width: 100vw;
   height: 100vh;
   background-color: blue;
-}/*# sourceMappingURL=style.css.map */
+}
+
+.product-images {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+.product-images .image-container {
+  width: 90vw;
+  height: 90vh;
+  background-color: rgba(0, 0, 0, 0.479);
+}
+.product-images .image-container .image {
+  max-width: 100%;
+  max-height: 100%;
+  -o-object-fit: contain;
+  object-fit: contain;
+} /*# sourceMappingURL=style.css.map */
