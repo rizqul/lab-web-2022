@@ -1,9 +1,16 @@
 let addBtn = document.getElementById("add-btn");
+let editBtn = document.getElementById("editButton");
 let cancelBtn = document.getElementById("cancel");
 let formPanel = document.getElementById("add");
 let overlay = document.getElementById("carousel-box");
 let idData;
+
 addBtn.onclick = () => {
+  formPanel.style.display = "block";
+};
+
+editBtn.onclick = () => {
+  console.log("edit button");
   formPanel.style.display = "block";
 };
 

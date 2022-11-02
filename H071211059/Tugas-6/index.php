@@ -115,8 +115,9 @@ function theForm()
         </form>';
 }
 
-function editFormValue()
+function editFormValue($data)
 {
+
     echo '<script>
             document.getElementById("title").value = "";
             document.getElementById("price").value = "";
@@ -143,6 +144,16 @@ function editFormValue()
         <?php echo theForm() ?>
     </div>
 
+    <div id="edit">
+        <?php
+        echo theForm();
+        if (isset($_POST['editButton'])) {
+            $data = mysqli_fetch_assoc($conn, 'SELECT * FROM projects WHERE id = ' . $_POST["edit"]);
+            editFormValue($data);
+        }
+        ?>
+    </div>
+
     <table class="table w-75 mx-auto">
         <thead>
             <tr>
@@ -158,40 +169,44 @@ function editFormValue()
         <tbody>
             <?php foreach ($products as $item) : ?>
                 <tr>
-                    <th scope="row"><?php echo $item['id']; ?></th>
-                    <td><?php echo $item['title']; ?></td>
-                    <td><?php echo $item['price']; ?></td>
-                    <td><?php echo $item['desc']; ?></td>
-                    <td><?php echo $item['qty']; ?></td>
-                    <td><?php echo $item['series']; ?></td>
-                    <td><button type="button" class="btn btn-outline-success btn-sm" onclick="viewImages(<?php echo $item['id'] ?>)">Show Images</button></td>
-                    <td id="<?php echo $item['id'] ?>" class="product-images">
-                        <div class="d-flex">
-                            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-inner">
-                                    <?php
-                                    $getImagesQuery = "SELECT * FROM image_source WHERE product_id = " . $item['id'];
-                                    $getImages = mysqli_query($conn, $getImagesQuery);
-                                    $images = mysqli_fetch_all($getImages, MYSQLI_ASSOC);
-                                    ?>
+                    <form action="" method="POST">
+                        <th scope="row"><?php echo $item['id']; ?></th>
+                        <td><?php echo $item['title']; ?></td>
+                        <td><?php echo $item['price']; ?></td>
+                        <td><?php echo $item['desc']; ?></td>
+                        <td><?php echo $item['qty']; ?></td>
+                        <td><?php echo $item['series']; ?></td>
+                        <td><button type="button" class="btn btn-outline-success btn-sm" onclick="viewImages(<?php echo $item['id'] ?>)">Show Images</button></td>
+                        <td><button type="button" class="btn btn-outline-success btn-sm" value="<?php echo $item['id'] ?>" id="editButton">Edit</button></td>
+                        <td id="<?php echo $item['id'] ?>" class="product-images">
+                            <div class="d-flex">
+                                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner">
+                                        <?php
+                                        $getImagesQuery = "SELECT * FROM image_source WHERE product_id = " . $item['id'];
+                                        $getImages = mysqli_query($conn, $getImagesQuery);
+                                        $images = mysqli_fetch_all($getImages, MYSQLI_ASSOC);
+                                        ?>
 
-                                    <?php foreach ($images as $item) : ?>
-                                        <div class="carousel-item <?php if ($images[1] == $item) echo 'active' ?> image-container">
-                                            <img src="<?php echo $item['source'] ?>" class="d-block w-100 image" alt="..." />
-                                        </div>
-                                    <?php endforeach ?>
+                                        <?php foreach ($images as $item) : ?>
+                                            <div class="carousel-item <?php if ($images[1] == $item) echo 'active' ?> image-container">
+                                                <img src="<?php echo $item['source'] ?>" class="d-block w-100 image" alt="..." />
+                                            </div>
+                                        <?php endforeach ?>
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
                                 </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
                             </div>
-                        </div>
-                    </td>
+                        </td>
+                    </form>
+
                 </tr>
             <?php endforeach; ?>
         </tbody>
