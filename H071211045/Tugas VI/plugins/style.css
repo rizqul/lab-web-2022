@@ -1,0 +1,71 @@
+body {
+    overflow-x: hidden;
+}
+
+.input-data, .output-data {
+    margin: 2rem auto auto auto;
+}
+
+.navbar .display-7 {
+    font-size: 1.5rem;
+    color: aliceblue;
+}
+
+.card, .card-header, .card-body, .card-footer, .alert, .btn{
+    border-radius:0px !important;
+}
+
+.alert {
+    margin: 1rem 1rem 0 1rem;
+}
+
+.overlay {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.bg-orange {
+    background-color: #da7c09;
+}
+
+.btn-outline-orange {
+    color: #da7c09;
+    border-color: #da7c09;
+}
+
+.btn-add:hover {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    box-shadow: 0 0 10px #ffffff;
+    transform: rotate(90deg);
+    transition: 0.5s;
+    border: none;
+}
+
+.btn-add:not(:hover) {
+    border: none;
+    transform: rotate(0deg);
+    transition: 0.5s;
+}
+
+.input-data {
+    z-index: 1; 
+    position: absolute; 
+    transform: translate(-50%, -50%); 
+    top: 50%; left: 50%;
+}
+
+.btn-close:hover {
+    transform: rotate(45deg);
+    transition: 0.3s;
+}
+
+.btn-close:not(:hover) {
+    transform: rotate(0deg);
+    transition: 0.3s;
+}
