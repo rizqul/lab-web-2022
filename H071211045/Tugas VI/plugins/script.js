@@ -1,15 +1,14 @@
 document.getElementsByClassName('btn-add')[0].addEventListener('click', function () {
-    document.getElementsByClassName('input-data')[0].style = 'display: block; transform: translate(100%, -50%); opacity: 50%;';
-    document.getElementsByClassName('overlay')[0].style.display = 'block';
     resetField();
-    animateBox();
+    document.getElementsByClassName('overlay')[0].style.display = 'block';
+    animateBox('input-data');
 }
 );
 
 document.getElementsByClassName('btn-close')[0].addEventListener('click', function () {
+    resetField();
     document.getElementsByClassName('input-data')[0].style.display = 'none';
     document.getElementsByClassName('overlay')[0].style.display = 'none';
-    resetField();
 }
 );
 
@@ -22,14 +21,15 @@ function resetField() {
     document.getElementById('save-button').className = 'btn btn-primary';
 }
 
-function animateBox() {
+function animateBox(className) {
     let id = null;
-    const elem = document.getElementsByClassName('input-data')[0];
+    const elem = document.getElementsByClassName(className)[0];
+    elem.style = 'display: block; transform: translate(100%, -50%); opacity: 50%;';
     let pos = 100;
 
     clearInterval(id);
 
-    id = setInterval(frame, 20);
+    id = setInterval(frame, 1);
 
     function frame() {
         if (pos == -50) {
@@ -37,12 +37,9 @@ function animateBox() {
             clearInterval(id);
             return;
         } else {
-            pos -= 3;
-            elem.style.opacity = -(pos*2) + '%';
+            pos -= 1.5;
+            // elem.style.opacity = -(pos*2) + '%';
             elem.style.transform = 'translate(' + pos + '%, -50%)';
         }
     }
 }
-
-
-

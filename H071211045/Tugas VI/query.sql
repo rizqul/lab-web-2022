@@ -25,4 +25,6 @@ SELECT * FROM projects;
 
 DELETE FROM projects WHERE id > 2;
 
+ALTER TABLE projects ADD COLUMN 'status' VARCHAR(255) NOT NULL AFTER id;
+
 -- UPDATE projects SET id = id - 1;

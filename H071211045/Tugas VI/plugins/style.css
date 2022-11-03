@@ -53,11 +53,12 @@ body {
     transition: 0.5s;
 }
 
-.input-data {
+.input-data, .confirm-delete {
     z-index: 1; 
     position: absolute; 
     transform: translate(-50%, -50%); 
     top: 50%; left: 50%;
+    transition: all 0.5s ease-out 0s;
 }
 
 .btn-close:hover {
@@ -68,4 +69,8 @@ body {
 .btn-close:not(:hover) {
     transform: rotate(0deg);
     transition: 0.3s;
+}
+
+.confirm-delete {
+    background-color: rgba(0, 0, 0, 0.344) !important;
 }
