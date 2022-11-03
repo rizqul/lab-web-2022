@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include_once 'plugins/functions.php' ?>
+<?php include 'plugins/functions.php' ?>
 
 <head>
     <meta charset="UTF-8">
@@ -31,6 +31,24 @@
 
     <a href="index.php"><div class="overlay"></div></a>
 
+    <div class="container w-50 confirm-delete" style="display: none;">
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-danger" role="alert">
+                    <h4 class="alert-heading">Are you sure?</h4>
+                    <p>Once you delete this data, you won't be able to recover it.</p>
+                    <hr>
+                    <p class="mb-0">Are you sure you want to delete this data?</p>
+                </div>
+                <div class="d-flex justify-content-center m-2">
+                    <form method="post">
+                        <button type="submit" class="btn btn-danger px-4" name="confirm-delete">Yes</button>
+                        <a href="index.php"><button type="button" class="btn btn-success px-4">No</button></a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="card w-50 input-data border-dark" style="display: none;">
         <div class="card-header label-input d-flex">
@@ -94,6 +112,7 @@
                 </thead>
                 <tbody>
 
+                    <script src="plugins/script.js"></script>
                     <?php setButtons($conn); ?>
                     <?php listRecords($conn) ?>
                     
@@ -103,7 +122,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-    <script src="plugins/script.js"></script>
+    
     <iframe style="display: none;"></iframe>
 
 </body>
