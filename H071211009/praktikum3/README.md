@@ -1,0 +1,1 @@
+https://genshin-impact-fansite.vercel.app/
