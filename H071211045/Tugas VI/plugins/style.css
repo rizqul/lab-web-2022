@@ -1,4 +1,8 @@
 body {
+    background-image: url("https://www.tilingtextures.com/wp-content/uploads/2019/05/0090b-512x512.jpg");
+    /* background-image: url("https://images.freecreatives.com/wp-content/uploads/2015/04/blackorchid_@2X.jpg"); */
+    /* background-image: url("https://vectorforfree.com/wp-content/uploads/2020/10/Halloween-Seamless-Pattern_vectorforfree.jpg"); */
+    background-position: center;
     overflow-x: hidden;
 }
 
@@ -12,11 +16,15 @@ body {
 }
 
 .card, .card-header, .card-body, .card-footer, .alert, .btn{
-    border-radius:0px !important;
+    border-radius:2.5px !important;
 }
 
-.alert {
-    margin: 1rem 1rem 0 1rem;
+.card {
+    border: 1px solid #000000;
+}
+
+.confirm-delete {
+    background-color: rgba(0, 0, 0, 0.344) !important;
 }
 
 .overlay {
@@ -39,38 +47,31 @@ body {
 }
 
 .btn-add:hover {
+    border: none;
     background-color: #ffffff;
     color: rgb(0, 0, 0);
     box-shadow: 0 0 10px #ffffff;
     transform: rotate(90deg);
     transition: 0.5s;
-    border: none;
 }
 
-.btn-add:not(:hover) {
+.btn-add:not(:hover) {  
     border: none;
     transform: rotate(0deg);
     transition: 0.5s;
 }
 
 .input-data, .confirm-delete {
-    z-index: 1; 
-    position: absolute; 
-    transform: translate(-50%, -50%); 
     top: 50%; left: 50%;
     transition: all 0.5s ease-out 0s;
 }
 
-.btn-close:hover {
-    transform: rotate(45deg);
+.btn-close:hover, .btn-close:focus{
+    transform: rotate(-90deg);
     transition: 0.3s;
 }
 
 .btn-close:not(:hover) {
     transform: rotate(0deg);
     transition: 0.3s;
-}
-
-.confirm-delete {
-    background-color: rgba(0, 0, 0, 0.344) !important;
 }
