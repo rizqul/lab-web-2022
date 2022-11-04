@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>H071211028-Muhammad Kahfi MS</title>
+        <style>
+            body{
+                background-image: url(Blackjack.jpg);
+                padding: 10px;
+                font-family: 'Swis721 Hv BT';
+            }
+            h1{
+                color: rgb(156, 6, 6);
+                text-align: center;
+                font-size:xx-large
+            }
+            p.p1{
+                color: rgb(255, 255, 255);
+                text-align: center;
+            }
+            p.p2{
+                color: white;
+                text-align: center;
+            }
+            p.p3{
+                color: white;
+                text-align: center;
+            }
+            p.p4{
+                color: rgb(0, 0, 0);
+                text-align: center;
+                font-family: monospace;
+            }
+            div.button{
+                text-align: center;
+            }
+            .button #btn1{
+                background-color: maroon;
+                border-color: brown;
+                color: white;
+            }
+            .button #btn2{
+                background-color:gold;
+                border-color: burlywood;
+            }
+            form{
+                text-align: center;
+            }
+
+            div.button3{
+                text-align: center;
+            }
+
+            .button3 #btn3{
+                background-color:goldenrod;
+                border-color: gold;
+            }
+            h3#pesan{
+                text-align: center;
+                color: rgb(161, 12, 12);
+                font-family: 'Trebuchet MS';
+            }
+        </style>
+    </head>
+        <body>
+            <h1>BlackJack</h1>
+            <p class="p1">Play A Round?</p><br>
+            <p class="p2" id="cards">Your Cards: </p><br>
+            <p class="p3" id="sum">Sum: </p>
+            <div class="button">
+                <button id="btn1" onclick="startgame()">START GAME</button>
+                <button id="btn2" onclick="takecard()">TAKE CARD</button>
+            </div>
+            <br>
+            <h3 id="pesan"> </h3>
+            <p class="p4" id="money">Your Money: Rp.5000</p>
+            <form>
+                <input type="number" id="bet" placeholder="Serahkan Betmu!">
+            </form><br>
+            <div class="button3">
+                <button id="btn3" onclick="reset()">RESET MONEY</button>
+            </div>
+
+            <script src="blackjack.js"></script>
+        </body>
+</html>

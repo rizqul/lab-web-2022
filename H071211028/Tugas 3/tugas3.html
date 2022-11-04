@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  </head>
+  <body class="bg-success">
+    
+    <!-- navbar -->
+    <nav class="navbar navbar-success navbar-expand-lg" style="background-color:rgb(11, 102, 35)">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><img src="img/yotta.png" width="55" height="55"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Deskripsi</a></li>
+                  <li><a class="dropdown-item" href="#">Lokasi</a></li>
+                  <li><a class="dropdown-item" href="#">Gallery</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-warning" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+      <!-- carousel -->
+      <div class="container">
+
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="img/YottaPemuda.jpg" class="w-100">
+            </div>
+            <div class="carousel-item">
+              <img src="img/YottaCoffe.jpg" class="w-100">
+            </div>
+            <div class="carousel-item">
+              <img src="img/YottaTea.jpg" class="w-100">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- deskripsi -->
+      <div class="container text-center">
+        <div class="container text-center text-warning"><h2>Deskripsi</h2></div>
+        <div class="row row-cols-2"  style="text-align:justify">
+          <div class="col text-white"><p>Salah satu brand minuman yang cukup terkenal di kalangan mahasiswa yaitu YOTTA kembali membuka cabang baru di Jl. Tammalate Raya No. 6 A (Depan Kampoeng Merdeka), Makassar. Grand opening Yotta cabang tamalate resmi dilaksanakan hari ini, Senin (9/12).</p></div>
+          <div class="col text-white"><p>Owner YOTTA, Ramadhani Lasenang, menuturkan saat ini YOTTA telah memiliki 7 cabang dilokasi yang berbeda dimakassar. Dua Outlet tersebar di Antang Raya dan Bumi Tamalanrea Permai (BTP) Blok A.</p></div>
+          <div class="col text-white"><p>Disajikan juga varian minuman dengan 20 lebih  jenis dengan 4 varian baru yaitu princess berry, boba brown sugar milk tea, manggo cheese, dan creamy afagato. </p></div>
+          <div class="col text-white"><p>Ia berharap kedepannya Yotta menjadi salah satu minuman yang digemari masyarakat di semua  kalangan. Ia juga berharap Yotta memiliki cabang  di seluruh daerah di Indonesia.</p></div>
+        </div>
+      </div>
+
+      <!-- lokasi -->
+      <div class="container-fluid bg-warning">
+        <h2 class="text-white" style="text-align:center">Menu</h2>
+        <div class="menu" style="font-size: 80%;">
+        <div class="row">
+          <div class="col">
+            <button type="button" class="btn btn-success btn-sm">
+                Choco cheese <span class="badge text-bg-warning">2</span>
+              </button>
+              <ul>
+                <li>Taro Choco Cheese</li>
+                <li>Avocado Choco Cheese</li>
+              </ul>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-success btn-sm">
+              Boba Brown Sugar <span class="badge text-bg-warning">5</span>
+              </button>
+              <ul>
+                <li>Brown Sugar Fresh Milk</li>
+                <li>Brown Sugar Thai Tea</li>
+                <li>Brown Sugar Milk Tea</li>
+                <li>Brown Sugar Milk Tea Cheese</li>
+                <li>Brown Sugar Creamy Chocolate</li>
+              </ul>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-success btn-sm">
+              Milk & Yoghurt <span class="badge text-bg-warning">4</span>
+              </button>
+              <ul>
+                <li>Choco Jelly Fresh Milk</li>
+                <li>Grass Jelly Fresh Milk</li>
+                <li>Strawberry Yogurt Smoothies</li>
+                <li>Green Tea Yogurt Smoothies</li>
+              </ul>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-success btn-sm">
+              Black Tea Series <span class="badge text-bg-warning">5</span>
+              </button>
+              <ul>
+                <li>Ice Signature Blacktea</li>
+                <li>Black Tea Lemonade</li>
+                <li>Lychee tea</li>
+                <li>Black Tea Lemonade With Rainbow Jelly</li>
+                <li>Lemonade Berry</li>
+              </ul>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-success btn-sm">
+              Regal Series <span class="badge text-bg-warning">2</span>
+              </button>
+              <ul>
+                <li>IRegal Milk Original</li>
+                <li>Regal Milk Brown Sugar</li>
+              </ul>
+          </div>
+          <div class="col">
+            <button type="button" class="btn btn-success btn-sm">
+              Smoothies <span class="badge text-bg-warning">9</span>
+              </button>
+              <ul>
+                <li>Vanilla Smoothies</li>
+                <li>Taro Milk</li>
+                <li>Creamy Vanilla</li>
+                <li>Creamy Taro Milk</li>
+                <li>Hazelnut</li>
+                <li>Tiramisu</li>
+                <li>Strawberry Milk</li>
+                <li>Red Velvet</li>
+                <li>Banana Smoothies</li>
+              </ul>
+            </div>
+          <div class="col">
+            <button type="button" class="btn btn-success btn-sm">
+              Milk Tea <span class="badge text-bg-warning">8</span>
+              </button>
+              <ul>
+                <li>Yotta Milk Tea</li>
+                <li>Pearl Milk Tea</li>
+                <li>Lava Greentea</li>
+                <li>Thai Greentea</li>
+                <li>Matcha Green Tea</li>
+                <li>Thai Tea Original</li>
+                <li>Thai Green Tea Original</li>
+                <li>Green Tea Smoothies</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gallery -->
+      <h2 class="text-warning" style="text-align:center"></h2style>Gallery</h2>
+      <div class="d-flex justify-content-evenly">
+      <div class="card" style="width: 18rem;">
+        <img src="img/Hazelnut.jpg" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">Hazelnut</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <div class="d-flex">
+          <a href="https://food.grab.com/id/id/restaurant/yotta-tamalanrea-delivery/6-CYV2LFWHELAKGN" class="btn btn-primary btn-sm">Buy</a>
+          <h5 class="card-text mx-2 text-muted">Rp15.000</h5>
+        </div>
+      </div>
+      </div>
+      <div class="card" style="width: 18rem;">
+        <img src="img/Green Tea Yogurt Smoothies.jpg" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">Green Tea Yogurt Smoothies</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <div class="d-flex">
+          <a href="https://food.grab.com/id/id/restaurant/yotta-tamalanrea-delivery/6-CYV2LFWHELAKGN" class="btn btn-primary btn-sm">Buy</a>
+          <h5 class="card-text mx-2 text-muted">Rp21.000</h5>
+        </div>
+      </div>
+      </div>
+      <div class="card" style="width: 18rem;">
+        <img src="img/Brown Sugar Fresh Milk.jpg" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">Brown Sugar Fresh Milk</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <div class="d-flex">
+          <a href="https://food.grab.com/id/id/restaurant/yotta-tamalanrea-delivery/6-CYV2LFWHELAKGN" class="btn btn-primary btn-sm">Buy</a>
+          <h5 class="card-text mx-2 text-muted">Rp22.500</h5>
+        </div>
+      </div>
+      </div>
+      <div class="card" style="width: 18rem;">
+        <img src="img/Pearl Milk Tea.jpg" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">Pearl Milk Tea</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <div class="d-flex">
+          <a href="https://food.grab.com/id/id/restaurant/yotta-tamalanrea-delivery/6-CYV2LFWHELAKGN" class="btn btn-primary btn-sm ">Buy</a>
+          <h5 class="card-text mx-2 text-muted">Rp21.500</h5>
+          </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- alert -->
+      <div class="alert alert-warning mt-5 mb-0">
+          A simple success alert—check it out!
+        </div>
+
+    <!-- footer -->
+    <div class="card text-center" style="background-color:rgb(11, 102, 35)">
+      <div class="container text-center">
+        <div class="container text-center" style="margin: 15px">
+          <div class="row align-items-start">
+            <div class="col">
+              <h5 class="text-warning" style="text-align:left">Contact</h5>
+              <div class="mb-3" style="text-align:left;">
+                <label for="exampleFormControlInput1" class="form-label text-warning">Email address</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" style="width:400px">
+                <div class="mb-3" style="text-align:left;">
+                  <label for="exampleFormControlTextarea1" class="form-label text-warning">Example textarea</label>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="width:400px"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <h5 class="text-warning" style="text-align:left">@yottaindonesia</h5>
+              <div class="list-group" style="text-align:left">
+                <a href="https://www.instagram.com/yotta_id/" class="list-group-item-action text-warning" style="margin:5px"><img src="img/Instagram.png" width="25" height="25" style="margin-right: 10px"> Instagram</a>
+                <a href="https://www.tiktok.com/@yotta_official?is_from_webapp=1&sender_device=pc" class="list-group-item-action text-warning" style="margin:5px"><img src="img/tiktok.png" width="25" height="25" style="margin-right: 10px">Tiktok</a>
+                <a href="https://api.whatsapp.com/message/KE6SLMVZE34EN1?autoload=1&app_absent=0" class="list-group-item-action text-warning" style="margin:5px"><img src="img/WA.png" width="25" height="35" style="margin-right: 10px">WA Delivery</a>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+      © 2022 Copyright by Muhammad Kahfi MS
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  </body>
+</html>

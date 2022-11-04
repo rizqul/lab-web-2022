@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Soal Noomor 3</title>
+    <script>
+        var text = prompt("Masukkan Kalimat").toLowerCase();
+        var huruf = {};
+
+        for (var i = 0; i < text.length; i++) {
+            var char = text.charAt(i);
+            if (char == " ") {
+                char = "spasi";
+            }
+            var count = huruf[char];
+            if (count) {
+                huruf[char] += 1;
+            } else {
+                huruf[char] = 1;
+            }
+        }
+        for (char in huruf) {
+            document.writeln(char + " = " + huruf[char] + "<br>");
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
