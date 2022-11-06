@@ -69,6 +69,36 @@
                         </h4>
                     </div>
                     <div class="card-body">
+                        <?php
+                        require "dbconn.php";
+                        $select_all = "SELECT * FROM products";
+                        $result = mysqli_query($conn, $select_all);
+                        $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                        ?>
+                        <table class="table table-bordered table-hover" id="products-table">
+                            <thead>
+                                <tr>
+                                    <th class="table-primary">ID</th>
+                                    <th class="table-primary">Title</th>
+                                    <th class="table-primary">Price</th>
+                                    <th class="table-primary">Quantity</th>
+                                    <th class="table-primary">Series</th>
+                                    <th class="table-primary">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($products as $items): ?>
+                                <tr>
+                                    <td><?php echo $items['id']; ?></td>
+                                    <td><?php echo $items['title']; ?></td>
+                                    <td><?php echo $items['price']; ?></td>
+                                    <td><?php echo $items['qty']; ?></td>
+                                    <td><?php echo $items['series']; ?></td>
+                                    <td>button</td>
+                                </tr>
+                                <?php endforeach;?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

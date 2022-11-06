@@ -21,6 +21,9 @@ $(document).on("submit", "#saveProduct", function (e) {
         $("#errorMessage").addClass("d-none");
         $("#productAddModal").modal("hide");
         $("#saveProduct")[0].reset();
+        
+        // reload table
+        $("#products-table").load(location.href + " #products-table");
       } else if (res.status == 500) {
         alert(res.message);
       }
