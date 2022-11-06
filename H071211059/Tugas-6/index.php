@@ -11,6 +11,7 @@
 
 <body>
 
+    <!-- ADD PRODUCT FORM -->
     <div class="modal fade" id="productAddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -18,28 +19,31 @@
                     <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="saveStudent">
+                <form id="saveProduct">
                     <div class="modal-body">
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="title" name="title" placeholder="text">
-                            <label for="title">Title</label>
+                        <div id="errorMessage" class="alert alert-warning d-none"></div>
+
+                        <div class="mb-3 form-floating">
+                            <input type="text" name="title" class="form-control" id="floatingTitle" placeholder="duh" />
+                            <label for="floatingTitle">Title</label>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="price" name="price" placeholder="text">
-                            <label for="price">Price</label>
+                        <div class="mb-3 form-floating">
+                            <input type="text" name="price" class="form-control" id="floatingPrice" placeholder="duh" />
+                            <label for="floatingPrice">Price</label>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="qty" name="qty" placeholder="text">
-                            <label for="qty">Quantity</label>
+                        <div class="mb-3 form-floating">
+                            <input type="text" name="qty" class="form-control" id="floatingQty" placeholder="duh" />
+                            <label for="floatingQty">Quantity</label>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="series" name="series" placeholder="text">
-                            <label for="series">Series</label>
+                        <div class="mb-3 form-floating">
+                            <input type="text" name="series" class="form-control" id="floatingSeries"
+                                placeholder="duh" />
+                            <label for="floatingSeries">Series</label>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="img-source" name="img-source"
-                                placeholder="text">
-                            <label for="img-source">Image Source</label>
+                        <div class="mb-3 form-floating">
+                            <input type="text" name="img-sources" class="form-control" id="floatingSrc"
+                                placeholder="duh" />
+                            <label for="floatingSrc">Image Source</label>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -71,9 +75,9 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
-    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
