@@ -70,11 +70,11 @@
                     </div>
                     <div class="card-body">
                         <?php
-                        require "dbconn.php";
-                        $select_all = "SELECT * FROM products";
-                        $result = mysqli_query($conn, $select_all);
-                        $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
-                        ?>
+require "dbconn.php";
+$select_all = "SELECT * FROM products";
+$result = mysqli_query($conn, $select_all);
+$products = mysqli_fetch_all($result, MYSQLI_ASSOC);
+?>
                         <table class="table table-bordered table-hover" id="products-table">
                             <thead>
                                 <tr>
@@ -94,7 +94,49 @@
                                     <td><?php echo $items['price']; ?></td>
                                     <td><?php echo $items['qty']; ?></td>
                                     <td><?php echo $items['series']; ?></td>
-                                    <td>button</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="<?php echo '#images-' . $items['id'];?>">
+                                            View Images
+                                        </button>
+                                    </td>
+                                    <div class="modal fade" id="<?php echo 'images-' . $items['id'] ?>" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" style="min-width: 80vw;">
+                                            <div class="modal-content" style=" background-color: black;">
+                                                <div class="modal-body">
+                                                    <div id="<?php echo 'carousel-' . $items['id'] ?>"
+                                                        class="carousel slide" data-bs-ride="carousel">
+                                                        <div class="carousel-inner">
+                                                            <?php $imgs = explode(',', $items['imgsource']);?>
+                                                            <?php foreach ($imgs as $image): ?>
+                                                            <div
+                                                                class="carousel-item <?php if ($image == $imgs[0]) echo 'active'?>">
+                                                                <img src="<?php echo $image ?>" class="d-block w-100"
+                                                                    alt="<?php echo $image?>"
+                                                                    style="max-width: 100%; max-height: 85vh; object-fit: contain;">
+                                                            </div>
+                                                            <?php endforeach;?>
+                                                        </div>
+                                                        <button class="carousel-control-prev" type="button"
+                                                            data-bs-target="<?php echo '#carousel-' . $items['id'];?>"
+                                                            data-bs-slide="prev">
+                                                            <span class="carousel-control-prev-icon"
+                                                                aria-hidden="true"></span>
+                                                            <span class="visually-hidden">Previous</span>
+                                                        </button>
+                                                        <button class="carousel-control-next" type="button"
+                                                            data-bs-target="<?php echo '#carousel-' . $items['id'];?>"
+                                                            data-bs-slide="next">
+                                                            <span class="carousel-control-next-icon"
+                                                                aria-hidden="true"></span>
+                                                            <span class="visually-hidden">Next</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </tr>
                                 <?php endforeach;?>
                             </tbody>
