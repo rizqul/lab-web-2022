@@ -55,6 +55,48 @@
         </div>
     </div>
 
+    <!-- Edit Product Modal -->
+    <div class="modal fade" id="productEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="updateProduct">
+                    <div class="modal-body">
+                        <div id="errorMessage" class="alert alert-warning d-none"></div>
+                        <input type="hidden" name="product_id" id="product_id">
+                        <div class="mb-3 form-floating">
+                            <input type="text" name="title" class="form-control" id="title" placeholder="duh" />
+                            <label for="title">Title</label>
+                        </div>
+                        <div class="mb-3 form-floating">
+                            <input type="text" name="price" class="form-control" id="price" placeholder="duh" />
+                            <label for="price">Price</label>
+                        </div>
+                        <div class="mb-3 form-floating">
+                            <input type="text" name="qty" class="form-control" id="qty" placeholder="duh" />
+                            <label for="qty">Quantity</label>
+                        </div>
+                        <div class="mb-3 form-floating">
+                            <input type="text" name="series" class="form-control" id="series" placeholder="duh" />
+                            <label for="series">Series</label>
+                        </div>
+                        <div class="mb-3 form-floating">
+                            <input type="text" name="img-sources" class="form-control" id="imgsrc" placeholder="duh" />
+                            <label for="imgsrc">Image Source</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update Product</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
     <div class="container mt-4">
         <div class="row">
@@ -95,10 +137,12 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                     <td><?php echo $items['qty']; ?></td>
                                     <td><?php echo $items['series']; ?></td>
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                             data-bs-target="<?php echo '#images-' . $items['id'];?>">
                                             View Images
                                         </button>
+                                        <button type="button" value="<?=$items['id'];?>"
+                                            class="editProductBtn btn btn-success btn-sm">Edit</button>
                                     </td>
                                     <div class="modal fade" id="<?php echo 'images-' . $items['id'] ?>" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
