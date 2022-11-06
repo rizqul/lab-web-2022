@@ -97,7 +97,7 @@
         </div>
     </div>
 
-
+    <!-- products table -->
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-12">
@@ -143,6 +143,8 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                         </button>
                                         <button type="button" value="<?=$items['id'];?>"
                                             class="editProductBtn btn btn-success btn-sm">Edit</button>
+                                        <button type="button" value="<?=$items['id'];?>"
+                                            class="deleteProductBtn btn btn-success btn-sm">Delete</button>
                                     </td>
                                     <div class="modal fade" id="<?php echo 'images-' . $items['id'] ?>" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">

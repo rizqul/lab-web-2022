@@ -100,4 +100,29 @@ if (isset($_POST['update_product'])) {
     }
 }
 
+
+if (isset($_POST['delete_product'])) {
+    $product_id = mysqli_real_escape_string($conn, $_POST['product_id']);
+
+    $query = "DELETE FROM products WHERE id = '$product_id'";
+    $query_run = mysqli_query($conn, $query);
+
+    if ($query_run) {
+        $res = [
+            'status' => 200,
+            'message' => 'Product Deleted Successfully',
+        ];
+        echo json_encode($res);
+        return;
+    } else {
+        $res = [
+            'status' => 500,
+            'message' => 'Product Not Deleted',
+        ];
+        echo json_encode($res);
+        return;
+    }
+
+}
+
 ?>

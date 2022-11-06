@@ -88,3 +88,28 @@ $(document).on("submit", "#updateProduct", function (e) {
     },
   });
 });
+
+$(document).on("click", ".deleteProductBtn", function (e) {
+  e.preventDefault();
+
+  if (confirm("Are you sure you want to delete this product?")) {
+    var product_id = $(this).val();
+
+    $.ajax({
+      type: "POST",
+      url: "config.php",
+      data: {
+        delete_product: true,
+        product_id: product_id,
+      },
+      success: function (response) {
+        var res = jQuery.parseJSON(response);
+        if (res.status == 500) {
+          alert(res.message);
+        } else {
+          $("#products-table").load(location.href + " #products-table");
+        }
+      },
+    });
+  }
+});
