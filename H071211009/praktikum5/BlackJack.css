@@ -1,0 +1,81 @@
+@font-face {
+    font-family:evil-empire-font ;
+    src: url(evil-empire-font/EvilEmpire-4BBVK.ttf);
+}
+* {
+    font-family: evil-empire-font;
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-image:url(Image/—Pngtree—acsino\ betting\ poker\ dark\ blue_1176442.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.game {
+    text-align: center;
+    margin: 200px;
+    background-color: rgba(53, 56, 65, 0.215);
+    border-radius: 25px;
+}
+.game h1{
+    font-size: 70px;
+    color: rgb(255, 225, 0);
+}
+.game h2{
+    color: white;
+    font-size: 30px;
+    margin-bottom: 40px;
+    margin-top: 10px;
+}
+#this {
+    color: white;
+    font-size: 20px;
+    margin: 20px;
+}
+.button {
+    padding: 20px;
+}
+/* button {
+    transition: 2s;
+} */
+#startgame {
+    background-color: aquamarine;
+    width: 100px;
+    height: 30px;
+    border-style: hidden;
+    margin-right: 10px;
+    border-radius: 25px;
+    font-size: 15px;
+}
+#takecard {
+    background-color: rgb(255, 208, 127);
+    width: 100px;
+    height: 30px;
+    border-style: hidden;
+    border-radius: 25px;
+    font-size: 15px;
+}
+.forbet h3{
+    color: red;
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+.forbet {
+    color: rgb(32, 227, 32);
+    margin-top: 50px;
+    font-size: 30px;
+}
+.forbet input {
+    margin-top: 20px;
+    text-align: center;
+    width: 500px;
+    height: 30px;
+    border-radius: 25px;
+}
+#resetgame{
+    width: 150px;
+    height: 40px;
+    border-radius: 25px;
+    font-size: 15px;
+}
