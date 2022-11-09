@@ -87,4 +87,29 @@ $(document).on("submit", "#editProduct", function (e) {
   });
 });
 
+$(document).on("click", ".deleteProductBtn", function (e) {
+  e.preventDefault();
+
+  if (confirm("ARE YOU MAD FAM?")) {
+    var product_id = $(this).val();
+
+    $.ajax({
+      type: "POST",
+      url: "func.php",
+      data: {
+        delete_product: true,
+        product_id: product_id,
+      },
+      success: function (response) {
+        var res = jQuery.parseJSON(response);
+        if (res.status == 500) {
+          alert(res.message);
+        } else {
+          $("#the-table").load(location.href + " #the-table");
+        }
+      },
+    });
+  }
+});
+
 

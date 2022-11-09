@@ -1,6 +1,7 @@
 <?php
 
 require_once 'dbfunc.php';
+require_once 'loginfunc.php';
 
 $db = new DBFunc();
 
@@ -87,4 +88,25 @@ if (isset($_POST['edit_product'])) {
         echo json_encode($response);
         return;
     }
+}
+
+if (isset($_POST['delete_product'])) {
+$product_id = $_POST['product_id'];
+
+if ($db->delete($product_id)) {
+$res = [
+'status' => 200,
+'message' => 'Product Deleted Successfully',
+];
+echo json_encode($res);
+return;
+} else {
+$res = [
+'status' => 500,
+'message' => 'Product Not Deleted',
+];
+echo json_encode($res);
+return;
+}
+
 }

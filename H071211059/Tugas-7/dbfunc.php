@@ -59,4 +59,15 @@ class DBFunc extends Conn
 
     }
 
+    public function delete($id)
+    {
+        $query = "DELETE FROM products WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute([
+            'id' => $id
+            ]
+        );
+        return true;
+    }
+
 }
