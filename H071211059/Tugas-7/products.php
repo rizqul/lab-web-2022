@@ -35,44 +35,101 @@
                         <div id="errorMessage" class="alert alert-warning d-none"></div>
 
                         <div class="mb-3 form-floating">
-                            <input type="text" name="code" class="form-control form-control-sm" id="floatingCode"
+                            <input type="text" name="code" class="form-control form-control-sm" id="sCode"
                                 placeholder="duh" />
-                            <label for="floatingCode">Code</label>
+                            <label for="sCode">Code</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input type="text" name="title" class="form-control form-control-sm" id="floatingTitle"
+                            <input type="text" name="title" class="form-control form-control-sm" id="sTitle"
                                 placeholder="duh" />
-                            <label for="floatingTitle">Title</label>
+                            <label for="sTitle">Title</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input type="text" name="price" class="form-control form-control-sm" id="floatingPrice"
+                            <input type="text" name="price" class="form-control form-control-sm" id="sPrice"
                                 placeholder="duh" />
-                            <label for="floatingPrice">Price</label>
+                            <label for="sPrice">Price</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input type="text" name="qty" class="form-control form-control-sm" id="floatingQty"
+                            <input type="text" name="qty" class="form-control form-control-sm" id="sQty"
                                 placeholder="duh" />
-                            <label for="floatingQty">Quantity</label>
+                            <label for="sQty">Quantity</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input type="text" name="series" class="form-control form-control-sm" id="floatingSeries"
+                            <input type="text" name="series" class="form-control form-control-sm" id="sSeries"
                                 placeholder="duh" />
-                            <label for="floatingSeries">Series</label>
+                            <label for="sSeries">Series</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input type="text" name="prod_desc" class="form-control form-control-sm" id="floatingSeries"
+                            <input type="text" name="prod_desc" class="form-control form-control-sm" id="sProd_desc"
                                 placeholder="duh" />
-                            <label for="floatingSeries">Product Description</label>
+                            <label for="sProd_desc">Product Description</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input type="text" name="img-sources" class="form-control form-control-sm" id="floatingSrc"
+                            <input type="text" name="img-sources" class="form-control form-control-sm" id="sImg_src"
                                 placeholder="duh" />
-                            <label for="floatingSrc">Image Source</label>
+                            <label for="sImg_src">Image Source</label>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit PRODUCT MODAL -->
+    <div class="modal fade" id="productEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="min-width: 75%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="editProduct">
+                    <div class="modal-body">
+                        <div id="errorMessage" class="alert alert-warning d-none"></div>
+                        <input type="hidden" name="product_id" id="product_id">
+                        <div class="mb-3 form-floating">
+                            <input type="text" name="code" class="form-control form-control-sm" id="code"
+                                placeholder="duh" />
+                            <label for="code">Code</label>
+                        </div>
+                        <div class="mb-3 form-floating">
+                            <input type="text" name="title" class="form-control form-control-sm" id="title"
+                                placeholder="duh" />
+                            <label for="title">Title</label>
+                        </div>
+                        <div class="mb-3 form-floating">
+                            <input type="text" name="price" class="form-control form-control-sm" id="price"
+                                placeholder="duh" />
+                            <label for="price">Price</label>
+                        </div>
+                        <div class="mb-3 form-floating">
+                            <input type="text" name="qty" class="form-control form-control-sm" id="qty"
+                                placeholder="duh" />
+                            <label for="qty">Quantity</label>
+                        </div>
+                        <div class="mb-3 form-floating">
+                            <input type="text" name="series" class="form-control form-control-sm" id="series"
+                                placeholder="duh" />
+                            <label for="series">Series</label>
+                        </div>
+                        <div class="mb-3 form-floating">
+                            <input type="text" name="prod_desc" class="form-control form-control-sm" id="prod_desc"
+                                placeholder="duh" />
+                            <label for="prod_desc">Product Description</label>
+                        </div>
+                        <div class="mb-3 form-floating">
+                            <input type="text" name="img-sources" class="form-control form-control-sm" id="img_src"
+                                placeholder="duh" />
+                            <label for="img_src">Image Source</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </form>
             </div>
@@ -133,7 +190,7 @@
                             View Images
                         </button>
                         <button type="button" value="<?= $items['id']; ?>" class="editProductBtn btn btn-success btn-sm"
-                            data-bs-toggle="modal" data-bs-target="#productAddModal">Edit</button>
+                            data-bs-toggle="modal" data-bs-target="#productEditModal">Edit</button>
                         <button type="button" value="<?= $items['id']; ?>"
                             class="deleteProductBtn btn btn-danger btn-sm">Delete</button>
                     </td>
