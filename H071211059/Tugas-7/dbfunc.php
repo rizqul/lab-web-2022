@@ -22,4 +22,13 @@ class DBFunc extends Conn
 
         return true;
     }
+
+    public function view() 
+    {
+        $query = "SELECT * FROM products;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
 }

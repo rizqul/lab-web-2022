@@ -19,9 +19,13 @@ $(document).on("submit", "#saveProduct", function (e) {
         $("#errorMessage").addClass("d-none");
         $("#productAddModal").modal("hide");
         $("#saveProduct")[0].reset();
+
+        $("#the-table").load(location.href + " #the-table");
       } else if (res.status == 500) {
         alert(res.message);
       }
     },
   });
 });
+
+

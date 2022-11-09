@@ -35,33 +35,37 @@
                         <div id="errorMessage" class="alert alert-warning d-none"></div>
 
                         <div class="mb-3 form-floating">
-                            <input type="text" name="code" class="form-control" id="floatingCode" placeholder="duh" />
+                            <input type="text" name="code" class="form-control form-control-sm" id="floatingCode"
+                                placeholder="duh" />
                             <label for="floatingCode">Code</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input type="text" name="title" class="form-control" id="floatingTitle" placeholder="duh" />
+                            <input type="text" name="title" class="form-control form-control-sm" id="floatingTitle"
+                                placeholder="duh" />
                             <label for="floatingTitle">Title</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input type="text" name="price" class="form-control" id="floatingPrice" placeholder="duh" />
+                            <input type="text" name="price" class="form-control form-control-sm" id="floatingPrice"
+                                placeholder="duh" />
                             <label for="floatingPrice">Price</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input type="text" name="qty" class="form-control" id="floatingQty" placeholder="duh" />
+                            <input type="text" name="qty" class="form-control form-control-sm" id="floatingQty"
+                                placeholder="duh" />
                             <label for="floatingQty">Quantity</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input type="text" name="series" class="form-control" id="floatingSeries"
+                            <input type="text" name="series" class="form-control form-control-sm" id="floatingSeries"
                                 placeholder="duh" />
                             <label for="floatingSeries">Series</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input type="text" name="prod_desc" class="form-control" id="floatingSeries"
+                            <input type="text" name="prod_desc" class="form-control form-control-sm" id="floatingSeries"
                                 placeholder="duh" />
                             <label for="floatingSeries">Product Description</label>
                         </div>
                         <div class="mb-3 form-floating">
-                            <input type="text" name="img-sources" class="form-control" id="floatingSrc"
+                            <input type="text" name="img-sources" class="form-control form-control-sm" id="floatingSrc"
                                 placeholder="duh" />
                             <label for="floatingSrc">Image Source</label>
                         </div>
@@ -87,7 +91,7 @@
             </h3>
         </div>
 
-        <table class="table table-bordered table-hover" id="products-table">
+        <table class="table table-bordered table-hover" id="the-table">
             <thead>
                 <tr>
                     <th class="table-primary">Code</th>
@@ -100,15 +104,78 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
+                <?php
+                require_once 'func.php';
+                $products = $db->view();
+                foreach ($products as $items): ?>
                 <tr>
-                    <td class="col-md-1"></td>
-                    <td class="col-md-3"></td>
-                    <td class="col-md-1"></td>
-                    <td></td>
-                    <td class="col-md-2"></td>
-                    <td class="col-md-3"></td>
-                    <td class="col-md-2"></td>
+                    <td>
+                        <?php echo $items['product_code']; ?>
+                    </td>
+                    <td>
+                        <?php echo $items['title']; ?>
+                    </td>
+                    <td>
+                        <?php echo $items['price']; ?>
+                    </td>
+                    <td>
+                        <?php echo $items['qty']; ?>
+                    </td>
+                    <td>
+                        <?php echo $items['series']; ?>
+                    </td>
+                    <td>
+                        <?php echo $items['product_desc']; ?>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                            data-bs-target="<?php echo '#images-' . $items['id']; ?>">
+                            View Images
+                        </button>
+                        <button type="button" value="<?= $items['id']; ?>" class="editProductBtn btn btn-success btn-sm"
+                            data-bs-toggle="modal" data-bs-target="#productAddModal">Edit</button>
+                        <button type="button" value="<?= $items['id']; ?>"
+                            class="deleteProductBtn btn btn-danger btn-sm">Delete</button>
+                    </td>
+                    <div class="modal fade" id="<?php echo 'images-' . $items['id'] ?>" tabindex="-1"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" style="min-width: 80vw;">
+                            <div class="modal-content" style="background-color: #dedede;">
+                                <div class="modal-body">
+                                    <div id="<?php echo 'carousel-' . $items['id'] ?>" class="carousel slide"
+                                        data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <?php $imgs = explode(',', $items['imgsrc']); ?>
+                                            <?php foreach ($imgs as $image): ?>
+                                            <div class="carousel-item <?php if ($image == $imgs[0]) {
+                            echo 'active';
+                        }
+                                            ?>">
+                                                <img src="<?php echo $image ?>" class="d-block w-100"
+                                                    alt="<?php echo $image ?>"
+                                                    style="max-width: 100%; max-height: 85vh; object-fit: contain;">
+                                            </div>
+                                            <?php endforeach; ?>
+                                        </div>
+                                        <button class="carousel-control-prev" type="button"
+                                            data-bs-target="<?php echo '#carousel-' . $items['id']; ?>"
+                                            data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button"
+                                            data-bs-target="<?php echo '#carousel-' . $items['id']; ?>"
+                                            data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
 
