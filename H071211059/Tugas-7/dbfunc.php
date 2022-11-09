@@ -1,5 +1,5 @@
 <?php
-use LDAP\Result;
+
 require_once 'conn.php';
 
 class DBFunc extends Conn
@@ -26,7 +26,7 @@ class DBFunc extends Conn
 
     public function view()
     {
-        $query = "SELECT * FROM products";
+        $query = "SELECT * FROM products;";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll();
