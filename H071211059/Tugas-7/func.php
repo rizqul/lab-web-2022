@@ -4,6 +4,11 @@ require_once 'dbfunc.php';
 require_once 'loginfunc.php';
 
 $db = new DBFunc();
+$user = new LoginFunc();
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 if (isset($_POST['submit_product'])) {
     $code = $_POST['code'];
@@ -109,4 +114,72 @@ echo json_encode($res);
 return;
 }
 
+}
+if (isset($_POST['register'])) {
+$email = $_POST['email'];
+$uname = $_POST['uname'];
+$nPassword = $_POST['password'];
+$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+
+if ($email == null || $uname == null || $password == null) {
+$response = [
+'status' => 422,
+'message' => 'Please fill all the fields!',
+];
+echo json_encode($response);
+return;
+}
+
+if ($user->register($email, $uname, $password)) {
+$response = [
+'status' => 200,
+'message' => 'Register Success',
+];
+echo json_encode($response);
+return;
+} else {
+$response = [
+'status' => 500,
+'message' => 'Register Not Success',
+];
+echo json_encode($response);
+return;
+}
+}
+
+if (isset($_POST['login'])) {
+$uname = $_POST['uname'];
+$password = $_POST['password'];
+
+if ($uname == null || $password == null) {
+$response = [
+'status' => 422,
+'message' => 'Please fill all the fields!',
+];
+echo json_encode($response);
+return;
+}
+
+if ($user->login($uname, $password)) {
+$response = [
+'status' => 200,
+'message' => 'Login Success',
+];
+echo json_encode($response);
+return;
+} else {
+$response = [
+'status' => 500,
+'message' => 'Login Not Success',
+];
+echo json_encode($response);
+return;
+}
+}
+
+if (isset($_GET['logout'])) {
+echo 'oi';
+session_destroy();
+header('location: ../index.php');
 }

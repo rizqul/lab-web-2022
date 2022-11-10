@@ -112,4 +112,51 @@ $(document).on("click", ".deleteProductBtn", function (e) {
   }
 });
 
+$(document).on("submit", "#register", function (e) {
+  e.preventDefault();
 
+  var formData = new FormData(this);
+  formData.append("register", true);
+
+  $.ajax({
+    type: "POST",
+    url: "func.php",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (response) {
+      var res = jQuery.parseJSON(response);
+      if (res.status == 200) {
+        window.location.href = "index.php";
+      } else {
+        alert("email sudah ada");
+      }
+    },
+  });
+});
+
+$(document).on("submit", "#login", function (e) {
+  e.preventDefault();
+
+  var formData = new FormData(this);
+  formData.append("login", true);
+
+  $.ajax({
+    type: "POST",
+    url: "func.php",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (response) {
+      console.log(response);
+      var res = jQuery.parseJSON(response);
+
+      if (res.status == 200) {
+        console.log("masuk bang");
+        window.location.href = "products.php";
+      } else {
+        alert("email sudah ada");
+      }
+    },
+  });
+});

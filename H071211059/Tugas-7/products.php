@@ -1,3 +1,13 @@
+<?php
+require_once 'loginfunc.php';
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!$_SESSION['login'])
+    header("Location: index.php");
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -14,6 +24,7 @@
         <div class="container-fluid">
             <a class="navbar-brand ms-5" href="#">Navbar</a>
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <a href="func.php/?logout=1" id="logout">Logout</a>
                 <form class="d-flex ms-auto me-5" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
