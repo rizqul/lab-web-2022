@@ -20,22 +20,24 @@ class User { // Kelas user yang mengatur data user
     }
 
     public function login() {
-        $sql = "SELECT * FROM users WHERE email = '$this->username' AND password = '$this->password'";
+        $sql = "SELECT * FROM users WHERE email = '$this->email' AND password = '$this->password'";
         $result = $this->conn->query($sql);
+
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             $this->email = $row['email'];
             $this->password = $row['password'];
+            $this->username = $row['username'];
+            $this->photo = $row['photo'];
             $_SESSION['login'] = true;
             header("Location: index.php");
 
         } else {
-            echo "<script>alert('Wrong Username or Password!')</script>";
+            echo "<script>alert('Invalid Username or Password!')</script>";
             header("Refresh:0");
         }
 
         $this->conn->close();
-
         return $result;
     }
 
@@ -78,6 +80,7 @@ function writeData($data) {
 }
 
 function setButtons($conn) { // Membaca seluruh tombol dalam dokumen dan menyetel Fungsinya
+
     if (isset($_POST['edit'])) {
         $_SESSION['edit'] = 'edit';
         editData($_POST['edit'], $GLOBALS['conn']);
@@ -101,7 +104,7 @@ function setButtons($conn) { // Membaca seluruh tombol dalam dokumen dan menyete
         "UPDATE projects SET project_name = '$project_name', head_staff = '$head_staff', research_code = '$research_code', status = '$status' WHERE id = ".$_POST['save']."";
             
         if (mysqli_query($conn, $sql)) {  
-            echo "<div class='alert alert-success m-3' role='alert'>Successfully ".$_SESSION['edit']."ed a data! Please Wait...</div>";
+            echo "<div class='alert alert-success m-3' role='alert'>Successfully ".$_SESSION['edit']."ed a data!</div>";
             unset($_POST['save'], $_POST['edit'], $_POST['project_name'], $_POST['head_staff'], $_POST['research_code'], $_POST['status']);
             $_SESSION['edit'] = "add";
             header("Refresh:2");
@@ -118,13 +121,14 @@ function setButtons($conn) { // Membaca seluruh tombol dalam dokumen dan menyete
     }
 
     if (isset($_POST['login-button'])) {
-        $user = new user(writeData('logemail'), writeData('logpass'), '', '');
-        $user->login();
+        // $username, $password, $email, $photo
+        $_SESSION['user'] = new user('', writeData('logpass'), writeData('logemail'), '');
+        $_SESSION['user']->login();
     }
 
     if (isset($_POST['register-button'])) {
-        $user = new user(writeData('regusername'), writeData('regpass'), writeData('regemail'), '');
-        $user->register();
+        $_SESSION['user'] = new user(writeData('regname'), writeData('regpass'), writeData('regemail'), '');
+        $_SESSION['user']->register();
     }
 
     if (isset($_POST['logout-button'])) {

@@ -27,7 +27,7 @@ DELETE FROM projects WHERE id > 2;
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL, -- Username sebagai pengganti full name
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `photo` varchar(255) NOT NULL,
@@ -44,5 +44,3 @@ INSERT INTO users ( `username`, `password`, `email`) VALUES (
 );
 
 DELETE FROM users;
-
-

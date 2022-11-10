@@ -25,11 +25,11 @@
             </a>
             <form class="d-flex" role="search" method="post">
                 <input class="form-control me-2 rounded-0" type="search" placeholder="Find a data (e.g AX-)" aria-label="Search" name="search" id="search-input">
-                <button class="btn btn-outline-orange btn-dark" type="submit" name="find" id="search-button"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg></button>
+                <button class="btn btn-outline-orange btn-dark" type="submit" name="find" id="search-button"><i class="bi bi-search"></i></button>
                 <button class="btn btn-outline-orange btn-dark" style="display: none;" type="submit" name="back" id="back-button">Show All</button>
             </form>
             <form method="post">
-                <button type="submit" name="logout-button" class="btn btn-outline-orange btn-dark p-3"><i class="input-icon bi bi-person"></i> | Logout</button>
+                <button type="submit" name="logout-button" class="btn btn-outline-orange btn-dark p-3"><i class="input-icon bi bi-person"> <?= strtok($_SESSION['user']->username, " ");  ?></i> | Logout</button>
             </form>
         </div>
     </nav>
@@ -55,7 +55,7 @@
         </div>
     </div>
 
-    <div class="card w-50 input-data border-dark" style="display: none;">
+    <div class="card w-50 input-data" style="display: none;">
         <div class="card-header label-input d-flex">
             <div class="col display-7 m-auto label">Add/Edit Data</div>
             <div class="col text-end m-auto">
@@ -116,7 +116,7 @@
                 </thead>
                 <tbody>
 
-                    <script src="plugins/script.js"></script>
+                    <script src="plugins/index.js"></script>
                     <?php setButtons($conn); ?>
                     <?php listRecords($conn) ?>
 

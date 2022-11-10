@@ -4,13 +4,13 @@ document.getElementsByClassName('btn-close')[0].addEventListener('click', functi
     document.getElementsByClassName('overlay')[0].style.display = 'none';
 });
 
-function addButton() {
+function addButton() { // Menampilkan form input data (+)
     document.getElementsByClassName('overlay')[0].style.display = 'block';
     animateBox('input-data');
     resetField();
 }
 
-function resetField() {
+function resetField() { // Menghilangkan semua data yang ada di input field
     document.getElementById('save-button').innerHTML = 'Add Data';
     document.getElementById('project_name').value = '';
     document.getElementById('head_staff').value = '';

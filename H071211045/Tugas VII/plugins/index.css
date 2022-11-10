@@ -6,6 +6,11 @@ body {
     overflow-x: hidden;
 }
 
+.navbar {
+    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
+    background-position: bottom center;
+}
+
 .input-data, .output-data {
     margin: 2rem auto auto auto;
 }
@@ -17,7 +22,10 @@ body {
 
 .card, .card-header, .card-footer, .alert, .btn{
     border-radius:3px !important;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.card {
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
 }
 
 .confirm-delete {
