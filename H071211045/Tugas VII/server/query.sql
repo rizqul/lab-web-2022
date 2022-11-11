@@ -1,10 +1,14 @@
 -- Active: 1663738801222@@127.0.0.1@3306@lets_colonize_db
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `lets_colonize_db` /*!40100 DEFAULT CHARACTER SET latin1 */;
+/** 
+  * Author : @sofyanox12
+  * Silahkan di run untuk menambahkan database lets_colonize_db dan tabel-tabelnya
+  */
+
+CREATE DATABASE IF NOT EXISTS `lets_colonize_db` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `lets_colonize_db`;
 
 DROP TABLE IF EXISTS `projects`;
-
 CREATE TABLE `projects` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `project_name` varchar(255) NOT NULL,
@@ -21,10 +25,10 @@ INSERT INTO projects ( `project_name`, `head_staff`, `research_code`, `status` )
   'On-Going'
 );
 
-SELECT * FROM projects;
+/* Tampilkan isi tabel projects */
+-- SELECT * FROM projects;
 
-DELETE FROM projects WHERE id > 2;
-
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL, -- Username sebagai pengganti full name
@@ -34,13 +38,5 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-SELECT * FROM users;
-
--- Isi ke dalam tabel users
-INSERT INTO users ( `username`, `password`, `email`) VALUES (
-  'admin',
-  'admin123',
-  'admin@gmail.com'
-);
-
-DELETE FROM users;
+/* Tampilkan isi tabel users */
+-- SELECT * FROM users;
