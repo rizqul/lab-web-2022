@@ -21,7 +21,7 @@
             <div class="container bg-dark container-form" id="login-form">
                 <div class="center-wrap">
                     <div class="section text-center">
-                        <h4 class="mb-4 pb-3">Log In</h4>
+                        <h4 class="mb-4 pb-3 title">LOGIN</h4>
                         <div class="form-group">
                             <input type="email" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="on">
                             <i class="input-icon bi bi-envelope"></i>
@@ -32,7 +32,7 @@
                         </div>
                         <input type="submit" class="btn mt-4" name="login-button" value="SUBMIT">
                         <div class="container d-flex justify-content-center">
-                            <p class="mb-0 mt-4 mx-3 text-center"><a href="#0" class="link"><b>Forgot your password?</b></a></p>
+                            <p class="mb-0 mt-4 mx-3 text-center"><a href="mailto:gaero38@gmail.com" class="link"><b>Forgot your password?</b></a></p>
                             <!-- <p class="mb-0 mt-4 mx-1 text-center"><b>|</b></p>
                             <p class="mb-0 mt-4 mx-3 text-center"><a href="#0" class="link"><b>Create a new Account</b></a></p> -->
 
@@ -44,7 +44,7 @@
             <div class="container bg-dark container-form" id="registration-form">
                 <div class="center-wrap">
                     <div class="section text-center">
-                        <h4 class="mb-4 pb-3">Sign Up</h4>
+                        <h4 class="mb-4 pb-3 title">SIGN UP</h4>
                         <div class="form-group">
                             <input type="text" name="regname" class="form-style" placeholder="Your Full Name" id="logname" autocomplete="off">
                             <i class="input-icon bi bi-person"></i>
