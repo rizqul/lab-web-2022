@@ -1,0 +1,33 @@
+body {
+    background-color: bisque;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+h3 {
+    text-align: center;
+    background-color:rgb(255, 245, 206);
+    color: rgb(59, 32, 14);
+    padding: 15px;
+}
+
+h5 {
+    text-align: center;
+}
+
+.card-header {
+    background-color:rgb(179, 126, 91);
+    color: whitesmoke;
+}
+
+.card-body {
+    color: rgb(59, 32, 14);
+}
+
+.mx-auto {
+    width: 800px;
+}
+
+.card {
+    margin-top: 10px;
+}
+
