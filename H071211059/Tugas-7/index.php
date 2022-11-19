@@ -3,9 +3,10 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-if ($_SESSION['login'])
-    header('Location: products.php')
-    ?>
+if (isset($_SESSION['login'])) {
+    header('Location: products.php');
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
