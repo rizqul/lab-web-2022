@@ -1,8 +1,61 @@
 // Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
+// @import url('https://fonts.bunny.net/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Sono:wght@300&display=swap');
 
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+// Custom
+.bg-dark {
+    background-color: $black !important;
+}
+
+.bg-red {
+    background-color: $red !important;
+}
+
+.bg-cooper {
+    background-color: $cooper !important;
+}
+
+.bg-yellow {
+    background-color: $yellow !important;
+}
+
+.bg-lemon {
+    background-color: $lemon !important;
+}
+
+.text-dark {
+    color: $black !important;
+}
+
+.text-red {
+    color: $red !important;
+}
+
+.text-cooper {
+    color: $cooper !important;
+}
+
+.text-yellow {
+    color: $yellow !important;
+}
+
+.text-lemon {
+    color: $lemon !important;
+}
+
+.letter-spacing {
+    letter-spacing: 2px !important;
+}
+
+body {
+    background-image: url("https://www.tilingtextures.com/wp-content/uploads/2019/05/0090b-512x512.jpg");
+    background-position: center;
+    overflow-x: hidden;
+}
+
