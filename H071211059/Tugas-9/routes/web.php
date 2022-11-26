@@ -26,4 +26,7 @@ Route::post('seller/storeQue', [SellerController::class, 'saveProductUseQueryBui
 Route::post('seller/updateEloq', [SellerController::class, 'updateProductUseEloquent'])->name('seller.updateEloq');
 Route::post('seller/updateQue', [SellerController::class, 'updateProductUseQueryBuilder'])->name('seller.updateQue');
 
+Route::delete('seller/deleteEloq/{id}', [SellerController::class, 'deleteProductUseEloquent']);
+Route::delete('seller/deleteQue/{id}', [SellerController::class, 'deleteProductUseQueryBuilder']);
+
 Route::get('seller/{id}', [SellerController::class, 'getSeller'])->name('seller.getSeller');

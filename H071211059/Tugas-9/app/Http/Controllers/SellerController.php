@@ -15,7 +15,7 @@ class SellerController extends Controller
         return view('seller', compact('sellers'));
     }
 
-    public function saveProductUseEloquent(Request $request)
+    public function saveSellerUseEloquent(Request $request)
     {
         $request->validate([
             'name' => 'required',
@@ -29,7 +29,7 @@ class SellerController extends Controller
 
         return redirect()->route('seller')->with('Success', 'Seller created successfully');
     }
-    public function saveProductUseQueryBuilder(Request $request)
+    public function saveSellerUseQueryBuilder(Request $request)
     {
         $request->validate([
             'name' => 'required',
@@ -53,7 +53,7 @@ class SellerController extends Controller
         return redirect()->route('seller')->with('Success', 'Seller created successfully');
     }
 
-    public function updateProductUseQueryBuilder(Request $request)
+    public function updateSellerUseQueryBuilder(Request $request)
     {
         $request->validate([
             'name' => 'required',
@@ -77,7 +77,7 @@ class SellerController extends Controller
         return redirect()->route('seller')->with('Success', 'Seller updated successfully');
     }
 
-    public function updateProductUseEloquent(Request $request)
+    public function updateSellerUseEloquent(Request $request)
     {
         $request->validate([
             'name' => 'required',
@@ -98,5 +98,19 @@ class SellerController extends Controller
         $seller = Seller::find($id);
 
         return response()->json($seller);
+    }
+
+
+    public function deleteSellerUseEloquent($id)
+    {
+        Seller::find($id)->delete();
+
+        return response('Post deleted successfully.', 200);
+    }
+
+    public function deleteSellerUseQueryBuilder($id)
+    {
+        DB::table('sellers')->delete($id);
+        return response('Post deleted successfully.', 200);
     }
 }

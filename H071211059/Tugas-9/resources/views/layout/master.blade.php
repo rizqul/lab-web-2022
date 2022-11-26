@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
@@ -28,7 +29,7 @@
                     <h5 class="modal-title" id="formLabel">Add Product</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="productForm" action="{{ route('seller.storeQue') }}" method="POST">
+                <form id="productForm" action="@yield('route-form')" method="POST">
                     @csrf
                     <div class="modal-body">
                         @if ($errors->any())
@@ -54,8 +55,7 @@
 
     <div class="container">
         <a class="btn btn-success my-3 addProduct" href="" data-bs-toggle="modal"
-            data-bs-target="#productAddModal"> Create
-            New Product</a>
+            data-bs-target="#productAddModal"> @yield('create-btn')</a>
         <table class="table table-bordered table-hover" id="the-table">
             <thead>
                 @yield('thead')
@@ -71,6 +71,13 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
         crossorigin="anonymous"></script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
     @yield('js')
 </body>
 

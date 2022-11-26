@@ -1,5 +1,7 @@
 @extends('layout.master')
 
+@section('create-btn', 'Create New Seller')
+
 @section('form_input')
     <input type="hidden" name="id" class="form-control form-control-sm" id="id" placeholder="duh"/>
     <div class="mb-3 form-floating">
@@ -60,16 +62,23 @@
                 <button class="editBtn btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#productAddModal"
                         value="{{$seller->id}}">Edit
                 </button>
-                <button class="btn btn-danger btn-sm">Delete</button>
+                <button class="deleteBtn btn btn-danger btn-sm" value="{{$seller->id}}">Delete</button>
             </td>
         </tr>
     @endforeach
 @stop
 
 @section('paginate_link', $sellers->links())
+@section('route-form', route('seller.storeEloq'))
 
 @section('js')
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         $(document).on('click', '.editBtn', function () {
             $('#goBtn').text('Update');
             $('#formLabel').text('Edit Product');
@@ -89,6 +98,23 @@
                     $('.status select').val(seller.status).change();
                 }
             })
+        })
+
+         $(document).on('click', '.deleteBtn', function () {
+            let id = $(this).val();
+            console.log(id)
+            if (confirm('Are you sure you want to delete this item?')) {
+                $.ajax({
+                    type: 'POST',
+                    data: {_token : "{{csrf_token()}}",
+                        id: id,
+                        _method: "DELETE"},
+                    url: 'seller/deleteQue/' + id,
+                    success: function (response) {
+                        window.location='/seller'
+                    }
+                })
+            }
         })
     </script>
 @stop
