@@ -1,0 +1,16 @@
+.mx-auto {
+	width: 800px;
+}
+.data{
+	margin-top: 50px;
+	margin-bottom: 70px;
+}
+.card {
+	margin-bottom: 50px;
+}
+.button{
+	padding-left: 20px;
+}
+.card-header {
+	background-color: #4FA095;
+}
