@@ -69,6 +69,23 @@
                 }
             })
         })
+
+        $(document).on('click', '.deleteBtn', function () {
+            let id = $(this).val();
+            console.log(id)
+            if (confirm('Are you sure you want to delete this item?')) {
+                $.ajax({
+                    type: 'POST',
+                    data: {_token : "{{csrf_token()}}",
+                        id: id,
+                        _method: "DELETE"},
+                    url: 'category/deleteQue/' + id,
+                    success: function (response) {
+                        window.location='/category'
+                    }
+                })
+            }
+        })
         
         $('#productAddModal').on('hidden.bs.modal', function() {
             $('#productAddModal form')[0].reset();

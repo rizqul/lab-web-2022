@@ -43,4 +43,7 @@ Route::controller(CategoryController::class)->group(function () {
 
     Route::post('category/updateEloq', 'updateCategoryUseEloquent')->name('category.updateEloq');
     Route::post('category/updateQue', 'updateCategoryUseQueryBuilder')->name('category.updateQue');
+
+    Route::delete('category/deleteEloq/{id}', 'deleteCategoryUseEloquent');
+    Route::delete('category/deleteQue/{id}', 'deleteCategoryUseQueryBuilder');
 });

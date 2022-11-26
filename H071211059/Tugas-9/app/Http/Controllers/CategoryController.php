@@ -82,4 +82,17 @@ class CategoryController extends Controller
 
         return redirect()->route('category.index')->with('Success', 'Category updated successfully');
     }
+
+    public function deletecategoryUseEloquent($id)
+    {
+        category::find($id)->delete();
+
+        return response('Category deleted successfully.', 200);
+    }
+
+    public function deletecategoryUseQueryBuilder($id)
+    {
+        DB::table('categories')->delete($id);
+        return response('Category deleted successfully.', 200);
+    }
 }
