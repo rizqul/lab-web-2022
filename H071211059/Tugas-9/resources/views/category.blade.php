@@ -1,6 +1,7 @@
 @extends('layout.master')
 
 @section('create-btn', 'Create New Category')
+@section('formName', 'Create New Category')
 
 @section('form_input')
     <input type="hidden" name="id" class="form-control form-control-sm" id="id" placeholder="duh" />

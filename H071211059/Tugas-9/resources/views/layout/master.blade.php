@@ -26,7 +26,7 @@
         <div class="modal-dialog" style="min-width: 75%;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="formLabel">Add Product</h5>
+                    <h5 class="modal-title" id="formLabel">@yield('formName')</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="productForm" action="@yield('route-form')" method="POST">
