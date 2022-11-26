@@ -19,6 +19,24 @@
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('product.index')}}">Product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('seller')}}">Seller</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('category.index')}}">Category</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('permission.index')}}">Permission</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('permissionseller.index')}}">Seller Permission</a>
+                    </li>
+            </div>
         </div>
     </nav>
 
