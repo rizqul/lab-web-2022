@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('seller', [\App\Http\Controllers\SellerController::class, 'index'])->name('seller');
+Route::post('seller/store', [\App\Http\Controllers\SellerController::class, 'saveProductUseEloquent'])->name('seller.storeEloq');
+Route::post('seller/store', [\App\Http\Controllers\SellerController::class, 'saveProductUseQueryBuilder'])->name('seller.storeQue');
