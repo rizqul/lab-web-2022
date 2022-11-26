@@ -9,5 +9,12 @@ class PermissionSeller extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'seller_id',
+        'permission_id',
+        'created_at',
+        'updated_at'
+    ];
+
     public $incrementing = true;
 }

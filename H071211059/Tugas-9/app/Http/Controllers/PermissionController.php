@@ -36,7 +36,7 @@ class PermissionController extends Controller
             'status' => 'required'
         ]);
 
-        DB::table('permission')
+        DB::table('permissions')
             ->insert([
                 'name' => $request->name,
                 'status' => $request->status,
