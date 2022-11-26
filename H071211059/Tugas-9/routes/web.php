@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,15 +19,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('seller', [SellerController::class, 'index'])->name('seller');
+Route::controller(SellerController::class)->group(function () {
+    Route::get('seller', 'index')->name('seller');
+    Route::post('seller/storeEloq', 'saveSellerUseEloquent')->name('seller.storeEloq');
+    Route::post('seller/storeQue', 'saveSellerUseQueryBuilder')->name('seller.storeQue');
 
-Route::post('seller/storeEloq', [SellerController::class, 'saveProductUseEloquent'])->name('seller.storeEloq');
-Route::post('seller/storeQue', [SellerController::class, 'saveProductUseQueryBuilder'])->name('seller.storeQue');
+    Route::post('seller/updateEloq', 'updateSellerUseEloquent')->name('seller.updateEloq');
+    Route::post('seller/updateQue', 'updateSellerUseQueryBuilder')->name('seller.updateQue');
 
-Route::post('seller/updateEloq', [SellerController::class, 'updateProductUseEloquent'])->name('seller.updateEloq');
-Route::post('seller/updateQue', [SellerController::class, 'updateProductUseQueryBuilder'])->name('seller.updateQue');
+    Route::delete('seller/deleteEloq/{id}', 'deleteSellerUseEloquent');
+    Route::delete('seller/deleteQue/{id}', 'deleteSellerUseQueryBuilder');
 
-Route::delete('seller/deleteEloq/{id}', [SellerController::class, 'deleteProductUseEloquent']);
-Route::delete('seller/deleteQue/{id}', [SellerController::class, 'deleteProductUseQueryBuilder']);
+    Route::get('seller/{id}', 'getSeller')->name('seller.getSeller');
+});
 
-Route::get('seller/{id}', [SellerController::class, 'getSeller'])->name('seller.getSeller');
+Route::controller(CategoryController::class)->group(function () {
+    Route::get('category', 'index')->name('category.index');
+
+    Route::get('category/{id}', 'getCategory')->name('category.getCategory');
+
+    Route::post('category/storeEloq', 'saveCategoryUseEloquent')->name('category.storeEloq');
+    Route::post('category/storeQue', 'saveCategoryUseQueryBuilder')->name('category.storeQue');
+
+    Route::post('category/updateEloq', 'updateCategoryUseEloquent')->name('category.updateEloq');
+    Route::post('category/updateQue', 'updateCategoryUseQueryBuilder')->name('category.updateQue');
+});

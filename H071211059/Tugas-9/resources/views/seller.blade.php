@@ -81,7 +81,7 @@
 
         $(document).on('click', '.editBtn', function () {
             $('#goBtn').text('Update');
-            $('#formLabel').text('Edit Product');
+            $('#formLabel').text('Edit Seller');
             $('#productForm').attr('action', '{{route('seller.updateEloq')}}');
             console.log($(this).val());
             let id = $(this).val();
@@ -115,6 +115,12 @@
                     }
                 })
             }
+        })
+
+        $('#productAddModal').on('hidden.bs.modal', function () {
+            $('#productAddModal form')[0].reset();
+            $('#goBtn').text('Submit');
+            $('#formLabel').text('Add Seller');
         })
     </script>
 @stop
