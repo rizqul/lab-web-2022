@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,4 +47,13 @@ Route::controller(CategoryController::class)->group(function () {
 
     Route::delete('category/deleteEloq/{id}', 'deleteCategoryUseEloquent');
     Route::delete('category/deleteQue/{id}', 'deleteCategoryUseQueryBuilder');
+});
+
+Route::controller(PermissionController::class)->group(function () {
+    Route::get('permission', 'index')->name('permission.index');
+
+    Route::get('permission/{id}', 'getPermission')->name('permission.getPermission');
+
+    Route::post('permission/storeEloq', 'savePermissionUseEloquent')->name('permission.storeEloq');
+    Route::post('permission/storeQue', 'savePermissionUseQueryBuilder')->name('permission.storeQue');
 });
