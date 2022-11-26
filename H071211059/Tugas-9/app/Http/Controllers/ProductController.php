@@ -24,4 +24,51 @@ class ProductController extends Controller
 
         return view('product', compact('products', 'categories', 'sellers'));
     }
+
+    public function getProduct($id)
+    {
+        $product = Product::find($id);
+
+        return response()->json($product);
+    }
+
+    public function updateProductUseQueryBuilder(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'seller' => 'required',
+            'category' => 'required',
+            'price' => 'required',
+            'status' => 'required',
+        ]);
+
+        DB::table('products')
+            ->where('id', $request->id)
+            ->update([
+                'name' => $request->name,
+                'seller_id' => $request->seller,
+                'category_id' => $request->category,
+                'price' => $request->price,
+                'status' => $request->status,
+                'updated_at' => \Carbon\Carbon::now()
+            ]);
+
+        return redirect()->route('product.index')->with('Success', 'Product updated successfully');
+    }
+
+    public function updateProductUseEloquent(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'seller' => 'required',
+            'category' => 'required',
+            'price' => 'required',
+            'status' => 'required',
+        ]);
+
+        $product = Product::find($request->id);
+        $product->update($request->all());
+
+        return redirect()->route('product.index')->with('Success', 'Product updated successfully');
+    }
 }
