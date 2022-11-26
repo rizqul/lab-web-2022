@@ -12,7 +12,7 @@
                placeholder="duh"/>
         <label for="address">Address</label>
     </div>
-    <div class="mb-3 form-floating">
+    <div class="mb-3 form-floating gender">
         <select class="form-select" aria-label="Default select example" name="gender">
             <option selected>Open this select menu</option>
             <option value="Male">Male</option>
@@ -26,7 +26,7 @@
                placeholder="duh"/>
         <label for="no_hp">Phone Number</label>
     </div>
-    <div class="mb-3 form-floating">
+    <div class="mb-3 form-floating status">
         <select class="form-select" aria-label="Default select example" name="status">
             <option selected>Open this select menu</option>
             <option value="Active">Active</option>
@@ -51,17 +51,44 @@
 @section('tbody')
     @foreach($sellers as $seller)
     <tr>
-        <td>{{$seller->name}}</td>
-        <td>{{$seller->address}}</td>
-        <td>{{$seller->gender}}</td>
-        <td>{{$seller->no_hp}}</td>
-        <td>{{$seller->status}}</td>
-        <td>
-            <button class="btn btn-success btn-sm">Edit</button>
-            <button class="btn btn-danger btn-sm">Delete</button>
-        </td>
-    </tr>
+            <td>{{$seller->name}}</td>
+            <td>{{$seller->address}}</td>
+            <td>{{$seller->gender}}</td>
+            <td>{{$seller->no_hp}}</td>
+            <td>{{$seller->status}}</td>
+            <td>
+                <button class="editBtn btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#productAddModal"
+                        value="{{$seller->id}}">Edit
+                </button>
+                <button class="btn btn-danger btn-sm">Delete</button>
+            </td>
+        </tr>
     @endforeach
 @stop
 
 @section('paginate_link', $sellers->links())
+
+@section('js')
+    <script>
+        $(document).on('click', '.editBtn', function () {
+            $('#goBtn').text('Update');
+            $('#formLabel').text('Edit Product');
+            $('#productForm').attr('action', '{{route('seller.updateEloq')}}');
+            console.log($(this).val());
+            let id = $(this).val();
+            $.ajax({
+                type: 'GET',
+                url: "/seller/" + id,
+                success: function (response) {
+                    let seller = response;
+                    $('#id').val(seller.id);
+                    $('#name').val(seller.name);
+                    $('.gender select').val(seller.gender).change();
+                    $('#address').val(seller.address);
+                    $('#no_hp').val(seller.no_hp);
+                    $('.status select').val(seller.status).change();
+                }
+            })
+        })
+    </script>
+@stop

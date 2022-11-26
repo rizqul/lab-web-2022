@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SellerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('seller', [\App\Http\Controllers\SellerController::class, 'index'])->name('seller');
-Route::post('seller/store', [\App\Http\Controllers\SellerController::class, 'saveProductUseEloquent'])->name('seller.storeEloq');
-Route::post('seller/store', [\App\Http\Controllers\SellerController::class, 'saveProductUseQueryBuilder'])->name('seller.storeQue');
+Route::get('seller', [SellerController::class, 'index'])->name('seller');
+
+Route::post('seller/storeEloq', [SellerController::class, 'saveProductUseEloquent'])->name('seller.storeEloq');
+Route::post('seller/storeQue', [SellerController::class, 'saveProductUseQueryBuilder'])->name('seller.storeQue');
+
+Route::post('seller/updateEloq', [SellerController::class, 'updateProductUseEloquent'])->name('seller.updateEloq');
+Route::post('seller/updateQue', [SellerController::class, 'updateProductUseQueryBuilder'])->name('seller.updateQue');
+
+Route::get('seller/{id}', [SellerController::class, 'getSeller'])->name('seller.getSeller');

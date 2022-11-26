@@ -52,4 +52,51 @@ class SellerController extends Controller
 
         return redirect()->route('seller')->with('Success', 'Seller created successfully');
     }
+
+    public function updateProductUseQueryBuilder(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'gender' => 'required',
+            'no_hp' => 'required',
+            'status' => 'required',
+        ]);
+
+        DB::table('sellers')
+            ->where('id', $request->id)
+            ->update([
+                'name' => $request->name,
+                'address' => $request->address,
+                'gender' => $request->gender,
+                'no_hp' => $request->no_hp,
+                'status' => $request->status,
+                'updated_at' => \Carbon\Carbon::now()
+            ]);
+
+        return redirect()->route('seller')->with('Success', 'Seller updated successfully');
+    }
+
+    public function updateProductUseEloquent(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'gender' => 'required',
+            'no_hp' => 'required',
+            'status' => 'required',
+        ]);
+
+        $seller = Seller::find($request->id);
+        $seller->update($request->all());
+
+        return redirect()->route('seller')->with('Success', 'Seller updated successfully');
+    }
+
+    public function getSeller($id)
+    {
+        $seller = Seller::find($id);
+
+        return response()->json($seller);
+    }
 }
