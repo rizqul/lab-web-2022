@@ -58,41 +58,43 @@
 
 @section('js')
     <script>
-        // $(document).on('click', '.editBtn', function() {
-        //     $('#goBtn').text('Update');
-        //     $('#formLabel').text('Edit Category');
-        //     $('#productForm').attr('action', '{{route('category.updateQue')}}');
-        //     console.log($(this).val());
-        //     let id = $(this).val();
+        $(document).on('click', '.editBtn', function() {
+            $('#goBtn').text('Update');
+            $('#formLabel').text('Edit Permission');
+            $('#productForm').attr('action', '{{route('permission.updateQue')}}');
+            console.log($(this).val());
+            let id = $(this).val();
 
-        //     $.ajax({
-        //         type: 'GET',
-        //         url: "/category/" + id,
-        //         success: function(response) {
-        //             let category = response;
-        //             $('#id').val(category.id);
-        //             $('#name').val(category.name);
-        //             $('.status select').val(category.status).change();
-        //         }
-        //     })
-        // })
+            $.ajax({
+                type: 'GET',
+                url: "/permission/" + id,
+                success: function(response) {
+                    let permission = response;
+                    console.log(permission);
+                    $('#id').val(permission.id);
+                    $('#name').val(permission.name);
+                    $('#desc').val(permission.description);
+                    $('.status select').val(permission.status).change();
+                }
+            })
+        })
 
-        // $(document).on('click', '.deleteBtn', function () {
-        //     let id = $(this).val();
-        //     console.log(id)
-        //     if (confirm('Are you sure you want to delete this item?')) {
-        //         $.ajax({
-        //             type: 'POST',
-        //             data: {_token : "{{csrf_token()}}",
-        //                 id: id,
-        //                 _method: "DELETE"},
-        //             url: 'category/deleteQue/' + id,
-        //             success: function (response) {
-        //                 window.location='/category'
-        //             }
-        //         })
-        //     }
-        // })
+        $(document).on('click', '.deleteBtn', function () {
+            let id = $(this).val();
+            console.log(id)
+            if (confirm('Are you sure you want to delete this item?')) {
+                $.ajax({
+                    type: 'POST',
+                    data: {_token : "{{csrf_token()}}",
+                        id: id,
+                        _method: "DELETE"},
+                    url: 'permission/deleteQue/' + id,
+                    success: function (response) {
+                        window.location='/permission'
+                    }
+                })
+            }
+        })
         
         $('#productAddModal').on('hidden.bs.modal', function() {
             $('#productAddModal form')[0].reset();

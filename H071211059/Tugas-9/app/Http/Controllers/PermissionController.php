@@ -54,4 +54,51 @@ class PermissionController extends Controller
 
         return response()->json($permission);
     }
+
+    public function updatePermissionUseEloquent(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'desc' => 'required',
+            'status' => 'required'
+        ]);
+
+        $permission = Permission::find($request->id);
+        $permission->update($request->all());
+
+        return redirect()->route('permission.index')->with('Success', 'Permission updated successfully');
+    }
+
+    public function updatePermissionUseQueryBuilder(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'desc' => 'required',
+            'status' => 'required'
+        ]);
+
+        DB::table('permissions')
+            ->where('id', $request->id)
+            ->update([
+                'name' => $request->name,
+                'status' => $request->status,
+                'description' => $request->desc,
+                'updated_at' => \Carbon\Carbon::now()
+            ]);
+
+        return redirect()->route('permission.index')->with('Success', 'Permission updated successfully');
+    }
+
+    public function deletePermissionUseEloquent($id)
+    {
+        Permission::find($id)->delete();
+
+        return response('Permission deleted successfully.', 200);
+    }
+
+    public function deletePermissionUseQueryBuilder($id)
+    {
+        DB::table('permissions')->delete($id);
+        return response('Permission deleted successfully.', 200);
+    }
 }

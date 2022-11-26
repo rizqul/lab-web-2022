@@ -56,4 +56,10 @@ Route::controller(PermissionController::class)->group(function () {
 
     Route::post('permission/storeEloq', 'savePermissionUseEloquent')->name('permission.storeEloq');
     Route::post('permission/storeQue', 'savePermissionUseQueryBuilder')->name('permission.storeQue');
+
+    Route::post('permission/updateEloq', 'updatePermissionUseEloquent')->name('permission.updateEloq');
+    Route::post('permission/updateQue', 'updatePermissionUseQueryBuilder')->name('permission.updateQue');
+
+    Route::delete('permission/deleteEloq/{id}', 'deletePermissionUseEloquent');
+    Route::delete('permission/deleteQue/{id}', 'deletePermissionUseQueryBuilder');
 });
