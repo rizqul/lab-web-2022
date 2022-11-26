@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,4 +63,19 @@ Route::controller(PermissionController::class)->group(function () {
 
     Route::delete('permission/deleteEloq/{id}', 'deletePermissionUseEloquent');
     Route::delete('permission/deleteQue/{id}', 'deletePermissionUseQueryBuilder');
+});
+
+Route::controller(ProductController::class)->group(function () {
+    Route::get('product', 'index')->name('product.index');
+
+    Route::get('product/{id}', 'getProduct')->name('product.getProduct');
+
+    Route::post('product/storeEloq', 'saveProductUseEloquent')->name('product.storeEloq');
+    Route::post('product/storeQue', 'saveProductUseQueryBuilder')->name('product.storeQue');
+
+    Route::post('product/updateEloq', 'updateProductUseEloquent')->name('product.updateEloq');
+    Route::post('product/updateQue', 'updateProductUseQueryBuilder')->name('product.updateQue');
+
+    Route::delete('product/deleteEloq/{id}', 'deleteProductUseEloquent');
+    Route::delete('product/deleteQue/{id}', 'deleteProductUseQueryBuilder');
 });
