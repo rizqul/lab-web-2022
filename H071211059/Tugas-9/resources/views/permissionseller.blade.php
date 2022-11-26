@@ -84,24 +84,24 @@
             })
         })
 
-        // $(document).on('click', '.deleteBtn', function() {
-        //     let id = $(this).val();
-        //     console.log(id)
-        //     if (confirm('Are you sure you want to delete this item?')) {
-        //         $.ajax({
-        //             type: 'POST',
-        //             data: {
-        //                 _token: "{{ csrf_token() }}",
-        //                 id: id,
-        //                 _method: "DELETE"
-        //             },
-        //             url: 'product/deleteEloq/' + id,
-        //             success: function(response) {
-        //                 window.location = '/product'
-        //             }
-        //         })
-        //     }
-        // })
+        $(document).on('click', '.deleteBtn', function() {
+            let id = $(this).val();
+            console.log(id)
+            if (confirm('Are you sure you want to delete this item?')) {
+                $.ajax({
+                    type: 'POST',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        id: id,
+                        _method: "DELETE"
+                    },
+                    url: 'permissionseller/deleteEloq/' + id,
+                    success: function(response) {
+                        window.location = '/permissionseller';
+                    }
+                })
+            }
+        })
 
         $('#productAddModal').on('hidden.bs.modal', function() {
             $('#productAddModal form')[0].reset();

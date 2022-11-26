@@ -92,16 +92,16 @@ class PermissionSellerController extends Controller
         return redirect()->route('permissionseller.index')->with('Success', 'Seller Permissiin created successfully');
     }
 
-    // public function deleteProductUseEloquent($id)
-    // {
-    //     Product::find($id)->delete();
+    public function deletePermissionSellerUseEloquent($id)
+    {
+        PermissionSeller::find($id)->delete();
 
-    //     return response('Product deleted successfully.', 200);
-    // }
+        return response('Seller Permisssion deleted successfully.', 200);
+    }
 
-    // public function deleteProductUseQueryBuilder($id)
-    // {
-    //     DB::table('products')->delete($id);
-    //     return response('Product deleted successfully.', 200);
-    // }
+    public function deletePermissionSellerUseQueryBuilder($id)
+    {
+        DB::table('permission_sellers')->delete($id);
+        return response('Seller Permisssion deleted successfully.', 200);
+    }
 }
