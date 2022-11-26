@@ -12,7 +12,7 @@
         <label for="name">Name</label>
     </div>
     <div class="mb-3 form-floating seller">
-        <select class="form-select" aria-label="Default select example" name="seller">
+        <select class="form-select" aria-label="Default select example" name="seller_id">
             <option selected>Open this select menu</option>
             @foreach ($sellers as $seller)
                 <option value="{{ $seller->id }}">{{ $seller->name . ' (ID = ' . $seller->id . ')' }}</option>
@@ -21,7 +21,7 @@
         <label for="seller">Seller</label>
     </div>
     <div class="mb-3 form-floating category">
-        <select class="form-select" aria-label="Default select example" name="category">
+        <select class="form-select" aria-label="Default select example" name="category_id">
             <option selected>Open this select menu</option>
             @foreach ($categories as $category)
                 <option value="{{ $category->id }}">{{ $category->name . ' (ID = ' . $category->id . ')' }}</option>
@@ -75,7 +75,7 @@
 @stop
 
 @section('paginate_link', $products->links())
-@section('route-form', route('seller.storeEloq'))
+@section('route-form', route('product.storeQue'))
 
 @section('js')
     <script>
@@ -118,9 +118,9 @@
                         id: id,
                         _method: "DELETE"
                     },
-                    url: 'seller/deleteQue/' + id,
+                    url: 'product/deleteEloq/' + id,
                     success: function(response) {
-                        window.location = '/seller'
+                        window.location = '/product'
                     }
                 })
             }

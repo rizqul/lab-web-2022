@@ -32,12 +32,51 @@ class ProductController extends Controller
         return response()->json($product);
     }
 
+    public function saveProductUseQueryBuilder(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'seller_id' => 'required',
+            'category_id' => 'required',
+            'price' => 'required',
+            'status' => 'required',
+        ]);
+
+        DB::table('products')
+            ->insert([
+                'name' => $request->name,
+                'seller_id' => $request->seller_id,
+                'category_id' => $request->category_id,
+                'price' => $request->price,
+                'status' => $request->status,
+                'updated_at' => \Carbon\Carbon::now(),
+                'created_at' => \Carbon\Carbon::now()
+            ]);
+
+        return redirect()->route('product.index')->with('Success', 'Product updated successfully');
+    }
+
+    public function saveProductUseEloquent(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'seller_id' => 'required',
+            'category_id' => 'required',
+            'price' => 'required',
+            'status' => 'required',
+        ]);
+
+        Product::create($request->all());
+
+        return redirect()->route('product.index')->with('Success', 'Product updated successfully');
+    }
+
     public function updateProductUseQueryBuilder(Request $request)
     {
         $request->validate([
             'name' => 'required',
-            'seller' => 'required',
-            'category' => 'required',
+            'seller_id' => 'required',
+            'category_id' => 'required',
             'price' => 'required',
             'status' => 'required',
         ]);
@@ -46,8 +85,8 @@ class ProductController extends Controller
             ->where('id', $request->id)
             ->update([
                 'name' => $request->name,
-                'seller_id' => $request->seller,
-                'category_id' => $request->category,
+                'seller_id' => $request->seller_id,
+                'category_id' => $request->category_id,
                 'price' => $request->price,
                 'status' => $request->status,
                 'updated_at' => \Carbon\Carbon::now()
@@ -60,8 +99,8 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'seller' => 'required',
-            'category' => 'required',
+            'seller_id' => 'required',
+            'category_id' => 'required',
             'price' => 'required',
             'status' => 'required',
         ]);
@@ -70,5 +109,18 @@ class ProductController extends Controller
         $product->update($request->all());
 
         return redirect()->route('product.index')->with('Success', 'Product updated successfully');
+    }
+
+    public function deleteProductUseEloquent($id)
+    {
+        Product::find($id)->delete();
+
+        return response('Product deleted successfully.', 200);
+    }
+
+    public function deleteProductUseQueryBuilder($id)
+    {
+        DB::table('products')->delete($id);
+        return response('Product deleted successfully.', 200);
     }
 }
