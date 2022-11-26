@@ -69,7 +69,7 @@
         $(document).on('click', '.editBtn', function() {
             $('#goBtn').text('Update');
             $('#formLabel').text('Edit Seller Permission');
-            // $('#productForm').attr('action', '{{ route('product.updateEloq') }}');
+            $('#productForm').attr('action', '{{ route('permissionseller.updateEloq') }}');
             console.log($(this).val());
             let id = $(this).val();
             $.ajax({
@@ -77,6 +77,7 @@
                 url: "/permissionseller/" + id,
                 success: function(response) {
                     // console.log(response);
+                    $('#id').val(response.id);
                     $('.seller select').val(response.seller_id).change();
                     $('.permission select').val(response.permission_id).change();
                 }

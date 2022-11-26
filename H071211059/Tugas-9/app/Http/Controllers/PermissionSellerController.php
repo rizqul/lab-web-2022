@@ -61,45 +61,36 @@ class PermissionSellerController extends Controller
         return redirect()->route('permissionseller.index')->with('Success', 'Seller Permissiin created successfully');
     }
 
-    // public function updateProductUseQueryBuilder(Request $request)
-    // {
-    //     $request->validate([
-    //         'name' => 'required',
-    //         'seller_id' => 'required',
-    //         'category_id' => 'required',
-    //         'price' => 'required',
-    //         'status' => 'required',
-    //     ]);
+    public function updatePermissionSellerUseQueryBuilder(Request $request)
+    {
+        $request->validate([
+            'seller_id' => 'required',
+            'permission_id' => 'required',
+        ]);
 
-    //     DB::table('products')
-    //         ->where('id', $request->id)
-    //         ->update([
-    //             'name' => $request->name,
-    //             'seller_id' => $request->seller_id,
-    //             'category_id' => $request->category_id,
-    //             'price' => $request->price,
-    //             'status' => $request->status,
-    //             'updated_at' => \Carbon\Carbon::now()
-    //         ]);
+        DB::table('permission_sellers')
+            ->where('id', $request->id)
+            ->update([
+                'seller_id' => $request->seller_id,
+                'permission_id' => $request->permission_id,
+                'updated_at' => \Carbon\Carbon::now(),
+            ]);
 
-    //     return redirect()->route('product.index')->with('Success', 'Product updated successfully');
-    // }
+        return redirect()->route('permissionseller.index')->with('Success', 'Seller Permissiin created successfully');
+    }
 
-    // public function updateProductUseEloquent(Request $request)
-    // {
-    //     $request->validate([
-    //         'name' => 'required',
-    //         'seller_id' => 'required',
-    //         'category_id' => 'required',
-    //         'price' => 'required',
-    //         'status' => 'required',
-    //     ]);
+    public function updatePermissionSellerUseEloquent(Request $request)
+    {
+        $request->validate([
+            'seller_id' => 'required',
+            'permission_id' => 'required',
+        ]);
 
-    //     $product = Product::find($request->id);
-    //     $product->update($request->all());
+        $permission_sellers = PermissionSeller::find($request->id);
+        $permission_sellers->update($request->all());
 
-    //     return redirect()->route('product.index')->with('Success', 'Product updated successfully');
-    // }
+        return redirect()->route('permissionseller.index')->with('Success', 'Seller Permissiin created successfully');
+    }
 
     // public function deleteProductUseEloquent($id)
     // {
