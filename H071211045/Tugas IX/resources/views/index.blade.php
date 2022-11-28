@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <title>Tugas IX</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -9,7 +10,14 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('style.css') }}">
-    <title>Tugas IX</title>
+    <script>
+        function importJS(file) {
+            var script = document.createElement('script');
+            script.src = file + '.js';
+            document.head.appendChild(script);
+        }
+    </script>
+
 </head>
 
 <body>
