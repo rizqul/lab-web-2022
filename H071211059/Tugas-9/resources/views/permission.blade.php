@@ -54,7 +54,7 @@
 @stop
 
 @section('paginate_link', $permissions->links())
-@section('route-form', route('permission.storeQue'))
+@section('route-form', route('permission.storeEloq'))
 
 @section('js')
     <script>

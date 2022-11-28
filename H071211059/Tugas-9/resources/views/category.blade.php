@@ -48,7 +48,7 @@
 @stop
 
 @section('paginate_link', $categories->links())
-@section('route-form', route('category.storeQue'))
+@section('route-form', route('category.storeEloq'))
 
 @section('js')
     <script>

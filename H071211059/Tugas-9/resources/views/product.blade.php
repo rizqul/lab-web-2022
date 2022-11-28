@@ -75,7 +75,7 @@
 @stop
 
 @section('paginate_link', $products->links())
-@section('route-form', route('product.storeQue'))
+@section('route-form', route('product.storeEloq'))
 
 @section('js')
     <script>

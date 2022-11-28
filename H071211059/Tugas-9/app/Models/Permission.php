@@ -23,4 +23,9 @@ class Permission extends Model
     {
         return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('D M Y');
     }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = strtolower($value);
+    }
 }

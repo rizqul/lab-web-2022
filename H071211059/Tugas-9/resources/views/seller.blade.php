@@ -20,7 +20,7 @@
             <option selected>Open this select menu</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
-            <option value="plastik indomaret">Plastik Indomaret</option>
+            <option value="whiskas">whiskas</option>
         </select>
         <label for="gender">Gender</label>
     </div>
