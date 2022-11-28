@@ -57,7 +57,7 @@
 
     <div class="card w-50 input-data" style="display: none;">
         <div class="card-header label-input d-flex">
-            <div class="col display-7 m-auto label">Add/Edit Data</div>
+            <div class="col display-7 m-auto label-modal">Add/Edit Data</div>
             <div class="col text-end m-auto">
                 <button type="button" class="btn-close m-0" aria-label="Close"></button>
             </div>
