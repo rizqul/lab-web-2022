@@ -9,17 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller {
 
-    public function index() {
-
-        $products = Products::join('categories', 'products.category_id', '=', 'categories.id')
-            ->join('sellers', 'products.seller_id', '=', 'sellers.id')
-            ->select('products.*', 'categories.name as category_name', 'sellers.name as seller_name')
-            ->get();
-
-        return view('index', compact('products'));
-            // ->with('i', (request()->input('page', 1) - 1) * 5);
-    }
-
     public function storeProductEloquent(Request $request) { // Use Query Builder
         $request->validate([
             'name' => 'required',

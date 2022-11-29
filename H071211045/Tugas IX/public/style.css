@@ -98,4 +98,23 @@ body {
     text-transform: capitalize;
 }
 
+td, tbody th {
+    color: var(--beige);
+}
+
+.page-link {
+    background-color: var(--skin) !important;
+    color: var(--dark) !important;
+}
+
+.active .page-link {
+    background-color: var(--dark) !important;
+    color: var(--skin) !important;
+    border: 1px var(--skin) solid !important;
+}
+
+.disabled .page-link {
+    background-color: var(--coffe) !important;
+    color: white !important ;
+}
 

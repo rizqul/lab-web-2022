@@ -7,16 +7,7 @@ use Illuminate\Http\Request;
 use \Carbon\Carbon as Date;
 use Illuminate\Support\Facades\DB;
 
-class SellerPermissionController extends Controller
-{
-    public function index() {
-        $sellerPerms = SellerPermissions::join('sellers', 'sellers.id', '=', 'seller_permissions.seller_id')
-            ->join('permissions', 'permissions.id', '=', 'seller_permissions.permission_id')
-            ->select('seller_permissions.*', 'sellers.name as seller_name', 'permissions.name as permission_name')
-            ->latest()->paginate(5);
-
-        return view('index', compact('sellerPerms'));
-    }
+class SellerPermissionController extends Controller {
 
     public function storeSellerPermsEloquent(Request $request) { // Use Eloquent
         $request->validate([

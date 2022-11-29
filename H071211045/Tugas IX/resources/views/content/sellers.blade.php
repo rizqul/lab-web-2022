@@ -23,36 +23,32 @@
             </thead>
             <tbody>
 
-                {{-- @forelse ($books as $book)
+                @forelse ($sellers as $data)
                     <tr>
-                        <th scope="row">{{ ($books ->currentpage()-1) * $books ->perpage() + $loop->index + 1 }}</th>
-                        <td>{{ $book->book_name }}</td>
-                        <td>{{ $book->author }}</td>
-                        <td>{{ $book->category }}</td>
-
-                        @if ($book->favorable == 1)
-                            <td>Yes</td>
-                        @else
-                            <td>No</td>
-                        @endif
+                        <th scope="row">{{ ($sellers ->currentpage()-1) * $sellers ->perpage() + $loop->index + 1 }}</th>
+                        <td>{{ $data->name }}</td>
+                        <td>{{ $data->address }}</td>
+                        <td>{{ $data->gender }}</td>
+                        <td>{{ $data->phone }}</td>
+                        <td>{{ $data->status }}</td>
 
                         <td>
-                            <button data="{{ $book }}" class="btn btn-dark edit-button"><i class="bi bi-pencil-fill align-middle"></i></button>
-                            <button data="{{ $book->id }}" class="btn btn-danger text-light delete-button"><i class="bi bi-trash-fill align-middle"></i></button>
+                            <button data="{{ $data }}" class="btn btn-dark edit-button"><i class="bi bi-pencil-fill align-middle"></i></button>
+                            <button data="{{ $data->id }}" class="btn btn-danger text-light delete-button"><i class="bi bi-trash-fill align-middle"></i></button>
                         </td>
                     </tr>
 
-                @empty --}}
+                @empty
                     <tr>
                         <td colspan="7" class="text-center text-beige">No Seller Registered.</td>
                     </tr>
-                {{-- @endforelse --}}
+                @endforelse
 
             </tbody>
         </table>
 
-    {{-- <div class="card-footer d-flex justify-content-center bg-lemon p-0 m-0">
-        {{ $books->links() }}
-    </div> --}}
+    <div class="card-footer d-flex justify-content-center bg-lemon p-0 m-0">
+        {{ $sellers->links() }}
+    </div>
 
 </div>

@@ -7,12 +7,7 @@ use Illuminate\Http\Request;
 use \Carbon\Carbon as Date;
 use Illuminate\Support\Facades\DB;
 
-class SellerController extends Controller
-{
-    public function index() {
-        $sellers = Sellers::latest()->paginate(5);
-        return view('index');
-    }
+class SellerController extends Controller {
 
     public function storeSellerEloquent(Request $request) { // Use Eloquent
         $request->validate([

@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 class PermissionController extends Controller {
 
-    public function index() {
-        $permissions = Permissions::latest()->paginate(5);
-        return view('index');
-    }
-
     public function storePermissionEloquent(Request $request) { // Use Eloquent
         $request->validate([
             'name' => 'required',
