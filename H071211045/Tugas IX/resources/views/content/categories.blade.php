@@ -41,7 +41,7 @@
             </tbody>
         </table>
 
-    <div class="container my-3 d-flex justify-content-center">
+    <div class="container d-flex justify-content-center mt-3">
         {{ $categories->links() }}
     </div>
 

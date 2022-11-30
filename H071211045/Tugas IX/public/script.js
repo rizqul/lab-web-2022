@@ -6,6 +6,8 @@ window.onload = () => {
 
     document.getElementById('close-modal').addEventListener('click', function () {
         overlay.style.display = 'none';
+        sessionStorage.setItem('token', 'Wakwau');
+
     });
 
     setButton('add-product');

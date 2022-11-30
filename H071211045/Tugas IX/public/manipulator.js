@@ -6,9 +6,11 @@
 const overlay = document.querySelector('.overlay');
 const requestInputs = document.querySelectorAll('.requests');
 
-function setButton(buttonID) {
+
+function setButton(buttonID, session) {
     const title = document.getElementById('modal-title');
     const button = document.getElementById(buttonID);
+
     button.addEventListener('click', function () {
 
         overlay.style.display = 'block';
@@ -65,3 +67,4 @@ function requestFor(label, placeholder, request, type) {
     requestInputs[0].appendChild(labelElement);
     requestInputs[0].appendChild(inputElement);
 }
+

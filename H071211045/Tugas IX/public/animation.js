@@ -7,21 +7,23 @@ const allTabs = document.querySelectorAll('.tab');
 const sidebarButtons = document.querySelectorAll('.btn-side');
 
 function showTable(button, classTab) {
+    var tab = document.getElementsByClassName(classTab)[0];
     var button = document.getElementById(button);
-    button.addEventListener('click', function () {
-        sidebarButtons.forEach(btn => {
-            btn.disabled = false;
-        });
-        button.disabled = true;
-        var tab = document.getElementsByClassName(classTab)[0];
-        for (let i = 0; i < sidebarButtons.length; i++) {
-            sidebarButtons[i].style = "background-color : var(--beige); color : var(--dark);";
-        }
 
-        for (let i = 0; i < allTabs.length; i++) {
-            allTabs[i].style.transform = 'translateX(200%)';
-        }
-        button.style = "background-color : var(--skin); box-shadow: 0 0 0.5rem 0.2rem var(--skin); ";
+    button.addEventListener('click', function () {
+        sidebarButtons.forEach(x => {
+            x.disabled = false;
+            x.style = "background-color : var(--beige); color : var(--dark);";
+        });
+
+        allTabs.forEach(x => {
+            x.style.transform = 'translateX(200%)';
+        });
+
+        button.style =
+            "background-color : var(--skin);"
+            + "box-shadow: 0 0 0.5rem 0.2rem var(--skin); ";
+        button.disabled = true;
         tab.style.display = "block";
         slideToRight(tab, 250, 12);
     });
@@ -56,3 +58,21 @@ function slideToLeft(element, start, end) {
         }
     }, .5);
 }
+
+function showAlready(element, button) {
+    var btn = document.getElementById(button);
+
+    sidebarButtons.forEach(x => {
+        x.disabled = false;
+        x.style = "background-color : var(--beige); color : var(--dark);";
+    });
+
+    element.style.display = 'block';
+    element.style.transition = 'none';
+    element.style.transform = 'translateX(12%)';
+
+    btn.disabled = true;
+
+
+}
+
