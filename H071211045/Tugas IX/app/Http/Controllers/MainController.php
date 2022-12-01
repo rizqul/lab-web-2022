@@ -8,15 +8,22 @@ use App\Models\Permissions;
 use App\Models\Products;
 use App\Models\SellerPermissions;
 use App\Models\Sellers;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        // if (Contents::count() == 0) {
+        //     $this->firstState();
+        // }
+
         $products = Products::join('categories', 'products.category_id', '=', 'categories.id')
-            ->join('sellers', 'products.seller_id', '=', 'sellers.id')
-            ->select('products.*', 'categories.name as category_name', 'sellers.name as seller_name')
-            ->latest()->paginate(5);
+        ->join('sellers', 'products.seller_id', '=', 'sellers.id')
+        ->select('products.*', 'categories.name as category', 'sellers.name as seller')
+        ->latest()->paginate(5);
 
         $sellers = Sellers::latest()->paginate(5);
 
@@ -29,19 +36,34 @@ class MainController extends Controller
             ->select('seller_permissions.*', 'sellers.name as seller_name', 'permissions.name as permission_name')
             ->latest()->paginate(5);
 
-        if (Contents::count() == 0) {
-            $this->firstState();
+            $showProducts = Contents::where('table_name', 'products') == 'true' ? true : false;
+            $showCategories = Contents::where('table_name', 'categories') == 'true' ? true : false;
+            $showSellers = Contents::where('table_name', 'sellers') == 'true' ? true : false;
+            $showPermissions = Contents::where('table_name', 'permissions') == 'true' ? true : false;
+            $showSellerPerms = Contents::where('table_name', 'seller_permissions') == 'true' ? true : false;
+
+        if ($request->ajax()) {
+            return response()->json(
+                [
+                    'products' => $products,
+                    'sellers' => $sellers,
+                    'categories' => $categories,
+                    'permissions' => $permissions,
+                    'sellerPerms' => $sellerPerms,
+                    'showProducts' => $showProducts,
+                    'showCategories' => $showCategories,
+                    'showSellers' => $showSellers,
+                    'showPermissions' => $showPermissions,
+                    'showSellerPerms' => $showSellerPerms,
+                ]
+            );
+
         }
-
-        $showProducts = Contents::where('table_name', 'products') == 'true' ? true : false;;
-
-        $showSellers = Contents::where('table_name', 'sellers') == 'true' ? true : false;;
-
-        $showCategories = Contents::where('table_name', 'categories') == 'true' ? true : false;
-
-        $showPermissions = Contents::where('table_name', 'permissions') == 'true' ? true : false;
-
-        $showSellerPerms = Contents::where('table_name', 'seller_permissions') == 'true' ? true : false;
+        // $this->products($showProducts);
+        // $this->categories($showCategories);
+        // $this->sellers($showSellers);
+        // $this->permissions($showPermissions);
+        // $this->sellerPerms($showSellerPerms);
 
         return view('index',
             compact(
@@ -85,11 +107,17 @@ class MainController extends Controller
         ]);
     }
 
-    public function set($table, $value) {
-        $content = Contents::where('table_name', $table)->first();
-        $content->condition = $value;
-        $content->save();
+    public function postView() {
+        if (request()->ajax()) {
+            DB::table('contents')
+            ->where('table_name', request()->table_name)
+            ->update(
+                [
+                    'condition' => request()->condition,
+                ]
+            );
+        }
 
-        return redirect()->route('index');
+        return response()->json(['x' => 'success']);
     }
 }

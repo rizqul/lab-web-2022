@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('contents' , function (Blueprint $table) {
             $table->string('table_name')->unique();
             $table->string('condition');
+            $table->timestamps();
         });
     }
 

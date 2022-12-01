@@ -118,3 +118,20 @@ td, tbody th {
     color: white !important ;
 }
 
+.bt-modal {
+    align-self: end;
+    width: 60%;
+    height: min-content;
+}
+
+.bt-modal:not(:hover) {
+    background-color : var(--beige);
+    color : var(--dark);
+    transition: 0.3s;
+}
+
+.bt-modal:hover {
+    background-color : var(--skin);
+    box-shadow: 0 0 0.5rem 0.2rem var(--skin);
+    transition: 0.3s;
+}

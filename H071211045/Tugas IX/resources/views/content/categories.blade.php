@@ -26,8 +26,8 @@
                         <td>{{ $data->name }}</td>
                         <td>{{ $data->status }}</td>
                         <td>
-                            <button data="{{ $data }}" class="btn btn-dark edit-button"><i class="bi bi-pencil-fill align-middle"></i></button>
-                            <button data="{{ $data->id }}" class="btn btn-danger text-light delete-button"><i class="bi bi-trash-fill align-middle"></i></button>
+                            <button data="{{ $data }}" data-type="category" class="btn btn-dark edit"><i class="bi bi-pencil-fill align-middle"></i></button>
+                            <button data="{{ $data->id }}" data-type="category" class="btn btn-danger text-light delete"><i class="bi bi-trash-fill align-middle"></i></button>
                         </td>
                     </tr>
 

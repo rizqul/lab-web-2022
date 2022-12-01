@@ -19,50 +19,60 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('/', MainController::class);
-// Route::get('/', 'MainController@index');
+// $index = ['/', '/products', '/categories', '/sellers', '/permissions', '/seller-permissions'];
 
-Route::controller(ProductController::class)->group(function () {
-    Route::post('/store-product-eloquent', 'storeProductEloquent');
-    Route::post('/store-product-query', 'storeProductQuery');
-    Route::get('/edit-product/{id}', 'editProduct');
-    Route::post('/update-product-eloquent/{id}', 'updateProductEloquent');
-    Route::post('/update-product-query/{id}', 'updateProductQuery');
-    Route::get('/delete-product/{id}', 'deleteProduct');
-});
+// foreach ($index as $route) {
+//     return Route::resource($route, MainController::class);
+// }
 
-Route::controller(PermissionController::class)->group(function () {
-    Route::post('/store-permission-eloquent', 'storePermissionEloquent');
-    Route::post('/store-permission-query', 'storePermissionQuery');
-    Route::get('/edit-permission/{id}', 'editPermission');
-    Route::post('/update-permission-eloquent/{id}', 'updatePermissionEloquent');
-    Route::post('/update-permission-query/{id}', 'updatePermissionQuery');
-    Route::get('/delete-permission/{id}', 'deletePermission');
-});
+// Route::get('/products', function () {
+//     return view('index');
+// });
 
-Route::controller(CategoryController::class)->group(function () {
-    Route::post('/store-category-eloquent', 'storeCategoryEloquent');
-    Route::post('/store-category-query', 'storeCategoryQuery');
-    Route::get('/edit-category/{id}', 'editCategory');
-    Route::post('/update-category-eloquent/{id}', 'updateCategoryEloquent');
-    Route::post('/update-category-query/{id}', 'updateCategoryQuery');
-    Route::get('/delete-category/{id}', 'deleteCategory');
-});
+Route::get('/', [MainController::class, 'index']);
+Route::get('/products', [MainController::class, 'index']);
+Route::get('/categories', [MainController::class, 'index']);
+Route::get('/sellers', [MainController::class, 'index']);
+Route::get('/permissions', [MainController::class, 'index']);
+Route::get('/seller-permissions', [MainController::class, 'index']);
 
-Route::controller(SellerController::class)->group(function () {
-    Route::post('/store-seller-eloquent', 'storeSellerEloquent');
-    Route::post('/store-seller-query', 'storeSellerQuery');
-    Route::get('/edit-seller/{id}', 'editSeller');
-    Route::post('/update-seller-eloquent/{id}', 'updateSellerEloquent');
-    Route::post('/update-seller-query/{id}', 'updateSellerQuery');
-    Route::get('/delete-seller/{id}', 'deleteSeller');
-});
+Route::post('/view-products', [MainController::class, 'postView']);
+Route::post('/view-categories', [MainController::class, 'postView']);
+Route::post('/view-sellers', [MainController::class, 'postView']);
+Route::post('/view-permissions', [MainController::class, 'postView']);
+Route::post('/view-seller-permissions', [MainController::class, 'postView']);
 
-Route::controller(SellerPermissionController::class)->group(function () {
-    Route::post('/store-seller-permission-eloquent', 'storeSellerPermsEloquent');
-    Route::post('/store-seller-permission-query', 'storeSellerPermsQuery');
-    Route::get('/edit-seller-permission/{id}', 'editSellerPerms');
-    Route::post('/update-seller-permission-eloquent/{id}', 'updateSellerPermsEloquent');
-    Route::post('/update-seller-permission-query/{id}', 'updateSellerPermsQuery');
-    Route::get('/delete-seller-permission/{id}', 'deleteSellerPerms');
-});
+Route::post('/store-product-eloquent', [ProductController::class, 'storeProductEloquent']);
+Route::post('/store-product-query', [ProductController::class, 'storeProductQuery']);
+Route::get('/edit-product/{id}', [ProductController::class, 'editProduct']);
+Route::post('/update-product-eloquent/{id}', [ProductController::class, 'updateProductEloquent']);
+Route::post('/update-product-query/{id}', [ProductController::class, 'updateProductQuery']);
+Route::get('/delete-product/{id}', [ProductController::class, 'deleteProduct']);
+
+Route::post('/store-permission-eloquent', [PermissionController::class, 'storePermissionEloquent']);
+Route::post('/store-permission-query', [PermissionController::class, 'storePermissionQuery']);
+Route::get('/edit-permission/{id}', [PermissionController::class, 'editPermission']);
+Route::post('/update-permission-eloquent/{id}', [PermissionController::class, 'updatePermissionEloquent']);
+Route::post('/update-permission-query/{id}', [PermissionController::class, 'updatePermissionQuery']);
+Route::get('/delete-permission/{id}', [PermissionController::class, 'deletePermission']);
+
+Route::post('/store-category-eloquent', [CategoryController::class, 'storeCategoryEloquent']);
+Route::post('/store-category-query', [CategoryController::class, 'storeCategoryQuery']);
+Route::get('/edit-category/{id}', [CategoryController::class, 'editCategory']);
+Route::post('/update-category-eloquent/{id}', [CategoryController::class, 'updateCategoryEloquent']);
+Route::post('/update-category-query/{id}', [CategoryController::class, 'updateCategoryQuery']);
+Route::get('/delete-category/{id}', [CategoryController::class, 'deleteCategory']);
+
+Route::post('/store-seller-eloquent', [SellerController::class, 'storeSellerEloquent']);
+Route::post('/store-seller-query', [SellerController::class, 'storeSellerQuery']);
+Route::get('/edit-seller/{id}', [SellerController::class, 'editSeller']);
+Route::post('/update-seller-eloquent/{id}', [SellerController::class, 'updateSellerEloquent']);
+Route::post('/update-seller-query/{id}', [SellerController::class, 'updateSellerQuery']);
+Route::get('/delete-seller/{id}', [SellerController::class, 'deleteSeller']);
+
+Route::post('/store-seller-permission-eloquent', [SellerPermissionController::class, 'storeSellerPermsEloquent']);
+Route::post('/store-seller-permission-query', [SellerPermissionController::class, 'storeSellerPermsQuery']);
+Route::get('/edit-seller-permission/{id}', [SellerPermissionController::class, 'editSellerPerms']);
+Route::post('/update-seller-permission-eloquent/{id}', [SellerPermissionController::class, 'updateSellerPermsEloquent']);
+Route::post('/update-seller-permission-query/{id}', [SellerPermissionController::class, 'updateSellerPermsQuery']);
+Route::get('/delete-seller-permission/{id}', [SellerPermissionController::class, 'deleteSellerPerms']);

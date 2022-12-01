@@ -13,8 +13,8 @@
             <thead class="bg-beige">
                 <tr>
                     <th scope="col">No</th>
-                    <th scope="col">Seller's ID</th>
-                    <th scope="col">Permission's ID</th>
+                    <th scope="col">Seller</th>
+                    <th scope="col">Permission</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -23,18 +23,28 @@
                 @forelse ($sellerPerms as $data)
                     <tr>
                         <th scope="row">{{ ($sellerPerms ->currentpage()-1) * $sellerPerms ->perpage() + $loop->index + 1 }}</th>
-                        <td>{{ $data->seller_id }}</td>
-                        <td>{{ $data->permission_id }}</td>
+
+                        @foreach ( $sellers as $s )
+                            @if ( $s->id == $data->seller_id )
+                                <td>{{ $s->name }}</td>
+                            @endif
+                        @endforeach
+
+                        @foreach ( $permissions as $p )
+                            @if ( $p->id == $data->permission_id )
+                                <td>{{ $p->name }}</td>
+                            @endif
+                        @endforeach
 
                         <td>
-                            <button data="{{ $data }}" class="btn btn-dark edit-button"><i class="bi bi-pencil-fill align-middle"></i></button>
-                            <button data="{{ $data->id }}" class="btn btn-danger text-light delete-button"><i class="bi bi-trash-fill align-middle"></i></button>
+                            <button data="{{ $data }}" data-type="seller-permission" class="btn btn-dark edit"><i class="bi bi-pencil-fill align-middle"></i></button>
+                            <button data="{{ $data->id }}" data-type="seller-permission" class="btn btn-danger text-light delete"><i class="bi bi-trash-fill align-middle"></i></button>
                         </td>
                     </tr>
 
                 @empty
                     <tr>
-                        <td colspan="4" class="text-center text-beige">No Any Permission Of Seller Submitted.</td>
+                        <td colspan="5" class="text-center text-beige">No Any Permission Of Seller Submitted.</td>
                     </tr>
                 @endforelse
 

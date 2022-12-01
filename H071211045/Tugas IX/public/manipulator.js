@@ -4,67 +4,109 @@
 */
 
 const overlay = document.querySelector('.overlay');
-const requestInputs = document.querySelectorAll('.requests');
+const section = document.querySelectorAll('.requests section');
 
-
-function setButton(buttonID, session) {
+function setButton(buttonID) {
     const title = document.getElementById('modal-title');
     const button = document.getElementById(buttonID);
 
     button.addEventListener('click', function () {
 
         overlay.style.display = 'block';
-        requestInputs[0].innerHTML = '';
+        section.forEach(x => {
+            x.style.display = 'none';
+        });
 
         title.innerHTML = buttonID.includes('add') ?
             'Add ' + buttonID.split('-')[1] :
             'Edit ' + buttonID.split('-')[1];
 
         if (buttonID == 'add-product') {
-            requestFor('Name', 'Name', 'product_name', 'text');
-            requestFor('Seller\'s ID', 'Seller\' ID', 'seller_id', 'number');
-            requestFor('Category\'s ID', 'Category\' ID', 'category_id', 'number');
-            requestFor('Price', 'Price', 'product_price', 'number');
-            requestFor('Status', 'Status', 'product_status', 'text');
+            document.getElementById('sender').setAttribute('action', '/store-product-eloquent');
+            // document.getElementById('sender').setAttribute('action', '/store-product-query');
+            document.getElementById('product-modal').style.display = 'block';
 
         } else if (buttonID == 'add-category') {
-            requestFor('Name', 'Name', 'category_name', 'text');
-            requestFor('Status', 'Status', 'category_status', 'text');
+            document.getElementById('sender').setAttribute('action', '/store-category-eloquent');
+            // document.getElementById('sender').setAttribute('action', '/store-category-query');
+            document.getElementById('category-modal').style.display = 'block';
 
         } else if (buttonID == 'add-seller') {
-            requestFor('Name', 'Name', 'seller_name', 'text');
-            requestFor('Address', 'Address', 'seller_address', 'text');
-            requestFor('Gender', 'Gender', 'seller_gender', 'text');
-            requestFor('Phone', 'Phone', 'seller_phone', 'text');
-            requestFor('Status', 'Status', 'seller_status', 'text');
+            document.getElementById('sender').setAttribute('action', '/store-seller-eloquent');
+            // document.getElementById('sender').setAttribute('action', '/store-seller-query');
+            document.getElementById('seller-modal').style.display = 'block';
 
         } else if (buttonID == 'add-permission') {
-            requestFor('Name', 'Name', 'permission_name', 'text');
-            requestFor('Description', 'Description', 'permission_description', 'text');
-            requestFor('Status', 'Status', 'permission_status', 'text');
+            document.getElementById('sender').setAttribute('action', '/store-permission-eloquent');
+            // document.getElementById('sender').setAttribute('action', '/store-permission-query');
+            document.getElementById('permission-modal').style.display = 'block';
 
         } else if (buttonID == 'add-seller-permission') {
-            requestFor('Seller\'s ID', 'Seller\' ID', 'seller_id', 'number');
-            requestFor('Permission\'s ID', 'Permission\' ID', 'permission_id', 'number');
-            requestFor('Status', 'Status', 'seller_permission_status', 'text');
+            document.getElementById('sender').setAttribute('action', '/store-seller-permission-eloquent');
+            // document.getElementById('sender').setAttribute('action', '/store-seller-permission-query');
+            document.getElementById('seller-permission-modal').style.display = 'block';
         }
 
     });
 }
 
-function requestFor(label, placeholder, request, type) {
-    const labelElement = document.createElement('label');
-    const inputElement = document.createElement('input');
+document.querySelectorAll('.edit').forEach(x => {
+    x.addEventListener('click', function () {
+        x = this;
+        const data = JSON.parse(x.getAttribute('data'));
 
-    labelElement.innerHTML = label;
-    labelElement.setAttribute('class', 'form-label');
+        if (x.getAttribute('data-type') == 'product') {
+            // get tag 'input' which has name
+            $('input[name="product_name"]').val(data.name);
+            $('select[name="seller_id"]').val(data.seller_id);
+            $('input[name="category_id"]').val(data.category_id);
+            $('input[name="product_price"]').val(data.price);
+            $('input[name="product_status"]').val(data.status);
+        } else if (x.getAttribute('data-type') == 'category') {
+            $('input[name="category_name"]').val(data.name);
+        }
+    });
+});
 
-    inputElement.setAttribute('class', 'form-control mb-2');
-    inputElement.setAttribute('placeholder', placeholder);
-    inputElement.setAttribute('name', request);
-    inputElement.setAttribute('type', type);
+document.querySelectorAll('.delete').forEach(x => {
+    x.addEventListener('click', function () {
+        const id = this.getAttribute('data');
+        x = this;
+        if (x.getAttribute('data-type') == 'product') {
+            window.location.href = '/delete-product/' + id;
+            // getResponse('/delete-product/' + id);
 
-    requestInputs[0].appendChild(labelElement);
-    requestInputs[0].appendChild(inputElement);
-}
+        } else if (x.getAttribute('data-type') == 'category') {
+            window.location.href = '/delete-category/' + id;
+            // getResponse('/delete-category/' + id);
+
+        } else if (x.getAttribute('data-type') == 'seller') {
+            window.location.href = '/delete-seller/' + id;
+            // getResponse('/delete-seller/' + id);
+
+        } else if (x.getAttribute('data-type') == 'permission') {
+            window.location.href = '/delete-permission/' + id;
+            // getResponse('/delete-permission/' + id);
+
+        } else if (x.getAttribute('data-type') == 'seller-permission') {
+            window.location.href = '/delete-seller-permission/' + id;
+            // getResponse('/delete-seller-permission/' + id);
+        }
+
+    });
+});
+
+// function getResponse(url) {
+//     $.ajax({
+//         type : 'GET',
+//         success: function (resp) {
+//             resp = JSON.parse(resp);
+//             console.log(resp);
+//             href.location.href = getURL()+ '/';
+//         }
+
+//     });
+// }
+
+
 

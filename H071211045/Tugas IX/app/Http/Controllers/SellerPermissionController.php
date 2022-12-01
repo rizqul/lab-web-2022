@@ -11,20 +11,20 @@ class SellerPermissionController extends Controller {
 
     public function storeSellerPermsEloquent(Request $request) { // Use Eloquent
         $request->validate([
-            'seller_id' => 'required',
+            'permission_seller_id' => 'required',
             'permission_id' => 'required',
         ]);
 
-        $sellerPerms = SellerPermissions::create(
+        SellerPermissions::create(
             [
-                'seller_id' => $request->seller_id,
+                'seller_id' => $request->permission_seller_id,
                 'permission_id' => $request->permission_id,
                 'updated_at' => Date::now(),
                 'created_at' => Date::now()
             ]
         );
 
-        return redirect()->route('index', compact('sellerPerms'))
+        return redirect()->back()
             ->with('success', 'Seller Permission created successfully.');
     }
 
@@ -93,7 +93,6 @@ class SellerPermissionController extends Controller {
         $sellerPerms = SellerPermissions::find($id);
         $sellerPerms->delete();
 
-        return redirect()->route('index', compact('sellerPerms'))
-            ->with('success', 'Seller Permission deleted successfully.');
+        return redirect('/');
     }
 }

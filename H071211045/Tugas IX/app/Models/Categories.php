@@ -9,6 +9,7 @@ use \Carbon\Carbon as Date;
 class Categories extends Model {
     use HasFactory;
 
+    protected $table = 'categories';
     protected $fillable = [
         'name',
         'status',

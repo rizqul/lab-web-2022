@@ -11,33 +11,38 @@ class SellerController extends Controller {
 
     public function storeSellerEloquent(Request $request) { // Use Eloquent
         $request->validate([
-            'name' => 'required',
-            'status' => 'required',
+            'seller_name' => 'required',
+            'seller_address' => 'required',
+            'seller_gender' => 'required',
+            'seller_phone' => 'required',
+            'seller_status' => 'required',
         ]);
 
-        $sellers = Sellers::create(
+        Sellers::create(
             [
-                'name' => $request->name,
-                'status' => $request->status,
+                'name' => $request->seller_name,
+                'address' => $request->seller_address,
+                'gender' => $request->seller_gender,
+                'phone' => $request->seller_phone,
+                'status' => $request->seller_status,
                 'updated_at' => Date::now(),
                 'created_at' => Date::now()
             ]
         );
 
-        return redirect()->route('index', compact('sellers'))
-            ->with('success', 'Seller created successfully.');
+        return redirect('/');
     }
 
     public function storeSellerQuery(Request $request) { // Use Query Builder
         $request->validate([
-            'name' => 'required',
-            'status' => 'required',
+            'seller_name' => 'required',
+            'seller_status' => 'required',
         ]);
 
         $sellers = DB::table('sellers')->insert(
             [
-                'name' => $request->name,
-                'status' => $request->status,
+                'name' => $request->seller_name,
+                'status' => $request->seller_status,
                 'updated_at' => Date::now(),
                 'created_at' => Date::now()
             ]
@@ -55,13 +60,13 @@ class SellerController extends Controller {
 
     public function updateSellerEloquent(Request $request, $id) { // Use Eloquent
         $request->validate([
-            'name' => 'required',
-            'status' => 'required',
+            'seller_name' => 'required',
+            'seller_status' => 'required',
         ]);
 
         $sellers = Sellers::find($id);
-        $sellers->name = $request->name;
-        $sellers->status = $request->status;
+        $sellers->name = $request->seller_name;
+        $sellers->status = $request->seller_status;
         $sellers->updated_at = Date::now();
         $sellers->save();
 
@@ -71,16 +76,16 @@ class SellerController extends Controller {
 
     public function updateSellerQuery(Request $request, $id) { // Use Query Builder
         $request->validate([
-            'name' => 'required',
-            'status' => 'required',
+            'seller_name' => 'required',
+            'seller_status' => 'required',
         ]);
 
         $sellers = DB::table('sellers')
             ->where('id', $id)
             ->update(
                 [
-                    'name' => $request->name,
-                    'status' => $request->status,
+                    'name' => $request->seller_name,
+                    'status' => $request->seller_status,
                     'updated_at' => Date::now()
                 ]
             );
@@ -93,8 +98,7 @@ class SellerController extends Controller {
         $sellers = Sellers::find($id);
         $sellers->delete();
 
-        return redirect()->route('index', compact('sellers'))
-            ->with('success', 'Seller deleted successfully');
+        return redirect('/');
     }
 
 }

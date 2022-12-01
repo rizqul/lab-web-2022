@@ -11,39 +11,39 @@ class CategoryController extends Controller {
 
     public function storeCategoryEloquent(Request $request) { // Use Eloquent
         $request->validate([
-            'name' => 'required',
-            'status' => 'required',
+            'category_name' => 'required',
+            'category_status' => 'required',
         ]);
 
-        $categories = Categories::create(
+        Categories::create(
             [
-                'name' => $request->name,
-                'status' => $request->status,
+                'name' => $request->category_name,
+                'status' => $request->category_status,
                 'updated_at' => Date::now(),
                 'created_at' => Date::now()
             ]
         );
 
-        return redirect()->route('categories.index', compact('categories'))
+        return redirect()->back()
             ->with('success', 'Category created successfully.');
     }
 
     public function storeCategoryQuery(Request $request) { // Use Query Builder
         $request->validate([
-            'name' => 'required',
-            'status' => 'required',
+            'category_name' => 'required',
+            'category_status' => 'required',
         ]);
 
-        $categories = DB::table('categories')->insert(
+        DB::table('categories')->insert(
             [
-                'name' => $request->name,
-                'status' => $request->status,
+                'name' => $request->category_name,
+                'status' => $request->category_status,
                 'updated_at' => Date::now(),
                 'created_at' => Date::now()
             ]
         );
 
-        return redirect()->route('categories.index', compact('categories'))
+        return redirect()->back()
             ->with('success', 'Category created successfully.');
     }
 
@@ -55,13 +55,13 @@ class CategoryController extends Controller {
 
     public function updateCategoryEloquent(Request $request, $id) { // Use Eloquent
         $request->validate([
-            'name' => 'required',
-            'status' => 'required',
+            'category_name' => 'required',
+            'category_status' => 'required',
         ]);
 
         $categories = Categories::find($id);
-        $categories->name = $request->name;
-        $categories->status = $request->status;
+        $categories->name = $request->category_name;
+        $categories->status = $request->category_status;
         $categories->updated_at = Date::now();
         $categories->save();
 
@@ -71,16 +71,16 @@ class CategoryController extends Controller {
 
     public function updateCategoryQuery(Request $request, $id) { // Use Query Builder
         $request->validate([
-            'name' => 'required',
-            'status' => 'required',
+            'category_name' => 'required',
+            'category_status' => 'required',
         ]);
 
         $categories = DB::table('categories')
             ->where('id', $id)
             ->update(
                 [
-                    'name' => $request->name,
-                    'status' => $request->status,
+                    'name' => $request->category_name,
+                    'status' => $request->category_status,
                     'updated_at' => Date::now()
                 ]
             );
@@ -90,10 +90,12 @@ class CategoryController extends Controller {
     }
 
     public function deleteCategory($id) {
-        $categories = Categories::find($id);
-        $categories->delete();
+        $categories = Categories::where('id', $id)->first();
 
-        return redirect()->route('index', compact('categories'))
-            ->with('success', 'Category deleted successfully');
+        if ($categories) {
+            $categories->delete();
+        }
+
+        return redirect('/');
     }
 }

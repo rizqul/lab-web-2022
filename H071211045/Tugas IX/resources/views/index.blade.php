@@ -4,6 +4,7 @@
 <head>
     <title>Tugas IX</title>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -23,9 +24,8 @@
 </head>
 
 <body>
-
+    @csrf
     @include('layout.sidebar')
-
     @include('content.products')
     @include('content.categories')
     @include('content.sellers')
@@ -34,20 +34,39 @@
 
     @include('layout.modal')
 
+    <input type="hidden" value="{{ session('view') }}" id="status-view">
+
+    <script>
+        function getURL() {
+           return '{{ Request::url()}}';
+        }
+    </script>
+
     <script src="{{ asset('script.js') }}"></script>
 
-    @if (session('showProducts'))
-        <script> showAlready('products-tab', 'show-products') </script>
-
-    @elseif (session('showCategories'))
-        <script> showAlready('categories-tab', 'show-categories') </script>
-
-    @elseif (session('showSellers'))
-        <script> showAlready('sellers-tab', 'show-sellers') </script>
-
-    @elseif (session('showPermissions'))
-        <script> showAlready('permissions-tab', 'show-permissions') </script>
+    @if ($showProducts)
+        <script>
+            showAlready('products-tab', 'show-products');
+        </script>
+    @elseif ($showCategories)
+        <script>
+            showAlready('categories-tab', 'show-categories')
+        </script>
+    @elseif ($showSellers)
+        <script>
+            showAlready('sellers-tab', 'show-sellers')
+        </script>
+    @elseif ($showPermissions)
+        <script>
+            showAlready('permissions-tab', 'show-permissions')
+        </script>
+    @elseif ($showSellerPerms)
+        <script>
+            showAlready('seller-permissions-tab', 'show-seller-permissions')
+        </script>
     @endif
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">

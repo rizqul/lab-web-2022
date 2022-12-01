@@ -14,8 +14,8 @@
                 <tr>
                     <th scope="col">No</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Seller's ID</th>
-                    <th scope="col">Category's ID</th>
+                    <th scope="col">Seller</th>
+                    <th scope="col">Category</th>
                     <th scope="col">Price</th>
                     <th scope="col">Status</th>
                     <th scope="col">Actions</th>
@@ -23,18 +23,29 @@
             </thead>
             <tbody>
 
-                @forelse ($products as $data)
+                @forelse ($products as $p)
                     <tr>
                         <th scope="row">{{ ($products ->currentpage()-1) * $products ->perpage() + $loop->index + 1 }}</th>
-                            <td>{{ $data->name }}</td>
-                            <td>{{ $data->seller_id }}</td>
-                            <td>{{ $data->category_id }}</td>
-                            <td>{{ $data->price }}</td>
-                            <td>{{ $data->status }}</td>
+                            <td>{{ $p->name }}</td>
+
+                            @foreach ($sellers as $s)
+                                @if ($s->id == $p->seller_id)
+                                    <td>{{ $s->name }}</td>
+                                @endif
+                            @endforeach
+
+                            @foreach ($categories as $c)
+                                @if ($c->id == $p->category_id)
+                                    <td>{{ $c->name }}</td>
+                                @endif
+                            @endforeach
+
+                            <td>{{ $p->price }}</td>
+                            <td>{{ $p->status }}</td>
 
                             <td>
-                                <button data="{{ $data }}" class="btn btn-dark edit-button"><i class="bi bi-pencil-fill align-middle"></i></button>
-                                <button data="{{ $data->id }}" class="btn btn-danger text-light delete-button"><i class="bi bi-trash-fill align-middle"></i></button>
+                                <button data="{{ $p }}" data-type="product" class="btn btn-dark edit"><i class="bi bi-pencil-fill align-middle"></i></button>
+                                <button data="{{ $p->id }}" data-type="product" class="btn btn-danger text-light delete"><i class="bi bi-trash-fill align-middle"></i></button>
                             </td>
                     </tr>
 

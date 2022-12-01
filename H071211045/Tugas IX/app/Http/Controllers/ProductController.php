@@ -9,52 +9,54 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller {
 
-    public function storeProductEloquent(Request $request) { // Use Query Builder
+    public function storeProductEloquent(Request $request) { // Use Eloquent
+        dd($request->all());
         $request->validate([
-            'name' => 'required',
+            'product_name' => 'required',
             'seller_id' => 'required',
             'category_id' => 'required',
-            'price' => 'required',
+            'product_price' => 'required',
+            'product_status' => 'required',
         ]);
-
-        $products = Products::create(
+        Products::create(
             [
-                'name' => $request->name,
+                'name' => $request->product_name,
                 'seller_id' => $request->seller_id,
                 'category_id' => $request->category_id,
-                'price' => $request->price,
-                'status' => $request->status,
+                'price' => $request->product_price,
+                'status' => $request->product_status,
                 'updated_at' => Date::now(),
                 'created_at' => Date::now()
             ]
         );
 
-        return redirect()->route('index', compact('products'))
-            ->with('success', 'Product created successfully.');
+        return redirect()->back()
+            ->with('success', 'Category created successfully.');
     }
 
     public function storeProductQuery(Request $request) { // Use Query Builder
         $request->validate([
-            'name' => 'required',
+            'product_name' => 'required',
             'seller_id' => 'required',
             'category_id' => 'required',
-            'price' => 'required',
+            'product_price' => 'required',
+            'product_status' => 'required',
         ]);
 
-        $products = DB::table('products')->insert(
+        DB::table('products')->insert(
             [
-                'name' => $request->name,
+                'name' => $request->product_name,
                 'seller_id' => $request->seller_id,
                 'category_id' => $request->category_id,
-                'price' => $request->price,
-                'status' => $request->status,
+                'price' => $request->product_price,
+                'status' => $request->product_status,
                 'updated_at' => Date::now(),
                 'created_at' => Date::now()
             ]
         );
 
-        return redirect()->route('index', compact('products'))
-            ->with('success', 'Product created successfully.');
+        return redirect()->back()
+            ->with('success', 'Category created successfully.');
     }
 
     public function editProduct($id) {
@@ -113,8 +115,7 @@ class ProductController extends Controller {
         $product = Products::find($id);
         $product->delete();
 
-        return redirect()->route('index')
-            ->with('success', 'Product deleted successfully');
+        return redirect('/');
     }
 
 }
