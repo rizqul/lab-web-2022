@@ -13,7 +13,6 @@
         <form action="" method="post" id="sender">
             @csrf
             <div class="container requests">
-
                 {{-- Product --}}
                 <section id="product-modal">
                     <label for="name" class="form-label">Name</label>
@@ -118,13 +117,6 @@
                             <option value="{{ $x->id }}">{{ $x->name }}</option>
                         @endforeach
                     </select>
-
-                    {{-- <label for="status" class="form-label mt-2">Status</label>
-                    <select class="form-select" name="seller_permission_status">
-                        <option value="" selected>-- Select a Status --</option>
-                        <option value="active">Active</option>
-                        <option value="not active">Not Active</option>
-                    </select> --}}
                 </section>
 
                 <div class="d-flex justify-content-center">

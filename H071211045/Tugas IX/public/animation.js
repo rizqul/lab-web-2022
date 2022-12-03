@@ -96,7 +96,7 @@ function slideToRight(element, start, end, route) {
     }, .5);
 }
 
-function slideToLeft(element, start, end) {
+function slideFromBottom(element, start, end) { // Ngeslide dari bawah
     let id = null;
     let pos = start;
     clearInterval(id);
@@ -105,10 +105,10 @@ function slideToLeft(element, start, end) {
             clearInterval(id);
             return;
         } else {
-            pos += 1;
-            element.style.transform = 'translateX(' + pos + '%)';
+            pos -= 1;
+            element.style.transform = 'translate(-50%, ' + pos + '%)';
         }
-    }, .5);
+    }, .3);
 }
 
 function showAlready(element, button) {

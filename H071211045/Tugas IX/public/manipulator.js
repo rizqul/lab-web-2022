@@ -5,7 +5,7 @@
 
 const overlay = document.querySelector('.overlay');
 const section = document.querySelectorAll('.requests section');
-
+const isty = document.querySelector('.input-box');
 function setButton(buttonID) {
     const title = document.getElementById('modal-title');
     const button = document.getElementById(buttonID);
@@ -47,6 +47,9 @@ function setButton(buttonID) {
             document.getElementById('seller-permission-modal').style.display = 'block';
         }
 
+
+        // Animasi untuk modal dari bawah
+        slideFromBottom(isty, 200, -50);
     });
 }
 

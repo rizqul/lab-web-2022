@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller {
 
     public function storeProductEloquent(Request $request) { // Use Eloquent
-        dd($request->all());
         $request->validate([
             'product_name' => 'required',
             'seller_id' => 'required',
@@ -18,6 +17,7 @@ class ProductController extends Controller {
             'product_price' => 'required',
             'product_status' => 'required',
         ]);
+
         Products::create(
             [
                 'name' => $request->product_name,

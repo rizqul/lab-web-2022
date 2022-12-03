@@ -16,9 +16,9 @@ class MainController extends Controller
 {
     public function index(Request $request)
     {
-        // if (Contents::count() == 0) {
-        //     $this->firstState();
-        // }
+        if (Contents::count() == 0) {
+            $this->firstState();
+        }
 
         $products = Products::join('categories', 'products.category_id', '=', 'categories.id')
         ->join('sellers', 'products.seller_id', '=', 'sellers.id')
