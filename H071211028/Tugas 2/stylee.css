@@ -1,0 +1,115 @@
+ul {
+    list-style-type: none;
+    margin:0;
+    padding-left: 0;
+    overflow: hidden;
+    background-color: grey;
+
+  }
+  li {
+    float: right;
+  }
+  
+  li a {
+    display: block;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+    font-weight: bolder;
+    font-size: larger;
+  }
+
+  li a:hover {
+    background-color: rgb(214, 214, 214);
+
+  }
+body{
+  margin: 0%;
+  float: left;
+}
+.center{
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  font-size: 5em;
+  color: rgb(217, 217, 2);
+  text-shadow:1px 4px 2px #000;
+  font-family:'Stencil';
+
+}
+
+h1{
+  float: left;
+  font-size: x large; 
+  color:rgb(217, 217, 2);
+  text-shadow: 1px 1px 1px #000;
+  margin: 0;
+  padding-bottom:5px;
+  font-family: 'Bradley Hand ITC';
+}
+.container{
+  width: 100%;
+}
+
+.jumbotron{
+  background-image: url("L.jpg");
+  background-position: center;
+  background-size: cover;
+  height: 600px;
+  position: relative;
+  margin-bottom: 25px;
+}
+
+img{
+  object-fit: cover;
+}
+div.gallery {
+  border: 1px solid rgb(0, 0, 0);
+  width: 25%;
+  text-align: center;
+  margin: 10px;
+  
+}
+div.gallery p{
+  font-size: small;
+}
+div.gallery img{
+  height: 200px;
+}
+
+div.gallery:hover {
+  border: 2px solid rgb(0, 0, 0);
+  transform: scale(1.1);
+}
+div.galleries{
+  display: flex;
+  background-color:grey;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.Content{
+  display: flex;
+  justify-content: center;
+}
+
+.desc{
+  margin: 15px;
+  font-family:'Bahnschrift SemiLight SemiConde';
+  text-align: justify;
+  width: 500px;
+}
+
+div h2{
+  margin: 15px
+}

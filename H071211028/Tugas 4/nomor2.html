@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Soal Nomor 2</title>
+    <script>
+        const a = prompt('Perkalian Berapa ?');
+        if (isNaN(a)) {
+            alert("Input bukan angka");
+        } else {
+            const b = prompt('Ingin dikalikan hingga berapa ?')
+            let total = 0;
+            for (let i = 1; i <= b; i++) {
+                document.writeln(`${i} x ${a} = ${(i * a)}<br>`)
+                total += i * a;
+            }
+            document.writeln("Hasil keseluruhan=" + total);
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Soal Nomor 1</title>
+    <script>
+        while (true) {
+            var nama = prompt("Masukkan Nama Anda");
+            if (nama) {
+                var tugas = prompt("Apakah sudah mengumpulkan Tugas Praktikum? YES atau NO");
+                if (tugas.toLowerCase() == "yes") {
+                    var asistensi = prompt("Apakah sudah mengikuti asistensi? YES atau NO");
+                    if (asistensi.toLowerCase() == "yes") {
+                        var asistensiKe = prompt("Sudah berapa kali asistensi? 1 atau 2");
+                        if (asistensiKe == 1) {
+                            alert("Asistensi sekali lagi ya " + nama);
+                        } else if (asistensiKe == 2) {
+                            alert("Hebat kamu " + nama + ":)");
+                        } else {
+                            alert("Masukkan input yang benar yaitu 1 atau 2");
+                            asistensiKe = prompt("Sudah berapa kali asistensi? 1 atau 2");
+                        }
+                    } else if (asistensi.toLowerCase() == "no") {
+                        alert("Asistensi dulu ya " + nama);
+                    } else {
+                        alert("Masukkan input yang benar yaitu YES atau NO");
+                        asistensi = prompt("Apakah sudah mengikuti asistensi? YES atau NO");
+                    }
+                } else if (tugas.toLowerCase() == "no") {
+                    alert("Jangan lupa dikerja tugas praktikumnya " + nama);
+                } else {
+                    alert("Masukkan input yang benar yaitu YES atau NO");
+                    tugas = prompt("Apakah sudah mengumpulkan Tugas Praktikum? YES atau NO");
+                }
+            } else {
+                alert("Masukkan nama anda terlebih dahulu");
+                nama = prompt("Masukkan Nama Anda:");
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
