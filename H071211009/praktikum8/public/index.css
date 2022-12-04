@@ -1,0 +1,28 @@
+body{
+	background-color: rgb(184, 245, 224);
+}
+.nav-desc{
+	font-size: 20px;
+	color: #28897c;
+}
+#btn-modal{
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+.mx-auto {
+	width: 800px;
+}
+.data{
+	margin-top: 50px;
+	margin-bottom: 70px;
+}
+.card {
+	margin-bottom: 50px;
+}
+.button{
+	padding-left: 17px;
+}
+.card-header {
+	background-color: #4FA095;
+}
+
