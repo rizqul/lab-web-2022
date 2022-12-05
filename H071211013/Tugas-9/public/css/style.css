@@ -1,0 +1,25 @@
+body {
+    font-family: 'Comfortaa', cursive;
+    background-color: rgb(241, 247, 247);
+}
+
+.navbar {
+    background-color: rgb(168, 204, 202);
+}
+
+.heading{
+    margin-top: 18px;
+    margin-bottom: 18px;
+    width: 88%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.table{
+    width: 90%;
+}
+
+.paginationButtonLink{
+    display: flex;
+    justify-content: center;
+}
