@@ -1,0 +1,35 @@
+body {
+    background-image: url("buku.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Klee One', cursive;
+}
+
+h3 {
+    text-align: center;
+    background-color:rgb(12, 25, 63);
+    color:whitesmoke;;
+    padding: 15px;
+    font-family: 'Fredoka One', cursive;
+}
+
+h4 {
+    text-align: center;
+}
+
+.card-header {
+    background-color:rgb(98, 120, 180);
+    color: whitesmoke;
+}
+
+.card-body {
+    color: rgb(14, 41, 59);
+}
+
+.mx-auto {
+    width: 800px;
+}
+
+.card {
+    margin-top: 10px;
+}
