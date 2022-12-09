@@ -1,0 +1,43 @@
+@import './root.css';
+
+
+
+/* homepage.blade.php */
+nav {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+}
+
+.nav-item .active {
+    /* Make an underline */
+    border-bottom: 1.5px solid var(--third);
+    transition: 0.3s;
+}
+
+.nav-link:not(:hover) {
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    border-bottom: 1.5px solid var(--third);
+    transition: 0.3s;
+}
+
+.bg-transparent:not(:hover) {
+    border: 1px solid var(--third) !important;
+    transition: 0.3s;
+}
+
+.bg-transparent:hover {
+    background-color: var(--third) !important;
+    color: var(--primary) !important;
+    border: 1px solid var(--third);
+    transition: 0.3s;
+}
+
+
+/* Responsive media */
+@media screen and (max-width: 1024px) {
+    .separator {
+        display: none;
+    }
+}
