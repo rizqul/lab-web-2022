@@ -23,6 +23,7 @@
     @endif --}}
 
     @yield('homepage')
+    @yield('login')
 
     {{-- Kasih ke tengah yang parentnya relative : position-absolute top-50 start-50 translate-middle --}}
 

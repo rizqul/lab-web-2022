@@ -1,23 +1,20 @@
 @import './root.css';
 
-
-
-/* homepage.blade.php */
+/* page.home */
 nav {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
 }
 
-.nav-item .active {
-    /* Make an underline */
+nav .nav-item .active {
     border-bottom: 1.5px solid var(--third);
     transition: 0.3s;
 }
 
-.nav-link:not(:hover) {
+nav .nav-link:not(:hover) {
     transition: 0.3s;
 }
 
-.nav-link:hover {
+nav .nav-link:hover {
     border-bottom: 1.5px solid var(--third);
     transition: 0.3s;
 }
@@ -32,6 +29,81 @@ nav {
     color: var(--primary) !important;
     border: 1px solid var(--third);
     transition: 0.3s;
+}
+
+.popular-articles .content img {
+    object-fit: cover;
+}
+
+.popular-articles .content {
+    text-align: left;
+}
+
+.popular-articles a {
+    border-radius: 5px;
+    border-bottom: 4px solid var(--fourth);
+}
+
+.popular-articles a:hover {
+    border-bottom: 4px solid var(--third);
+}
+
+.popular-articles .bg-secondary:hover {
+    background-color: var(--primary) !important;
+}
+
+.popular-articles p {
+    text-align: justify;
+}
+
+.latest-posts {
+    transform: translateY(-120px);
+}
+
+.latest-posts .content .text-primary:hover {
+    color: var(--fourth) !important;
+}
+
+.latest-posts .content .img-fluid:hover{
+    background-color: var(--primary);
+    opacity: 0.8;
+}
+/* ----------- */
+
+
+/* footer.guest */
+footer a:hover  {
+    color: var(--third) !important;
+}
+/* ----------- */
+
+
+/* module.login */
+.login-setup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-30%, -50%);
+    background-color: rgb(20, 20, 24);
+    backdrop-filter: blur(20px);
+    border-radius: 5px;
+    width: 40%;
+}
+
+.input-group-addon {
+    width: 3rem;
+}
+
+/* module.register */
+.register-setup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-80%, -50%);
+    background-color: rgb(17, 17, 17);
+    backdrop-filter: blur(20px);
+    border-radius: 5px;
+    width: 40%;
 }
 
 

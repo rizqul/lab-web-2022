@@ -3,6 +3,8 @@
     --secondary: #2E4750;
     --third: #F6C90E;
     --fourth: #F7F7F7;
+
+    --primary-rgb: 48, 56, 65;
 }
 
 body {
@@ -41,3 +43,12 @@ body {
     color: var(--fourth) !important;
 }
 
+.text-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary);
+}
