@@ -1,0 +1,27 @@
+body{
+	background-color: #ffccd5;
+}
+.navbar{
+	background-color: #5e548e;
+}
+#btn-modal{
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+.mx-auto {
+	width: 800px;
+}
+.data{
+	margin-top: 50px;
+	margin-bottom: 70px;
+}
+.card {
+	margin-bottom: 50px;
+}
+.button{
+	padding-left: 17px;
+}
+.card-header {
+	background-color: #5e548e;
+}
+
