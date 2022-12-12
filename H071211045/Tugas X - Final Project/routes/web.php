@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,40 +15,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('page.homepage');
-});
+Route::get('/', [PageController::class, 'homepage'])->name('page.homepage');
 
 /* 
  * CMS ROUTES 
  */
-
-Route::get('/panel/dashboard', function () {
-    return view('module.dashboard');
-});
-
-Route::get('/panel/articles', function () {
-    return view('module.articles')->with('articles', 'active');
-});
-
-Route::get('/panel/categories', function () {
-    return view('module.categories');
-});
-
-Route::get('/panel/tags', function () {
-    return view('module.tags');
-});
-
-Route::get('/panel/users', function () {
-    return view('module.users');
-});
-
+Route::get('/panel/dashboard', [PageController::class, 'dashboard'])->name('page.dashboard')->middleware('auth');
+Route::get('/panel/articles', [PageController::class, 'articles'])->name('page.articles')->middleware('auth');
+Route::get('/panel/categories', [PageController::class, 'categories'])->name('page.categories')->middleware('auth');
+Route::get('/panel/tags', [PageController::class, 'tags'])->name('page.tags')->middleware('auth');
+Route::get('/panel/users', [PageController::class, 'users'])->name('page.users')->middleware('auth');
 /* - */
 
-Route::get('/login', function () {
-    return view('module.login');
+Route::group(['middleware' => ['guest']], function() {
+    Route::get('login', [PageController::class, 'login'])->name('login.show');
+    Route::post('login', [UserController::class, 'login'])->name('login');
+
+    Route::get('register', [PageController::class, 'register'])->name('register.show');
+    Route::post('register', [UserController::class, 'register'])->name('register');
 });
 
-Route::get('/register', function () {
-    return view('module.register');
-});
+Route::get('logout', [UserController::class, 'logout'])->name('logout');
+

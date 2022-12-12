@@ -13,110 +13,106 @@
     <link rel="stylesheet" href="{{ asset('styles/module.css') }}">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src='http://wordfishgroup.local/wp-content/themes/picostrap-mdb5pro/js/popper.min.js?ver=2.5.4' id='Popper-js'>
-    </script>
 
-    <script src='http://wordfishgroup.local/wp-content/themes/picostrap-mdb5pro/js/mdb.min.js?ver=5.0.0' id='mdb-js'>
-    </script>
 </head>
 
 <body id="body-pd">
 
-    
-    <header class="header" id="header">
+    @auth
+        <header class="header" id="header">
 
-        <div class="header_toggle">
-            <i class='bx bx-menu' id="header-toggle"></i>
-        </div>
-
-        <div class="d-flex mt-3">
-            <div class="header_img">
-                <i class="bi bi-person"></i>
+            <div class="header_toggle">
+                <i class='bx bx-menu' id="header-toggle"></i>
             </div>
-            <div class="display-7">Profile</div>
-        </div>
 
-    </header>
+            <div class="d-flex mt-3">
+                <div class="header_img">
+                    <i class="bi bi-person"></i>
+                </div>
+                <div class="display-7 text-capitalize">{{ Auth::user()->name }}</div>
+            </div>
+        </header>
 
-    <div class="l-navbar bg-primary" id="nav-bar">
-        <nav class="nav">
+        <div class="l-navbar bg-primary" id="nav-bar">
+            <nav class="nav">
 
-            <div>
-                <a href="#" class="nav_logo text-third">
-                    <i class="bi bi-toggles"></i>
-                    <span class="nav_logo-name">HYPERGRIND</span>
-                </a>
-
-                <div class="nav_list">
-                    @if (Str::contains(Request::url(), 'panel/dashboard'))
-                        <a href="#" class="nav_link text-third active">
-                        @else
-                            <a href="dashboard" class="nav_link text-third">
-                    @endif
-                    <i class='bx bx-grid-alt nav_icon'></i>
-                    <span class="nav_name">Dashboard</span>
+                <div>
+                    <a href="#" class="nav_logo text-third">
+                        <i class="bi bi-toggles"></i>
+                        <span class="nav_logo-name">HYPERGRIND</span>
                     </a>
 
-                    @if (Str::contains(Request::url(), 'panel/articles'))
-                        <a class="nav_link text-third active">
-                        @else
-                            <a href="articles" class="nav_link text-third">
-                    @endif
-                    <i class='bx bx-message-square-detail nav_icon'></i>
-                    <span class="nav_name">Articles</span>
-                    </a>
+                    <div class="nav_list">
+                        @if (Str::contains(Request::url(), 'panel/dashboard'))
+                            <a href="#" class="nav_link text-third active">
+                            @else
+                                <a href="dashboard" class="nav_link text-third">
+                        @endif
+                        <i class='bx bx-grid-alt nav_icon'></i>
+                        <span class="nav_name">Dashboard</span>
+                        </a>
 
-                    @if (Str::contains(Request::url(), 'panel/categories'))
-                        <a class="nav_link text-third active">
-                        @else
-                            <a href="categories" class="nav_link text-third">
-                    @endif
-                    <i class='bx bx-folder nav_icon'></i>
-                    <span class="nav_name">Categories</span>
-                    </a>
+                        @if (Str::contains(Request::url(), 'panel/articles'))
+                            <a class="nav_link text-third active">
+                            @else
+                                <a href="articles" class="nav_link text-third">
+                        @endif
+                        <i class='bx bx-message-square-detail nav_icon'></i>
+                        <span class="nav_name">Articles</span>
+                        </a>
 
-                    @if (Str::contains(Request::url(), 'panel/tags'))
-                        <a class="nav_link text-third active">
-                        @else
-                            <a href="tags" class="nav_link text-third">
-                    @endif
-                    <i class='bx bx-bookmark nav_icon'></i>
-                    <span class="nav_name">Tags</span>
-                    </a>
+                        @if (Str::contains(Request::url(), 'panel/categories'))
+                            <a class="nav_link text-third active">
+                            @else
+                                <a href="categories" class="nav_link text-third">
+                        @endif
+                        <i class='bx bx-folder nav_icon'></i>
+                        <span class="nav_name">Categories</span>
+                        </a>
 
-                    @if (Str::contains(Request::url(), 'panel/users'))
-                        <a class="nav_link text-third active">
-                        @else
-                            <a href="users" class="nav_link text-third">
-                    @endif
-                    <i class='bx bx-user nav_icon'></i>
-                    <span class="nav_name">Users</span>
+                        @if (Str::contains(Request::url(), 'panel/tags'))
+                            <a class="nav_link text-third active">
+                            @else
+                                <a href="tags" class="nav_link text-third">
+                        @endif
+                        <i class='bx bx-bookmark nav_icon'></i>
+                        <span class="nav_name">Tags</span>
+                        </a>
+
+                        @if (Str::contains(Request::url(), 'panel/users'))
+                            <a class="nav_link text-third active">
+                            @else
+                                <a href="users" class="nav_link text-third">
+                        @endif
+                        <i class='bx bx-user nav_icon'></i>
+                        <span class="nav_name">Users</span>
+                        </a>
+                    </div>
+                </div>
+
+
+                <div>
+                    <a href="/" class="nav_link text-third">
+                        <i class="bi bi-house"></i>
+                        <span class="nav_name">Homepage</span>
+                    </a>
+                    <a href="{{ route('logout') }}" class="nav_link text-third">
+                        <i class='bx bx-log-out nav_icon'></i>
+                        <span class="nav_name">Sign Out</span>
                     </a>
                 </div>
-            </div>
 
+            </nav>
+        </div>
 
-            <div>
-                <a href="/" class="nav_link text-third">
-                    <i class="bi bi-house"></i>
-                    <span class="nav_name">Homepage</span>
-                </a>
-                <a href="#" class="nav_link text-third">
-                    <i class='bx bx-log-out nav_icon'></i>
-                    <span class="nav_name">Sign Out</span>
-                </a>
-            </div>
+        <div class="height-100 content">
+            @yield('content')
+        </div>
 
-        </nav>
-    </div>
-
-    <div class="height-100 content">
-        @yield('content')
-    </div>
+    @endauth
 
 
 
-    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>

@@ -1,6 +1,6 @@
 @extends('index')
 
-@section('article-detail')
+@section('page')
 
 
 @endsection

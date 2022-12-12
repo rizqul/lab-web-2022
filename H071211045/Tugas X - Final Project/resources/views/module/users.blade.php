@@ -36,6 +36,7 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th scope="col">No</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Username</th>
@@ -45,18 +46,26 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @forelse ($users as $user)
                     <tr>
-                        <th scope="row">Mark</th>
-                        <td>Otto</td>
+                        <th scope="row">{{ $loop->iteration }}</th>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email}}</td>
+                        <td>{{ $user->username }}</td>
                         <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
+                        <td>{{ $user->created_at }}</td>
                         <td class="actions">
                             <a href="#" class="btn bg-secondary text-third rounded-0"><i
                                     class="bi bi-pencil-square"></i></a>
                             <a href="#" class="btn bg-danger text-third rounded-0"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
+                    @empty
+                    <tr>
+                        <td colspan="7" class="text-center">No Users Found</td>
+                    </tr>
+                    @endforelse
+                    
                 </tbody>
             </table>
         </div>

@@ -1,7 +1,7 @@
 @extends('index')
 
-@section('homepage')
-    @include('navbar.guest')
+@section('page')
+    @include('item.navbar')
     {{-- @include('element.admin-navbar') --}}
 
     <div class="wrapper-landing position-relative d-inline-block">
@@ -99,5 +99,5 @@
 
     </div>
     
-    @include('footer.guest')
+    @include('item.footer')
 @endsection
