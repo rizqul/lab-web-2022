@@ -17,9 +17,31 @@ Route::get('/', function () {
     return view('page.homepage');
 });
 
-Route::get('/panel', function () {
+/* 
+ * CMS ROUTES 
+ */
+
+Route::get('/panel/dashboard', function () {
     return view('module.dashboard');
 });
+
+Route::get('/panel/articles', function () {
+    return view('module.articles')->with('articles', 'active');
+});
+
+Route::get('/panel/categories', function () {
+    return view('module.categories');
+});
+
+Route::get('/panel/tags', function () {
+    return view('module.tags');
+});
+
+Route::get('/panel/users', function () {
+    return view('module.users');
+});
+
+/* - */
 
 Route::get('/login', function () {
     return view('module.login');

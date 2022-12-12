@@ -1,15 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500&display=swap');
 @import './root.css';
 
 :root {
     --header-height: 3rem;
     --nav-width: 68px;
-    --first-color: #4723D9;
+    --first-color: #F6C90E;
     --first-color-light: #AFA5D9;
     --white-color: #F7F6FB;
-    --body-font: 'Nunito', sans-serif;
+    /* --body-font: 'Nunito', sans-serif; */
+    --body-font: 'Poppins', sans-serif;
     --normal-font-size: 1rem;
     --z-fixed: 100
+    
 }
 
 *,
@@ -115,8 +118,8 @@ a {
     transition: .3s
 }
 
-.nav_link:hover {
-    color: var(--white-color)
+.nav_link:hover, .text-third:hover {
+    color: var(--white-color) !important;
 }
 
 .nav_icon {
@@ -132,7 +135,7 @@ a {
 }
 
 .active {
-    color: var(--white-color)
+    color: var(--white-color) !important;
 }
 
 .active::before {
@@ -148,6 +151,42 @@ a {
     height: 100vh
 }
 
+/* Content */
+.dash-stats i {
+    font-size: 5rem;
+    color: var(--third);
+}
+
+.dash-stats {
+    width: 24rem;
+    /* width: 28vw; */
+    box-shadow: 0 0 1rem rgba(0, 0, 0, .1);
+}
+
+.font-title {
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+.actions .bg-secondary:hover,
+.actions .bg-warning:hover,
+.actions .bg-danger:hover {
+    background-color: var(--primary) !important;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.4) !important;
+}
+
+.actions .bg-warning:hover {
+    color: var(--third) !important;
+}
+
+.actions .bg-danger:hover {
+    color: rgb(210, 81, 81) !important;
+}
+
+
+
+
+/* Responsive */
 @media screen and (min-width: 768px) {
     body {
         margin: calc(var(--header-height) + 1rem) 0 0 0;

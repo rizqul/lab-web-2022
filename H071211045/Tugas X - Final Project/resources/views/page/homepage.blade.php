@@ -77,6 +77,14 @@
                     <a href="#" class="text-primary d-inline-block">How to Build a good chest</a>
                 </div>
                 <hr>
+
+                <div class="mb-3 content">
+                    <a href="#">
+                        <img src="https://wallpaperaccess.com/full/460863.jpg" alt="post-image" class="img-fluid">
+                    </a>
+                    <a href="#" class="text-primary d-inline-block">How to Build a good chest</a>
+                </div>
+                <hr>
                 
                 <div class="mb-3 content">
                     <a href="#">
