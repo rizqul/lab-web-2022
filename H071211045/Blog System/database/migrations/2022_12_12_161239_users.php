@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('level')->default('user');
             $table->string('status')->default('active');
             $table->string('article_count')->default(0);
+            $table->string('biography')->nullable(); // TODO: Baru ditambah, besok pagi migrate lagi TURU TURU
             $table->rememberToken();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();

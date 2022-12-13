@@ -29,21 +29,24 @@
         <div class="row px-3 mt-3 collapse w-50" id="filter-control">
             <div class="display-7 fw-bold">Filter</div>
             <hr class="mt-2 ms-2">
-            <div class="d-flex ms-2 filters">
-
-
+            <form action="{{ route('page.users.filter') }}" method="POST" class="d-flex  filters">
+                @csrf
                 <div class="col d-flex flex-column">
-                    <span class="fw-bold">Date</span>
-                    <a class="filter-link" href="users?f=date">Date Joined</a>
-
+                    <span class="ms-1 fw-bold">Date</span>
+                    <button type="submit" name="filter" class="filter-link border-0 bg-transparent"
+                        value="created_date">Date Joined</button>
                 </div>
                 <div class="col d-flex flex-column">
-                    <span class=" fw-bold">Status</span>
-                    <a class="filter-link" href="users?f=status-active">Active</a>
-                    <a class="filter-link" href="users?f=status-inactive">Inactive</a>
-                    <a class="filter-link" href="users?f=status-blocked">Blocked</a>
+                    <span class="ms-1 fw-bold">Status</span>
+                    <button type="submit" name="filter" class="filter-link border-0 bg-transparent"
+                        value="active">Active</button>
+                    <button type="submit" name="filter" class="filter-link border-0 bg-transparent"
+                        value="inactive">Inactive</button>
+                    <button type="submit" name="filter" class="filter-link border-0 bg-transparent"
+                        value="blocked">Blocked</button>
                 </div>
-            </div>
+
+            </form>
         </div>
 
         <div class="row px-3 mt-3">
@@ -55,6 +58,8 @@
                         <th scope="col">Email</th>
                         <th scope="col">Username</th>
                         <th scope="col">Articles Authored</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Permission</th>
                         <th scope="col">Joined Date</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -63,13 +68,16 @@
                     @forelse ($users as $user)
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
-                            <td>{{ $user->name }}</td>
+                            <td class="text-capitalize">{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->username }}</td>
                             <td>{{ $user->article_count }}</td>
+                            <td class="text-capitalize">{{ $user->status }}</td>
+                            <td class="text-capitalize">{{ $user->permission }}</td>
                             <td>{{ $user->created_at }}</td>
                             <td class="actions">
-                                <a href="#" class="btn bg-secondary text-third rounded-0">
+                                <a href="{{ url('panel/users/edit/' . $user->id) }}"
+                                    class="btn bg-secondary text-third rounded-0">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
                                 <button href="#" class="btn bg-danger text-third rounded-0 delete"
@@ -77,6 +85,9 @@
                                     data-id="{{ $user->id }}">
                                     <i class="bi bi-trash"></i>
                                 </button>
+                                <a href="{{ url('user/' . $user->username) }}" class="btn bg-fourth text-primary rounded-0">
+                                    <i class="bi bi-eye"></i>
+                                </a>
                             </td>
                         </tr>
                     @empty
@@ -95,28 +106,30 @@
         <div class="modal-dialog ">
             <div class="modal-content rounded-0">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="confirm-delete-modal-label">Are you sure?</h1>
+                    <h1 class="modal-title fs-5" id="confirm-delete-modal-label">Are you sure Bro?</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     The deleted user will be permanently removed from the system.
                 </div>
                 <div class="modal-footer">
-                    
-                        <button type="button" class="btn bg-danger text-fourth rounded-0"
-                            data-bs-dismiss="modal">Close</button>
-                        <input type="hidden" name="id" id="id">
-                        <a href="{{ url('/panel/users/delete/') }}" type="submit" class="btn bg-primary text-fourth rounded-0" id="confirm-delete">Delete</a>
+
+                    <button type="button" class="btn bg-danger text-fourth rounded-0"
+                        data-bs-dismiss="modal">Close</button>
+                    <input type="hidden" name="id" id="id">
+                    <a href="{{ url('/panel/users/delete/') }}" type="submit"
+                        class="btn bg-primary text-fourth rounded-0" id="confirm-delete">Delete</a>
                 </div>
             </div>
         </div>
     </div>
+@endsection
 
+@section('script')
     <script>
         $(".delete").click(function() {
             var id = $(this).data("id");
             $('#confirm-delete').attr('href', '/panel/users/delete/' + id);
-            // $("#modal-form").attr('action', action);
         });
     </script>
 @endsection

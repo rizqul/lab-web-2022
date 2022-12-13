@@ -176,7 +176,8 @@ a {
 
 .actions .bg-secondary:hover,
 .actions .bg-warning:hover,
-.actions .bg-danger:hover {
+.actions .bg-danger:hover,
+.actions .bg-fourth:hover {
     background-color: var(--primary) !important;
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.4) !important;
 }
@@ -189,6 +190,14 @@ a {
     color: rgb(210, 81, 81) !important;
 }
 
+.actions .bg-fourth:hover{
+    color: var(--third) !important;
+}
+
+.filter-link {
+    text-align: left;
+}
+
 .filter-link:hover {
     color: var(--third) !important;
     cursor: pointer;
@@ -198,12 +207,7 @@ a {
     text-align: left;
 }
 
-/* .modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-} */
+
 
 /* Responsive */
 @media screen and (min-width: 768px) {

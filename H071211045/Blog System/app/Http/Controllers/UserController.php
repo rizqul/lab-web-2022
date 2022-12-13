@@ -60,6 +60,32 @@ class UserController extends Controller
         return redirect()->route('login.show')->with('status', 'You can now login with that account.');
     }
 
+
+    public function update(Request $request) {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'username ' => 'required',
+        ]);
+
+        $data = new Users();
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->username = $request->username;
+
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            $extension = $file->getClientOriginalExtension();
+            $filename = $request->username . '_avatar.' . $extension;
+            $file->move(public_path('users/'), $filename);
+            $data->avatar = $filename;
+
+        }
+
+        $data->save();
+        return redirect()->route('page.users');
+    }
+
     public function delete($id)
     {   
         Users::find($id)->delete($id);

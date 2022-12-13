@@ -27,6 +27,18 @@ body {
     background-color: var(--fourth) !important;
 }
 
+.bg-transparent:not(:hover) {
+    border: 1px solid var(--third) !important;
+    transition: 0.3s;
+}
+
+.bg-transparent:hover {
+    background-color: var(--third) !important;
+    color: var(--primary) !important;
+    border: 1px solid var(--third);
+    transition: 0.3s;
+}
+
 .text-primary {
     color: var(--primary) !important;
 }
