@@ -126,7 +126,7 @@ a {
     font-size: 1.25rem
 }
 
-.show {
+.show-sidebar {
     left: 0
 }
 
@@ -145,6 +145,12 @@ a {
     width: 2px;
     height: 32px;
     background-color: var(--white-color)
+}
+
+.modal .bg-primary:hover, 
+.modal .bg-danger:hover {
+    background-color: var(--third) !important;
+    color: var(--primary) !important;
 }
 
 .height-100 {
@@ -183,8 +189,21 @@ a {
     color: rgb(210, 81, 81) !important;
 }
 
+.filter-link:hover {
+    color: var(--third) !important;
+    cursor: pointer;
+}
 
+.content {
+    text-align: left;
+}
 
+/* .modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+} */
 
 /* Responsive */
 @media screen and (min-width: 768px) {
@@ -212,7 +231,7 @@ a {
         padding: 1rem 1rem 0 0
     }
 
-    .show {
+    .show-sidebar {
         width: calc(var(--nav-width) + 156px)
     }
 
@@ -221,6 +240,3 @@ a {
     }
 }
 
-.content {
-    text-align: left;
-}

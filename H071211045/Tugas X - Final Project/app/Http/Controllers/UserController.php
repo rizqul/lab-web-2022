@@ -13,8 +13,9 @@ class UserController extends Controller
 
     public function __construct() {
         $this->middleware('guest')->except('logout');
+        $this->middleware('auth')->except('login', 'register');
+        $this->middleware('user')->except('login', 'register');
     }
-
     
     public function login(Request $request) {
         $request->validate([
@@ -57,5 +58,14 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->route('login.show')->with('status', 'You can now login with that account.');
+    }
+
+    public function delete(Request $request){
+        dd($request);
+        $id = $request->id;
+
+        Users::find($id)->delete($id);
+
+        return redirect()->route('page.users');
     }
 }

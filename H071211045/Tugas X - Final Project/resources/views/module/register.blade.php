@@ -12,9 +12,9 @@
     </div>
 
     <div class="container register-setup d-flex justify-content-center py-3 text-third ">
-        <div class="row">
+        <div class="row px-5">
             <div class="display-6 mb-1">
-                <span class="text-primary text-light">NEW</span>
+                <span class="text-primary text-light">BECOME A</span>
                 <span class="text-third fw-bold">CHAD</span>
             </div>
             
