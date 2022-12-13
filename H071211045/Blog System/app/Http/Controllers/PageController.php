@@ -11,7 +11,7 @@ class PageController extends Controller
 
     
     public function homepage() {
-        // dd(Auth::user()->);
+        
         return view('page.homepage');
     }
 
