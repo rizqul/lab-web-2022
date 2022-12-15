@@ -9,7 +9,7 @@ class TagController extends Controller
 {
     public function index()
     {
-        $tags = Tag::latest()->paginate();
+        $tags = Tag::withCount('articles')->get();
 
         return view('dashboard.tags', compact('tags'));
     }

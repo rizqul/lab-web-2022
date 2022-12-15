@@ -77,12 +77,10 @@
                                     <tr id="row-{{ $subcategory->id }}">
                                         <td class="align-middle">{{ $subcategory->name }}</td>
                                         <td class="align-middle">{{ $subcategory->category->name }}</td>
-                                        <td class="align-middle">22x</td>
-                                        {{-- <td>{{ $subcategorys->email }}</td> --}}
+                                        <td class="align-middle">{{ $subcategory->articles_count }}</td>
                                         <td class="align-middle">{{ $subcategory->created_at }}</td>
                                         <td class="align-middle">{{ $subcategory->user->name }}</td>
                                         <td class="align-middle">{{ $subcategory->status }}</td>
-                                        {{-- <td>{{ $tags->created_at }}</td> --}}
                                         <td class="align-middle">
                                             <a href="#edit-form-card"
                                                 style="color: white; @if (auth()->user()->id != $subcategory->author_id && auth()->user()->is_admin != 1) pointer-events: none @endif"
@@ -134,7 +132,7 @@
                             <div class="col-sm-12 col-md-7">
                                 <select class="form-control" name="category_id">
                                     @foreach ($categories as $category)
-                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -187,7 +185,7 @@
                             <div class="col-sm-12 col-md-7" id="category_id">
                                 <select class="form-control" name="category_id">
                                     @foreach ($categories as $category)
-                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

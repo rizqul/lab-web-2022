@@ -75,12 +75,10 @@
                                 @foreach ($tags as $tag)
                                     <tr id="row-{{ $tag->id }}">
                                         <td class="align-middle">{{ $tag->name }}</td>
-                                        <td class="align-middle">22x</td>
-                                        {{-- <td>{{ $tags->email }}</td> --}}
+                                        <td class="align-middle">{{ $tag->articles_count }}</td>
                                         <td class="align-middle">{{ $tag->created_at }}</td>
-                                        <td class="align-middle">{{ $tag->user->name}}</td>
-                                        <td class="align-middle">{{ $tag->status}}</td>
-                                        {{-- <td>{{ $tags->created_at }}</td> --}}
+                                        <td class="align-middle">{{ $tag->user->name }}</td>
+                                        <td class="align-middle">{{ $tag->status }}</td>
                                         <td class="align-middle">
                                             <a href="#edit-form-card"
                                                 style="color: white; @if (auth()->user()->id != $tag->author_id && auth()->user()->is_admin != 1) pointer-events: none @endif"
@@ -343,26 +341,26 @@
             $('#edit-form-card').show();
             $('#create-form-card').hide();
 
-            
+
         })
 
         function destroy(id) {
-                var row = table.row($('#row-' + id));
-                var rowIndex = row.index() + 1;
-                console.log(rowIndex);
-                $.ajax({
-                    type: 'POST',
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        id: id,
-                        _method: "DELETE"
-                    },
-                    url: 'tags/delete/' + id,
-                    success: function(response) {
-                        row.remove().draw();
-                        $("#fire-modal-" + rowIndex).modal('hide');
-                    }
-                })
-            }
+            var row = table.row($('#row-' + id));
+            var rowIndex = row.index() + 1;
+            console.log(rowIndex);
+            $.ajax({
+                type: 'POST',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    id: id,
+                    _method: "DELETE"
+                },
+                url: 'tags/delete/' + id,
+                success: function(response) {
+                    row.remove().draw();
+                    $("#fire-modal-" + rowIndex).modal('hide');
+                }
+            })
+        }
     </script>
 @endsection

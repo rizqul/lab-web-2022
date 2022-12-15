@@ -10,7 +10,7 @@ class SubCategoryController extends Controller
 {
     public function index()
     {
-        $subcategories = SubCategory::latest()->paginate();
+        $subcategories = SubCategory::withCount('articles')->get();;
         $categories = Category::all();
 
         return view('dashboard.subcategory', compact('subcategories', 'categories'));

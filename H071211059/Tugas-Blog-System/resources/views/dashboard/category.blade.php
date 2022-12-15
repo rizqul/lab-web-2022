@@ -75,7 +75,7 @@
                                 @foreach ($categories as $category)
                                     <tr id="row-{{ $category->id }}">
                                         <td class="align-middle">{{ $category->name }}</td>
-                                        <td class="align-middle">22x</td>
+                                        <td class="align-middle">{{$category->articles_count}}</td>
                                         {{-- <td>{{ $categorys->email }}</td> --}}
                                         <td class="align-middle">{{ $category->created_at }}</td>
                                         <td class="align-middle">{{ $category->user->name}}</td>
