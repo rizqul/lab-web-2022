@@ -113,7 +113,7 @@
                     <td> {{ $item->name }} </td>
                     <td>{{ $item->address }}</td>
                     <td>{{ $item->gender }}</td>
-                    <td>Rp. {{ $item->no_hp }}</td>
+                    <td>{{ $item->no_hp }}</td>
                     <td>{{ $item->status }}</td>
                     <td>
                         @foreach($item->products as $product)
