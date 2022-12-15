@@ -3,54 +3,107 @@
 @section('content')
     <div class="display-5 pt-4">Users</div>
 
-    <div class="mt-2">
-        <div class="row">
-            <div class="form-outline d-flex">
-                <input type="text" class="form-control rounded-0" id="search-input" placeholder="Search For Any Users" />
-                <button type="button" class="btn px-3 bg-primary rounded-0">
-                    <i class="bi bi-search text-third"></i>
-                </button>
+    @if (session('status'))
+        <style>
+            #message {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+            }
 
-                <div class="ms-3 me-3 dropdown">
-                    <button class="btn bg-primary text-third rounded-0 px-5 dropdown-toggle" data-bs-toggle="collapse"
-                        data-bs-target="#filter-control" aria-expanded="false" aria-controls="filter-control">
-                        Filter By
-                    </button>
-                </div>
+            #inner-message {
+                margin: 0 auto;
+            }
 
-                <a href="articles/new" class="bg-primary text-third px-4 d-flex justify-content-center align-items-center">
-                    <span class="me-2">New</span>
-                    <span class="me-2">User</span>
-                    <i class="bi bi-plus-circle"></i>
-                </a>
+            #message span {
+                letter-spacing: 1.2px;
+            }
+        </style>
+        <div id="message">
+            <div class="m-2 float-end">
+                <div class="alert alert-dark alert-dismissible fade show rounded-0" role="alert">
+                    <strong>Hola Amigos!</strong> {{ session('status') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
             </div>
         </div>
+    @endif
 
-        <div class="row px-3 mt-3 collapse w-50" id="filter-control">
-            <div class="display-7 fw-bold">Filter</div>
-            <hr class="mt-2 ms-2">
-            <form action="{{ route('page.users.filter') }}" method="POST" class="d-flex  filters">
-                @csrf
-                <div class="col d-flex flex-column">
-                    <span class="ms-1 fw-bold">Date</span>
-                    <button type="submit" name="filter" class="filter-link border-0 bg-transparent"
-                        value="created_date">Date Joined</button>
+    <div class="mt-2">
+        <table class="table" id="table_user">
+            <div class="row px-3 collapse w-75 mb-5" id="filter-menu">
+
+                <div class="d-flex align-items-center">
+                    <div class="display-7 fw-bold ">Filters</div>
+                    
                 </div>
-                <div class="col d-flex flex-column">
-                    <span class="ms-1 fw-bold">Status</span>
-                    <button type="submit" name="filter" class="filter-link border-0 bg-transparent"
-                        value="active">Active</button>
-                    <button type="submit" name="filter" class="filter-link border-0 bg-transparent"
-                        value="inactive">Inactive</button>
-                    <button type="submit" name="filter" class="filter-link border-0 bg-transparent"
-                        value="blocked">Blocked</button>
-                </div>
+                
+                <hr class="mt-2 ms-2">
+                    {{-- Date --}}
+                    <div class="col d-flex flex-column">
+                        <span class="fw-bold mb-3">Date</span>
+                        <div class="row mb-2 d-flex align-items-center">
+                            <span class="col form-check-label" for="from">From</span>
+                            <input class="col filter-status" name="status" type="date" id="from" value="from">
+                        </div>
 
-            </form>
-        </div>
+                        <div class="row mb-2 d-flex align-items-center">
+                            <span class="col form-check-label" for="to">To</span>
+                            <input class="col filter-status" name="status" type="date" id="to" value="to">
+                        </div>
+                    </div>
 
-        <div class="row px-3 mt-3">
-            <table class="table">
+                    {{-- Permission Level --}}
+                    <div class="col ms-3 d-flex flex-column">
+                        <span class="mb-2 fw-bold">Permission level</span>
+                        <div class="row mb-2 d-flex align-items-center">
+                            <span class="col form-check-label" for="active">
+                                Admin
+                            </span>
+                            <input class="col filter-permission" name="permission" type="checkbox" id="admin" value="admin">
+                        </div>
+                        
+                        <div class="row mb-2 d-flex align-items-center">
+                            <span class="col form-check-label" for="inactive">
+                                User
+                            </span>
+                            <input class="col filter-permission" name="permission" type="checkbox" id="user" value="user">
+                        </div>
+                    </div>
+
+                    {{-- Status --}}
+                    <div class="col ms-3 d-flex flex-column">
+                        <span class="mb-2 fw-bold">Status</span>
+                        <div class="row mb-2 d-flex align-items-center">
+                            <span class="col form-check-label" for="active">
+                                Active
+                            </span>
+                            <input class="col filter-status" name="status" type="checkbox" id="active" value="active">
+                        </div>
+                        
+                        <div class="row mb-2 d-flex align-items-center">
+                            <span class="col form-check-label" for="inactive">
+                                Inactive
+                            </span>
+                            <input class="col filter-status" name="status" type="checkbox" id="inactive" value="inactive">
+                        </div>
+
+                        <div class="row mb-2 -flex align-items-center">
+                            <span class="col form-check-label" for="blocked">
+                                Blocked
+                            </span>
+                            <input class="col filter-status" name="status" type="checkbox" id="blocked" value="blocked">
+                        </div>
+
+                        <div class="row">
+                            <button class="btn bg-third rounded-0 w-50 mt-2 ms-2" id="clear-filter">Clear Filter</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row px-3 mt-3">
                 <thead>
                     <tr>
                         <th scope="col">No</th>
@@ -73,7 +126,7 @@
                             <td>{{ $user->username }}</td>
                             <td>{{ $user->article_count }}</td>
                             <td class="text-capitalize">{{ $user->status }}</td>
-                            <td class="text-capitalize">{{ $user->permission }}</td>
+                            <td class="text-capitalize">{{ $user->level }}</td>
                             <td>{{ $user->created_at }}</td>
                             <td class="actions">
                                 <a href="{{ url('panel/users/edit/' . $user->id) }}"
@@ -85,7 +138,8 @@
                                     data-id="{{ $user->id }}">
                                     <i class="bi bi-trash"></i>
                                 </button>
-                                <a href="{{ url('user/' . $user->username) }}" class="btn bg-fourth text-primary rounded-0">
+                                <a href="{{ url('member/' . $user->username) }}"
+                                    class="btn bg-fourth text-primary rounded-0">
                                     <i class="bi bi-eye"></i>
                                 </a>
                             </td>
@@ -97,8 +151,9 @@
                     @endforelse
 
                 </tbody>
-            </table>
-        </div>
+
+            </div>
+        </table>
     </div>
 
     <div class="modal fade " id="confirm-delete-modal" tabindex="-1" aria-labelledby="confirm-delete-modal-label"
@@ -127,9 +182,94 @@
 
 @section('script')
     <script>
-        $(".delete").click(function() {
-            var id = $(this).data("id");
-            $('#confirm-delete').attr('href', '/panel/users/delete/' + id);
+        const filterMenu =
+            "<div class='form-outline d-flex'>" +
+            "<button class='btn bg-primary text-third rounded-0 px-5 me-3 dropdown-toggle' data-bs-toggle='collapse'data-bs-target='#filter-menu' aria-expanded='false' aria-controls='filter-menu'>Filter By </button>" +
+            "<a href='{{ route('page.users.new') }}'class='bg-primary text-third px-4 d-flex justify-content-center align-items-center'><span class='me-2'>New</span><span class='me-2'>User</span><i class='bi bi-plus-circle'></i></a>" +
+            "</div>";
+
+        $(document).ready(function() {
+
+            $(".delete").click(function() {
+                var id = $(this).data("id");
+                $('#confirm-delete').attr('href', '/panel/users/delete/' + id);
+            });
+
+            var table = $("#table_user").DataTable({
+                "columnDefs": [{
+                    "sortable": false,
+                    "targets": [0, 8]
+                }],
+                dom: '<"#filterDiv">frtip',
+            })
+
+            $('#from, #to').on('change', function() {
+                table.draw();
+            });
+
+            $("#filterDiv").append(
+                filterMenu
+            );
+
+            $("#filter-menu").prependTo($("#filterDiv"));
+
+            fromDate = $("#from");
+            toDate = $("#to");
+
+            $.fn.dataTable.ext.search.push(
+                function(settings, data, dataIndex) {
+                    var min = fromDate.val();
+                    var max = toDate.val();
+                    var date = new Date(data[7]); // Kolom tanggal
+                    console.log(date)
+                    year = date.getFullYear();
+                    month = date.getMonth() + 1;
+                    day = date.getDate();
+                    date = year + "-" + month + "-" + day
+                    if (
+                        (min === "" && max === "") ||
+                        (min === "" && date <= max) ||
+                        (min <= date && max === "") ||
+                        (min <= date && date <= max)
+                    ) {
+                        return true;
+                    }
+                }
+            );
+
+            $('.filter-status').on('change', function(e) {
+                var searchTerms = []
+                $.each($('.filter-status'), function(i, elem) {
+                    if ($(elem).prop('checked')) {
+                        searchTerms.push("^" + $(this).val() + "$")
+                    }
+                })
+
+                table.column(5).search(searchTerms.join('|'), true, false, true).draw(); // Column Data status
+                console.log($(this).val());
+            });
+
+            $('.filter-permission').on('change', function(e) {
+                var searchTerms = []
+                $.each($('.filter-permission'), function(i, elem) {
+                    if ($(elem).prop('checked')) {
+                        searchTerms.push("^" + $(this).val() + "$")
+                    }
+                })
+                table.column(6).search(searchTerms.join('|'), true, false, true).draw(); // Column Data permission
+                console.log($(this).val());
+            });
+            
+            $(document).on('click', '#clear-filter', function(e) { // Clear Filter inputs
+                $('input[type=checkbox]').prop('checked', false);
+                $('input[type=date]').val('');
+                table
+                    .search('')
+                    .columns().search('')
+                    .draw();
+            });
         });
+
+        
     </script>
 @endsection

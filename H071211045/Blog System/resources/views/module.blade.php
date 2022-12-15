@@ -12,7 +12,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" href="{{ asset('styles/module.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @yield('head')
 </head>
 
@@ -24,9 +26,13 @@
             <i class='bx bx-menu' id="header-toggle"></i>
         </div>
 
-        <div class="d-flex mt-3">
-            <div class="header_img">
-                <i class="bi bi-person"></i>
+        <div class="d-flex align-items-center">
+            <div class="header_img mx-2">
+                @if (!empty(Auth::user()->avatar))
+                    <img src="{{ asset('storage/'. auth()->user()->avatar )}}" id="person_logo" alt="avatar">
+                @else
+                    <img src="{{ asset('storage/users/default-avatar.png' )}}" id="person_logo" alt="avatar">
+                @endif
             </div>
             <div class="display-7 text-capitalize">{{ Auth::user()->name }}</div>
         </div>
@@ -44,7 +50,7 @@
                 <div class="nav_list">
                     @if (Str::contains(Request::url(), 'panel/dashboard'))
                         <a href="#" class="nav_link text-third active">
-                        @else
+                    @else
                             <a href="{{ route('page.dashboard') }}" class="nav_link text-third">
                     @endif
                     <i class='bx bx-grid-alt nav_icon'></i>
@@ -80,7 +86,7 @@
 
                     @if (Str::contains(Request::url(), 'panel/users'))
                         <a class="nav_link text-third active">
-                        @else
+                    @else
                             <a href=" {{ route('page.users') }}" class="nav_link text-third">
                     @endif
                     <i class='bx bx-user nav_icon'></i>
@@ -108,7 +114,7 @@
         @yield('content')
     </div>
 
-
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">

@@ -52,7 +52,7 @@
                         <div class="input-group-addon p-2 bg-primary">
                             <i class="bi bi-person"></i>
                         </div>
-                        <input type="username" class="form-control rounded-0" id="username" name="username"
+                        <input type="username" class="form-control rounded-0" id="username" name="username" value="{{ old('username') }}"
                             placeholder="Enter your username" required>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
 
                 <div class="mt-3">
                     <span class="text-fourth">A newbie chad?</span>
-                    <a href="/register" class="text-third">Sign Up</a>
+                    <a href=" {{ route('register.show') }}" class="text-third">Sign Up</a>
                 </div>
             </form>
 

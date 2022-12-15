@@ -1,9 +1,6 @@
 @extends('index')
 
 @section('page')
-    @include('item.navbar')
-    {{-- @include('element.admin-navbar') --}}
-
     <div class="wrapper-landing position-relative d-inline-block">
         <img src="{{ asset('contents/homeimg.jpg') }}" alt="landing-image" class="img-fluid">
         <div class="position-absolute top-50 start-50 translate-middle display-6 text-fourth">
@@ -99,5 +96,4 @@
 
     </div>
     
-    @include('item.footer')
 @endsection

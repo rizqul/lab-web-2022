@@ -1,5 +1,11 @@
 @import './root.css';
 
+#img-preview {
+    width: 15rem;
+    height: 15rem;
+    object-fit: cover;
+}
+
 /* page.home */
 nav {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
@@ -8,6 +14,7 @@ nav {
 nav .nav-item .active {
     border-bottom: 1.5px solid var(--third);
     transition: 0.3s;
+    pointer-events: none;
 }
 
 nav .nav-link:not(:hover) {
@@ -19,6 +26,12 @@ nav .nav-link:hover {
     transition: 0.3s;
 }
 
+#person_logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
 
 
 .popular-articles .content img {
@@ -93,7 +106,7 @@ footer a:hover  {
     background-color: rgb(17, 17, 17);
     backdrop-filter: blur(20px);
     border-radius: 5px;
-    width: 40%;
+    width: 50%;
 }
 
 

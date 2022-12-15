@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -14,6 +15,7 @@ class Users extends Authenticatable
 
     protected $table = 'users';
     protected $primaryKey = 'id';
+    protected $date = 'created_at';
 
     protected $fillable = [
         'name',
@@ -32,11 +34,18 @@ class Users extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'created_at' => 'datetime:m/d/Y', 
+        'updated_at' => 'datetime:m/d/Y',
     ];
 
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = bcrypt($password);
+    }
+
+    public function getCreatedAtAttribute($date)
+    {
+        return Carbon::parse($date)->format('m/d/Y');
     }
 
     public function getAuthPassword()
@@ -48,6 +57,4 @@ class Users extends Authenticatable
     {
         return $this->remember_token;
     }
-
-
 }
