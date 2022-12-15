@@ -44,9 +44,14 @@ Route::group(['middleware' => ['auth']], function() {
     });
     
     Route::get('panel/dashboard', [ModuleController::class, 'dashboard'])->name('page.dashboard');
-    Route::get('panel/articles', [ModuleController::class, 'articles'])->name('page.articles');
 
-    // Tags
+    // Articles
+    Route::get('panel/articles', [ModuleController::class, 'articles'])->name('page.articles');
+    Route::get('panel/articles/edit/{id}',  [ModuleController::class, 'articleEdit'])->name('page.articles.edit');
+    Route::get('panel/articles/delete/{id}',  [ModuleController::class, 'articleDelete'])->name('article.delete');
+    Route::post('panel/articles/store', [ModuleController::class, 'articleStore'])->name('articles.store');
+
+    // Categories
     Route::get('panel/categories', [ModuleController::class, 'categories'])->name('page.categories');
     Route::get('panel/categories/edit/{id}',  [ModuleController::class, 'categoryEdit'])->name('page.categories.edit');
     Route::get('panel/categories/delete/{id}',  [ModuleController::class, 'categoryDelete'])->name('category.delete');
@@ -66,11 +71,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('panel/users/new', [ModuleController::class, 'userNew'])->name('page.users.new');
     Route::post('panel/users/store', [ModuleController::class, 'userStore'])->name('page.users.store');
 
-
-    // Content Uploader
-    Route::get('panel/users/edit/{id}/upload', [ModuleController::class, 'contentUploader'])->name('page.users.update.upload');
-
-    // Settings
+    // Auth
     Route::get('logout', [UserController::class, 'logout'])->name('logout');
 });
 /* - */

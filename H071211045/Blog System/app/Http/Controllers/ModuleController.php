@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Articles;
 use App\Models\Categories;
 use App\Models\Tags;
 use App\Models\Users;
@@ -16,10 +17,72 @@ class ModuleController extends Controller
         return view('module.dashboard');
     }
 
+    /*
+     * Articles CMS
+     */
     public function articles()
     {
-        return view('module.articles');
+        $articles = Articles::join('users', 'articles.author_id', '=', 'users.id')
+            ->join('categories', 'articles.category_id', '=', 'categories.id')
+            ->join('article_tag', 'articles.id', '=', 'article_tag.article_id')
+            ->join('tags', 'article_tag.tag_id', '=', 'tags.id')
+            ->select('articles.*', 'users.username', 'categories.category_name', 'tags.tag_name')
+            ->get();
+
+        return view('module.articles', compact('articles'));
     }
+
+    public function articleEdit($id)
+    {
+        $article = Articles::find($id);
+        return response()->json($article);
+    }
+
+    public function articleStore(Request $request) {
+
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+        ]);
+        
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        if ($request->mode == 'false') {
+            $article = Articles::find($request->id);
+            $article->title = $request->title;
+            $article->content = $request->content;
+            $article->category_id = $request->category_id;
+            $article->save();
+
+        } else {
+            $article = Articles::create([
+                'title' => $request->title, 
+                'content' => $request->content,
+                'category_id' => $request->category_id,
+                'author_id' => Auth::user()->id
+            ]);
+        }
+        
+        $response = Articles::join('users', 'articles.author_id', '=', 'users.id')
+            ->join('categories', 'articles.category_id', '=', 'categories.id')
+            ->join('article_tag', 'articles.id', '=', 'article_tag.article_id')
+            ->join('tags', 'article_tag.tag_id', '=', 'tags.id')
+            ->select('articles.*', 'users.username', 'categories.category_name', 'tags.tag_name')
+            // ->groupBy('articles.id')
+            ->get();
+
+        return response()->json($response);
+    }
+
+    public function articleDelete($id)
+    {
+        $article = Articles::find($id);
+        $article->delete();
+
+        return redirect()->route('page.articles')->with('status', 'deleted');
+    }
+    /* * * */
 
     /*
      * Categories CMS
@@ -30,13 +93,12 @@ class ModuleController extends Controller
             ->select('categories.*', 'users.username')
             ->get();
 
-        return view('module.tags', compact('cateogies'));
+        return view('module.categories', compact('categories'));
     }
 
     public function categoryEdit($id)
     {
         $category = Categories::find($id);
-
         return response()->json($category);
     }
 
@@ -54,12 +116,14 @@ class ModuleController extends Controller
             $category = Categories::find($request->id);
             $category->category_name = $request->category_name;
             $category->description = $request->description;
+            $category->status = $request->status;
             $category->save();
 
         } else {
             $category = Categories::create([
                 'category_name' => $request->category_name, 
                 'description'   => $request->description,
+                'status'        => $request->status,
                 'author_id'     => Auth::user()->id
             ]);
         }
@@ -72,7 +136,13 @@ class ModuleController extends Controller
         return response()->json($response);
     }
 
+    public function categoryDelete($id)
+    {
+        $category = Categories::find($id);
+        $category->delete();
 
+        return redirect()->route('page.categories')->with('status', 'deleted');
+    }
 
     /*
      * Tags CMS
@@ -107,12 +177,14 @@ class ModuleController extends Controller
             $tag = Tags::find($request->id);
             $tag->tag_name = $request->tag_name;
             $tag->description = $request->description;
+            $tag->status = $request->status;
             $tag->save();
 
         } else {
             $tag = Tags::create([
                 'tag_name'     => $request->tag_name, 
                 'description'   => $request->description,
+                'status'        => $request->status,
                 'author_id'     => Auth::user()->id
             ]);
         }

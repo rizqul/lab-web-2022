@@ -25,7 +25,7 @@
                 <div class="alert alert-dark alert-dismissible fade show rounded-0" role="alert">
                     <strong>Hola Amigos!</strong> {{ session('status') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                  </div>
+                </div>
             </div>
         </div>
     @endif
@@ -36,70 +36,72 @@
 
                 <div class="d-flex align-items-center">
                     <div class="display-7 fw-bold ">Filters</div>
-                    
+
                 </div>
-                
+
                 <hr class="mt-2 ms-2">
-                    {{-- Date --}}
-                    <div class="col d-flex flex-column">
-                        <span class="fw-bold mb-3">Date</span>
-                        <div class="row mb-2 d-flex align-items-center">
-                            <span class="col form-check-label" for="from">From</span>
-                            <input class="col filter-status" name="status" type="date" id="from" value="from">
-                        </div>
-
-                        <div class="row mb-2 d-flex align-items-center">
-                            <span class="col form-check-label" for="to">To</span>
-                            <input class="col filter-status" name="status" type="date" id="to" value="to">
-                        </div>
+                {{-- Date --}}
+                <div class="col d-flex flex-column">
+                    <span class="fw-bold mb-3">Date</span>
+                    <div class="row mb-2 d-flex align-items-center">
+                        <span class="col form-check-label" for="from">From</span>
+                        <input class="col filter-status" name="status" type="date" id="from" value="from">
                     </div>
 
-                    {{-- Permission Level --}}
-                    <div class="col ms-3 d-flex flex-column">
-                        <span class="mb-2 fw-bold">Permission level</span>
-                        <div class="row mb-2 d-flex align-items-center">
-                            <span class="col form-check-label" for="active">
-                                Admin
-                            </span>
-                            <input class="col filter-permission" name="permission" type="checkbox" id="admin" value="admin">
-                        </div>
-                        
-                        <div class="row mb-2 d-flex align-items-center">
-                            <span class="col form-check-label" for="inactive">
-                                User
-                            </span>
-                            <input class="col filter-permission" name="permission" type="checkbox" id="user" value="user">
-                        </div>
+                    <div class="row mb-2 d-flex align-items-center">
+                        <span class="col form-check-label" for="to">To</span>
+                        <input class="col filter-status" name="status" type="date" id="to" value="to">
+                    </div>
+                </div>
+
+                {{-- Permission Level --}}
+                <div class="col ms-3 d-flex flex-column">
+                    <span class="mb-2 fw-bold">Permission level</span>
+                    <div class="row mb-2 d-flex align-items-center">
+                        <span class="col form-check-label" for="active">
+                            Admin
+                        </span>
+                        <input class="col filter-permission" name="permission" type="checkbox" id="admin"
+                            value="admin">
                     </div>
 
-                    {{-- Status --}}
-                    <div class="col ms-3 d-flex flex-column">
-                        <span class="mb-2 fw-bold">Status</span>
-                        <div class="row mb-2 d-flex align-items-center">
-                            <span class="col form-check-label" for="active">
-                                Active
-                            </span>
-                            <input class="col filter-status" name="status" type="checkbox" id="active" value="active">
-                        </div>
-                        
-                        <div class="row mb-2 d-flex align-items-center">
-                            <span class="col form-check-label" for="inactive">
-                                Inactive
-                            </span>
-                            <input class="col filter-status" name="status" type="checkbox" id="inactive" value="inactive">
-                        </div>
-
-                        <div class="row mb-2 -flex align-items-center">
-                            <span class="col form-check-label" for="blocked">
-                                Blocked
-                            </span>
-                            <input class="col filter-status" name="status" type="checkbox" id="blocked" value="blocked">
-                        </div>
-
-                        <div class="row">
-                            <button class="btn bg-third rounded-0 w-50 mt-2 ms-2" id="clear-filter">Clear Filter</button>
-                        </div>
+                    <div class="row mb-2 d-flex align-items-center">
+                        <span class="col form-check-label" for="inactive">
+                            User
+                        </span>
+                        <input class="col filter-permission" name="permission" type="checkbox" id="user"
+                            value="user">
                     </div>
+                </div>
+
+                {{-- Status --}}
+                <div class="col ms-3 d-flex flex-column">
+                    <span class="mb-2 fw-bold">Status</span>
+                    <div class="row mb-2 d-flex align-items-center">
+                        <span class="col form-check-label" for="active">
+                            Active
+                        </span>
+                        <input class="col filter-status" name="status" type="checkbox" id="active" value="active">
+                    </div>
+
+                    <div class="row mb-2 d-flex align-items-center">
+                        <span class="col form-check-label" for="inactive">
+                            Inactive
+                        </span>
+                        <input class="col filter-status" name="status" type="checkbox" id="inactive" value="inactive">
+                    </div>
+
+                    <div class="row mb-2 -flex align-items-center">
+                        <span class="col form-check-label" for="blocked">
+                            Blocked
+                        </span>
+                        <input class="col filter-status" name="status" type="checkbox" id="blocked" value="blocked">
+                    </div>
+
+                    <div class="row">
+                        <button class="btn bg-third rounded-0 w-50 mt-2 ms-2" id="clear-filter">Clear Filter</button>
+                    </div>
+                </div>
                 </form>
             </div>
 
@@ -197,9 +199,14 @@
 
             var table = $("#table_user").DataTable({
                 "columnDefs": [{
-                    "sortable": false,
-                    "targets": [0, 8]
-                }],
+                        "sortable": false,
+                        "targets": [0, 8]
+                    },
+                    {
+                        "visible": false,
+                        "targets": [6]
+                    }
+                ],
                 dom: '<"#filterDiv">frtip',
             })
 
@@ -245,7 +252,8 @@
                     }
                 })
 
-                table.column(5).search(searchTerms.join('|'), true, false, true).draw(); // Column Data status
+                table.column(5).search(searchTerms.join('|'), true, false, true)
+            .draw(); // Column Data status
                 console.log($(this).val());
             });
 
@@ -256,10 +264,11 @@
                         searchTerms.push("^" + $(this).val() + "$")
                     }
                 })
-                table.column(6).search(searchTerms.join('|'), true, false, true).draw(); // Column Data permission
+                table.column(6).search(searchTerms.join('|'), true, false, true)
+            .draw(); // Column Data permission
                 console.log($(this).val());
             });
-            
+
             $(document).on('click', '#clear-filter', function(e) { // Clear Filter inputs
                 $('input[type=checkbox]').prop('checked', false);
                 $('input[type=date]').val('');
@@ -269,7 +278,5 @@
                     .draw();
             });
         });
-
-        
     </script>
 @endsection

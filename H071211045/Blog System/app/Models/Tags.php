@@ -28,4 +28,9 @@ class Tags extends Model
     {
         return Carbon::parse($date)->format('m/d/Y');
     }
+    
+    public function articles()
+    {
+        return $this->belongsToMany(Articles::class, 'article_tag', 'tag_id', 'article_id');
+    }
 }

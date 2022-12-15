@@ -10,17 +10,18 @@
 @endsection
 
 @section('content')
-    <div class="display-5 pt-4">Tags</div>
+    <div class="display-5 pt-4">Categories</div>
 
     <div class="mt-2">
-        <table class="table" id="table_tags">
+        <table class="table" id="table_categories">
+            {{-- Filters --}}
             <div class="row px-3 collapse w-75 mb-5" id="filter-menu">
-
                 <div class="d-flex align-items-center">
                     <div class="display-7 fw-bold ">Filters</div>
                 </div>
 
                 <hr class="mt-2 ms-2">
+                {{-- Date --}}
                 <div class="col d-flex flex-column">
                     <span class="fw-bold mb-3">Date</span>
                     <div class="row mb-2 d-flex align-items-center">
@@ -60,33 +61,33 @@
                         <th scope="col">No</th>
                         <th scope="col">Name</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Articles Tagged</th>
+                        <th scope="col">Articles Categorized</th>
                         <th scope="col">Author</th>
                         <th scope="col">Created Date</th>
                         <th scope="col">Actions</th>
                         <th scope="col">id</th>
                     </tr>
                 </thead>
-                <tbody class="taglist">
-                    @foreach ($categories as $tag)
+                <tbody class="categorylist">
+                    @foreach ($categories as $category)
                         <tr>
                             <td scope="row">{{ $loop->iteration }}</td>
-                            <td>{{ $tag->tag_name }}</td>
-                            <td>{{ $tag->status }}</td>
-                            <td>{{ $tag->article_count }}</td>
-                            <td>{{ $tag->username }}</td>
-                            <td>{{ $tag->created_at }}</td>
+                            <td>{{ $category->category_name }}</td>
+                            <td class="text-capitalize">{{ $category->status }}</td>
+                            <td>{{ $category->article_count }}</td>
+                            <td>{{ $category->username }}</td>
+                            <td>{{ $category->created_at }}</td>
                             <td class="actions">
                                 <button class="btn bg-secondary text-third rounded-0 edit" data-bs-toggle="modal"
-                                    data-bs-target="#tag-modal" data-id="{{ $tag->id }}">
+                                    data-bs-target="#category-modal" data-id="{{ $category->id }}">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
                                 <button class="btn bg-danger text-third rounded-0 delete" data-bs-toggle="modal"
-                                    data-bs-target="#confirm-delete-modal" data-id="{{ $tag->id }}">
+                                    data-bs-target="#confirm-delete-modal" data-id="{{ $category->id }}">
                                     <i class="bi bi-trash"></i>
                                 </button>
                             </td>
-                            <td>{{ $tag->id }}</td>
+                            <td>{{ $category->id }}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -104,7 +105,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    The deleted tag will be permanently removed from the system.
+                    The deleted Category will be permanently removed from the system.
                 </div>
                 <div class="modal-footer delete-forms">
                     <button type="button" class="btn bg-danger text-fourth rounded-0"
@@ -116,21 +117,28 @@
         </div>
     </div>
 
-    <div class="modal fade " id="tag-modal" tabindex="-1" aria-labelledby="tag-modal-label"aria-hidden="true">
+    <div class="modal fade " id="category-modal" tabindex="-1" aria-labelledby="category-modal-label"aria-hidden="true">
         <div class="modal-dialog ">
             <div class="modal-content rounded-0">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="tag-modal-label">Create a New Tag</h1>
+                    <h1 class="modal-title fs-5" id="category-modal-label">Create a New Category</h1>
                     <button type="button" class="btn-close close-forms" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
                 <div class="modal-body forms">
-                    <label for="name" class="row form-label mb-1 ms-1">Tag Name</label>
-                    <input type="text" name="tag_name" id="tag_name" placeholder="Tag Name"
-                        class="row form-control mb-2 ms-1">
+                    <label for="name" class="row form-label mb-1 ms-1">Category Name</label>
+                    <input type="text" name="category_name" id="category_name" placeholder="Category Name"
+                        class="row form-control mb-3 ms-1">
 
                     <label for="description" class="row form-label mb-1 ms-1">Description</label>
-                    <textarea id="description" name="description" placeholder="Description" class="row border mb-2"></textarea>
+                    <textarea id="description" name="description" placeholder="Description" class="row border mb-3"></textarea>
+
+                    <label for="status" class="row form-label mb-1 mt-3 ms-1">Status</label>
+                    <select id="status" name="status" class="form-control mb-3">
+                        <option selected="true" disabled="disabled">- Select Status -</option>
+                        <option value="published">Published</option>
+                        <option value="archived">Archived</option>
+                    </select>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn bg-primary text-fourth rounded-0 store">Submit</button>
@@ -145,18 +153,18 @@
         const filterMenu =
             "<div class='form-outline d-flex'>" +
             "<button class='btn bg-primary text-third rounded-0 px-5 me-3 dropdown-toggle' data-bs-toggle='collapse'data-bs-target='#filter-menu' aria-expanded='false' aria-controls='filter-menu'>Filter By </button>" +
-            "<button class='btn rounded-0 bg-primary text-third px-4 d-flex justify-content-center align-items-center' id='add-new' onclick='add()' data-bs-toggle='modal' data-bs-target='#tag-modal'><span class='me-2'>New</span><span class='me-2'>Tag</span><i class='bi bi-plus-circle'></i></button>" +
+            "<button class='btn rounded-0 bg-primary text-third px-4 d-flex justify-content-center align-items-center' id='add-new' onclick='add()' data-bs-toggle='modal' data-bs-target='#category-modal'><span class='me-2'>New</span><span class='me-2'>Category</span><i class='bi bi-plus-circle'></i></button>" +
             "</div>";
 
         var description, table, rowIndex;
 
         function add() {
-            $('#tag-modal-label').text('Create a New Tag');
+            $('#category-modal-label').text('Create a New Category');
             $('#id').remove();
         }
 
         function clearInput() {
-            $('#tag_name').val('');
+            $('#category_name').val('');
             description.setData('');
             $('#id').remove();
         }
@@ -174,7 +182,7 @@
             /*
              * DataTables
              */
-            table = $("#table_tags").DataTable({
+            table = $("#table_categories").DataTable({
                 // hide last column
 
                 "columnDefs": [{
@@ -266,8 +274,9 @@
                 e.preventDefault();
                 let isEdit = document.getElementById("id");
                 let id_token = $('#id').val();
-                let tagName = $('#tag_name').val();
-                let tagDescription = description.getData();
+                let categoryName = $('#category_name').val();
+                let categoryDescription = description.getData();
+                let categoryStatus = $('#status').val();
                 let store = !isEdit ? true : false;
                 let _token = $('meta[name="csrf-token"]').attr('content');
                 let firstCol = (table.rows().count() != 0) ? table.rows().count() + 1 : 1;
@@ -277,8 +286,9 @@
                     url: '{{ route('categories.store') }}',
                     type: 'POST',
                     data: {
-                        tag_name: tagName,
-                        description: tagDescription,
+                        category_name: categoryName,
+                        description: categoryDescription,
+                        status: categoryStatus,
                         id: id_token,
                         mode: store,
                         _token: _token
@@ -286,7 +296,7 @@
                     success: function(data) {
                         if (data) {
                             clearInput();
-                            $('#tag-modal').modal('hide');
+                            $('#category-modal').modal('hide');
 
                             // console.log(data);
 
@@ -295,12 +305,12 @@
                                 data.articles_count = 0;
                                 table.row.add([
 
-                                    firstCol, data.tag_name, data.status, data
+                                    firstCol, data.category_name, data.status, data
                                     .articles_count,
                                     data.username, data.created_at,
                                     "<div class='actions d-flex w-100'>" +
                                     "<button class='btn bg-secondary text-third rounded-0 edit'" +
-                                    "data-bs-toggle='modal' data-bs-target='#tag-modal' data-id='" +
+                                    "data-bs-toggle='modal' data-bs-target='#category-modal' data-id='" +
                                     data.id + "'>" +
                                     "<i class='bi bi-pencil-square'></i>" +
                                     "</button>" +
@@ -314,13 +324,14 @@
 
                                 ]).draw(false);
 
-                                return swal.fire('Successfuly added the Tag!');
+                                return swal.fire('Successfuly added the Category!');
 
                             } else { // Edit Data
 
-                                table.cell(rowIndex, 1).data(data.tag_name);
+                                table.cell(rowIndex, 1).data(data.category_name);
+                                table.cell(rowIndex, 2).data(data.status);
                                 
-                                return swal.fire('Successfuly edited the Tag!');
+                                return swal.fire('Successfuly edited the Category!');
                             }
                         }
                     }
@@ -336,12 +347,12 @@
                 $('#confirm-delete').attr('href', '/panel/categories/delete/' + id);
             });
 
-            $('.taglist').on('click', '.edit', function() { // Edit
+            $('.categorylist').on('click', '.edit', function() { // Edit
                 $(this).parents('tr').addClass('editing');
                 rowIndex = table.row('.editing').index();
                 $(this).parents('tr').removeClass('editing');
                 console.log(rowIndex)
-                $('#tag-modal-label').text('Edit Tag');
+                $('#category-modal-label').text('Edit Category');
                 var id = $(this).data("id");
 
                 console.log("[DEBUG] Prepared edit ID: " + id);
@@ -355,7 +366,8 @@
                             '<input type="hidden" name="id" id="id" value="' + data.id +'">'
                         );
 
-                        $('#tag_name').val(data.tag_name);
+                        $('#category_name').val(data.category_name);
+                        $('#status').val(data.status);
 
                         if (data.description == null) {
                             data.description = '';

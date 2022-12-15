@@ -72,7 +72,7 @@
                         <tr>
                             <td scope="row">{{ $loop->iteration }}</td>
                             <td>{{ $tag->tag_name }}</td>
-                            <td>{{ $tag->status }}</td>
+                            <td class="text-capitalize">{{ $tag->status }}</td>
                             <td>{{ $tag->article_count }}</td>
                             <td>{{ $tag->username }}</td>
                             <td>{{ $tag->created_at }}</td>
@@ -127,10 +127,17 @@
                 <div class="modal-body forms">
                     <label for="name" class="row form-label mb-1 ms-1">Tag Name</label>
                     <input type="text" name="tag_name" id="tag_name" placeholder="Tag Name"
-                        class="row form-control mb-2 ms-1">
+                        class="row form-control mb-3 ms-1">
 
                     <label for="description" class="row form-label mb-1 ms-1">Description</label>
-                    <textarea id="description" name="description" placeholder="Description" class="row border mb-2"></textarea>
+                    <textarea id="description" name="description" placeholder="Description" class="row border mb-3"></textarea>
+
+                    <label for="status" class="row form-label mb-1 mt-3 ms-1">Status</label>
+                    <select id="status" name="status" class="form-control mb-3">
+                        <option selected="true" disabled="disabled">- Select Status -</option>
+                        <option value="published">Published</option>
+                        <option value="archived">Archived</option>
+                    </select>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn bg-primary text-fourth rounded-0 store">Submit</button>
@@ -268,6 +275,7 @@
                 let id_token = $('#id').val();
                 let tagName = $('#tag_name').val();
                 let tagDescription = description.getData();
+                let tagStatus = $('#status').val();
                 let store = !isEdit ? true : false;
                 let _token = $('meta[name="csrf-token"]').attr('content');
                 let firstCol = (table.rows().count() != 0) ? table.rows().count() + 1 : 1;
@@ -279,6 +287,7 @@
                     data: {
                         tag_name: tagName,
                         description: tagDescription,
+                        status: tagStatus,
                         id: id_token,
                         mode: store,
                         _token: _token
@@ -319,7 +328,7 @@
                             } else { // Edit Data
 
                                 table.cell(rowIndex, 1).data(data.tag_name);
-                                
+                                table.cell(rowIndex, 2).data(data.status);
                                 return swal.fire('Successfuly edited the Tag!');
                             }
                         }
@@ -356,6 +365,7 @@
                         );
 
                         $('#tag_name').val(data.tag_name);
+                        $('#status').val(data.status);
 
                         if (data.description == null) {
                             data.description = '';

@@ -10,7 +10,8 @@ class Categories extends Model
 {
     use HasFactory;
 
-    protected $table = 'tags';
+    protected $table = 'categories';
+    
     protected $fillable = [
         'category_name',
         'status',
@@ -22,6 +23,11 @@ class Categories extends Model
     public function author()
     {
         return $this->belongsTo(Users::class, 'author_id');
+    }
+
+    public function articles()
+    {
+        return $this->hasMany(Articles::class, 'category_id');
     }
 
     public function getCreatedAtAttribute($date)
