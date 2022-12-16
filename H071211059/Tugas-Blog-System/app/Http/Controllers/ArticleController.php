@@ -7,6 +7,7 @@ use App\Models\ArticleTag;
 use App\Models\Category;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class ArticleController extends Controller
 {
@@ -120,5 +121,13 @@ class ArticleController extends Controller
     {
         // dd($id);
         Article::find($id)->delete();
+    }
+
+    public function getSlug(Request $request)
+    {
+        // dd($request->title);
+        $slug = SlugService::createSlug(Article::class, 'slug', $request->title);
+        // dd($slug);
+        return response()->json(['slug' => $slug]);
     }
 }

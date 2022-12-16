@@ -25,6 +25,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::controller(FeController::class)->group(function () {
     Route::get('/', 'homepage');
+    Route::get('/articles', 'articlesList');
 });
 
 Route::get('/login', function () {
@@ -93,8 +94,10 @@ Route::controller(ArticleController::class)->group(function () {
     Route::get('/article', 'index')->middleware('auth')->name('article');
     Route::post('/article', 'store')->middleware('auth');
 
-    Route::get('/article/{id}', 'getArticle')->middleware('auth');
+    Route::get('/article/getArticle/{id}', 'getArticle')->middleware('auth');
     Route::post('/article/update', 'update')->middleware('auth')->name('article.update');
+
+    Route::get('/getSlug', 'getSlug')->name('getSlug');
 
     Route::delete('/article/delete/{id}', 'delete')->middleware('auth');
 });

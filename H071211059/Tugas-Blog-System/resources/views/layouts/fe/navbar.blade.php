@@ -1,17 +1,19 @@
 <div class="navbar">
     <div class="container">
-        <h2 class="mx-auto mb-2 mt-3" id="title-page">Mezzala</h2>
+        <h2 class="mx-auto mb-2 mt-3" id="title-page"><a href="/">Mezzala</a></h2>
     </div>
     <div class="container w-50 mt-2 menu">
-        <h5>Article</h5>
-        <h5>Premier League</h5>
-        <h5>World Cup</h5>
-        <h5>Story</h5>
-        <h5>Author</h5>
+        <h5><a href="/articles">Article</a></h5>
+        <h5><a href="">Premier League</a></h5>
+        <h5><a href="">World Cup</a></h5>
+        <h5><a href="">Story</a></h5>
+        <h5><a href="">Author</a></h5>
     </div>
     @if (auth()->user())
         <div class="dropdown" class="auth-btn">
+
             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+
                 @if (empty(auth()->user()->img_src))
                     <img alt="image" src="../assets/img/avatar/avatar-5.png" class="rounded-circle mr-1"
                         style="width: 25px; height: 25px; fit-content: contain;">

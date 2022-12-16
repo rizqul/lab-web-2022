@@ -132,7 +132,7 @@
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
                             <div class="col-sm-12 col-md-7">
                                 <input type="text" class="form-control @error('title') is-invalid @enderror"
-                                    name="title" value="{{ old('title') }}">
+                                    name="title" value="{{ old('title') }}" id="create-title">
                                 @error('title')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -146,7 +146,7 @@
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Slug</label>
                             <div class="col-sm-12 col-md-7">
                                 <input type="text" class="form-control @error('slug') is-invalid @enderror"
-                                    name="slug" value="{{ old('slug') }}">
+                                    name="slug" value="{{ old('slug') }}" id="create-slug">
                                 @error('slug')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -489,7 +489,7 @@
             
             $.ajax({
                 type: "get",
-                url: "/article/" + id,
+                url: "/article/getArticle/" + id,
                 success: function(response) {
                     let article = JSON.parse(response.article);
                     let tags = JSON.parse(response.tags);
@@ -561,6 +561,38 @@
                             "<option value='" + subcategory[index].id + "' class='subcat-" + subcategory[index].id + "'>" + subcategory[index]
                             .name + "</option>")
                     }
+                }
+            })
+        })
+
+        $(document).on('change', '#create-title', function () {
+            title = $('#create-title').val();
+            slug = $('#create-slug');
+
+            console.log(title);
+
+            $.ajax({
+                type: "get",
+                url: "/getSlug",
+                data: {title},
+                success: function (response) {
+                    slug.val(response.slug);
+                }
+            })
+        })
+
+        $(document).on('change', '#edit-title', function () {
+            title = $('#edit-title').val();
+            slug = $('#edit-slug');
+
+            // console.log(title);
+
+            $.ajax({
+                type: "get",
+                url: "/getSlug",
+                data: {title},
+                success: function (response) {
+                    slug.val(response.slug);
                 }
             })
         })

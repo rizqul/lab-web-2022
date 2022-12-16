@@ -22,17 +22,18 @@
         <div class="row">
             <div class="col-5 best-article">
                 <div id="img-top-post">
-                    <img src="https://cdn.theathletic.com/cdn-cgi/image/width=600,format=auto/https://cdn.theathletic.com/app/uploads/2022/12/14125046/WC22_Editorial_1214_Messi.png"
-                        alt="" style="width: 100%">
+                    @if (str_contains($top_articles[0]->banner, 'article-banners'))
+                        <img src="{{ asset('storage/' . $top_articles[0]->banner) }}" alt="">
+                    @else
+                        <img src="{{ $top_articles[0]->banner }}" alt="">
+                    @endif
                 </div>
                 <div class="title h5 mt-3">
                     {{ $top_articles[0]->title }}
                 </div>
                 <div class="article-desc">
                     <p>
-                        lormasdfkj asdfkjaskld fasdklfjalskdfj jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-                        kgldfjaklsjfaklsdjfklafsj;daskfj aklsdjfalsdkfjasdk Lorem ipsum dolor sit, amet consectetur
-                        adipisicing elit. Molestiae modi animi
+                        {!! $top_articles[0]->description !!}
                     </p>
                 </div>
             </div>

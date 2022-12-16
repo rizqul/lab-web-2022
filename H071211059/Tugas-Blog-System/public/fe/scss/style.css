@@ -7,7 +7,8 @@
   font-weight: lighter;
   src: url(../fonts/MyriadPro-Light.woff);
 }
-a {
+a,
+a:hover {
   text-decoration: none;
   color: #fff;
 }
@@ -31,12 +32,11 @@ body {
 #title-page {
   color: #fff;
   font-family: "myriad-pro-semibold";
-  display: block;
 }
 
 .auth-btn {
   position: absolute;
-  top: 30%;
+  bottom: 15%;
   right: 5%;
 }
 
@@ -90,4 +90,49 @@ body {
 
 .top-author {
   margin-bottom: 1rem;
+}
+
+.article-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.articles-list {
+  margin-bottom: 1.5rem;
+  max-width: 30%;
+  height: 30%;
+  margin-right: 0.2rem;
+  line-height: 1.2;
+}
+.articles-list .title-list {
+  margin-bottom: 0.3rem;
+}
+
+.author-list {
+  color: rgb(71, 71, 71);
+  font-size: smaller;
+}
+
+.banner-list {
+  width: 95%;
+  height: 150px;
+  margin-bottom: 0.5rem;
+}
+.banner-list img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: fill;
+     object-fit: fill;
+}
+
+.img-article {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 0.5rem;
+}
+.img-article img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }/*# sourceMappingURL=style.css.map */
