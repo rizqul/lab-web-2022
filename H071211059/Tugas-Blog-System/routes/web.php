@@ -26,6 +26,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::controller(FeController::class)->group(function () {
     Route::get('/', 'homepage');
     Route::get('/articles', 'articlesList');
+    Route::get('/articles/{slug}', 'viewArticle')->name('viewarticle');
 });
 
 Route::get('/login', function () {

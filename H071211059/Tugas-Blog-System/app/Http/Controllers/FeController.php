@@ -27,4 +27,11 @@ class FeController extends Controller
         // dd($articles->links());
         return view('article-list', compact('articles', 'top_category', 'top_authors'));
     }
+
+    public function viewArticle($slug)
+    {
+        $article = Article::where('slug', $slug)->get()[0];
+
+        return view('article-page', compact('article'));
+    }
 }
