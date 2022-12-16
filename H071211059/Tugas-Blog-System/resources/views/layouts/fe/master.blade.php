@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mezzala</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
@@ -23,6 +25,11 @@
             @yield('main-content')
             @yield('side-panel')
         </div>
+        <div class="row">
+            <div class="col-8 mx-auto" style="max-width: 640px" id="comment-section">
+                @yield('comment-section')
+            </div>
+        </div>
     </div>
 
 
@@ -39,6 +46,7 @@
     <script src="../assets/js/scripts.js"></script>
     <script src="../assets/js/custom.js"></script>
     <script src="../fe/js/main.js"></script>
+    @yield('spesific-js')
 </body>
 
 </html>

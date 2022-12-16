@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeController;
 use App\Http\Controllers\LoginController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -28,6 +30,11 @@ Route::controller(FeController::class)->group(function () {
     Route::get('/articles', 'articlesList');
     Route::get('/authors', 'authorsList');
     Route::get('/articles/{slug}', 'viewArticle')->name('viewarticle');
+});
+
+Route::controller(CommentController::class)->group(function () {
+    Route::get('/comments', 'comments');
+    Route::post('/comments', 'store');
 });
 
 Route::get('/login', function () {
