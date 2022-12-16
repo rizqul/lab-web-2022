@@ -28,6 +28,17 @@ class FeController extends Controller
         return view('article-list', compact('articles', 'top_category', 'top_authors'));
     }
 
+    public function authorsList()
+    {
+        $authors = User::latest()->paginate(20);
+        // dd($authors);
+        $top_category = Category::withCount('articles')->orderBy('articles_count', 'desc')->take(5)->get();
+        $top_authors = User::withCount('articles')->orderBy('articles_count', 'desc')->take(5)->get();
+
+        // dd($articles->links());
+        return view('author-list', compact('authors', 'top_category', 'top_authors'));
+    }
+
     public function viewArticle($slug)
     {
         $article = Article::where('slug', $slug)->get()[0];

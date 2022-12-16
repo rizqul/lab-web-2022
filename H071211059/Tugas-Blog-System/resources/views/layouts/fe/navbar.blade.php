@@ -7,7 +7,7 @@
         <h5><a href="">Premier League</a></h5>
         <h5><a href="">World Cup</a></h5>
         <h5><a href="">Story</a></h5>
-        <h5><a href="">Author</a></h5>
+        <h5><a href="/authors">Author</a></h5>
     </div>
     @if (auth()->user())
         <div class="dropdown" class="auth-btn">
