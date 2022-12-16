@@ -1,0 +1,137 @@
+:root {
+    --dark : #3A3845;
+    --beige : #F7CCAC;
+    --skin : #C69B7B;
+    --coffe : #826F66;
+}
+body {
+    overflow-x: hidden;
+    /* background-image: url(''); */
+}
+
+.floating-bar {
+    position: absolute !important;
+    left: 1rem;
+    top: 1rem;
+    width: min-content;
+    /* shadow effect */
+    box-shadow: 0.4rem 0.4rem 0.2rem 0.1rem var(--coffe);
+}
+
+.bg-dark {
+    background-color: var(--dark) !important;
+    color: var(--beige) !important;
+}
+
+.bg-beige {
+    background-color: var(--beige) !important;
+    color: var(--dark) !important;
+}
+
+.bg-skin {
+    background-color: var(--skin) !important;
+    color: var(--dark) !important;
+}
+
+.text-dark {
+    color: var(--dark) !important;
+}
+
+.text-beige {
+    color: var(--beige) !important;
+}
+
+.label {
+    font-size: 1.5rem;
+}
+
+.btn-skin:not(:hover) {
+    background-color : var(--beige);
+    color : var(--dark);
+    transition: 0.3s;
+}
+
+.btn-skin:hover {
+    background-color : var(--skin);
+    box-shadow: 0 0 0.5rem 0.2rem var(--skin);
+    transition: 0.3s;
+}
+
+.tab {
+    display: none;
+    position: absolute;
+    top: 2rem;
+    /* left: 2rem; */
+    transform: translateX(250%);
+    width: 85%;
+    box-shadow: 0.4rem 0.4rem 0.2rem 0.1rem var(--coffe);
+    transition: 0.5s ease-out;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 1;
+    display: none;
+}
+
+.input-box {
+    position: inherit;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 200%);
+    width: 60%;
+    height: min-content;
+    transition: 0.6s ease-out;
+}
+
+/* .label-modal {
+    letter-spacing: 3px;
+} */
+
+.form-label {
+    /* Capitalize Starting */
+    text-transform: capitalize;
+}
+
+td, tbody th {
+    color: var(--beige);
+}
+
+.page-link {
+    background-color: var(--skin) !important;
+    color: var(--dark) !important;
+}
+
+.active .page-link {
+    background-color: var(--dark) !important;
+    color: var(--skin) !important;
+    border: 1px var(--skin) solid !important;
+}
+
+.disabled .page-link {
+    background-color: var(--coffe) !important;
+    color: white !important ;
+}
+
+.bt-modal {
+    align-self: end;
+    width: 60%;
+    height: min-content;
+}
+
+.bt-modal:not(:hover) {
+    background-color : var(--beige);
+    color : var(--dark);
+    transition: 0.3s;
+}
+
+.bt-modal:hover {
+    background-color : var(--skin);
+    box-shadow: 0 0 0.5rem 0.2rem var(--skin);
+    transition: 0.3s;
+}
