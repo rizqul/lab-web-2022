@@ -110,8 +110,8 @@
                 <div class="modal-footer delete-forms">
                     <button type="button" class="btn bg-danger text-fourth rounded-0"
                         data-bs-dismiss="modal">Close</button>
-                    <a href="{{ url('/panel/categories/delete/') }}" type="submit" class="btn bg-primary text-fourth rounded-0"
-                        id="confirm-delete">Delete</a>
+                    <a href="{{ url('/panel/categories/delete/') }}" type="submit"
+                        class="btn bg-primary text-fourth rounded-0" id="confirm-delete">Delete</a>
                 </div>
             </div>
         </div>
@@ -259,10 +259,7 @@
             });
             /* * * */
 
-
-            // table.row('[id=' + 1 + ']').remove().draw(false);
-            // console.log(table.columns(7).search('87').data());
-
+            
             /*
              *  Modal Buttons
              */
@@ -297,7 +294,8 @@
                         if (data) {
                             clearInput();
                             $('#category-modal').modal('hide');
-                            data.status = data.status.charAt(0).toUpperCase() + data.status.slice(1);
+                            data.status = data.status.charAt(0).toUpperCase() + data.status
+                                .slice(1);
                             if (store) { // Add new data
                                 console.log('fetched id: ' + data.id);
                                 data.articles_count = 0;
@@ -328,7 +326,7 @@
 
                                 table.cell(rowIndex, 1).data(data.category_name);
                                 table.cell(rowIndex, 2).data(data.status);
-                                
+
                                 return swal.fire('Successfuly edited the Category!');
                             }
                         }
@@ -361,7 +359,8 @@
 
                     success: function(data) {
                         $('.forms').append(
-                            '<input type="hidden" name="id" id="id" value="' + data.id +'">'
+                            '<input type="hidden" name="id" id="id" value="' + data.id +
+                            '">'
                         );
 
                         $('#category_name').val(data.category_name);
@@ -377,4 +376,10 @@
             /* * * */
         });
     </script>
+
+    @if (session('status'))
+        <script>
+            swal.fire('Successfuly deleted the Category!');
+        </script>
+    @endif
 @endsection

@@ -4,25 +4,9 @@
     {{-- <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script> --}}
 
     <style>
-        /* span.ck-file-dialog-button {
-                                                    display: none;
-                                                } */
-        /* #article-input {
-                                                width: 60rem !important;
-                                                position: absolute;
-                                                top: 50%;
-                                                left: 50%;
-                                                transform: translate(-50%, 10%);
-                                            } */
         .ck-editor__editable_inline {
             min-height: 400px;
         }
-
-        /* #preview-image {
-                        width: 100%;
-                        height: 30rem;
-                        object-fit: cover;
-                    } */
     </style>
 @endsection
 
@@ -232,18 +216,8 @@
             CKEDITOR.instances['content'].setData('');
             $('#category').val('');
             $('#status').val('');
+            $('#id').remove();
         }
-
-        // function preview(input) {
-        //     if (input.files && input.files[0]) {
-        //         var reader = new FileReader();
-        //         reader.onload = function(e) {
-        //             $('#preview-image').attr('src', e.target.result);
-        //             $('#preview-image').show();
-        //         };
-        //         reader.readAsDataURL(input.files[0]);
-        //     }
-        // }
 
         $(document).ready(function() {
             /*
@@ -376,7 +350,7 @@
                 data.append('id', id);
                 data.append('mode', isEdit);
 
-                console.log(data);
+                // console.log(data);
 
                 if (!title || !slug || !category || !status || !description) {
                     return swal.fire({
@@ -483,12 +457,14 @@
                         );
                         $('#title').val(data.title);
                         $('#slug').val(data.slug);
-                        if (data.banner) {
-                            $('#preview-image').attr('src', '{{ asset('storage/') }}' + data.banner);
+                        if (data.banner !== null) {
+                            console.log(data.banner);
+                            $('#preview-image').attr('src', '{{ asset('storage/') }}/' + data.banner);
+                            $('#preview-image').show();
                         }
                         $('#description').val(data.description);
                         CKEDITOR.instances['content'].setData(data.content);
-                        $('#category').val(data.category);
+                        $('#category').val(data.category_id);
                         $('#status').val(data.status);
                     }
                 });
@@ -496,4 +472,10 @@
             /* * * */
         });
     </script>
+
+     @if (session('status'))
+     <script>
+         swal.fire('Successfuly deleted the Article!');
+     </script>
+ @endif
 @endsection

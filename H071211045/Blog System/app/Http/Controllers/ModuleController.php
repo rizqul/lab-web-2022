@@ -9,13 +9,57 @@ use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 
 class ModuleController extends Controller
 {
+
     public function dashboard()
     {
-        return view('module.dashboard');
+
+        // Total Articles
+        $totalArticles = Articles::count();
+
+        // Total Views
+        $totalVisitors = Articles::sum('visitors');
+
+        // Total Users
+        $totalUsers = Users::count();
+
+        // Most Liked Articles
+        $mostLikedArticles = Articles::join('categories', 'articles.category_id', '=', 'categories.id')
+            ->select('articles.*', 'categories.category_name')
+            ->orderBy('likes', 'desc')
+            ->limit(3)
+            ->get();
+
+        // Most Commented Articles
+        $mostCommentedArticles = Articles::join('categories', 'articles.category_id', '=', 'categories.id')
+            ->select('articles.*', 'categories.category_name')
+            ->orderBy('comments', 'desc')
+            ->limit(3)
+            ->get();
+
+        // Most Viewed Articles
+        $mostViewedArticles = Articles::join('categories', 'articles.category_id', '=', 'categories.id')
+            ->select('articles.*', 'categories.category_name')
+            ->orderBy('visitors', 'desc')
+            ->limit(3)
+            ->get();
+
+        
+
+        return view(
+            'module.dashboard',
+            compact(
+                'totalArticles',
+                'totalVisitors',
+                'totalUsers',
+                'mostLikedArticles',
+                'mostCommentedArticles',
+                'mostViewedArticles'
+            )
+        );
     }
 
     /*
@@ -23,12 +67,7 @@ class ModuleController extends Controller
      */
     public function articles()
     {
-        $articles = Articles::join('users', 'articles.author_id', '=', 'users.id')
-            ->join('categories', 'articles.category_id', '=', 'categories.id')
-            ->join('article_tag', 'articles.id', '=', 'article_tag.article_id')
-            ->join('tags', 'article_tag.tag_id', '=', 'tags.id')
-            ->select('articles.*', 'users.username', 'categories.category_name', 'tags.tag_name')
-            ->get();
+        $articles = Articles::all();
 
         $categories = Categories::all();
 
@@ -41,7 +80,8 @@ class ModuleController extends Controller
         return response()->json($article);
     }
 
-    public function articleStore(Request $request) {
+    public function articleStore(Request $request)
+    {
 
         $validator = Validator::make($request->all(), [
             'title' => 'required',
@@ -49,13 +89,15 @@ class ModuleController extends Controller
             'category' => 'required',
             'status' => 'required',
         ]);
-        
+
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()]);
         }
 
         if ($request->file('banner')) {
             $banner = $request->file('banner')->store('banners');
+        } else {
+            $banner = $request->banner;
         }
 
         if ($request->mode != 'true') {
@@ -70,6 +112,16 @@ class ModuleController extends Controller
                 'author_id' => Auth::user()->id,
             ]);
 
+            // add article_count to categories
+            $category = Categories::find($article->category_id);
+            $category->articles_count = $category->articles_count + 1;
+            $category->save();
+
+            // add article_count to users
+            $user = Users::find(Auth::user()->id);
+            $user->articles_count = $user->articles_count + 1;
+            $user->save();
+
         } else {
             $article = Articles::find($request->id);
             $article->update([
@@ -80,39 +132,32 @@ class ModuleController extends Controller
                 'category_id' => $request->category,
                 'status' => $request->status,
                 'content' => $request->content,
-                'author_id' => Auth::user()->id,
             ]);
         }
-        
-        return response()->json($article);
-    }
 
-    public function content(Request $request)
-    {
-        if($request->hasFile('upload')) {
-            $originName = $request->file('upload')->getClientOriginalName();
-            $fileName = pathinfo($originName, PATHINFO_FILENAME);
-            $extension = $request->file('upload')->getClientOriginalExtension();
-            $fileName = $fileName.'_'.time().'.'.$extension;
-            $request->file('upload')->move(public_path('images'), $fileName);
-            $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-            $url = asset('images/'.$fileName); 
-            $msg = 'Image successfully uploaded'; 
-            $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
-               
-            @header('Content-type: text/html; charset=utf-8'); 
-            echo $response;
-        }
+        return response()->json($article);
     }
 
     public function articleDelete($id)
     {
         $article = Articles::find($id);
+        if (File::exists(public_path('storage/' . $article->banner))) {
+            File::delete(public_path('storage/' . $article->banner));
+        }
         $article->delete();
+
+        // remove article_count to categories
+        $category = Categories::find($article->category_id);
+        $category->articles_count = $category->articles_count - 1;
+        $category->save();
+
+        // remove article_count to users
+        $user = Users::find($article->author_id);
+        $user->articles_count = $user->articles_count - 1;
+        $user->save();
 
         return redirect()->route('page.articles')->with('status', 'deleted');
     }
-
 
     /* * * */
 
@@ -120,7 +165,7 @@ class ModuleController extends Controller
      * Categories CMS
      */
     public function categories()
-    {   
+    {
         $categories = Categories::join('users', 'categories.author_id', '=', 'users.id')
             ->select('categories.*', 'users.username')
             ->get();
@@ -134,12 +179,13 @@ class ModuleController extends Controller
         return response()->json($category);
     }
 
-    public function categoryStore(Request $request) {
+    public function categoryStore(Request $request)
+    {
 
         $validator = Validator::make($request->all(), [
             'category_name' => 'required',
         ]);
-        
+
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
@@ -153,18 +199,18 @@ class ModuleController extends Controller
 
         } else {
             $category = Categories::create([
-                'category_name' => $request->category_name, 
+                'category_name' => $request->category_name,
                 'description'   => $request->description,
                 'status'        => $request->status,
                 'author_id'     => Auth::user()->id
             ]);
         }
-        
+
         $response = Categories::join('users', 'categories.author_id', '=', 'users.id')
             ->select('categories.*', 'users.username')
             ->where('categories.id', $category->id)
             ->first();
-        
+
         return response()->json($response);
     }
 
@@ -180,7 +226,7 @@ class ModuleController extends Controller
      * Tags CMS
      */
     public function tags()
-    {   
+    {
         $tags = Tags::join('users', 'tags.author_id', '=', 'users.id')
             ->select('tags.*', 'users.username')
             ->get();
@@ -195,12 +241,13 @@ class ModuleController extends Controller
         return response()->json($tag);
     }
 
-    public function tagStore(Request $request) {
+    public function tagStore(Request $request)
+    {
 
         $validator = Validator::make($request->all(), [
             'tag_name' => 'required',
         ]);
-        
+
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
@@ -211,21 +258,20 @@ class ModuleController extends Controller
             $tag->description = $request->description;
             $tag->status = $request->status;
             $tag->save();
-
         } else {
             $tag = Tags::create([
-                'tag_name'     => $request->tag_name, 
+                'tag_name'     => $request->tag_name,
                 'description'   => $request->description,
                 'status'        => $request->status,
                 'author_id'     => Auth::user()->id
             ]);
         }
-        
+
         $response = Tags::join('users', 'tags.author_id', '=', 'users.id')
             ->select('tags.*', 'users.username')
             ->where('tags.id', $tag->id)
             ->first();
-        
+
         return response()->json($response);
     }
 

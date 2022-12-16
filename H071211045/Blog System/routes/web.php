@@ -21,6 +21,7 @@ Route::get('home', function () {
 });
 
 Route::get('member/{username}', [PageController::class, 'member'])->name('page.member');
+Route::get('posts', [PageController::class, 'articles'])->name('page.posts');
 /* - */
 
 /*

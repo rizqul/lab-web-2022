@@ -258,10 +258,6 @@
             });
             /* * * */
 
-
-            // table.row('[id=' + 1 + ']').remove().draw(false);
-            // console.log(table.columns(7).search('87').data());
-
             /*
              *  Modal Buttons
              */
