@@ -21,7 +21,7 @@
     <div class="container mt-5">
         <div class="row">
             @yield('main-content')
-            @include('layouts.fe.side-panel')
+            @yield('side-panel')
         </div>
     </div>
 

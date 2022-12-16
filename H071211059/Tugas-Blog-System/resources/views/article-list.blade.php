@@ -21,3 +21,7 @@
         {!! $articles->links('pagination::bootstrap-4') !!}
     </div>
 @endsection
+
+@section('side-panel')
+    @include('layouts.fe.side-panel')
+@endsection
