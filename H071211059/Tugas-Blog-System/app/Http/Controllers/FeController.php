@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -43,6 +44,9 @@ class FeController extends Controller
     {
         $article = Article::where('slug', $slug)->get()[0];
 
-        return view('article-page', compact('article'));
+        $article_id = $article->id;
+        $comments = Comment::where('article_id', $article_id)->orderBy('created_at', 'desc')->get();
+
+        return view('article-page', compact('article', 'comments'));
     }
 }

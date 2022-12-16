@@ -24,11 +24,8 @@
 @endsection
 
 @section('comment-section')
-    <div class="d-flex">
-        <i class="far fa-heart mr-2" id="like-btn" style="color: red; font-size: 24px;"></i>
-        <p class="mr-3">11</p>
-        <i class="far fa-comment-alt " id="comment-btn" style="color: red; font-size: 22px;"></i>
-    </div>
+    <i class="far fa-heart mr-2" id="like-btn" style="color: red; font-size: 24px;"></i>
+    <i class="far fa-comment-alt " id="comment-btn" style="color: red; font-size: 22px;"></i>
     <div class="comment-section mt-4">
         <div class="comment-form">
             <input type="hidden" name="article-id" id="article-id" value="{{ $article->id }}">
@@ -36,13 +33,16 @@
             <textarea class="form-control" id="comment-input" rows="4" placeholder="Leave a comment..."></textarea>
             <button class="btn btn-success mt-2 float-right" id="submit-btn">Submit</button>
         </div>
-        <div class="mx-3 the-comment mt-5">
-            <div class="author-name">
-                <h5>Author Name</h5>
-            </div>
-            <div class="comment">
-                <p class="h5">Comment</p>
-            </div>
+        <div class="mx-3 the-comment mt-5 pt-5" id="user-comment">
+            @foreach ($comments as $comment)
+                <div class="author-name">
+                    <h6 class="lead">{{ $comment->user->name }}</h6>
+                </div>
+                <div class="comment">
+                    <p class="h6">{{ $comment->comments }}</p>
+                </div>
+                <hr>
+            @endforeach
         </div>
     </div>
 @endsection
@@ -63,16 +63,26 @@
             $.ajax({
                 type: "post",
                 url: "/comments",
-                data: {id: article_id, 
-                        comments: comments},
+                data: {
+                    id: article_id,
+                    comments: comments
+                },
                 success: function(response) {
-                    console.log(response);
+                    $('#user-comment').prepend("<hr>")
+                    $('#user-comment').prepend("<div class='comment'> <p class='h6'>" + response
+                        .comment + "</p></div>"
+                    )
+                    $('#user-comment').prepend(
+                        "<div class='author-name'><h6 class='lead'>" + response.user_name +
+                        "</h6> </div>"
+                    )
+                    $('#comment-input').val("");
                 }
             });
         });
 
         $(document).on('click', '#comment-btn', function() {
-
+            $('.comment-section').show();
         });
 
         $(document).on('click', '#like-btn', function() {

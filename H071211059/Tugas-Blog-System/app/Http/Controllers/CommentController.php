@@ -23,13 +23,14 @@ class CommentController extends Controller
         $article_id = $request->input('id');
         $comment = $request->input('comments');
         $user_id = auth()->user()->id;
+        $user_name = auth()->user()->name;
 
         if (Comment::create([
             'user_id' => $user_id,
             'comments' => $comment,
             'article_id' => $article_id
         ])) {
-            return response()->json(['message' => '200', 'comment' => $comment, 'article_id' => $article_id, 'user_id' => $user_id], 200);
+            return response()->json(['message' => '200', 'comment' => $comment, 'article_id' => $article_id, 'user_id' => $user_id, 'user_name' => $user_name], 200);
         } else {
             return response()->json(['message' => 'salah bro']);
         }
