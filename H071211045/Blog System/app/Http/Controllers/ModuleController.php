@@ -54,17 +54,16 @@ class ModuleController extends Controller
             return response()->json(['errors' => $validator->errors()]);
         }
 
-        $article = new Articles();
-
         if ($request->file('banner')) {
-            $article->banner = $request->file('banner')->store('banners');
+            $banner = $request->file('banner')->store('banners');
         }
-        
-        if ($request->mode == 'false') {
-            $article = Articles::find($request->id);
-            $response = $article->update([
+
+        if ($request->mode != 'true') {
+            $article = Articles::create([
                 'title' => $request->title,
                 'slug' => $request->slug,
+                'description' => $request->description,
+                'banner' => $banner,
                 'category_id' => $request->category,
                 'status' => $request->status,
                 'content' => $request->content,
@@ -72,16 +71,20 @@ class ModuleController extends Controller
             ]);
 
         } else {
-            $response = $article->create([
+            $article = Articles::find($request->id);
+            $article->update([
                 'title' => $request->title,
                 'slug' => $request->slug,
+                'description' => $request->description,
+                'banner' => $banner,
                 'category_id' => $request->category,
                 'status' => $request->status,
                 'content' => $request->content,
                 'author_id' => Auth::user()->id,
             ]);
         }
-        return response()->json($response);
+        
+        return response()->json($article);
     }
 
     public function content(Request $request)
@@ -300,4 +303,13 @@ class ModuleController extends Controller
         return view('module.register');
     }
     /* * * * */
+
+    /*
+     * Ajax Response Debugging
+     */
+
+    public function ajaxDebug($request)
+    {
+        return response()->json($request->all());
+    }
 }

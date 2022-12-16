@@ -296,9 +296,7 @@
                         if (data) {
                             clearInput();
                             $('#tag-modal').modal('hide');
-
-                            // console.log(data);
-
+                            data.status = data.status.charAt(0).toUpperCase() + data.status.slice(1);
                             if (store) { // Add new data
                                 console.log('fetched id: ' + data.id);
                                 data.articles_count = 0;

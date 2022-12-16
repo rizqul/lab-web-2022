@@ -15,15 +15,15 @@ class Articles extends Model
     protected $fillable = [
         'title',
         'slug',
-        'banner',
         'status',
+        'banner',
         'description',
         'visitors',
         'likes',
         'comments',
         'category_id',
         'author_id',
-        'content',
+        'content'
     ];
 
     public function author()
@@ -31,10 +31,10 @@ class Articles extends Model
         return $this->belongsTo(Users::class, 'author_id');
     }
 
-    public function tags()
-    {
-        return $this->belongsToMany(Tags::class, 'article_tag', 'article_id', 'tag_id');
-    }
+    // public function tags()
+    // {
+    //     return $this->belongsToMany(Tags::class, 'article_tag');
+    // }
 
     public function getCreatedAtAttribute($date)
     {
