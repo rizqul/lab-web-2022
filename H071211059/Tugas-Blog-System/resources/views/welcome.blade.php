@@ -22,45 +22,47 @@
         <div class="row">
             <div class="col-5 best-article">
                 @isset($top_articles)
+                    <a href="{{ '/articles/' . $top_articles[0]->slug }}" class="home-card">
+                        <div id="img-top-post">
+                            @if (str_contains($top_articles[0]->banner, 'article-banners'))
+                                <img src="{{ asset('storage/' . $top_articles[0]->banner) }}" alt="">
+                            @else
+                                <img src="{{ $top_articles[0]->banner }}" alt="">
+                            @endif
 
-                    <div id="img-top-post">
-                        @if (str_contains($top_articles[0]->banner, 'article-banners'))
-                            <img src="{{ asset('storage/' . $top_articles[0]->banner) }}" alt="">
-                        @else
-                            <img src="{{ $top_articles[0]->banner }}" alt="">
-                        @endif
+                        </div>
+                        <div class="title h5 mt-3 home-card" style="color: black">
+                            {{ $top_articles[0]->title }}
+                        </div>
+                        <div class="article-desc home-card" style="color: black">
+                            <p>
+                                {!! $top_articles[0]->description !!}
+                            </p>
+                        </div>
+                    </a>
 
-                    </div>
-                    <div class="title h5 mt-3">
-                        {{ $top_articles[0]->title }}
-                    </div>
-                    <div class="article-desc">
-                        <p>
-                            {!! $top_articles[0]->description !!}
-                        </p>
-                    </div>
                 </div>
                 <div class="col-4">
                     @for ($i = 1; $i < count($top_articles); $i++)
-                        <div class="top-article d-flex">
-                            <div class="" style="width: 65%">
-                                <div class="title h6">
-                                    {{ $top_articles[$i]->title }}
+                        <a href="{{ '/articles/' . $top_articles[$i]->slug }}" class="home-card">
+                            <div class="top-article d-flex">
+                                <div class="" style="width: 65%">
+                                    <div class="title h6 home-card" style="color: black">
+                                        {{ $top_articles[$i]->title }}
+                                    </div>
+                                    <p class="fs-6 home-card" style="color: black">{{ $top_articles[$i]->user->name }}</p>
                                 </div>
-                                <p class="fs-6">{{ $top_articles[$i]->user->name }}</p>
+                                <div class="img-article ms-auto">
+                                    @if (str_contains($top_articles[$i]->banner, 'article-banners'))
+                                        <img src="{{ asset('storage/' . $top_articles[$i]->banner) }}" alt="">
+                                    @else
+                                        <img src="{{ $top_articles[$i]->banner }}" alt="">
+                                    @endif
+                                </div>
                             </div>
-                            <div class="img-article ms-auto">
-                                @if (str_contains($top_articles[$i]->banner, 'article-banners'))
-                                    <img src="{{ asset('storage/' . $top_articles[$i]->banner) }}" alt="">
-                                @else
-                                    <img src="{{ $top_articles[$i]->banner }}" alt="">
-                                @endif
-                            </div>
-                        </div>
+                        </a>
                     @endfor
                 </div>
-
-
 
                 <div class="col-3">
                     <div class="top-categories mb-3">

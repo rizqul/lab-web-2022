@@ -24,27 +24,29 @@
 @endsection
 
 @section('comment-section')
-    <i class="far fa-heart mr-2" id="like-btn" style="color: red; font-size: 24px;"></i>
-    <i class="far fa-comment-alt " id="comment-btn" style="color: red; font-size: 22px;"></i>
-    <div class="comment-section mt-4">
-        <div class="comment-form">
-            <input type="hidden" name="article-id" id="article-id" value="{{ $article->id }}">
-            <label for="comment-input">Comment</label>
-            <textarea class="form-control" id="comment-input" rows="4" placeholder="Leave a comment..."></textarea>
-            <button class="btn btn-success mt-2 float-right" id="submit-btn">Submit</button>
+    @if (auth()->user())
+        <i class="far fa-heart mr-2" id="like-btn" style="color: red; font-size: 24px;"></i>
+        <i class="far fa-comment-alt " id="comment-btn" style="color: red; font-size: 22px;"></i>
+        <div class="comment-section mt-4">
+            <div class="comment-form">
+                <input type="hidden" name="article-id" id="article-id" value="{{ $article->id }}">
+                <label for="comment-input">Comment</label>
+                <textarea class="form-control" id="comment-input" rows="4" placeholder="Leave a comment..."></textarea>
+                <button class="btn btn-success mt-2 float-right" id="submit-btn">Submit</button>
+            </div>
+            <div class="mx-3 the-comment mt-5 pt-5" id="user-comment">
+                @foreach ($comments as $comment)
+                    <div class="author-name">
+                        <h6 class="lead">{{ $comment->user->name }}</h6>
+                    </div>
+                    <div class="comment">
+                        <p class="h6">{{ $comment->comments }}</p>
+                    </div>
+                    <hr>
+                @endforeach
+            </div>
         </div>
-        <div class="mx-3 the-comment mt-5 pt-5" id="user-comment">
-            @foreach ($comments as $comment)
-                <div class="author-name">
-                    <h6 class="lead">{{ $comment->user->name }}</h6>
-                </div>
-                <div class="comment">
-                    <p class="h6">{{ $comment->comments }}</p>
-                </div>
-                <hr>
-            @endforeach
-        </div>
-    </div>
+    @endif
 @endsection
 
 @section('spesific-js')
