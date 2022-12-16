@@ -1,0 +1,169 @@
+@font-face {
+  font-family: "myriad-pro-semibold";
+  src: url(../fonts/MYRIADPRO-SEMIBOLD.woff);
+}
+@font-face {
+  font-family: "myriad-pro-light";
+  font-weight: lighter;
+  src: url(../fonts/MyriadPro-Light.woff);
+}
+a,
+a:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+@font-face {
+  font-family: "adobe-garamond-pro";
+  src: url(../fonts/AGaramondPro-Regular.otf);
+}
+body {
+  font-family: "adobe-garamond-pro";
+}
+
+.article-desc p {
+  font-family: "myriad-pro-light";
+}
+
+.navbar {
+  background-color: #be2736;
+}
+
+#title-page {
+  color: #fff;
+  font-family: "myriad-pro-semibold";
+}
+
+.auth-btn {
+  position: absolute;
+  bottom: 15%;
+  right: 5%;
+}
+
+.menu {
+  color: #fff;
+}
+
+.title {
+  font-family: "adobe-gararmond-pro";
+}
+
+#img-top-post {
+  width: 100%;
+  height: 300px;
+}
+#img-top-post img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: fill;
+     object-fit: fill;
+}
+
+.img-article {
+  width: 100px;
+  height: 100px;
+}
+.img-article img {
+  height: 100%;
+  width: 100%;
+}
+
+.best-article {
+  height: 80vh;
+}
+
+.top-article {
+  margin-bottom: 1rem;
+}
+
+.topic-section {
+  display: flex;
+  flex-wrap: wrap;
+}
+.topic-section .top-topic {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  border: 1px black solid;
+}
+
+.top-author {
+  margin-bottom: 1rem;
+}
+
+.article-container,
+.author-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.articles-list {
+  margin-bottom: 1.5rem;
+  max-width: 30%;
+  height: 30%;
+  margin-right: 0.2rem;
+  line-height: 1.2;
+}
+.articles-list .title-list {
+  margin-bottom: 0.3rem;
+  color: black;
+}
+
+.author-list {
+  color: rgb(71, 71, 71);
+  font-size: smaller;
+}
+
+.banner-list {
+  width: 95%;
+  height: 150px;
+  margin-bottom: 0.5rem;
+}
+.banner-list img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: fill;
+     object-fit: fill;
+}
+
+.img-article {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 0.5rem;
+}
+.img-article img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.banner img {
+  width: 100%;
+  height: 80vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.author-list {
+  margin-bottom: 1.5rem;
+  width: 30%;
+  height: 30%;
+  margin-right: 0.2rem;
+  line-height: 1.2;
+}
+
+.author-img {
+  width: 150px;
+  height: 150px;
+  margin: auto;
+  margin-bottom: 1rem;
+}
+.author-img img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}/*# sourceMappingURL=style.css.map */
