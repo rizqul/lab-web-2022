@@ -9,6 +9,7 @@ use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
 
 class ModuleController extends Controller
 {
@@ -29,7 +30,9 @@ class ModuleController extends Controller
             ->select('articles.*', 'users.username', 'categories.category_name', 'tags.tag_name')
             ->get();
 
-        return view('module.articles', compact('articles'));
+        $categories = Categories::all();
+
+        return view('module.articles', compact('articles', 'categories'));
     }
 
     public function articleEdit($id)
@@ -42,37 +45,61 @@ class ModuleController extends Controller
 
         $validator = Validator::make($request->all(), [
             'title' => 'required',
+            'slug' => 'required',
+            'category' => 'required',
+            'status' => 'required',
         ]);
         
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return response()->json(['errors' => $validator->errors()]);
         }
 
-        if ($request->mode == 'false') {
-            $article = Articles::find($request->id);
-            $article->title = $request->title;
-            $article->content = $request->content;
-            $article->category_id = $request->category_id;
-            $article->save();
+        $article = new Articles();
 
-        } else {
-            $article = Articles::create([
-                'title' => $request->title, 
-                'content' => $request->content,
-                'category_id' => $request->category_id,
-                'author_id' => Auth::user()->id
-            ]);
+        if ($request->file('banner')) {
+            $article->banner = $request->file('banner')->store('banners');
         }
         
-        $response = Articles::join('users', 'articles.author_id', '=', 'users.id')
-            ->join('categories', 'articles.category_id', '=', 'categories.id')
-            ->join('article_tag', 'articles.id', '=', 'article_tag.article_id')
-            ->join('tags', 'article_tag.tag_id', '=', 'tags.id')
-            ->select('articles.*', 'users.username', 'categories.category_name', 'tags.tag_name')
-            // ->groupBy('articles.id')
-            ->get();
+        if ($request->mode == 'false') {
+            $article = Articles::find($request->id);
+            $response = $article->update([
+                'title' => $request->title,
+                'slug' => $request->slug,
+                'category_id' => $request->category,
+                'status' => $request->status,
+                'content' => $request->content,
+                'author_id' => Auth::user()->id,
+            ]);
 
+        } else {
+            $response = $article->create([
+                'title' => $request->title,
+                'slug' => $request->slug,
+                'category_id' => $request->category,
+                'status' => $request->status,
+                'content' => $request->content,
+                'author_id' => Auth::user()->id,
+            ]);
+        }
         return response()->json($response);
+    }
+
+    public function content(Request $request)
+    {
+        if($request->hasFile('upload')) {
+            $originName = $request->file('upload')->getClientOriginalName();
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+            $extension = $request->file('upload')->getClientOriginalExtension();
+            $fileName = $fileName.'_'.time().'.'.$extension;
+            $request->file('upload')->move(public_path('images'), $fileName);
+            $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+            $url = asset('images/'.$fileName); 
+            $msg = 'Image successfully uploaded'; 
+            $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
+               
+            @header('Content-type: text/html; charset=utf-8'); 
+            echo $response;
+        }
     }
 
     public function articleDelete($id)
@@ -82,6 +109,8 @@ class ModuleController extends Controller
 
         return redirect()->route('page.articles')->with('status', 'deleted');
     }
+
+
     /* * * */
 
     /*

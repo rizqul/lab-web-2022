@@ -50,6 +50,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('panel/articles/edit/{id}',  [ModuleController::class, 'articleEdit'])->name('page.articles.edit');
     Route::get('panel/articles/delete/{id}',  [ModuleController::class, 'articleDelete'])->name('article.delete');
     Route::post('panel/articles/store', [ModuleController::class, 'articleStore'])->name('articles.store');
+    Route::post('panel/articles/content', [ModuleController::class, 'articleUpload'])->name('articles.content');
 
     // Categories
     Route::get('panel/categories', [ModuleController::class, 'categories'])->name('page.categories');

@@ -1,12 +1,29 @@
 @extends('module')
 
 @section('head')
-    <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
-    {{-- <style>
-        span.ck-file-dialog-button {
-            display: none;
+    {{-- <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script> --}}
+
+    <style>
+        /* span.ck-file-dialog-button {
+                                        display: none;
+                                    } */
+        /* #article-input {
+                                    width: 60rem !important;
+                                    position: absolute;
+                                    top: 50%;
+                                    left: 50%;
+                                    transform: translate(-50%, 10%);
+                                } */
+        .ck-editor__editable_inline {
+            min-height: 400px;
         }
-    </style> --}}
+
+        /* #preview-image {
+            width: 100%;
+            height: 30rem;
+            object-fit: cover;
+        } */
+    </style>
 @endsection
 
 @section('content')
@@ -114,28 +131,72 @@
                 <div class="modal-footer delete-forms">
                     <button type="button" class="btn bg-danger text-fourth rounded-0"
                         data-bs-dismiss="modal">Close</button>
-                    <a href="{{ url('/panel/articles/delete/') }}" type="submit" class="btn bg-primary text-fourth rounded-0"
-                        id="confirm-delete">Delete</a>
+                    <a href="{{ url('/panel/articles/delete/') }}" type="submit"
+                        class="btn bg-primary text-fourth rounded-0" id="confirm-delete">Delete</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade " id="article-modal" tabindex="-1" aria-labelledby="article-modal-label" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-        <div class="modal-dialog ">
-            <div class="modal-content rounded-0">
-                <div class="modal-header">
+    <div class="modal fade" id="article-modal" tabindex="-1" aria-labelledby="article-modal-label" aria-hidden="true"
+        data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable modal-fullscreen p-5">
+            <div class="modal-content rounded-0 bg-fourth" id="article-input">
+                <div class="modal-header bg-primary text-third">
                     <h1 class="modal-title fs-5" id="article-modal-label">Create a New article</h1>
-                    <button type="button" class="btn-close close-forms" data-bs-dismiss="modal"
+                    <button type="button" class="btn-close close-forms text-white" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
-                <div class="modal-body forms">
-                    <label for="name" class="row form-label mb-1 ms-1">Article Name</label>
-                    <input type="text" name="article_name" id="article_name" placeholder="Article Name"
-                        class="row form-control mb-2 ms-1">
+                <div class="modal-body forms d-flex">
+                    <div class="col-8 pe-3">
+                        <label for="name" class="row form-label mb-1 ms-1">Title</label>
+                        <input type="text" name="title" id="title" placeholder="Article Title"
+                            class="row form-control mb-2 ms-1 rounded-0">
 
-                    <label for="description" class="row form-label mb-1 ms-1">Description</label>
-                    <textarea id="description" name="description" placeholder="Description" class="row border mb-2"></textarea>
+                        <label for="content" class="row form-label mb-1 ms-1">Content</label>
+                        <textarea id="content" name="content" placeholder="Content" class="ckeditor row border mb-2 rounded-0"></textarea>
+                    </div>
+                    <div class="col px-2">
+                        <label for="name" class="row form-label mb-1 ms-1">Slug</label>
+                        <input type="text" name="slug" id="slug" placeholder="A Slug"
+                            class="row form-control mb-2 ms-1 rounded-0">
+
+                        <label for="description" class="row form-label mb-1 ms-1">Description</label>
+                        <input id="description" name="description" placeholder="Description"
+                            class="row border mb-2 form-control ms-1 rounded-0">
+
+                        <label for="name" class="row form-label mb-1 ms-1">Banner</label>
+                        <input type="file" name="banner" id="banner" placeholder="Banner"
+                            class="row form-control mb-2 ms-1 rounded-0" onchange="preview(this)">
+                        <img src="" alt="" class="img-fluid rounded-0" id="preview-image">
+                        {{-- Place a preview image from input above --}}
+                        <img  class="img-fluid rounded-0" id="preview-image" style="display: none">
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="category" class="row form-label mb-1 mt-3 ms-1">Category</label>
+                                <select id="category" name="category" class="form-control mb-3 rounded-0">
+                                    <option selected="true" disabled="disabled">- Select a Category
+                                        -
+                                    </option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col">
+                                <label for="status" class="row form-label mb-1 mt-3 ms-1">Status</label>
+                                <select id="status" name="status" class="form-control mb-3 rounded-0">
+                                    <option selected="true" disabled="disabled">- Select post status
+                                        -
+                                    </option>
+                                    <option value="archived">Archived</option>
+                                    <option value="published">Published</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn bg-primary text-fourth rounded-0 store">Submit</button>
@@ -146,6 +207,7 @@
 @endsection
 
 @section('script')
+    <script src=" {{ asset('plugin/ckeditor/ckeditor.js') }} "></script>
     <script>
         const filterMenu =
             "<div class='form-outline d-flex'>" +
@@ -153,7 +215,7 @@
             "<button class='btn rounded-0 bg-primary text-third px-4 d-flex justify-content-center align-items-center' id='add-new' onclick='add()' data-bs-toggle='modal' data-bs-target='#article-modal'><span class='me-2'>New</span><span class='me-2'>article</span><i class='bi bi-plus-circle'></i></button>" +
             "</div>";
 
-        var description, table, rowIndex;
+        var  table, rowIndex;
 
         function add() {
             $('#article-modal-label').text('Create a New article');
@@ -161,37 +223,66 @@
         }
 
         function clearInput() {
-            $('#article_name').val('');
-            description.setData('');
-            $('#id').remove();
+            $('#title').val('');
+            $('#slug').val('');
+            $('#banner').val('');
+            $('#description').val('');
+            $('#preview-image').attr('src', '');
+            CKEDITOR.instances['content'].setData('');
+            $('#category').val('');
+            $('#status').val('');
+        }
+
+        function preview(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#preview-image').attr('src', e.target.result);
+                    $('#preview-image').show();
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
         }
 
         $(document).ready(function() {
-            ClassicEditor
-                .create(document.querySelector('#description'))
-                .then(editor => {
-                    description = editor;
-                })
-                .catch(error => {
-                    console.error(error);
-                });
+            // CKEDITOR.replace('content');
+
+            // Inject CKEditor with image upload feature
+            // ClassicEditor
+            //     .create(document.querySelector('#content'), {
+            //         ckfinder: {
+            //             uploadUrl: '{{ route('articles.content') }}'
+            //         }
+            //     })
+            //     .then(text => {
+            //         content = text;
+            //     })
+            //     .catch(error => {
+            //         console.error(error);
+            //     });
+            // ClassicEditor
+            //     .create(document.querySelector('#content'))
+            //     .then(editor => {
+            //         description = editor;
+            //     })
+            //     .catch(error => {
+            //         console.error(error);
+            //     });
 
             /*
              * DataTables
              */
             table = $("#table_articles").DataTable({
-                // hide last column
 
                 "columnDefs": [{
                         "sortable": false,
-                        "targets": [0, 6]
+                        "targets": [0, 7]
                     },
                     {
                         "visible": false,
-                        "targets": [7]
+                        "targets": [9]
                     }
                 ],
-
                 dom: '<"#filterDiv">frtip',
             });
 
@@ -261,60 +352,98 @@
                 e.preventDefault();
                 let isEdit = document.getElementById("id");
                 let id_token = $('#id').val();
-                let articleName = $('#article_name').val();
-                let articleDescription = description.getData();
                 let store = !isEdit ? true : false;
                 let _token = $('meta[name="csrf-token"]').attr('content');
                 let firstCol = (table.rows().count() != 0) ? table.rows().count() + 1 : 1;
+
+                let title = $('#title').val();
+                let slug = $('#slug').val();
+                let banner = $('#banner').val();
+                let description = $('#description').val();
+                let content = CKEDITOR.instances['content'].getData();
+                let category = $('#category').val();
+                let status = $('#status').val();
+
+                if (!title || !slug || !category || !status || !content || !description) {
+                    return swal.fire({
+                        title: 'Error!',
+                        text: 'Please fill all required fields',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
+                }
 
                 // Send data to controller
                 $.ajax({
                     url: '{{ route('articles.store') }}',
                     type: 'POST',
                     data: {
-                        article_name: articleName,
-                        description: articleDescription,
                         id: id_token,
+                        title: title,
+                        slug: slug,
+                        banner: banner,
+                        description: description,
+                        content: content,
+                        category: category,
+                        status: status,
+
+                        /* Injection Addon */
                         mode: store,
                         _token: _token
                     },
                     success: function(data) {
                         if (data) {
-                            clearInput();
-                            $('#article-modal').modal('hide');
 
-                            // console.log(data);
+                            if (!data.id || typeof data.id == undefined) { // Error Validator
+                                console.log(data);
+                                return swal.fire({
+                                    title: 'Error!',
+                                    text: 'Something went wrong',
+                                    icon: 'error',
+                                    confirmButtonText: 'Ok'
+                                });
+
+                            } else {
+                                clearInput();
+                                $('#article-modal').modal('hide');
+                            }
+
 
                             if (store) { // Add new data
                                 console.log('fetched id: ' + data.id);
-                                data.articles_count = 0;
-                                table.row.add([
+                                // data.articles_count = 0;
+                                // table.row.add([
 
-                                    firstCol, data.article_name, data.status, data
-                                    .articles_count,
-                                    data.username, data.created_at,
-                                    "<div class='actions d-flex w-100'>" +
-                                    "<button class='btn bg-secondary text-third rounded-0 edit'" +
-                                    "data-bs-toggle='modal' data-bs-target='#article-modal' data-id='" +
-                                    data.id + "'>" +
-                                    "<i class='bi bi-pencil-square'></i>" +
-                                    "</button>" +
+                                //     firstCol, data.article_name, data.status, data
+                                //     .articles_count,
+                                //     data.username, data.created_at,
+                                //     "<div class='actions d-flex w-100'>" +
+                                //     "<button class='btn bg-secondary text-third rounded-0 edit'" +
+                                //     "data-bs-toggle='modal' data-bs-target='#article-modal' data-id='" +
+                                //     data.id + "'>" +
+                                //     "<i class='bi bi-pencil-square'></i>" +
+                                //     "</button>" +
 
-                                    "<button class='ms-1 btn bg-danger text-third rounded-0 delete'" +
-                                    "data-bs-toggle='modal' data-bs-target='#confirm-delete-modal' data-id='" +
-                                    data.id + "'>" +
-                                    "<i class='bi bi-trash'></i>" +
-                                    "</button>" +
-                                    "</div>", data.id
+                                //     "<button class='ms-1 btn bg-danger text-third rounded-0 delete'" +
+                                //     "data-bs-toggle='modal' data-bs-target='#confirm-delete-modal' data-id='" +
+                                //     data.id + "'>" +
+                                //     "<i class='bi bi-trash'></i>" +
+                                //     "</button>" +
+                                //     "</div>", data.id
 
-                                ]).draw(false);
+                                // ]).draw(false);
 
                                 return swal.fire('Successfuly added the article!');
 
                             } else { // Edit Data
 
-                                table.cell(rowIndex, 1).data(data.article_name);
-                                
+                                // table.cell(rowIndex, 1).data(data.article_name);
+                                // table.cell(rowIndex, 2).data(data.status);
+                                // table.cell(rowIndex, 3).data(data.description);
+                                // table.cell(rowIndex, 4).data(data.likes);
+                                // table.cell(rowIndex, 5).data(data.comments);
+                                // table.cell(rowIndex, 6).data(data.visitors);
+
                                 return swal.fire('Successfuly edited the article!');
                             }
                         }
@@ -347,15 +476,24 @@
 
                     success: function(data) {
                         $('.forms').append(
-                            '<input type="hidden" name="id" id="id" value="' + data.id +'">'
+                            '<input type="hidden" name="id" id="id" value="' + data.id +
+                            '">'
                         );
-
+                        $('#title').val(data.title);
+                        $('#slug').val(data.slug);
+                        $('#banner').val(data.banner);
+                        $('#description').val(data.description);
+                        $('#content').val(data.content);
+                        $('#category').val(data.category);
+                        $('#status').val(data.status);
                         $('#article_name').val(data.article_name);
 
                         if (data.description == null) {
                             data.description = '';
                         }
+
                         description.setData(data.description);
+
                     }
                 });
             });
