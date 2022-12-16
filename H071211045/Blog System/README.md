@@ -7,3 +7,4 @@
 <span><b>Note</b><span><br>
 <span>Hanya 90an persen jadi, front end hanya tersisa bagian members</span><br>
 <span>Mari tutup semester 3 ini dengan doa semoga semuanya sehat wal'afiat</span>
+<span><br>#SalamTanpaTemplate</br><span>
