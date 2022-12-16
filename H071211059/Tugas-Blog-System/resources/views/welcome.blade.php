@@ -21,21 +21,24 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-5 best-article">
-                <div id="img-top-post">
-                    @if (str_contains($top_articles[0]->banner, 'article-banners'))
-                        <img src="{{ asset('storage/' . $top_articles[0]->banner) }}" alt="">
-                    @else
-                        <img src="{{ $top_articles[0]->banner }}" alt="">
-                    @endif
-                </div>
-                <div class="title h5 mt-3">
-                    {{ $top_articles[0]->title }}
-                </div>
-                <div class="article-desc">
-                    <p>
-                        {!! $top_articles[0]->description !!}
-                    </p>
-                </div>
+                @empty($top_articles)
+                    <div id="img-top-post">
+                        @if (str_contains($top_articles[0]->banner, 'article-banners'))
+                            <img src="{{ asset('storage/' . $top_articles[0]->banner) }}" alt="">
+                        @else
+                            <img src="{{ $top_articles[0]->banner }}" alt="">
+                        @endif
+
+                    </div>
+                    <div class="title h5 mt-3">
+                        {{ $top_articles[0]->title }}
+                    </div>
+                    <div class="article-desc">
+                        <p>
+                            {!! $top_articles[0]->description !!}
+                        </p>
+                    </div>
+                @endempty
             </div>
             <div class="col-4">
                 @for ($i = 1; $i < count($top_articles); $i++)
