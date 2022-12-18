@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
         
             @forelse ($products as $product)
-                <div class="col-sm-12 col-md-6 col-lg-4 d-flex justify-content-center mt-5">
+                <div class="col-sm-12 col-md-6 d-flex justify-content-center mt-5">
                     <div class="card" style="min-width: 300px;">
                         <img class="card-img-top" style="width: 100%;" src="{{asset('storage/img/'.$product->file)}}" alt="Card image cap">
                         <div class="card-body">
