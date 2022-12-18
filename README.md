@@ -12,4 +12,3 @@ Repository untuk mengumpulkan tugas praktikum Lab Web 2022 Group 1
 - SELVIANI AMALIA KARTIKA
 - MUHAMMAD ERWIN ARIF
 
-LINK YOUTUBE FINAL PRAKTIKUM: https://youtu.be/XbT2tHrvXPQ
