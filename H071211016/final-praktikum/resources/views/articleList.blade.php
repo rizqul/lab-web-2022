@@ -1,34 +1,27 @@
 @extends('layout.user')
 @section('content')
 <div class="container" style="margin-top: 30px;">
-        <div class="row">
-            @foreach($data as $item)
-            <div class="col-lg-4">
-                <div class="card text-center mb-5">
-                    <div class="card-header p-0">
-                        <div class="blog-media">
-                            <img src="http://127.0.0.1:8000/blogTemplate/assets/imgs/blog2.jpg" alt="" class="w-100">
-                            <a href="#" class="badge badge-primary">#{{ $item -> category_id }}</a>
-                        </div>
-                    </div>
-                    <div class="card-body px-0">
-                        <h5 class="card-title mb-2">{{$item -> title}}</h5>
-                        <small class="small text-muted">{{$item -> created_at}}
-                            <span class="px-2">-</span>
-                            <a href="#" class="text-muted">0 Comments</a>
-                        </small>
-                        <p class="my-2">{{ $item->description }}</p>
-                    </div>
-
-                    <div class="card-footer p-0 text-center">
-                        <a href="publicArticleDetail/{{ $item->id }}" class="btn btn-outline-dark btn-sm">READ MORE</a>
-                    </div>
-                </div>
-            </div>
+<h1 class="text-center" >Article List</h1>
+<table class="table table-striped" id="tableBlog">
+         <thead>
+            <tr>
+               <th scope="col">No.</th>
+               <th scope="col">Title</th>
+               <th scope="col">Category</th>
+               <th scope="col">Created At</th>
+               <th scope="col">Action</th>
+            </tr>
+         </thead>
+         <tbody>
+            @foreach($data as $index => $item)
+            <tr>
+               <th>{{ $index + 1 }}</th>
+               <td>{{$item->title}}</td>
+               <td>{{ $item->category_id }} </td>
+               <td>{{ $item->created_at }}</td>
+               <td><a class="btn btn-primary rounded" href="publicArticleDetail/{{ $item->id }}">Detail</a></td>
+            </tr>
             @endforeach
-        </div>
-    </div>
-    <div class="paginationButtonLink">
-        {{$data->links()}}
-    </div>
+         </tbody>
+</table>
     @endsection

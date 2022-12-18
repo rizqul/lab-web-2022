@@ -28,13 +28,13 @@
 
                 <div class="col-12">
                     <div class="form-group">
-                        <form action="createArticle" method="POST">
+                        <form action="createArticle" method="POST" enctype="multipart/form-data">
                             @csrf
                                 <label for="inputName">Title</label>
                                 <input type="text" id="title" name="title" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="inputEmail">Description (At least 20 characters)</label>
+                                <label for="inputEmail">Description</label>
                                 <input type="text" id="description" name="description" class="form-control">
                             </div>
                             <div class="form-group">
@@ -66,7 +66,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="inputMessage">Articles's Body</label>
-                                <textarea id="body" class="form-control" name="body" rows="4"></textarea>
+                                <textarea id="mysummernote" class="form-control" name="body" rows="4"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="status">Status</label>
@@ -75,6 +75,10 @@
                                     <option value="archived">Archived</option>
                                     <option value="Published">Published</option>
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputMessage">Photo</label>
+                                <input type="file" name="foto">
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Submit</button>

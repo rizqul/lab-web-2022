@@ -12,7 +12,7 @@ class homePageController extends Controller
     {
         $data = DB::table('users')->limit(5)->get();
         $data2 = DB::table('categories')->limit(6)->get();
-        $data3 = DB::table('articles')->limit(5)->get();
+        $data3 = DB::table('articles')->where('status', 'published')->limit(5)->get();
         return view('homepage')
             -> with(compact('data'))
             -> with(compact('data2'))

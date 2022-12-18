@@ -30,33 +30,7 @@
           <div class="row">
             <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
               <div class="row">
-                <div class="col-12 col-sm-4">
-                  <div class="info-box bg-light">
-                    <div class="info-box-content">
-                      <span class="info-box-text text-center text-muted">Favorite</span>
-                      <span class="info-box-number text-center text-muted mb-0">0</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-sm-4">
-                  <div class="info-box bg-light">
-                    <div class="info-box-content">
-                      <span class="info-box-text text-center text-muted">Comment</span>
-                      <span class="info-box-number text-center text-muted mb-0">0</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-sm-4">
-                  <div class="info-box bg-light">
-                    <div class="info-box-content">
-                      <span class="info-box-text text-center text-muted">Read</span>
-                      <span class="info-box-number text-center text-muted mb-0">0</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                {{$data1->body}}
+                {!! $data1->body !!}
               </div>
             </div>
             <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
@@ -66,6 +40,9 @@
               <div class="text-muted">
                 <p class="text-sm">Author
                   <b class="d-block">{{$data2 -> username}}</b>
+                </p>
+                <p class="text-sm">Picture/Thumbnail
+                  <img src="{{ asset('fotoArticle/'. $data1->foto) }}" width="300px" alt="foto-article">
                 </p>
                 <p class="text-sm">Category
                   @foreach ($data3 as $item)
@@ -89,6 +66,7 @@
               </ul>
               <div class="text-center mt-5 mb-3">
               <a href="/articleEdit/{{$data1->id}}" class="btn btn-sm btn-warning">Edit Article</a>
+              <a href="/articleDelete/{{$data1->id}}" class="btn btn-sm btn-danger">Delete Article</a>
               </div>
             </div>
           </div>

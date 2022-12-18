@@ -19,6 +19,7 @@ class registerController extends Controller
             'userName' => 'required|unique:users',
             'email'=>'required|email|unique:users',
             'password'=>'required',
+            'foto'=>'required',
         ]);
 
         $register = new register();
@@ -28,7 +29,12 @@ class registerController extends Controller
         $register->password = bcrypt($request->password);
         $register->level = 'member';
 
-        $register->save();
+        if($request->hasFile('foto')){
+            $request->file('foto')->move('fotoArticle/', $request->file('foto')->getClientOriginalName());
+            $register->foto = $request->file('foto')->getClientOriginalName();
+            $register->save();
+        }
+
 
         return redirect()->to('/login')->send()->with('success', 'Data berhasil di tambahkan!');
     }

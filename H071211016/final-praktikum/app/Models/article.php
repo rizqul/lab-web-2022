@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
 
 class article extends Model
 {
@@ -30,4 +32,22 @@ class article extends Model
     public function getCreatedAtAttribute($value){
         return Carbon::parse($value)->format('d/m/Y H:i:s');
     }
+
+    public function getCategoryIdAttribute($value)
+    {
+        $data = DB::table('categories')->where('id', $value)->get();
+        foreach ($data as $item) {
+            return $item -> name;
+        }
+    }
+    
+    public function getSubCategoryIdAttribute($value)
+    {
+        $data = DB::table('sub_category')->where('id', $value)->get();
+        foreach ($data as $item) {
+            return $item -> name;
+        }
+    }
+
+
 }

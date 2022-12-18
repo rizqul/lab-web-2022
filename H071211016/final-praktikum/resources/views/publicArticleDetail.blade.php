@@ -29,11 +29,10 @@
                             <span class="px-2">·</span>
                             <span>{{$data1 -> created_at}}</span>
                             <span class="px-2">·</span>
-                            <a href="#" class="text-muted">0 Comments</a>
                         </small>
                     </div>
                     <div class="card-body border-top">
-                        {{$data1->body}}
+                        {!! $data1->body !!}
                     </div>
                     
                                       
@@ -48,7 +47,9 @@
                 <h6 class=" ">Tags</h6>
                 @foreach($data4 as $item)
                 <a href="javascript:void(0)" class="badge badge-primary m-1">#{{ $item->tag_id }}</a>
-                @endforeach           
+                @endforeach
+                <h6 class="mt-5">Picture/Thumbnail</h6>
+                <img src="{{ asset('fotoArticle/'. $data1->foto) }}" class="w-100" alt="foto-article">
             </div>
         </div>
     </section>

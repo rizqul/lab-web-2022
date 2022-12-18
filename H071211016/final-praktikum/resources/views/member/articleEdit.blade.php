@@ -29,7 +29,7 @@
                 <div class="col-12">
                     <div class="form-group">
                         @foreach($data4 as $item)
-                        <form action="/editArticle/{{$item->id}}" method="POST">
+                        <form action="/editArticle/{{$item->id}}" method="POST" enctype="multipart/form-data">
                         @endforeach
                             @csrf
                                 <label for="inputName">Title</label>
@@ -38,7 +38,7 @@
                                 @endforeach
                             </div>
                             <div class="form-group">
-                                <label for="inputEmail">Description (At least 20 characters)</label>
+                                <label for="inputEmail">Description</label>
                                 @foreach($data4 as $item)
                                 <input type="text" id="description" name="description" class="form-control" value="{{$item->description}}">
                                 @endforeach
@@ -55,7 +55,7 @@
                             <div class="form-group">
                                 <label for="inputEmail">Sub Category</label>
                                 <select class="form-select" name="subCategory" aria-label="Default select example">
-                                    <option selected>-- Sub Category</option>
+                                <option selected>-- Sub Category</option>
                                     @foreach($data3 as $item)
                                     <option value="{{$item->id}}">{{$item -> name}}</option>
                                     @endforeach
@@ -73,16 +73,22 @@
                             <div class="form-group">
                                 <label for="inputMessage">Articles's Body</label>
                                 @foreach($data4 as $item)
-                                <textarea id="body" class="form-control" name="body" rows="4" value="{{$item->body}}">{{ $item->body }}</textarea>
+                                <textarea id="mysummernote" class="form-control" name="body" rows="4" value="{{$item->body}}">{{ $item->body }}</textarea>
                                 @endforeach
                             </div>
                             <div class="form-group">
                                 <label for="status">Status</label>
                                 <select class="form-select" name="status" aria-label="Default select example">
-                                    <option value="" selected>-- Status</option>
+                                    @foreach($data4 as $item)
+                                    <option value="{{ $item -> status }}" selected>-- {{$item -> status}}</option>
+                                    @endforeach
                                     <option value="archived">Archived</option>
                                     <option value="Published">Published</option>
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="formFile" class="form-label">Foto</label>
+                                <input class="form-control" name="foto" type="file" id="formFile">
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Submit</button>

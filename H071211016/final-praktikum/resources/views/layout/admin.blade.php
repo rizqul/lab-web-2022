@@ -18,8 +18,11 @@
 
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
 
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+
 </head>
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition light-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
 
   <!-- Preloader -->
@@ -35,10 +38,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="/home" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="/articles" class="nav-link">articles</a>
+        <a href="/articles" class="nav-link">Articles</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="/category" class="nav-link">Category</a>
@@ -62,7 +62,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="btn btn-dark" href="logout" role="button">Logout</a>
+        <a class="btn btn-dark" href="/logout" role="button">Logout</a>
       </li>
   </nav>
   <!-- /.navbar -->
@@ -79,10 +79,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{asset('template/dist/img/user2-160x160.jpg ')}}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ asset('fotoArticle/'. Auth::user()->foto) }}" alt="User profile picture" class="img-circle elevation-2">
         </div>
         <div class="info">
-          <a href="profile" class="d-block">{{Auth::user()->name}}</a>
+          <a href="profile/{{ Auth::user()->id }}" class="d-block">{{Auth::user()->name}}</a>
         </div>
       </div>
 
@@ -103,11 +103,6 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
-                <a href="/home" class="nav-link">
-                  <p>Home</p>
-                </a>
-          </li>
           <li class="nav-item">
                 <a href="/articles" class="nav-link">
                   <p>Articles</p>
@@ -179,5 +174,13 @@
          $('#tableBlog').DataTable();
       } );
    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#mysummernote").summernote();
+        $('.dropdown-toggle').dropdown();
+    });
+</script>
 </body>
 </html>

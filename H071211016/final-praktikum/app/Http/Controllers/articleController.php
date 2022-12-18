@@ -37,11 +37,9 @@ class articleController extends Controller
     public function create(Request $request)
     {
         $request->validate([
+            'foto' => 'required',
             'title' => 'required',
-            'description'=>'required',
-            'body'=>'required',
-            'category' => 'required',
-            'status' => 'required',
+            'description' => 'required',
         ]);
 
         $article = new article();
@@ -53,7 +51,11 @@ class articleController extends Controller
         $article->sub_category_id = $request->subCategory;
         $article->status = $request->status;
 
-        $article->save();
+        if($request->hasFile('foto')){
+            $request->file('foto')->move('fotoArticle/', $request->file('foto')->getClientOriginalName());
+            $article->foto = $request->file('foto')->getClientOriginalName();
+            $article->save();
+        }
 
         $query = DB::table('tags')->where('author_id', Auth::id())->get();
         foreach ($query as $list) {
@@ -84,7 +86,7 @@ class articleController extends Controller
         $data = DB::table('categories')->where('author_id', Auth::id())->get();
         $data2 = DB::table('tags')->where('author_id', Auth::id())->get();
         $data3 = DB::table('sub_category')->where('author_id', Auth::id())->get();
-        $data4 = DB::table('articles')->where('id', $id)->get();
+        $data4 = article::where('id', $id)->get();
         return view('member/articleEdit')
             ->with(compact('data'))
             ->with(compact('data2'))
@@ -102,7 +104,11 @@ class articleController extends Controller
         $article->sub_category_id = $request->subCategory;
         $article->status = $request->status;
 
-        $article->save();
+        if($request->hasFile('foto')){
+            $request->file('foto')->move('fotoArticle/', $request->file('foto')->getClientOriginalName());
+            $article->foto = $request->file('foto')->getClientOriginalName();
+            $article->save();
+        }
 
         $deleteTag = DB::table('article_tags')->where('article_id', $id)->delete();
 
@@ -113,9 +119,13 @@ class articleController extends Controller
             'tag_id'      => $request->input('tags'.$list->id),
           );
         }
-        //dd($data);
         DB::table('article_tags')->insert($data);
 
         return redirect()->to('/articles')->send()->with('success', 'Data berhasil di edit!');
+    }
+
+    public function deleteArticle($id){
+        $deleted = DB::table('articles')->where('id','=', $id)->delete();
+        return redirect()->to('/articles')->send()->with('success', 'Data berhasil di hapus!');
     }
 }

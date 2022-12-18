@@ -21,7 +21,7 @@ class loginController extends Controller
         ]);
 
         if(Auth::attempt($request->only('email', 'password'))){
-            return redirect('home');
+            return redirect('articles');
         }else{
             dd($request->all());
         }

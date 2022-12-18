@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('description');
             $table->text('body');
             $table->string('status');
+            $table->string('foto');
             $table->unsignedBigInteger('member_id')->nullable();
             $table->foreign('member_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('category_id')->nullable();

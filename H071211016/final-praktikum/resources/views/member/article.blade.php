@@ -6,6 +6,12 @@
         <div class="container-fluid">
             <h2 class="text-center display-4">Your Articles</h2>
         </div>
+        @if($message = Session::get('success'))
+            <div class="alert alert-success alert-dismissible fade show w-100" role="alert">
+                <strong> {{$message}} </strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="card">
             <div class="card-header d-flex">
                 <h3 class="card-title p-2 flex-grow-1">Articles's Table</h3>
@@ -19,9 +25,6 @@
                             <th style="width: 10px">No</th>
                             <th>Title</th>
                             <th>Description</th>
-                            <th>Favorite</th>
-                            <th>Comment</th>
-                            <th>Read</th>
                             <th>Created At</th>
                             <th style="width: 40px">Details</th>
                         </tr>
@@ -32,9 +35,6 @@
                             <td> {{ $index + 1 }} </td>
                             <td> {{ $item->title }} </td>
                             <td>{{ $item->description }}</td>
-                            <td> - </td>
-                            <td> - </td>
-                            <td> - </td>
                             <td>{{ $item->created_at }}</td>
                             <td>
                             <a class="btn btn-danger" href="articleDetail/{{$item -> id}}/{{$item->member_id}}" role="button">Details</a>

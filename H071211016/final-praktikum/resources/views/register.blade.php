@@ -24,7 +24,7 @@
     <div class="card-body register-card-body">
       <p class="login-box-msg">Register a new membership</p>
 
-      <form action="registerProcess" method="post">
+      <form action="registerProcess" method="post" enctype="multipart/form-data">
         @csrf
         <div class="input-group mb-3">
           <input type="text" class="form-control" name="name" placeholder="Full name">
@@ -57,6 +57,10 @@
               <span class="fas fa-lock"></span>
             </div>
           </div>
+        </div>
+        <div class="mb-3">
+          <label for="formFile" class="form-label">Profile Picture</label>
+          <input class="form-control" name="foto" type="file" id="formFile">
         </div>
         <button type="submit" class="btn btn-primary btn-block">Register</button>
       </form>

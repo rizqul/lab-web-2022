@@ -12,15 +12,12 @@ use App\Http\Controllers\homePageController;
 use App\Http\Controllers\articleListController;
 use App\Http\Controllers\memberListController;
 use App\Http\Controllers\memberDetailController;
+use App\Http\Controllers\profileController;
 use App\Http\Controllers\publicArticleDetailController;
 
 
 
 Route::group(['middleware' => ['auth', 'hakAkses:member, admin']], function(){
-    
-    Route::get('/home', function () {
-        return view('member/index');
-    });
 
     Route::get('articles', [articleController::class , 'showArticles']);
 
@@ -59,6 +56,14 @@ Route::group(['middleware' => ['auth', 'hakAkses:member, admin']], function(){
     Route::get('articleEdit/{id}', [articleController::class, 'showArticleEdit']);
 
     Route::post('editArticle/{id}', [articleController::class, 'edit']);
+
+    Route::get('profile/{id}', [profileController::class, 'showProfile']);
+
+    Route::post('/editProfile/{id}', [profileController::class, 'editProfile']);
+
+    Route::get('articleDelete/{id}', [articleController::class, 'deleteArticle']);
+
+    Route::get('/deleteProfile/{id}', [profileController::class, 'deleteProfile']);
 
 });
 
