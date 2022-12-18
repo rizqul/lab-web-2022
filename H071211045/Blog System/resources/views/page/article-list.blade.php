@@ -1,5 +1,9 @@
 @extends('index')
 
+@section('head')
+
+@endsection
+
 @section('page')
     <div class="bg-dark py-5"></div>
     <div class="container mt-5">
@@ -12,12 +16,20 @@
         <div class="row">
             @forelse ($articles as $article)
                 <div class="col-4">
-                    <div class="card">
+                    <div class="card bg-dark mb-2">
                         <div class="card-body">
-                            <a href="/p/{{ $article->slug }}" class="text-title text-primary d-inline-block fw-bold">
+                            <a href="/p/{{ $article->slug }}">
+                                @if ($article->banner)
+                                    <img src="{{ asset('storage/' . $article->banner) }}" alt="post-image"
+                                        class="img-fluid">
+                                @else
+                                    <img src="{{ asset('storage/default-banner.png') }}" alt="post-image" class="img-fluid">
+                                @endif
+                            </a>
+                            <a href="/p/{{ $article->slug }}" class="text-title text-third d-inline-block fw-bold">
                                 {{ $article->title }}
                             </a>
-                            <p class="text-secondary mt-2 description">
+                            <p class="text-white mt-2 description">
                                 {{ $article->description }}
                             </p>
                             <a href="/p/{{ $article->slug }}" class="p-2 bg-secondary text-third d-inline-block">
@@ -36,7 +48,4 @@
             @endforelse
         </div>
     </div>
-
-
-        
 @endsection

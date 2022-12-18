@@ -149,19 +149,15 @@
                         <input id="description" name="description" placeholder="Description"
                             class="row border mb-2 form-control ms-1 rounded-0">
                         <label for="name" class="row form-label mb-1 ms-1">Banner</label>
-                        {{-- <form enctype="multipart/form-data" id="bannerForm"> --}}
                         <input type="file" name="banner" id="banner" placeholder="Banner"
                             class="row form-control mb-2 ms-1 rounded-0">
-                        {{-- Place a preview image from input above --}}
-                        {{-- </form> --}}
                         <img class="img-fluid rounded-0" id="preview-image" style="display: none">
-
 
                         <div class="row">
                             <div class="col">
                                 <label for="category" class="row form-label mb-1 mt-3 ms-1">Category</label>
                                 <select id="category" name="category" class="form-control mb-3 rounded-0">
-                                    <option selected="true" disabled="disabled">- Select a Category
+                                    <option selected="true" disabled="disabled" value="0">- Select a Category
                                         -
                                     </option>
                                     @foreach ($categories as $category)
@@ -173,11 +169,26 @@
                             <div class="col">
                                 <label for="status" class="row form-label mb-1 mt-3 ms-1">Status</label>
                                 <select id="status" name="status" class="form-control mb-3 rounded-0">
-                                    <option selected="true" disabled="disabled">- Select post status
+                                    <option selected="true" disabled="disabled" value="0">- Select post status
                                         -
                                     </option>
                                     <option value="archived">Archived</option>
                                     <option value="published">Published</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="tags" class="row form-label mb-1 mt-3 ms-1">Tags</label>
+                                <select id="tags" name="tags[]" class="form-select mb-3 rounded-0"
+                                    multiple="multiple">
+                                    <option disabled="disabled">Ctrl + Right Click Below Tags :
+                                    </option>
+                                    @foreach ($tags as $tag)
+                                        <option value="{{ $tag->id }}">{{ $tag->tag_name }}</option>
+                                    @endforeach
+
                                 </select>
                             </div>
                         </div>
@@ -214,8 +225,9 @@
             $('#description').val('');
             $('#preview-image').attr('src', '');
             CKEDITOR.instances['content'].setData('');
-            $('#category').val('');
-            $('#status').val('');
+            $('#category').val(0);
+            $('#status').val(0);
+            $('#tags').val('');
             $('#id').remove();
         }
 
@@ -291,6 +303,10 @@
                     .draw();
             });
 
+            $('#tags').on('change', function() {
+                console.log($(this).val());
+            });
+
             $('#banner').on('change', function() {
                 input = this;
                 if (input.files && input.files[0]) {
@@ -323,7 +339,7 @@
                         confirmButtonText: 'Ok'
                     });
                 }
-
+                
                 let isEdit = document.getElementById('id') ? true : false;
 
                 let title = $('#title').val();
@@ -331,6 +347,7 @@
                 let category = $('#category').val();
                 let status = $('#status').val();
                 let description = $('#description').val();
+                let tags = $('#tags').val();
 
                 let content = CKEDITOR.instances['content'].getData();
                 let _token = $('meta[name="csrf-token"]').attr('content');
@@ -341,11 +358,12 @@
                 const data = new FormData();
                 data.append('title', title);
                 data.append('slug', slug);
-                data.append('banner', banner);
+                data.append('banner', banner, banner.name);
                 data.append('description', description);
                 data.append('content', content);
                 data.append('category', category);
                 data.append('status', status);
+                data.append('tags', tags);
                 data.append('_token', _token);
                 data.append('id', id);
                 data.append('mode', isEdit);
@@ -361,6 +379,16 @@
                     });
                 }
 
+                // if category contains more than 20 words
+                if (category.split(' ').length > 20) {
+                    return swal.fire({
+                        title: 'Error!',
+                        text: 'Category must be less than 20 words',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
+                }
+
                 // Send data to controller
                 $.ajax({
                     url: '{{ route('articles.store') }}',
@@ -369,6 +397,7 @@
                     processData: false,
                     contentType: false,
                     success: function(data) {
+                        // return console.log(data); // Mode debug gaming
                         if (data) {
                             if (!data.id || typeof data.id == undefined) { // Error Validator
                                 return swal.fire({
@@ -387,9 +416,9 @@
                             if (!isEdit) {
                                 // data.articles_count = 0;
                                 table.row.add([
-                                    firstCol, 
-                                    data.title, 
-                                    data.status, 
+                                    firstCol,
+                                    data.title,
+                                    data.status,
                                     data.description,
                                     0, 0, 0,
                                     data.created_at,
@@ -451,17 +480,26 @@
                     dataType: 'json',
 
                     success: function(data) {
+                        // return console.log(data.tag_id)
                         $('.forms').append(
                             '<input type="hidden" name="id" id="id" value="' + data.id +
                             '">'
                         );
                         $('#title').val(data.title);
                         $('#slug').val(data.slug);
-                        if (data.banner !== null) {
-                            console.log(data.banner);
-                            $('#preview-image').attr('src', '{{ asset('storage/') }}/' + data.banner);
+
+                        if (data.banner == 'default-banner.png') {
+                            $('#preview-image').attr('src',
+                                '{{ asset('storage/default-banner.png') }}');
+                            $('#preview-image').show();
+
+                        } else {
+                            $('#preview-image').attr('src', '{{ asset('storage/') }}/' + data
+                                .banner);
                             $('#preview-image').show();
                         }
+                        
+                        $('#tags').val(data.tag_id);
                         $('#description').val(data.description);
                         CKEDITOR.instances['content'].setData(data.content);
                         $('#category').val(data.category_id);
@@ -473,9 +511,9 @@
         });
     </script>
 
-     @if (session('status'))
-     <script>
-         swal.fire('Successfuly deleted the Article!');
-     </script>
- @endif
+    @if (session('status'))
+        <script>
+            swal.fire('Successfuly deleted the Article!');
+        </script>
+    @endif
 @endsection

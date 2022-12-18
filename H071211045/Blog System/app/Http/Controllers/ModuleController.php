@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Articles;
+use App\Models\ArticleTags;
 use App\Models\Categories;
 use App\Models\Tags;
 use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
 
@@ -47,8 +49,6 @@ class ModuleController extends Controller
             ->limit(3)
             ->get();
 
-        
-
         return view(
             'module.dashboard',
             compact(
@@ -69,20 +69,29 @@ class ModuleController extends Controller
     {
         $articles = Articles::all();
 
-        $categories = Categories::all();
+        $categories = Categories::where('status', 'published')
+            ->orderBy('category_name', 'asc')
+            ->get();
 
-        return view('module.articles', compact('articles', 'categories'));
+        $tags = Tags::where('status', 'published')
+            ->orderBy('tag_name', 'asc')
+            ->get();
+
+        return view('module.articles', compact('articles', 'categories', 'tags'));
     }
 
     public function articleEdit($id)
     {
-        $article = Articles::find($id);
+        $article = Articles::find($id)->join('article_tag', 'articles.id', '=', 'article_tag.article_id')
+            ->select('articles.*', 'article_tag.tag_id')
+            ->where('articles.id', $id)
+            ->first();
+
         return response()->json($article);
     }
 
     public function articleStore(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'slug' => 'required',
@@ -90,14 +99,20 @@ class ModuleController extends Controller
             'status' => 'required',
         ]);
 
+
+        $tags = explode(',', $request->tags);
+
+        // return response()->json($tags);
+
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()]);
         }
 
         if ($request->file('banner')) {
             $banner = $request->file('banner')->store('banners');
+
         } else {
-            $banner = $request->banner;
+            $banner = 'default-banner.png';
         }
 
         if ($request->mode != 'true') {
@@ -112,17 +127,26 @@ class ModuleController extends Controller
                 'author_id' => Auth::user()->id,
             ]);
 
-            // add article_count to categories
+            
             $category = Categories::find($article->category_id);
-            $category->articles_count = $category->articles_count + 1;
+            $category->article_count = $category->article_count + 1;
             $category->save();
 
-            // add article_count to users
             $user = Users::find(Auth::user()->id);
-            $user->articles_count = $user->articles_count + 1;
+            $user->article_count = $user->article_count + 1;
             $user->save();
 
+            ArticleTags::where('article_id', $article->id)->delete();
+
+            foreach ($tags as $tag) {
+                ArticleTags::create([
+                    'article_id' => $article->id,
+                    'tag_id' => $tag,
+                ]);
+            }
+
         } else {
+            
             $article = Articles::find($request->id);
             $article->update([
                 'title' => $request->title,
@@ -133,6 +157,15 @@ class ModuleController extends Controller
                 'status' => $request->status,
                 'content' => $request->content,
             ]);
+
+            ArticleTags::where('article_id', $request->id)->delete();
+
+            foreach ($tags as $tag) {
+                ArticleTags::create([
+                    'article_id' => $article->id,
+                    'tag_id' => $tag,
+                ]);
+            }
         }
 
         return response()->json($article);
@@ -141,19 +174,20 @@ class ModuleController extends Controller
     public function articleDelete($id)
     {
         $article = Articles::find($id);
-        if (File::exists(public_path('storage/' . $article->banner))) {
+        if ($article->banner != 'default-banner.png') {
             File::delete(public_path('storage/' . $article->banner));
         }
+        
         $article->delete();
 
         // remove article_count to categories
         $category = Categories::find($article->category_id);
-        $category->articles_count = $category->articles_count - 1;
+        $category->article_count = $category->article_count - 1;
         $category->save();
 
         // remove article_count to users
         $user = Users::find($article->author_id);
-        $user->articles_count = $user->articles_count - 1;
+        $user->article_count = $user->article_count - 1;
         $user->save();
 
         return redirect()->route('page.articles')->with('status', 'deleted');

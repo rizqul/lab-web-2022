@@ -50,7 +50,7 @@
                                     href="{{ route('page.posts') }}">ARTICLES</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link ms-2" id="members-link" href="#">MEMBERS</a>
+                                <a class="nav-link ms-2" id="members-link" href="{{ route('page.members')}}">MEMBERS</a>
                             </li>
                         </ul>
 
@@ -72,7 +72,7 @@
                                         <li><a class="dropdown-item fw-bold"
                                                 href="{{ route('page.dashboard') }}">Dashboard</a>
                                         </li>
-                                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                                        <li><a class="dropdown-item" href=" {{route('page.member', Auth::user()->username)}}">Profile</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
@@ -159,6 +159,12 @@
 
         } else if (page == "member") {
             document.getElementById("members-link").classList.add("active");
+        
+        } else if (page == "members") {
+            document.getElementById("members-link").classList.add("active");
+        
+        } else if (page == "p") {
+            document.getElementById("article-link").classList.add("active");
 
         } else {
             document.getElementById("home-link").classList.add("active");

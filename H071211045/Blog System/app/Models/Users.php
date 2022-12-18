@@ -24,6 +24,7 @@ class Users extends Authenticatable
         'avatar',
         'level',
         'status',
+        'article_count',
         'biography',
     ];
 

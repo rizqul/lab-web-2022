@@ -27,12 +27,12 @@
                             </a>
                         </div>
                         <div class="col-8">
-                            <a href="#"
+                            <a href="p/{{$article->slug }}"
                                 class="text-title text-primary d-inline-block fw-bold">{{ $article->title }}</a>
                             <p class="text-secondary mt-2 description">
                                 {{ $article->description }}
                             </p>
-                            <a href="#" class="p-2 bg-secondary text-third d-inline-block">
+                            <a href="p/{{$article->slug }}" class="p-2 bg-secondary text-third d-inline-block">
                                 <span class="me-1">Read More</span>
                                 <i class="bi bi-arrow-right"></i>
                             </a>
@@ -46,9 +46,6 @@
                     </div>
                 @endforelse
             </div>
-
-
-
         </div>
 
         <div class="col p-0">
@@ -56,12 +53,15 @@
                 <div class="display-7 text-primary fw-bold">LATEST POSTS <i class="ms-2 bi bi-menu-up"></i></div>
                 <hr>
                 @forelse ($latestArticles as $article)
-                    <div class="mb-3 content">
+                    <div class="mb-3 content px-2">
                         <a href="/p/{{ $article->slug }}">
                             <img src="https://www.runtastic.com/blog/wp-content/uploads/2019/02/533_do-your-first-push-up_ft-1024x683.jpg"
                                 alt="post-image" class="img-fluid mb-1">
                         </a>
-                        <a href="/p/{{ $article->slug }}" class="text-primary ">{{ $article->description }}</a>
+                        <a href="/p/{{ $article->slug }}" class="text-primary d-flex flex-column">
+                            <span class="fw-bold">{{ $article->title }}</span>
+                            <span>{{ $article->description }}</span>
+                        </a>
                     </div>
                     <hr>
                 @empty
@@ -81,7 +81,7 @@
                                 <i class="bi bi-arrow-right text-primary"></i>
                             </div>
                             <div class="col">
-                                <span href="#" class="text-primary">Web Development</span>
+                                <span class="text-primary">{{ $category->category_name }}</span>
                             </div>
                         </div>
                     </div>
@@ -92,8 +92,28 @@
                         </p>
                     </div>
                 @endforelse
+            </div>
 
-
+            <div class="container d-inline-block pb-2 bg-secondary">
+                <div class="display-7 text-third p-3">Popular Members <i class="bi bi-bookmark"></i></div>
+                @forelse ($mostActiveMember as $user)
+                    <div class="bg-third mb-2">
+                        <div class="row px-4 py-3">
+                            <div class="col-1">
+                                <i class="bi bi-arrow-right text-primary"></i>
+                            </div>
+                            <div class="col">
+                                <span href="#" class="text-primary">{{ $user->username }}</span>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="text-center  d-flex justify-content-center">
+                        <p class="text-third bg-primary px-3 mb-2 rounded fw-bold m-auto">
+                            <\> No Members yet Bro.
+                        </p>
+                    </div>
+                @endforelse
             </div>
 
         </div>
