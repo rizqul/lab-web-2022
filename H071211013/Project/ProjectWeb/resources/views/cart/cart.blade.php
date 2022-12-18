@@ -27,7 +27,7 @@
             <div class="card p-2 mt-3" style="width: 35rem;">
                 <div class="row">
                     <div class="col-sm-3">                        
-                        <img class="card-img-top" src="{{asset('storage/docs/'.$products[$cartItem->product_id]->file)}}" alt="Card image cap">
+                        <img class="card-img-top" src="{{asset('storage/img/'.$products[$cartItem->product_id]->file)}}" alt="Card image cap">
                     </div>
                     <div class="col-sm-6">                        
                         <h5 class="card-title">{{$products[$cartItem->product_id]->title}}</h5>
