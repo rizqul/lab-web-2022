@@ -21,78 +21,89 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-5 best-article">
-                <div id="img-top-post">
-                    @if (str_contains($top_articles[0]->banner, 'article-banners'))
-                        <img src="{{ asset('storage/' . $top_articles[0]->banner) }}" alt="">
-                    @else
-                        <img src="{{ $top_articles[0]->banner }}" alt="">
-                    @endif
-                </div>
-                <div class="title h5 mt-3">
-                    {{ $top_articles[0]->title }}
-                </div>
-                <div class="article-desc">
-                    <p>
-                        {!! $top_articles[0]->description !!}
-                    </p>
-                </div>
-            </div>
-            <div class="col-4">
-                @for ($i = 1; $i < count($top_articles); $i++)
-                    <div class="top-article d-flex">
-                        <div class="" style="width: 65%">
-                            <div class="title h6">
-                                {{ $top_articles[$i]->title }}
-                            </div>
-                            <p class="fs-6">{{ $top_articles[$i]->user->name }}</p>
-                        </div>
-                        <div class="img-article ms-auto">
-                            @if (str_contains($top_articles[$i]->banner, 'article-banners'))
-                                <img src="{{ asset('storage/' . $top_articles[$i]->banner) }}" alt="">
+                @isset($top_articles)
+                    <a href="{{ '/articles/' . $top_articles[0]->slug }}" class="home-card">
+                        <div id="img-top-post">
+                            @if (str_contains($top_articles[0]->banner, 'article-banners'))
+                                <img src="{{ asset('storage/' . $top_articles[0]->banner) }}" alt="">
                             @else
-                                <img src="{{ $top_articles[$i]->banner }}" alt="">
+                                <img src="{{ $top_articles[0]->banner }}" alt="">
                             @endif
+
+                        </div>
+                        <div class="title h5 mt-3 home-card" style="color: black">
+                            {{ $top_articles[0]->title }}
+                        </div>
+                        <div class="article-desc home-card" style="color: black">
+                            <p>
+                                {!! $top_articles[0]->description !!}
+                            </p>
+                        </div>
+                    </a>
+
+                </div>
+                <div class="col-4">
+                    @for ($i = 1; $i < count($top_articles); $i++)
+                        <a href="{{ '/articles/' . $top_articles[$i]->slug }}" class="home-card">
+                            <div class="top-article d-flex">
+                                <div class="" style="width: 65%">
+                                    <div class="title h6 home-card" style="color: black">
+                                        {{ $top_articles[$i]->title }}
+                                    </div>
+                                    <p class="fs-6 home-card" style="color: black">{{ $top_articles[$i]->user->name }}</p>
+                                </div>
+                                <div class="img-article ms-auto">
+                                    @if (str_contains($top_articles[$i]->banner, 'article-banners'))
+                                        <img src="{{ asset('storage/' . $top_articles[$i]->banner) }}" alt="">
+                                    @else
+                                        <img src="{{ $top_articles[$i]->banner }}" alt="">
+                                    @endif
+                                </div>
+                            </div>
+                        </a>
+                    @endfor
+                </div>
+
+                <div class="col-3">
+                    <div class="top-categories mb-3">
+                        <div class="title topic-title">
+                            <p class="h3 mb-3">Popular Topic</p>
+                        </div>
+                        <div class="topic-section">
+                            @foreach ($top_category as $category)
+                                <div class="top-topic">{{ $category->name }}</div>
+                            @endforeach
                         </div>
                     </div>
-                @endfor
-            </div>
-            <div class="col-3">
-                <div class="top-categories mb-3">
-                    <div class="title topic-title">
-                        <p class="h3 mb-3">Popular Topic</p>
-                    </div>
-                    <div class="topic-section">
-                        @foreach ($top_category as $category)
-                            <div class="top-topic">{{ $category->name }}</div>
-                        @endforeach
-                    </div>
-                </div>
-                <div class="top-authors">
-                    <div class="title author-title">
-                        <p class="h3 mb-3">Authors</p>
-                    </div>
-                    <div class="author-section">
-                        @foreach ($top_authors as $author)
-                            <div class="top-author d-flex">
-                                @if (empty($author->img_src))
-                                    <img alt="image" src="../assets/img/avatar/avatar-2.png"
-                                        class="rounded-circle profile-widget-picture"
-                                        style="width: 30px; height: 30px; object-fit: cover;">
-                                @elseif(str_contains($author->img_src, 'post-images'))
-                                    <img alt="image" src="{{ asset('storage/' . $author->img_src) }}"
-                                        class="rounded-circle profile-widget-picture"
-                                        style="width: 30px; height: 30px; object-fit: cover;">
-                                @else
-                                    <img alt="image" src="{{ $author->img_src }}"
-                                        class="rounded-circle profile-widget-picture"
-                                        style="width: 30px; height: 30px; object-fit: cover;">
-                                @endif
-                                <p class="my-auto h5 ml-3">{{ $author->name }}</p>
-                            </div>
-                        @endforeach
+                    <div class="top-authors">
+                        <div class="title author-title">
+                            <p class="h3 mb-3">Authors</p>
+                        </div>
+                        <div class="author-section">
+                            @foreach ($top_authors as $author)
+                                <div class="top-author d-flex">
+                                    @if (empty($author->img_src))
+                                        <img alt="image" src="../assets/img/avatar/avatar-2.png"
+                                            class="rounded-circle profile-widget-picture"
+                                            style="width: 30px; height: 30px; object-fit: cover;">
+                                    @elseif(str_contains($author->img_src, 'post-images'))
+                                        <img alt="image" src="{{ asset('storage/' . $author->img_src) }}"
+                                            class="rounded-circle profile-widget-picture"
+                                            style="width: 30px; height: 30px; object-fit: cover;">
+                                    @else
+                                        <img alt="image" src="{{ $author->img_src }}"
+                                            class="rounded-circle profile-widget-picture"
+                                            style="width: 30px; height: 30px; object-fit: cover;">
+                                    @endif
+                                    <p class="my-auto h5 ml-3">{{ $author->name }}</p>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endisset
+
+
         </div>
     </div>
 

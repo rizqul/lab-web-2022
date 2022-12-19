@@ -7,16 +7,19 @@ use App\Models\ArticleTag;
 use App\Models\Category;
 use App\Models\Tag;
 use Illuminate\Http\Request;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::latest()->paginate();
+        $articles = Article::withCount('comments', 'likes')
+            ->latest()
+            ->paginate();
         $categories = Category::all();
         $tags = Tag::all();
-        return view("dashboard.article", compact('articles', 'categories', 'tags'));
+        return view('dashboard.article', compact('articles', 'categories', 'tags'));
     }
 
     public function store(Request $request)
@@ -31,7 +34,8 @@ class ArticleController extends Controller
             'category_id' => 'required',
             'sub_category_id' => 'required',
             'tags' => 'required',
-            'content' => 'required'
+            'content' => 'required',
+            'status' => 'required',
         ]);
 
         if ($request->file('banner-file')) {
@@ -39,8 +43,6 @@ class ArticleController extends Controller
         } else {
             $validated['banner'] = $request['banner-url'];
         }
-
-        // dd($validated['content']);
 
         $article = Article::create([
             'title' => $validated['title'],
@@ -50,13 +52,14 @@ class ArticleController extends Controller
             'category_id' => $validated['category_id'],
             'sub_category_id' => $validated['sub_category_id'],
             'content' => $validated['content'],
+            'status' => $validated['status'],
             'author_id' => auth()->user()->id,
         ]);
 
         foreach ($validated['tags'] as $tag) {
             ArticleTag::create([
                 'article_id' => $article->id,
-                'tag_id' => $tag
+                'tag_id' => $tag,
             ]);
         }
 
@@ -71,7 +74,7 @@ class ArticleController extends Controller
 
         return response()->json([
             'article' => $article->toJson(),
-            'tags' => $tags->toJson()
+            'tags' => $tags->toJson(),
         ]);
     }
 
@@ -86,7 +89,8 @@ class ArticleController extends Controller
             'category_id' => 'required',
             'sub_category_id' => 'required',
             'tags' => 'required',
-            'content' => 'required'
+            'content' => 'required',
+            'status' => 'required',
         ]);
 
         if ($request->file('banner-file')) {
@@ -103,6 +107,7 @@ class ArticleController extends Controller
             'category_id' => $validated['category_id'],
             'sub_category_id' => $validated['sub_category_id'],
             'content' => $validated['content'],
+            'status' => $validated['status'],
         ]);
 
         ArticleTag::where('article_id', $request->id)->delete();
@@ -110,7 +115,7 @@ class ArticleController extends Controller
         foreach ($validated['tags'] as $tag) {
             ArticleTag::create([
                 'article_id' => $request->id,
-                'tag_id' => $tag
+                'tag_id' => $tag,
             ]);
         }
 

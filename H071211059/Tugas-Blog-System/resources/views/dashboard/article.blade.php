@@ -77,11 +77,11 @@
                             <tbody>
                                 @foreach ($articles as $article)
                                     <tr id="row-{{ $article->id }}">
-                                        <p class="d-none" id="cat-id-{{$article->id}}">{{$article->category_id}}</p>
+                                        <p class="d-none" id="cat-id-{{ $article->id }}">{{ $article->category_id }}</p>
                                         <td class="align-middle">{{ $article->title }}</td>
                                         <td class="align-middle">{!! $article->description !!}</td>
-                                        <td class="align-middle">fav count</td>
-                                        <td class="align-middle">com count</td>
+                                        <td class="align-middle">{{ $article->likes_count }}</td>
+                                        <td class="align-middle">{{ $article->comments_count }}</td>
                                         <td class="align-middle">{{ $article->view_count }}</td>
                                         <td class="align-middle">{{ $article->created_at }}</td>
                                         <td class="align-middle">{{ $article->user->name }}</td>
@@ -190,11 +190,13 @@
                         <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Sub Category</label>
                             <div class="col-sm-12 col-md-7">
-                                <select class="form-control select_subcategory" name="sub_category_id" id="select_subcategory">
+                                <select class="form-control select_subcategory" name="sub_category_id"
+                                    id="select_subcategory">
 
                                 </select>
                             </div>
                         </div>
+
 
                         {{-- Tags Field --}}
                         <div class="form-group row mb-4">
@@ -207,6 +209,17 @@
                                         <span class="selectgroup-button">{{ $tag->name }}</span>
                                     </label>
                                 @endforeach
+                            </div>
+                        </div>
+
+                        {{-- Status Field --}}
+                        <div class="form-group row mb-4">
+                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Status</label>
+                            <div class="col-sm-12 col-md-7">
+                                <select class="form-control select_status" name="status" id="select_status">
+                                    <option value="0">Archived</option>
+                                    <option value="1">Published</option>
+                                </select>
                             </div>
                         </div>
 
@@ -323,6 +336,17 @@
                                         <span class="selectgroup-button">{{ $tag->name }}</span>
                                     </label>
                                 @endforeach
+                            </div>
+                        </div>
+
+                        {{-- Status Field --}}
+                        <div class="form-group row mb-4">
+                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Status</label>
+                            <div class="col-sm-12 col-md-7">
+                                <select class="form-control select_status" name="status" id="edit_status">
+                                    <option value="0">Archived</option>
+                                    <option value="1">Published</option>
+                                </select>
                             </div>
                         </div>
 
@@ -486,7 +510,7 @@
             $('#id').val(id);
             $('#update-form').attr('action', '{{ route('article.update') }}');
             let category_id = $('#cat-id-' + id).text();
-            
+
             $.ajax({
                 type: "get",
                 url: "/article/getArticle/" + id,
@@ -500,15 +524,16 @@
                     $('#category-edit select').val(article.category_id).change();
                     sub_category_id = article.sub_category_id;
                     $('#edit-content').summernote("code", article.content);
+                    $('#edit-status').val(article.status).change()
                     $('sub-category-edit select').val(article.sub_category_id).change();
-                    
-                    
+
+
                 }
             });
-            
+
             $('#create-form-card').hide();
             $('#edit-form-card').show();
-            
+
         })
 
         function destroy(id) {
@@ -540,7 +565,8 @@
                     $('.select_subcategory').html("");
                     for (let index = 0; index < subcategory.length; index++) {
                         $('.select_subcategory').append(
-                            "<option value='" + subcategory[index].id + "' class='subcat-" + subcategory[index].id + "'>" + subcategory[index]
+                            "<option value='" + subcategory[index].id + "' class='subcat-" +
+                            subcategory[index].id + "'>" + subcategory[index]
                             .name + "</option>")
                     }
                 }
@@ -558,14 +584,15 @@
                     $('.select_subcategory').html("");
                     for (let index = 0; index < subcategory.length; index++) {
                         $('.select_subcategory').append(
-                            "<option value='" + subcategory[index].id + "' class='subcat-" + subcategory[index].id + "'>" + subcategory[index]
+                            "<option value='" + subcategory[index].id + "' class='subcat-" +
+                            subcategory[index].id + "'>" + subcategory[index]
                             .name + "</option>")
                     }
                 }
             })
         })
 
-        $(document).on('change', '#create-title', function () {
+        $(document).on('change', '#create-title', function() {
             title = $('#create-title').val();
             slug = $('#create-slug');
 
@@ -574,14 +601,16 @@
             $.ajax({
                 type: "get",
                 url: "/getSlug",
-                data: {title},
-                success: function (response) {
+                data: {
+                    title
+                },
+                success: function(response) {
                     slug.val(response.slug);
                 }
             })
         })
 
-        $(document).on('change', '#edit-title', function () {
+        $(document).on('change', '#edit-title', function() {
             title = $('#edit-title').val();
             slug = $('#edit-slug');
 
@@ -590,8 +619,10 @@
             $.ajax({
                 type: "get",
                 url: "/getSlug",
-                data: {title},
-                success: function (response) {
+                data: {
+                    title
+                },
+                success: function(response) {
                     slug.val(response.slug);
                 }
             })

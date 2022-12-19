@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SubCategoryController;
@@ -35,6 +36,10 @@ Route::controller(FeController::class)->group(function () {
 Route::controller(CommentController::class)->group(function () {
     Route::get('/comments', 'comments');
     Route::post('/comments', 'store');
+});
+
+Route::controller(LikeController::class)->group(function () {
+    Route::get('/article/like', 'like');
 });
 
 Route::get('/login', function () {

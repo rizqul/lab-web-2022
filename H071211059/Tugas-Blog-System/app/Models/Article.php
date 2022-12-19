@@ -56,4 +56,9 @@ class Article extends Model
     {
         return $this->hasMany(Comment::class, 'article_id');
     }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class, 'article_id');
+    }
 }
