@@ -21,6 +21,11 @@ Route::get('home', function () {
 });
 
 Route::get('member/{username}', [PageController::class, 'member'])->name('page.member');
+Route::get('members', [PageController::class, 'members'])->name('page.members');
+Route::get('posts', [PageController::class, 'articles'])->name('page.posts');
+Route::get('p/{slug}', [PageController::class, 'articleDetail'])->name('page.article');
+Route::post('p/comment', [PageController::class, 'comment'])->name('comment');
+Route::post('p/like', [PageController::class, 'like'])->name('like');
 /* - */
 
 /*

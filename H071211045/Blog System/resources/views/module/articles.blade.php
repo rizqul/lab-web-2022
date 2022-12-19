@@ -4,25 +4,9 @@
     {{-- <script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script> --}}
 
     <style>
-        /* span.ck-file-dialog-button {
-                                        display: none;
-                                    } */
-        /* #article-input {
-                                    width: 60rem !important;
-                                    position: absolute;
-                                    top: 50%;
-                                    left: 50%;
-                                    transform: translate(-50%, 10%);
-                                } */
         .ck-editor__editable_inline {
             min-height: 400px;
         }
-
-        /* #preview-image {
-            width: 100%;
-            height: 30rem;
-            object-fit: cover;
-        } */
     </style>
 @endsection
 
@@ -164,19 +148,16 @@
                         <label for="description" class="row form-label mb-1 ms-1">Description</label>
                         <input id="description" name="description" placeholder="Description"
                             class="row border mb-2 form-control ms-1 rounded-0">
-
                         <label for="name" class="row form-label mb-1 ms-1">Banner</label>
                         <input type="file" name="banner" id="banner" placeholder="Banner"
-                            class="row form-control mb-2 ms-1 rounded-0" onchange="preview(this)">
-                        <img src="" alt="" class="img-fluid rounded-0" id="preview-image">
-                        {{-- Place a preview image from input above --}}
-                        <img  class="img-fluid rounded-0" id="preview-image" style="display: none">
+                            class="row form-control mb-2 ms-1 rounded-0">
+                        <img class="img-fluid rounded-0" id="preview-image" style="display: none">
 
                         <div class="row">
                             <div class="col">
                                 <label for="category" class="row form-label mb-1 mt-3 ms-1">Category</label>
                                 <select id="category" name="category" class="form-control mb-3 rounded-0">
-                                    <option selected="true" disabled="disabled">- Select a Category
+                                    <option selected="true" disabled="disabled" value="0">- Select a Category
                                         -
                                     </option>
                                     @foreach ($categories as $category)
@@ -188,11 +169,26 @@
                             <div class="col">
                                 <label for="status" class="row form-label mb-1 mt-3 ms-1">Status</label>
                                 <select id="status" name="status" class="form-control mb-3 rounded-0">
-                                    <option selected="true" disabled="disabled">- Select post status
+                                    <option selected="true" disabled="disabled" value="0">- Select post status
                                         -
                                     </option>
                                     <option value="archived">Archived</option>
                                     <option value="published">Published</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="tags" class="row form-label mb-1 mt-3 ms-1">Tags</label>
+                                <select id="tags" name="tags[]" class="form-select mb-3 rounded-0"
+                                    multiple="multiple">
+                                    <option disabled="disabled">Ctrl + Right Click Below Tags :
+                                    </option>
+                                    @foreach ($tags as $tag)
+                                        <option value="{{ $tag->id }}">{{ $tag->tag_name }}</option>
+                                    @endforeach
+
                                 </select>
                             </div>
                         </div>
@@ -215,7 +211,7 @@
             "<button class='btn rounded-0 bg-primary text-third px-4 d-flex justify-content-center align-items-center' id='add-new' onclick='add()' data-bs-toggle='modal' data-bs-target='#article-modal'><span class='me-2'>New</span><span class='me-2'>article</span><i class='bi bi-plus-circle'></i></button>" +
             "</div>";
 
-        var  table, rowIndex;
+        var table, rowIndex;
 
         function add() {
             $('#article-modal-label').text('Create a New article');
@@ -229,46 +225,13 @@
             $('#description').val('');
             $('#preview-image').attr('src', '');
             CKEDITOR.instances['content'].setData('');
-            $('#category').val('');
-            $('#status').val('');
-        }
-
-        function preview(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('#preview-image').attr('src', e.target.result);
-                    $('#preview-image').show();
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
+            $('#category').val(0);
+            $('#status').val(0);
+            $('#tags').val('');
+            $('#id').remove();
         }
 
         $(document).ready(function() {
-            // CKEDITOR.replace('content');
-
-            // Inject CKEditor with image upload feature
-            // ClassicEditor
-            //     .create(document.querySelector('#content'), {
-            //         ckfinder: {
-            //             uploadUrl: '{{ route('articles.content') }}'
-            //         }
-            //     })
-            //     .then(text => {
-            //         content = text;
-            //     })
-            //     .catch(error => {
-            //         console.error(error);
-            //     });
-            // ClassicEditor
-            //     .create(document.querySelector('#content'))
-            //     .then(editor => {
-            //         description = editor;
-            //     })
-            //     .catch(error => {
-            //         console.error(error);
-            //     });
-
             /*
              * DataTables
              */
@@ -339,6 +302,22 @@
                     .columns().search('')
                     .draw();
             });
+
+            $('#tags').on('change', function() {
+                console.log($(this).val());
+            });
+
+            $('#banner').on('change', function() {
+                input = this;
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#preview-image').attr('src', e.target.result);
+                        $('#preview-image').show();
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            })
             /* * * */
 
             /*
@@ -350,24 +329,61 @@
 
             $(".store").click(function(e) { // Submit modal (2 Kondisi : Membuat baru atau edit)
                 e.preventDefault();
-                let isEdit = document.getElementById("id");
-                let id_token = $('#id').val();
-                let store = !isEdit ? true : false;
-                let _token = $('meta[name="csrf-token"]').attr('content');
-                let firstCol = (table.rows().count() != 0) ? table.rows().count() + 1 : 1;
+
+                let banner = document.getElementById('banner').files[0];
+                if (banner && !banner.type.match('image.*')) {
+                    return swal.fire({
+                        title: 'Error!',
+                        text: 'Banner must be an image',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
+                }
+                
+                let isEdit = document.getElementById('id') ? true : false;
 
                 let title = $('#title').val();
                 let slug = $('#slug').val();
-                let banner = $('#banner').val();
-                let description = $('#description').val();
-                let content = CKEDITOR.instances['content'].getData();
                 let category = $('#category').val();
                 let status = $('#status').val();
+                let description = $('#description').val();
+                let tags = $('#tags').val();
 
-                if (!title || !slug || !category || !status || !content || !description) {
+                let content = CKEDITOR.instances['content'].getData();
+                let _token = $('meta[name="csrf-token"]').attr('content');
+                let id = $('#id').val();
+
+                let firstCol = (table.rows().count() != 0) ? table.rows().count() + 1 : 1;
+
+                const data = new FormData();
+                data.append('title', title);
+                data.append('slug', slug);
+                data.append('banner', banner, banner.name);
+                data.append('description', description);
+                data.append('content', content);
+                data.append('category', category);
+                data.append('status', status);
+                data.append('tags', tags);
+                data.append('_token', _token);
+                data.append('id', id);
+                data.append('mode', isEdit);
+
+                // console.log(data);
+
+                if (!title || !slug || !category || !status || !description) {
                     return swal.fire({
                         title: 'Error!',
                         text: 'Please fill all required fields',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
+                }
+
+                // if category contains more than 20 words
+                if (category.split(' ').length > 20) {
+                    return swal.fire({
+                        title: 'Error!',
+                        text: 'Category must be less than 20 words',
                         icon: 'error',
                         confirmButtonText: 'Ok'
                     });
@@ -377,25 +393,13 @@
                 $.ajax({
                     url: '{{ route('articles.store') }}',
                     type: 'POST',
-                    data: {
-                        id: id_token,
-                        title: title,
-                        slug: slug,
-                        banner: banner,
-                        description: description,
-                        content: content,
-                        category: category,
-                        status: status,
-
-                        /* Injection Addon */
-                        mode: store,
-                        _token: _token
-                    },
+                    data: data,
+                    processData: false,
+                    contentType: false,
                     success: function(data) {
+                        // return console.log(data); // Mode debug gaming
                         if (data) {
-
                             if (!data.id || typeof data.id == undefined) { // Error Validator
-                                console.log(data);
                                 return swal.fire({
                                     title: 'Error!',
                                     text: 'Something went wrong',
@@ -403,46 +407,47 @@
                                     confirmButtonText: 'Ok'
                                 });
 
-                            } else {
+                            } else { // Success
                                 clearInput();
                                 $('#article-modal').modal('hide');
+                                console.log(data.status);
                             }
 
-
-                            if (store) { // Add new data
-                                console.log('fetched id: ' + data.id);
+                            if (!isEdit) {
                                 // data.articles_count = 0;
-                                // table.row.add([
+                                table.row.add([
+                                    firstCol,
+                                    data.title,
+                                    data.status,
+                                    data.description,
+                                    0, 0, 0,
+                                    data.created_at,
+                                    "<div class='actions d-flex w-100'>" +
+                                    "<button class='btn bg-secondary text-third rounded-0 edit'" +
+                                    "data-bs-toggle='modal' data-bs-target='#article-modal' data-id='" +
+                                    data.id + "'>" +
+                                    "<i class='bi bi-pencil-square'></i>" +
+                                    "</button>" +
 
-                                //     firstCol, data.article_name, data.status, data
-                                //     .articles_count,
-                                //     data.username, data.created_at,
-                                //     "<div class='actions d-flex w-100'>" +
-                                //     "<button class='btn bg-secondary text-third rounded-0 edit'" +
-                                //     "data-bs-toggle='modal' data-bs-target='#article-modal' data-id='" +
-                                //     data.id + "'>" +
-                                //     "<i class='bi bi-pencil-square'></i>" +
-                                //     "</button>" +
+                                    "<button class='ms-1 btn bg-danger text-third rounded-0 delete'" +
+                                    "data-bs-toggle='modal' data-bs-target='#confirm-delete-modal' data-id='" +
+                                    data.id + "'>" +
+                                    "<i class='bi bi-trash'></i>" +
+                                    "</button>" +
+                                    "</div>", data.id
 
-                                //     "<button class='ms-1 btn bg-danger text-third rounded-0 delete'" +
-                                //     "data-bs-toggle='modal' data-bs-target='#confirm-delete-modal' data-id='" +
-                                //     data.id + "'>" +
-                                //     "<i class='bi bi-trash'></i>" +
-                                //     "</button>" +
-                                //     "</div>", data.id
-
-                                // ]).draw(false);
+                                ]).draw(false);
 
                                 return swal.fire('Successfuly added the article!');
 
                             } else { // Edit Data
 
-                                // table.cell(rowIndex, 1).data(data.article_name);
-                                // table.cell(rowIndex, 2).data(data.status);
-                                // table.cell(rowIndex, 3).data(data.description);
-                                // table.cell(rowIndex, 4).data(data.likes);
-                                // table.cell(rowIndex, 5).data(data.comments);
-                                // table.cell(rowIndex, 6).data(data.visitors);
+                                table.cell(rowIndex, 1).data(data.title);
+                                table.cell(rowIndex, 2).data(data.status);
+                                table.cell(rowIndex, 3).data(data.description);
+                                table.cell(rowIndex, 4).data(data.likes);
+                                table.cell(rowIndex, 5).data(data.comments);
+                                table.cell(rowIndex, 6).data(data.visitors);
 
                                 return swal.fire('Successfuly edited the article!');
                             }
@@ -475,29 +480,40 @@
                     dataType: 'json',
 
                     success: function(data) {
+                        // return console.log(data.tag_id)
                         $('.forms').append(
                             '<input type="hidden" name="id" id="id" value="' + data.id +
                             '">'
                         );
                         $('#title').val(data.title);
                         $('#slug').val(data.slug);
-                        $('#banner').val(data.banner);
-                        $('#description').val(data.description);
-                        $('#content').val(data.content);
-                        $('#category').val(data.category);
-                        $('#status').val(data.status);
-                        $('#article_name').val(data.article_name);
 
-                        if (data.description == null) {
-                            data.description = '';
+                        if (data.banner == 'default-banner.png') {
+                            $('#preview-image').attr('src',
+                                '{{ asset('storage/default-banner.png') }}');
+                            $('#preview-image').show();
+
+                        } else {
+                            $('#preview-image').attr('src', '{{ asset('storage/') }}/' + data
+                                .banner);
+                            $('#preview-image').show();
                         }
-
-                        description.setData(data.description);
-
+                        
+                        $('#tags').val(data.tag_id);
+                        $('#description').val(data.description);
+                        CKEDITOR.instances['content'].setData(data.content);
+                        $('#category').val(data.category_id);
+                        $('#status').val(data.status);
                     }
                 });
             });
             /* * * */
         });
     </script>
+
+    @if (session('status'))
+        <script>
+            swal.fire('Successfuly deleted the Article!');
+        </script>
+    @endif
 @endsection

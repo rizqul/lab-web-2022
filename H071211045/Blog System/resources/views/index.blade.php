@@ -46,10 +46,11 @@
                                     href="{{ route('page.homepage') }}">HOME</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link ms-2" id="article-link" href="#">ARTICLES</a>
+                                <a class="nav-link ms-2" id="article-link"
+                                    href="{{ route('page.posts') }}">ARTICLES</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link ms-2" id="members-link" href="#">MEMBERS</a>
+                                <a class="nav-link ms-2" id="members-link" href="{{ route('page.members')}}">MEMBERS</a>
                             </li>
                         </ul>
 
@@ -71,7 +72,7 @@
                                         <li><a class="dropdown-item fw-bold"
                                                 href="{{ route('page.dashboard') }}">Dashboard</a>
                                         </li>
-                                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                                        <li><a class="dropdown-item" href=" {{route('page.member', Auth::user()->username)}}">Profile</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
@@ -105,13 +106,17 @@
         @endif
     @endif
 
-    @yield('page')
+    <div id="wrap">
+        <div id="main">
+            @yield('page')
+        </div>
+    </div>
 
     {{-- Footer --}}
     @if (Route::currentRouteName() != 'login.show')
         @if (Route::currentRouteName() != 'register.show')
             <div class="container-fluid footer bg-primary mt-5">
-                <footer class="py-3 p-0">
+                <footer class="py-0 p-0">
                     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
                         <li class="nav-item">
                             <a href="{{ route('page.homepage') }}" class="nav-link px-2 mx-2 text-muted">Home</a>
@@ -149,11 +154,17 @@
         if (page == "home") {
             document.getElementById("home-link").classList.add("active");
 
-        } else if (page == "article") {
+        } else if (page == "posts") {
             document.getElementById("article-link").classList.add("active");
 
         } else if (page == "member") {
             document.getElementById("members-link").classList.add("active");
+        
+        } else if (page == "members") {
+            document.getElementById("members-link").classList.add("active");
+        
+        } else if (page == "p") {
+            document.getElementById("article-link").classList.add("active");
 
         } else {
             document.getElementById("home-link").classList.add("active");

@@ -8,7 +8,7 @@
                 <div class="dash-stats border p-3 bg-fourth">
                     <i class="d-flex justify-content-center bi bi-people-fill"></i>
                     <div class="font-title text-center">Total Chads Joined</div>
-                    <span id="total_member" class="display-5 fw-bold d-flex justify-content-center">0</span>
+                    <span id="total_member" class="display-5 fw-bold d-flex justify-content-center">{{ $totalUsers }}</span>
                 </div>
             </div>
 
@@ -17,7 +17,7 @@
                 <div class="dash-stats border p-3 bg-fourth">
                     <i class="d-flex justify-content-center bi bi-people-fill"></i>
                     <div class="font-title text-center">Total Articles Created</div>
-                    <span id="total_member" class="display-5 fw-bold d-flex justify-content-center">0</span>
+                    <span id="total_member" class="display-5 fw-bold d-flex justify-content-center">{{ $totalArticles }}</span>
                 </div>
             </div>
 
@@ -25,7 +25,7 @@
                 <div class="dash-stats border p-3 bg-fourth">
                     <i class="d-flex justify-content-center bi bi-people-fill"></i>
                     <div class="font-title text-center">Total Visitors</div>
-                    <span id="total_member" class="display-5 fw-bold d-flex justify-content-center">0</span>
+                    <span id="total_member" class="display-5 fw-bold d-flex justify-content-center"> {{ $totalVisitors }}</span>
                 </div>
             </div>
         </div>
@@ -45,24 +45,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                @foreach ($mostLikedArticles as $article)
+                    <tr>
+                        <th scope="row">{{ $loop->iteration }}</th>
+                        <td>{{ $article->title }}</td>
+                        <td>{{ $article->category_name }}</td>
+                        <td>{{ $article->likes }}</td>
+                    </tr>
+                    
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -79,24 +70,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                @foreach ($mostCommentedArticles as $article)
+                    <tr>
+                        <th scope="row">{{ $loop->iteration }}</th>
+                        <td>{{ $article->title }}</td>
+                        <td>{{ $article->category_name }}</td>
+                        <td>{{ $article->comments }}</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -113,24 +94,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                @foreach ($mostViewedArticles as $article)
+                    <tr>
+                        <th scope="row">{{ $loop->iteration }}</th>
+                        <td>{{ $article->title }}</td>
+                        <td>{{ $article->category_name }}</td>
+                        <td>{{ $article->visitors }}</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
