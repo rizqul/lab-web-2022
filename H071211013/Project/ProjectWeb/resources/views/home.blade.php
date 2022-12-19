@@ -10,7 +10,7 @@
                 @foreach ($products as $product)
                 <div class="col-sm-12 col-md-6 col-lg-4 d-flex justify-content-center mt-5">
                     <div class="card" style="min-width: 300px;">
-                        <img class="card-img-top" style="width: 100%;" src='{{asset("storage/docs/$product->file")}}' alt="Card image cap">
+                        <img class="card-img-top" style="width: 100%;" src='{{asset("storage/img/$product->file")}}' alt="Card image cap">
                         <div class="card-body">
                             <h2 class="card-title">{{$product->title}}</h2>
                             <p class="card-text">{{$product->description}}</p>
